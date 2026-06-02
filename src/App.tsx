@@ -33,8 +33,10 @@ import LeaseCreatePage from '@/pages/leases/LeaseCreatePage';
 import LeaseDetailPage from '@/pages/leases/LeaseDetailPage';
 import ContractRenewalPage from '@/pages/leases/ContractRenewalPage';
 import ContractTerminationPage from '@/pages/leases/ContractTerminationPage';
+import LeasingPipelinePage from '@/pages/leases/LeasingPipelinePage';
 
 import RentInvoicesPage from '@/pages/rent-collection/RentInvoicesPage';
+import RentInvoiceCreatePage from '@/pages/rent-collection/RentInvoiceCreatePage';
 import RentReceiptsPage from '@/pages/rent-collection/RentReceiptsPage';
 
 import MaintenanceRequestListPage from '@/pages/maintenance/MaintenanceRequestListPage';
@@ -43,6 +45,7 @@ import MaintenanceRequestDetailPage from '@/pages/maintenance/MaintenanceRequest
 import FinanceAccountsPage from '@/pages/finance/FinanceAccountsPage';
 import FinanceJournalEntriesPage from '@/pages/finance/FinanceJournalEntriesPage';
 import PeriodClosingPage from '@/pages/finance/PeriodClosingPage';
+import ThreeWayMatchPage from '@/pages/finance/ThreeWayMatchPage';
 
 import SettingsPage from '@/pages/settings/SettingsPage';
 import RolesPage from '@/pages/settings/RolesPage';
@@ -95,6 +98,7 @@ import InventoryItemsPage from '@/pages/inventory/InventoryItemsPage';
 import StockTransactionsPage from '@/pages/inventory/StockTransactionsPage';
 import ProjectBudgetsPage from '@/pages/budgets/ProjectBudgetsPage';
 import QuotationComparisonPage from '@/pages/procurement/QuotationComparisonPage';
+import VendorScorecardPage from '@/pages/procurement/VendorScorecardPage';
 
 // Phase 3 pages
 import EmployeesPage from '@/pages/hr/EmployeesPage';
@@ -107,7 +111,9 @@ import BankAccountsPage from '@/pages/finance/BankAccountsPage';
 // Phase 4 pages
 import ProjectTasksPage from '@/pages/projects/ProjectTasksPage';
 import InspectionsPage from '@/pages/maintenance/InspectionsPage';
+import AssetRegistryPage from '@/pages/maintenance/AssetRegistryPage';
 import ChangeOrdersPage from '@/pages/construction/ChangeOrdersPage';
+import RiskRegisterPage from '@/pages/construction/RiskRegisterPage';
 import MaintenanceDashboardPage from '@/pages/maintenance/MaintenanceDashboardPage';
 import InspectionBuilderPage from '@/pages/maintenance/InspectionBuilderPage';
 import NumberingSettingsPage from '@/pages/settings/NumberingSettingsPage';
@@ -225,10 +231,13 @@ export default function App() {
         <Route path="leases/:id/terminate" element={<ContractTerminationPage />} />
         <Route path="leases/terminate" element={<ContractTerminationPage />} />
         <Route path="leases/renew" element={<ContractRenewalPage />} />
+        <Route path="leases/pipeline" element={<LeasingPipelinePage />} />
 
         {/* Rent Collection */}
         <Route path="rent-collection" element={<RentInvoicesPage />} />
         <Route path="rent-collection/invoices" element={<RentInvoicesPage />} />
+        <Route path="rent-collection/invoices/create" element={<RentInvoiceCreatePage />} />
+        <Route path="rent-collection/invoices/:id/edit" element={<RentInvoiceCreatePage />} />
         <Route path="rent-collection/receipts" element={<RentReceiptsPage />} />
 
         {/* Maintenance */}
@@ -241,6 +250,7 @@ export default function App() {
         <Route path="finance/accounts" element={<FinanceAccountsPage />} />
         <Route path="finance/journal-entries" element={<FinanceJournalEntriesPage />} />
         <Route path="finance/period-closing" element={<PeriodClosingPage />} />
+        <Route path="finance/three-way-match" element={<ThreeWayMatchPage />} />
 
         {/* Settings & Users */}
         <Route path="settings" element={<SettingsPage />} />
@@ -278,6 +288,7 @@ export default function App() {
         <Route path="procurement/purchase-orders" element={<PurchaseOrdersPage />} />
         <Route path="procurement/goods-receipts" element={<GoodsReceiptsPage />} />
         <Route path="procurement/quotation-comparison" element={<QuotationComparisonPage />} />
+        <Route path="procurement/vendor-scorecard" element={<VendorScorecardPage />} />
         <Route path="inventory" element={<Navigate to="/inventory/warehouses" />} />
         <Route path="inventory/warehouses" element={<WarehousesPage />} />
         <Route path="inventory/items" element={<InventoryItemsPage />} />
@@ -304,6 +315,7 @@ export default function App() {
         <Route path="maintenance/work-orders" element={<WorkOrdersPage />} />
         <Route path="maintenance/preventive" element={<PreventiveMaintenancePage />} />
         <Route path="maintenance/inspections" element={<InspectionsPage />} />
+        <Route path="maintenance/assets" element={<AssetRegistryPage />} />
         <Route path="maintenance/inspection-builder" element={<InspectionBuilderPage />} />
         <Route path="maintenance/dashboard" element={<MaintenanceDashboardPage />} />
 
@@ -323,6 +335,7 @@ export default function App() {
 
         {/* Construction extended */}
         <Route path="construction/change-orders" element={<ChangeOrdersPage />} />
+        <Route path="construction/risk-register" element={<RiskRegisterPage />} />
 
         {/* System */}
         <Route path="system/audit-log" element={<AuditLogPage />} />

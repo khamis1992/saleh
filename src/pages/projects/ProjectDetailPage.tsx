@@ -13,7 +13,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { ArrowRight, Pencil, ClipboardList, TrendingUp, ShoppingCart, DollarSign, History, HardHat, FileText, Plus, Trash2, Save, X, GanttChart } from 'lucide-react';
+import { ArrowRight, Pencil, ClipboardList, TrendingUp, ShoppingCart, DollarSign, History, HardHat, FileText, Plus, Trash2, Save, X, GanttChart, AlertTriangle } from 'lucide-react';
 import {
   projectStore, getLandName, projectBudgetStore, contractorClaimStore,
   purchaseOrderStore, purchaseRequestStore, rfqStore,
@@ -24,6 +24,7 @@ import { createStore } from '@/services/dataService';
 import { ProjectGantt, phasesToGanttTasks } from '@/components/gantt/ProjectGantt';
 import { WorkflowTimeline } from '@/components/shared/WorkflowTimeline';
 import { NextBestAction } from '@/components/shared/NextBestAction';
+import { EVMPanel } from '@/components/shared/EVMPanel';
 import type { ProjectProgressUpdate, ProjectPhase } from '@/types';
 // dailyReportStore imported from '@/services/stores' above
 const seedProgressUpdates: ProjectProgressUpdate[] = [
@@ -309,12 +310,31 @@ export default function ProjectDetailPage() {
         <Button variant="outline" size="sm" onClick={() => navigate('/construction/claims')} className="h-8 text-xs gap-1">
           <DollarSign className="h-3.5 w-3.5" /> مطالبة
         </Button>
+        <Button variant="outline" size="sm" onClick={() => navigate('/construction/risk-register')} className="h-8 text-xs gap-1">
+          <AlertTriangle className="h-3.5 w-3.5" /> المخاطر
+        </Button>
         {project.status === 'completed' && (
           <Button variant="outline" size="sm" onClick={() => navigate('/wizards/conversion')} className="h-8 text-xs gap-1 text-blue-700 border-blue-200 hover:bg-blue-50">
             <HardHat className="h-3.5 w-3.5" /> تحويل إلى عقار
           </Button>
         )}
       </div>
+
+      {/* ── Earned Value Management panel (P0 ANSI/EIA 748) ── */}
+      {(() => {
+        const phases = projectPhaseStore.getAll().filter(p => p.project_id === project.id);
+        const pv = project.approved_budget * (project.completion_percentage / 100);
+        return (
+          <EVMPanel
+            bac={project.approved_budget}
+            ac={project.actual_cost}
+            ev={project.approved_budget * (project.completion_percentage / 100)}
+            pv={pv}
+            completionPct={project.completion_percentage}
+            className="mb-4"
+          />
+        );
+      })()}
 
       <Tabs dir="rtl" defaultValue="overview">
         <div className="bg-white rounded-xl p-1 shadow-sm border border-gray-100 mb-6 w-fit">

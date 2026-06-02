@@ -3,7 +3,8 @@ import { NavLink, useLocation } from 'react-router-dom';
 import {
   LayoutDashboard, Briefcase, ListChecks, BarChart3, Settings,
   ChevronRight, Menu, X, Building2, HardHat, Wrench, DollarSign, ChevronDown,
-  PieChart, FileText, Bell, ChevronLeft, Shield, ShoppingCart,
+  PieChart, FileText, Bell, ChevronLeft, Shield, ShoppingCart, Truck, Scale, Box, AlertTriangle,
+  Users, Check, Package, Award, TrendingDown, TrendingUp,
 } from 'lucide-react';
 import { cn } from '@/utils/cn';
 import { useLocale } from '@/providers/LocaleContext';
@@ -40,9 +41,8 @@ const workCenters = [
       { title: 'المقاولون', href: '/contractors', icon: Briefcase },
       { title: 'الإنشاءات', href: '/construction/contracts', icon: HardHat },
       { title: 'الميزانيات', href: '/budgets', icon: FileText },
+      { title: 'سجل المخاطر', href: '/construction/risk-register', icon: AlertTriangle },
       { title: 'قائمة البناء', href: '/queues/construction', icon: ListChecks },
-      { title: 'المشتريات والمخزون', href: '/centers/procurement', icon: ShoppingCart },
-      { title: 'قائمة المشتريات', href: '/queues/procurement', icon: ListChecks },
     ],
   },
   {
@@ -57,6 +57,7 @@ const workCenters = [
       { title: 'الوحدات', href: '/units', icon: Building2 },
       { title: 'المستأجرون', href: '/tenants', icon: Briefcase },
       { title: 'عقود الإيجار', href: '/leases', icon: FileText },
+      { title: 'خط التأجير (CRM)', href: '/leases/pipeline', icon: Users },
       { title: 'تحصيل الإيجار', href: '/rent-collection/invoices', icon: DollarSign },
       { title: 'قائمة التحصيل', href: '/queues/collection', icon: ListChecks },
     ],
@@ -75,6 +76,7 @@ const workCenters = [
       { title: 'الحسابات البنكية', href: '/finance/bank-accounts', icon: DollarSign },
       { title: 'الشيكات', href: '/finance/cheques', icon: FileText },
       { title: 'إقفال الفترة', href: '/finance/period-closing', icon: ListChecks },
+      { title: 'مطابقة ثلاثية (PO/GR/INV)', href: '/finance/three-way-match', icon: Check },
       { title: 'تقييم العقارات', href: '/finance/valuation', icon: BarChart3 },
       { title: 'توقعات التدفق النقدي', href: '/finance/cash-flow-forecast', icon: BarChart3 },
     ],
@@ -91,8 +93,30 @@ const workCenters = [
       { title: 'أوامر العمل', href: '/maintenance/work-orders', icon: ListChecks },
       { title: 'الصيانة الوقائية', href: '/maintenance/preventive', icon: ListChecks },
       { title: 'المعاينات', href: '/maintenance/inspections', icon: ListChecks },
+      { title: 'سجل الأصول', href: '/maintenance/assets', icon: Package },
       { title: 'قائمة الصيانة', href: '/queues/maintenance', icon: ListChecks },
       { title: 'الشؤون القانونية', href: '/legal/notices', icon: Shield },
+    ],
+  },
+  {
+    key: 'procurement',
+    title: 'المشتريات والمخزون',
+    description: 'الموردون، طلبات الشراء، أوامر الشراء، المستودعات',
+    icon: ShoppingCart,
+    href: '/centers/procurement',
+    color: 'from-teal-500 to-cyan-600',
+    items: [
+      { title: 'الصفحة الرئيسية للمركز', href: '/centers/procurement', icon: ShoppingCart },
+      { title: 'قائمة المشتريات', href: '/queues/procurement', icon: ListChecks },
+      { title: 'الموردون', href: '/procurement/vendors', icon: Briefcase },
+      { title: 'طلبات الشراء', href: '/procurement/purchase-requests', icon: FileText },
+      { title: 'مقارنة العروض', href: '/procurement/quotation-comparison', icon: Scale },
+      { title: 'بطاقة الموردين', href: '/procurement/vendor-scorecard', icon: Award },
+      { title: 'أوامر الشراء', href: '/procurement/purchase-orders', icon: ShoppingCart },
+      { title: 'استلام البضائع', href: '/procurement/goods-receipts', icon: Truck },
+      { title: 'المستودعات', href: '/inventory/warehouses', icon: Briefcase },
+      { title: 'المواد والأصناف', href: '/inventory/items', icon: Box },
+      { title: 'حركات المخزون', href: '/inventory/transactions', icon: FileText },
     ],
   },
 ] as const;

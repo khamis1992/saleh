@@ -11,6 +11,9 @@ import { getAuditLogs } from '@/utils/exportUtils';
 import { formatQARInt } from '@/lib/format';
 import { colorClass } from '@/utils/colorClass';
 import { cn } from '@/utils/cn';
+import { Chart } from '@/components/shared/Chart';
+import { Scorecard, ScorecardGrid } from '@/components/shared/Scorecard';
+import { propertyStore, leaseStore } from '@/services/stores';
 
 function safeCount(key: string, predicate?: (item: any) => boolean): number {
   try {
@@ -91,6 +94,67 @@ export default function ExecutiveCenterPage() {
         <KpiCard label="مشاريع نشطة" value={kpis.activeProjects} sublabel="قيد التنفيذ" icon={<Wrench className="h-5 w-5" />} color="orange" />
         <KpiCard label="مراحل متأخرة" value={kpis.delayedPhases} sublabel="عن الموعد المخطط" icon={<Clock className="h-5 w-5" />} color="amber" />
       </div>
+
+      {/* Performance Scorecard Grid */}
+      <ScorecardGrid
+        title="مؤشرات الأداء الرئيسية"
+        subtitle="الأداء الفعلي مقابل الأهداف"
+        columns={4}
+        scorecards={[
+          { label: 'هامش الربح التشغيلي (NOI)', value: formatQARInt(kpis.monthlyRent * 12 * 0.7), target: formatQARInt(kpis.monthlyRent * 14), delta: { value: -10, direction: 'up-good' as const }, sublabel: 'سنوي', icon: <TrendingUp className="h-4 w-4 text-emerald-600" />, iconBg: 'bg-emerald-50' },
+          { label: 'نسبة التحصيل', value: `${Math.round(kpis.monthlyRent / Math.max(1, kpis.monthlyRent + kpis.overdueInvoices) * 100)}%`, target: '95%', delta: { value: -5, direction: 'up-good' as const }, sublabel: 'من المستحقات', icon: <Banknote className="h-4 w-4 text-blue-600" />, iconBg: 'bg-blue-50' },
+          { label: 'معدل الإشغال', value: `${kpis.occupancy}%`, target: '90%', delta: { value: Math.round((kpis.occupancy - 90) / 90 * 100), direction: 'up-good' as const }, sublabel: 'من الوحدات الجاهزة', icon: <Building2 className="h-4 w-4 text-cyan-600" />, iconBg: 'bg-cyan-50' },
+          { label: 'انحراف المواعيد', value: `${kpis.delayedPhases}`, target: '0', delta: { value: kpis.delayedPhases * 10, direction: 'down-good' as const }, sublabel: 'مرحلة متأخرة', icon: <Clock className="h-4 w-4 text-amber-600" />, iconBg: 'bg-amber-50' },
+        ]}
+      />
+
+      {/* NOI & Occupancy charts */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <Card>
+          <CardContent className="p-5">
+            <h3 className="font-bold text-base mb-3">صافي الدخل التشغيلي (NOI) لكل عقار</h3>
+            <Chart height={260} option={{
+              tooltip: { trigger: 'axis', valueFormatter: (v: number) => formatQARInt(v) },
+              xAxis: { type: 'category', data: propertyStore.getAll().slice(0, 6).map((p: any) => p.property_name), axisLabel: { fontSize: 10, rotate: 15 } },
+              yAxis: { type: 'value', axisLabel: { fontSize: 10, formatter: (v: number) => `${(v / 1000).toFixed(0)}K` } },
+              series: [{ name: 'NOI', type: 'bar', data: propertyStore.getAll().slice(0, 6).map((p: any) => { const ls = leaseStore.getAll().filter((l: any) => l.property_id === p.id && l.status === 'active'); return Math.round(ls.reduce((s: number, l: any) => s + l.rent_amount * 12, 0) * 0.7); }), itemStyle: { color: '#10B981', borderRadius: [4, 4, 0, 0] } }],
+            }} />
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent className="p-5">
+            <h3 className="font-bold text-base mb-3">نسبة الإشغال لكل عقار</h3>
+            <Chart height={260} option={{
+              tooltip: { trigger: 'axis', valueFormatter: (v: number) => `${v}%` },
+              xAxis: { type: 'category', data: propertyStore.getAll().slice(0, 6).map((p: any) => p.property_name), axisLabel: { fontSize: 10, rotate: 15 } },
+              yAxis: { type: 'value', max: 100, axisLabel: { fontSize: 10, formatter: '{value}%' } },
+              series: [{ name: 'الإشغال', type: 'bar', data: propertyStore.getAll().slice(0, 6).map((p: any) => { const us = JSON.parse(localStorage.getItem('erp_units') || '[]').filter((u: any) => u.property_id === p.id); if (!us.length) return 0; return Math.round(us.filter((u: any) => u.status === 'leased').length / us.length * 100); }), itemStyle: { color: '#3B82F6', borderRadius: [4, 4, 0, 0] } }],
+            }} />
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Occupancy heatmap */}
+      <Card>
+        <CardContent className="p-5">
+          <div className="flex items-center justify-between mb-3">
+            <div>
+              <h3 className="font-bold text-base">خريطة الإشغال</h3>
+              <p className="text-xs text-muted-foreground">كل مربع = وحدة. أخضر مؤجرة، رمادي شاغرة، أصفر صيانة، أحمر محجوزة</p>
+            </div>
+            <Link to="/units" className="text-xs text-blue-600 hover:underline">كل الوحدات</Link>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-1.5">
+            {(() => { const us = JSON.parse(localStorage.getItem('erp_units') || '[]'); return us.slice(0, 80).map((u: any) => { const c = u.status === 'leased' ? 'bg-emerald-500 text-white' : u.status === 'under_maintenance' ? 'bg-amber-500 text-white' : u.status === 'available' ? 'bg-gray-200 text-gray-600 border border-dashed border-gray-300' : 'bg-red-500 text-white'; return <div key={u.id} title={u.unit_code + ' · ' + u.status} className={cn('aspect-square rounded-md flex items-center justify-center text-[9px] font-bold cursor-pointer transition-transform hover:scale-110', c)}>{(u.unit_code || '').slice(-3) || '?'}</div>; }); })()}
+          </div>
+          <div className="flex items-center gap-3 mt-3 text-[11px] text-muted-foreground flex-wrap">
+            <span className="flex items-center gap-1.5"><span className="h-3 w-3 rounded bg-emerald-500" />مؤجرة</span>
+            <span className="flex items-center gap-1.5"><span className="h-3 w-3 rounded bg-gray-200 border border-dashed border-gray-300" />شاغرة</span>
+            <span className="flex items-center gap-1.5"><span className="h-3 w-3 rounded bg-amber-500" />صيانة</span>
+            <span className="flex items-center gap-1.5"><span className="h-3 w-3 rounded bg-red-500" />محجوزة</span>
+          </div>
+        </CardContent>
+      </Card>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Approvals queue (left, 2 cols) */}
