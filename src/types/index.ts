@@ -563,6 +563,7 @@ export interface InventoryItem {
   name_en: string;
   category: string;
   unit_of_measure: string;
+  warehouse_id: string;
   minimum_stock: number;
   maximum_stock: number;
   reorder_level: number;

@@ -40,7 +40,7 @@ export default function ContractorCreatePage() {
   };
 
   return (
-    <div className="min-h-full bg-[#F8FAFC]" dir="rtl">
+    <div className="min-h-full bg-[#f6f9fc]" dir="rtl">
       <div className="flex items-center justify-between flex-wrap gap-3 mb-6">
         <div className="flex items-center gap-3">
           <Button variant="ghost" size="sm" onClick={() => navigate('/contractors')} className="text-xs text-gray-500">
@@ -51,7 +51,7 @@ export default function ContractorCreatePage() {
             <p className="text-xs text-gray-500 mt-0.5">{isEdit ? 'تعديل بيانات المقاول' : 'إضافة مقاول جديد'}</p>
           </div>
         </div>
-        <Button onClick={handleSave} className="gap-2 bg-[#3B82F6] hover:bg-blue-600 text-white text-sm h-9 rounded-lg px-4">
+        <Button onClick={handleSave} className="gap-2 bg-[#533afd] hover:bg-[#4434d4] text-white text-sm h-9 rounded-full px-4">
           <Save className="h-4 w-4" />{t.common.save}
         </Button>
       </div>
@@ -97,7 +97,7 @@ export default function ContractorCreatePage() {
 
       <div className="flex items-center gap-3 justify-end mt-6">
         <Button variant="outline" onClick={() => navigate('/contractors')} className="h-9 text-sm rounded-lg">{t.common.cancel}</Button>
-        <Button onClick={handleSave} className="gap-2 bg-[#3B82F6] hover:bg-blue-600 text-white text-sm h-9 rounded-lg px-4"><Save className="h-4 w-4" />{t.common.save}</Button>
+        <Button onClick={handleSave} className="gap-2 bg-[#533afd] hover:bg-[#4434d4] text-white text-sm h-9 rounded-full px-4"><Save className="h-4 w-4" />{t.common.save}</Button>
       </div>
     </div>
   );

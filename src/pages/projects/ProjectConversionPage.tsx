@@ -155,7 +155,7 @@ export default function ProjectConversionPage() {
 
   if (converted && conversionResult) {
     return (
-      <div className="min-h-full bg-[#F8FAFC]" dir="rtl">
+      <div className="min-h-full bg-[#f6f9fc]" dir="rtl">
         <div className="mb-6">
           <h1 className="text-xl font-bold text-gray-900">تحويل المشروع إلى عقار</h1>
           <p className="text-xs text-gray-500 mt-0.5">تحويل مشروع مكتمل إلى عقار في النظام</p>
@@ -172,7 +172,7 @@ export default function ProjectConversionPage() {
             <div className="border-t pt-2 flex justify-between font-bold"><span>القيمة الإجمالية</span><span className="font-mono">{fmt(conversionResult.total)}</span></div>
           </div>
           <div className="mt-6 flex gap-3 justify-center">
-            <Button onClick={() => { setSelectedProjectId(''); setShowSummary(false); setConverted(false); setConversionResult(null); }} className="bg-[#3B82F6] hover:bg-blue-600 text-white text-sm h-9 rounded-lg px-4">تحويل مشروع آخر</Button>
+            <Button onClick={() => { setSelectedProjectId(''); setShowSummary(false); setConverted(false); setConversionResult(null); }} className="bg-[#533afd] hover:bg-[#4434d4] text-white text-sm h-9 rounded-full px-4">تحويل مشروع آخر</Button>
             <Button variant="outline" onClick={() => window.location.href = '/properties'} className="h-9 text-sm rounded-lg">الذهاب إلى العقارات</Button>
           </div>
         </div>
@@ -181,7 +181,7 @@ export default function ProjectConversionPage() {
   }
 
   return (
-    <div className="min-h-full bg-[#F8FAFC]" dir="rtl">
+    <div className="min-h-full bg-[#f6f9fc]" dir="rtl">
       <div className="mb-6">
         <h1 className="text-xl font-bold text-gray-900">تحويل المشروع إلى عقار</h1>
         <p className="text-xs text-gray-500 mt-0.5">اختر مشروعاً مكتملاً لتحويله إلى عقار</p>
@@ -246,11 +246,11 @@ export default function ProjectConversionPage() {
           <div className="border-t border-gray-100 pt-4 flex justify-between items-center">
             <div className="text-sm text-gray-500"><Building2 className="h-4 w-4 inline ml-1" />العقار: <span className="font-semibold">{propertyName}</span> | الكود: <span className="font-mono">{propertyCode}</span></div>
             {!showSummary ? (
-              <Button onClick={() => setShowSummary(true)} disabled={!propertyName || !propertyCode || !propertyType || !address} className="bg-[#3B82F6] hover:bg-blue-600 text-white text-sm h-9 rounded-lg px-4">مراجعة التحويل</Button>
+              <Button onClick={() => setShowSummary(true)} disabled={!propertyName || !propertyCode || !propertyType || !address} className="bg-[#533afd] hover:bg-[#4434d4] text-white text-sm h-9 rounded-full px-4">مراجعة التحويل</Button>
             ) : (
               <div className="flex gap-2">
                 <Button variant="outline" onClick={() => setShowSummary(false)} className="h-9 text-sm rounded-lg">رجوع</Button>
-                <Button onClick={handleConvert} className="gap-2 bg-[#3B82F6] hover:bg-blue-600 text-white text-sm h-9 rounded-lg px-4"><CheckCircle2 className="h-4 w-4" />تأكيد التحويل</Button>
+                <Button onClick={handleConvert} className="gap-2 bg-[#533afd] hover:bg-[#4434d4] text-white text-sm h-9 rounded-full px-4"><CheckCircle2 className="h-4 w-4" />تأكيد التحويل</Button>
               </div>
             )}
           </div>

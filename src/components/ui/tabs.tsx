@@ -2,7 +2,16 @@ import * as React from "react";
 import * as TabsPrimitive from "@radix-ui/react-tabs";
 import { cn } from "@/utils/cn";
 
-const Tabs = TabsPrimitive.Root;
+const Tabs = React.forwardRef<
+  React.ComponentRef<typeof TabsPrimitive.Root>,
+  React.ComponentPropsWithoutRef<typeof TabsPrimitive.Root>
+>(({ dir, ...props }, ref) => {
+  // Auto-detect RTL from HTML element so tables inside Tabs render columns
+  // right-to-left without requiring every caller to pass dir={dir}.
+  const resolvedDir = (dir || (typeof document !== 'undefined' ? document.documentElement.dir : 'rtl')) as 'rtl' | 'ltr';
+  return <TabsPrimitive.Root dir={resolvedDir} {...props} ref={ref} />;
+});
+Tabs.displayName = TabsPrimitive.Root.displayName;
 
 const TabsList = React.forwardRef<
   React.ComponentRef<typeof TabsPrimitive.List>,

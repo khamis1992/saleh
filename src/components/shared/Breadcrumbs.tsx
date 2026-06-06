@@ -6,7 +6,7 @@ import { cn } from '@/utils/cn';
 const routeLabels: Record<string, { label: string; parent?: string }> = {
   '': { label: 'الرئيسية' },
   'tasks': { label: 'مهامي' },
-  'reports': { label: 'التقارير' },
+  'reports': { label: 'التقارير والقوائم' },
   'settings': { label: 'الإعدادات' },
   'documents': { label: 'المستندات' },
   'calendar': { label: 'التقويم' },
@@ -16,11 +16,13 @@ const routeLabels: Record<string, { label: string; parent?: string }> = {
   'centers/property': { label: 'العقارات والتأجير' },
   'centers/finance': { label: 'المالية والتحصيل' },
   'centers/maintenance': { label: 'الصيانة والشؤون القانونية' },
+  'centers/procurement': { label: 'المشتريات والمخزون' },
   'queues': { label: 'قوائم الانتظار' },
   'queues/approvals': { label: 'الموافقات' },
   'queues/collection': { label: 'التحصيل' },
   'queues/maintenance': { label: 'الصيانة' },
   'queues/construction': { label: 'البناء' },
+  'queues/procurement': { label: 'المشتريات' },
   'wizards': { label: 'المعالجات' },
   'wizards/project': { label: 'إنشاء مشروع جديد' },
   'wizards/conversion': { label: 'تحويل مشروع إلى عقار' },
@@ -107,6 +109,13 @@ const routeLabels: Record<string, { label: string; parent?: string }> = {
   'profit-loss': { label: 'قائمة الدخل' },
   'balance-sheet': { label: 'الميزانية العمومية' },
   'cash-flow': { label: 'التدفقات النقدية' },
+  // Mega-pages
+  'leasing': { label: 'العقارات والتأجير' },
+  'construction-all': { label: 'المشاريع والإنشاءات' },
+  'my-work': { label: 'مهامي اليوم' },
+  'executive-dashboard': { label: 'لوحة المعلومات التنفيذية' },
+  'dashboard': { label: 'لوحة المعلومات' },
+  'all': { label: 'الكل' },
 };
 
 function lookupLabel(segment: string): string {

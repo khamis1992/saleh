@@ -8,8 +8,9 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
-import { Search, Filter, MoreHorizontal, Pencil, Trash2 } from 'lucide-react';
+import { Search, Filter, MoreHorizontal, Pencil, Trash2, Building2, TrendingUp, CreditCard } from 'lucide-react';
 import { costCenterStore } from '@/services/stores';
+import { KpiCard } from '@/components/shared/DesignSystem';
 
 const typeLabels: Record<string, string> = {
   project: 'مشروع',
@@ -47,6 +48,11 @@ export default function CostCentersPage() {
     if (search && !cc.cost_center_name.includes(search) && !cc.cost_center_code.includes(search)) return false;
     return true;
   });
+
+  // KPI computations
+  const activeCenters = centers.filter((cc: any) => cc.status === 'active').length;
+  const projectCenters = centers.filter((cc: any) => cc.type === 'project').length;
+  const propertyCenters = centers.filter((cc: any) => cc.type === 'property').length;
 
   const openCreate = () => {
     setEditId(null);
@@ -101,7 +107,15 @@ export default function CostCentersPage() {
   };
 
   return (
-    <div className="min-h-full bg-[#F8FAFC]" dir="rtl">
+    <div className="min-h-full bg-[#f6f9fc]" dir="rtl">
+      {/* KPI Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+        <KpiCard title="مراكز التكلفة" value={centers.length} subtitle={`${filtered.length} مركز`} icon={Building2} moduleOverride="finance" />
+        <KpiCard title="نشطة" value={activeCenters} subtitle="مراكز عاملة" icon={TrendingUp} moduleOverride="finance" />
+        <KpiCard title="مشاريع" value={projectCenters} subtitle="مراكز مشاريع" icon={CreditCard} moduleOverride="finance" />
+        <KpiCard title="عقارات" value={propertyCenters} subtitle="مراكز عقارية" icon={Building2} moduleOverride="finance" />
+      </div>
+
       <PageHeader
         title="مراكز التكلفة"
         description={`إدارة مراكز التكلفة (${centers.length} مركز)`}

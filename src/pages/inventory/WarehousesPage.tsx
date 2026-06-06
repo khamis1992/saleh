@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { useLocale } from '@/providers/LocaleContext';
 import { toast } from 'sonner';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
@@ -14,8 +14,9 @@ import {
   AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent,
   AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
-import { Search, Filter, Pencil, Trash2, Plus, Warehouse, X } from 'lucide-react';
-import { warehouseStore } from '@/services/stores';
+import { Search, Filter, Pencil, Trash2, Plus, Warehouse, X, Package, TrendingUp, MapPin } from 'lucide-react';
+import { warehouseStore, inventoryStore } from '@/services/stores';
+import { KpiCard } from '@/components/shared/DesignSystem';
 
 const warehouseTypeLabels: Record<string, string> = {
   main: 'مستودع رئيسي',
@@ -44,9 +45,12 @@ export default function WarehousesPage() {
   const [deleteTarget, setDeleteTarget] = useState<any | null>(null);
 
   const warehouses = useMemo(() => {
-    const data = warehouseStore.getAll();
+    return warehouseStore.getAll();
+  }, [refresh]);
+
+  useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 300);
-    return data;
+    return () => clearTimeout(timer);
   }, [refresh]);
 
   const filtered = warehouses.filter((w: any) => {
@@ -54,6 +58,11 @@ export default function WarehousesPage() {
     if (search && !w.warehouse_name.includes(search) && !w.warehouse_code.includes(search)) return false;
     return true;
   });
+
+  // KPI computations
+  const invItems = useMemo(() => inventoryStore.getAll(), [refresh]);
+  const totalWarehouseItems = invItems.reduce((s: number, it: any) => s + (it.warehouse_id ? 1 : 0), 0);
+  const activeWarehouses = warehouses.filter((w: any) => w.status === 'active').length;
 
   const openCreate = () => {
     setEditId(null);
@@ -106,7 +115,15 @@ export default function WarehousesPage() {
   };
 
   return (
-    <div className="min-h-full bg-[#F8FAFC]" dir="rtl">
+    <div className="min-h-full bg-[#f6f9fc]" dir="rtl">
+      {/* KPI Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+        <KpiCard title="المستودعات" value={warehouses.length} subtitle={`${filtered.length} مستودع`} icon={Warehouse} moduleOverride="procurement" />
+        <KpiCard title="نشطة" value={activeWarehouses} subtitle="مستودعات عاملة" icon={MapPin} moduleOverride="procurement" />
+        <KpiCard title="المواد" value={invItems.length} subtitle="إجمالي الأصناف" icon={Package} moduleOverride="procurement" />
+        <KpiCard title="في المستودعات" value={totalWarehouseItems} subtitle="أصناف مخزنة" icon={TrendingUp} moduleOverride="procurement" />
+      </div>
+
       {/* Page Header */}
       <div className="flex items-center justify-between flex-wrap gap-3 mb-6">
         <div>
@@ -115,7 +132,7 @@ export default function WarehousesPage() {
         </div>
         <Button
           onClick={openCreate}
-          className="gap-2 bg-[#3B82F6] hover:bg-blue-600 text-white text-sm h-9 rounded-lg px-4 shadow-sm shadow-blue-500/20 transition-all hover:shadow-md hover:shadow-blue-500/30"
+          className="gap-2 bg-[#533afd] hover:bg-[#4434d4] text-white text-sm h-9 rounded-full px-4 shadow-sm shadow-blue-500/20 transition-all hover:shadow-md hover:shadow-blue-500/30"
         >
           <Plus className="h-4 w-4" />
           إضافة مستودع

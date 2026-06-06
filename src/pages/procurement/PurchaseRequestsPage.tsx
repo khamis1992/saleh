@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { useLocale } from '@/providers/LocaleContext';
 import { toast } from 'sonner';
 import { formatQAR, formatQARInt } from '@/lib/format';
@@ -23,11 +24,10 @@ import {
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import {
-  Search, Filter, Eye, Pencil, Trash2, Plus, FileText, AlertTriangle, X,
+  Search, Filter, Eye, Pencil, Trash2, Plus, FileText, AlertTriangle, X, ShoppingCart, TrendingUp, Clock, CheckCircle2, ArrowRight,
 } from 'lucide-react';
-import {
-  purchaseRequestStore, projectStore, getProjectName,
-} from '@/services/stores';
+import { projectStore, purchaseRequestStore, purchaseOrderStore, getProjectName, rfqStore, vendorQuotationStore } from '@/services/stores';
+import { KpiCard } from '@/components/shared/DesignSystem';
 import type { PurchaseRequest, PRLineItem } from '@/services/stores';
 
 const priorityLabels: Record<string, string> = {
@@ -53,6 +53,9 @@ const priorityColors: Record<string, string> = {
 
 export default function PurchaseRequestsPage() {
   const { t } = useLocale();
+  const [searchParams] = useSearchParams();
+  const projectId = searchParams.get('projectId') || '';
+  const projectName = searchParams.get('projectName') || '';
   const [search, setSearch] = useState('');
   const [priorityFilter, setPriorityFilter] = useState('all');
   const [loading, setLoading] = useState(true);
@@ -213,6 +216,20 @@ export default function PurchaseRequestsPage() {
   };
 
   const handleApprove = (pr: PurchaseRequest) => {
+    // Budget validation
+    const project = projectStore.getById(pr.project);
+    if (project) {
+      const projectBudget = (project as any).approved_budget || (project as any).estimated_budget || 0;
+      const projectCost = (project as any).actual_cost || 0;
+      const existingApproved = allPRs
+        .filter((p: any) => p.project === pr.project && p.id !== pr.id && (p.status === 'approved' || p.status === 'pending'))
+        .reduce((s: number, p: any) => s + (p.estimated_total || 0), 0);
+      const remaining = projectBudget - projectCost - existingApproved;
+      if (pr.estimated_total > remaining && remaining >= 0) {
+        toast.error(`الميزانية غير كافية. المتبقي: ${formatQARInt(remaining)} من ${formatQARInt(projectBudget)}`);
+        return;
+      }
+    }
     purchaseRequestStore.update(pr.id, { status: 'approved' });
     toast.success(`تم اعتماد طلب الشراء ${pr.pr_number}`);
   };
@@ -220,6 +237,73 @@ export default function PurchaseRequestsPage() {
   const handleReject = (pr: PurchaseRequest) => {
     purchaseRequestStore.update(pr.id, { status: 'rejected' });
     toast.success(`تم رفض طلب الشراء ${pr.pr_number}`);
+  };
+
+  // Convert approved PR to Purchase Order
+  const handleConvertToPO = (pr: PurchaseRequest) => {
+    const yearCode = new Date().getFullYear();
+    const existing = purchaseOrderStore.getAll();
+    const count = existing.filter((p: any) => p.po_number?.includes(String(yearCode))).length + 1;
+    const poNumber = `PO-${yearCode}-${String(count).padStart(3, '0')}`;
+    const projectName = getProjectName(pr.project) || pr.project;
+
+    const po = purchaseOrderStore.create({
+      po_number: poNumber,
+      pr_id: pr.id,
+      pr_number: pr.pr_number,
+      vendor: '',
+      project: projectName,
+      order_date: new Date().toISOString().split('T')[0],
+      expected_delivery: pr.required_date,
+      total_amount: pr.estimated_total,
+      status: 'draft',
+      receipt_status: 'none',
+      payment_status: 'unpaid',
+      delivery_location: '',
+      notes: `تم إنشاؤه تلقائياً من طلب الشراء ${pr.pr_number}`,
+      items: (pr.items || []).map((item: any) => ({
+        itemName: item.item_name,
+        description: item.description || '',
+        quantity: item.quantity,
+        unit: item.unit,
+        unitPrice: item.unit_price,
+        total: item.total_price,
+      })),
+    } as any);
+
+    purchaseRequestStore.update(pr.id, { linked_po_id: po.id, linked_po_number: poNumber } as any);
+    toast.success(`تم إنشاء أمر الشراء ${poNumber} من طلب الشراء ${pr.pr_number}`);
+    navigate(`/procurement/orders`);
+  };
+
+  // Create RFQ from approved PR
+  const handleCreateRFQ = (pr: PurchaseRequest) => {
+    const yearCode = new Date().getFullYear();
+    const existing = rfqStore.getAll();
+    const count = existing.filter((r: any) => r.rfq_number?.includes(String(yearCode))).length + 1;
+    const rfqNumber = `RFQ-${yearCode}-${String(count).padStart(3, '0')}`;
+
+    const rfq = rfqStore.create({
+      rfq_number: rfqNumber,
+      pr_id: pr.id,
+      pr_number: pr.pr_number,
+      project_id: pr.project,
+      title: `طلب عروض أسعار - ${pr.pr_number}`,
+      description: pr.justification || '',
+      status: 'draft',
+      created_date: new Date().toISOString().split('T')[0],
+      due_date: new Date(Date.now() + 14 * 86400000).toISOString().split('T')[0],
+      items: (pr.items || []).map((item: any) => ({
+        item_name: item.item_name,
+        description: item.description || '',
+        quantity: item.quantity,
+        unit: item.unit,
+      })),
+      total_estimated: pr.estimated_total,
+    } as any);
+
+    toast.success(`تم إنشاء طلب عروض الأسعار ${rfqNumber}`);
+    navigate(`/procurement/quotation-comparison?rfqId=${rfq.id}&rfqNumber=${rfqNumber}&prId=${pr.id}`);
   };
 
   return (
@@ -423,6 +507,42 @@ export default function PurchaseRequestsPage() {
                               <TooltipContent>رفض</TooltipContent>
                             </Tooltip>
                           </>
+                        )}
+                        {/* Workflow: Convert to PO for approved PRs */}
+                        {pr.status === 'approved' && !pr.linked_po_id && (
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <Button
+                                variant="ghost" size="sm"
+                                className="h-7 px-2 text-[10px] text-indigo-600 hover:text-indigo-700 hover:bg-indigo-50 font-semibold gap-1"
+                                onClick={() => handleConvertToPO(pr)}
+                              >
+                                <ArrowRight className="h-3 w-3" />PO
+                              </Button>
+                            </TooltipTrigger>
+                            <TooltipContent>تحويل إلى أمر شراء</TooltipContent>
+                          </Tooltip>
+                        )}
+                        {/* Workflow: RFQ link for approved PRs */}
+                        {pr.status === 'approved' && (
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <Button
+                                variant="ghost" size="sm"
+                                className="h-7 px-2 text-[10px] text-amber-600 hover:text-amber-700 hover:bg-amber-50 font-semibold gap-1"
+                                onClick={() => handleCreateRFQ(pr)}
+                              >
+                                <FileText className="h-3 w-3" />RFQ
+                              </Button>
+                            </TooltipTrigger>
+                            <TooltipContent>طلب عروض أسعار</TooltipContent>
+                          </Tooltip>
+                        )}
+                        {/* Show linked PO indicator */}
+                        {pr.linked_po_number && (
+                          <span className="text-[10px] text-indigo-500 bg-indigo-50 px-1.5 py-0.5 rounded font-semibold">
+                            {pr.linked_po_number}
+                          </span>
                         )}
                         <Tooltip>
                           <TooltipTrigger asChild>

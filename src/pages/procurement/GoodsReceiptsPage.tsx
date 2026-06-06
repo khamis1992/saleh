@@ -23,10 +23,11 @@ import {
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import {
-  Search, Filter, Eye, Pencil, Trash2, Plus, FileText, Warehouse, PackageCheck, CheckCircle, X,
+  Search, Filter, Eye, Pencil, Trash2, Plus, FileText, Warehouse, PackageCheck, CheckCircle, X, ShoppingCart, TrendingUp, Clock, CheckCircle2,
 } from 'lucide-react';
 import { createStore } from '@/services/dataService';
-import { stockTransactionStore, purchaseOrderStore } from '@/services/stores';
+import { stockTransactionStore, purchaseOrderStore, inventoryStore } from '@/services/stores';
+import { KpiCard } from '@/components/shared/DesignSystem';
 import { logAudit, generateJournalEntry } from '@/utils/exportUtils';
 
 interface GRItem {
@@ -140,6 +141,12 @@ export default function GoodsReceiptsPage() {
     });
   }, [data, search, statusFilter]);
 
+  // KPI computations
+  const receiptCount = data.length;
+  const receivedValue = data.reduce((s: number, gr: any) => s + (gr.total_amount || 0), 0);
+  const pendingReceipts = data.filter((gr: any) => gr.status === 'draft' || gr.status === 'in_transit').length;
+  const completedReceipts = data.filter((gr: any) => gr.status === 'completed' || gr.status === 'received').length;
+
   const handleCopyCode = (code: string) => {
     navigator.clipboard.writeText(code).then(() => {
       toast.success('تم نسخ رقم السند');
@@ -220,6 +227,16 @@ export default function GoodsReceiptsPage() {
       toast.error('تم ترحيل السند مسبقاً');
       return;
     }
+    // Resolve inventory item IDs by name matching
+    const allInventory = inventoryStore.getAll();
+    function findItemId(itemName: string): string {
+      const match = allInventory.find((inv: any) =>
+        inv.name_ar.includes(itemName) || itemName.includes(inv.name_ar) ||
+        inv.name_en?.toLowerCase().includes(itemName.toLowerCase()) ||
+        itemName.toLowerCase().includes(inv.name_en?.toLowerCase() || '')
+      );
+      return match?.id || itemName; // fall back to name if no match
+    }
     // Create stock_transactions for each line item
     let created = 0;
     for (const item of gr.items) {
@@ -232,7 +249,7 @@ export default function GoodsReceiptsPage() {
           project_id: gr.project,
           property_id: '',
           work_order_id: '',
-          inventory_item_id: item.itemName,
+          inventory_item_id: findItemId(item.itemName),
           quantity: item.receivedQty,
           unit_cost: item.unitPrice,
           total_cost: item.total,
@@ -249,6 +266,32 @@ export default function GoodsReceiptsPage() {
     // Update GR status to posted
     setReceipts((prev) => prev.map((r) => r.id === gr.id ? { ...r, status: 'posted' } : r));
     logAudit('post', 'goods_receipt', gr.id, gr.status, 'posted');
+
+    // Auto-register as assets if items are equipment/fixed-assets
+    try {
+      const existingAssets = JSON.parse(localStorage.getItem('erp_assets') || '[]');
+      const assetCategories = ['hvac', 'plumbing', 'electrical', 'mechanical', 'fire_safety', 'elevator'];
+      for (const item of gr.items) {
+        const itemName = (item.itemName || '').toLowerCase();
+        if (assetCategories.some(cat => itemName.includes(cat) || itemName.includes('وحدة') || itemName.includes('مضخة') || itemName.includes('مولد'))) {
+          const newAsset = {
+            id: `a-${gr.id}-${item.itemName.slice(0, 3)}`,
+            asset_code: `AST-${Date.now().toString(36).toUpperCase()}`,
+            asset_name: item.itemName,
+            category: assetCategories.find(cat => itemName.includes(cat)) || 'mechanical',
+            property_name: gr.project,
+            manufacturer: gr.vendor,
+            model: '-',
+            serial_number: '-',
+            status: 'operational',
+            service_frequency_months: 6,
+            last_service_date: gr.receipt_date,
+          };
+          existingAssets.push(newAsset);
+        }
+      }
+      localStorage.setItem('erp_assets', JSON.stringify(existingAssets));
+    } catch {}
 
     // Generate JE: Debit Inventory (acc-7), Credit Supplier Payables (acc-8)
     if (gr.total_amount > 0) {
@@ -291,7 +334,15 @@ export default function GoodsReceiptsPage() {
   };
 
   return (
-    <div className="min-h-full bg-[#F8FAFC]" dir="rtl">
+    <div className="min-h-full bg-[#f6f9fc]" dir="rtl">
+      {/* KPI Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+        <KpiCard title="استلام البضائع" value={receiptCount} subtitle={`${filtered.length} سند`} icon={PackageCheck} moduleOverride="procurement" />
+        <KpiCard title="معلقة" value={pendingReceipts} subtitle="بانتظار الاستلام" icon={Clock} trend={pendingReceipts > 0 ? { value: pendingReceipts } : undefined} moduleOverride="procurement" />
+        <KpiCard title="مكتملة" value={completedReceipts} subtitle="تم استلامها" icon={CheckCircle} moduleOverride="procurement" />
+        <KpiCard title="القيمة المستلمة" value={formatQARInt(receivedValue)} subtitle="ر.ق" icon={TrendingUp} moduleOverride="procurement" />
+      </div>
+
       {/* Page Header */}
       <div className="flex items-center justify-between flex-wrap gap-3 mb-6">
         <div>
@@ -302,7 +353,7 @@ export default function GoodsReceiptsPage() {
         </div>
         <Button
           onClick={openCreate}
-          className="gap-2 bg-[#3B82F6] hover:bg-blue-600 text-white text-sm h-9 rounded-lg px-4 shadow-sm shadow-blue-500/20 transition-all hover:shadow-md hover:shadow-blue-500/30"
+          className="gap-2 bg-[#533afd] hover:bg-[#4434d4] text-white text-sm h-9 rounded-full px-4 shadow-sm shadow-blue-500/20 transition-all hover:shadow-md hover:shadow-blue-500/30"
         >
           <Plus className="h-4 w-4" />
           سند استلام جديد

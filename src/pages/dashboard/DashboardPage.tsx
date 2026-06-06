@@ -390,7 +390,7 @@ export default function DashboardPage() {
   // ============================================================
   return (
     <div className="bg-gray-50 min-h-full" dir="rtl">
-      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-4 mb-4">
+      <div className="grid grid-cols-1 lg:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
         <KpiCard title="المشاريع قيد الإنشاء" value={activeConstruction.length} trend={-2} trendLabel={`${delayedProjects.length} متأخرة`} icon={HardHat} iconBg="bg-blue-500" onClick={() => navigate('/projects')} />
         <KpiCard title="إجمالي العقارات" value={properties.length} trend={8} trendLabel="عقار مكتمل" icon={Building2} iconBg="bg-blue-600" onClick={() => navigate('/properties')} />
         <KpiCard title="إجمالي الوحدات" value={totalUnits} trend={3} trendLabel={`${leased} مؤجرة`} icon={Building} iconBg="bg-indigo-500" onClick={() => navigate('/units')} />
@@ -400,7 +400,7 @@ export default function DashboardPage() {
         <KpiCard title="طلبات الصيانة" value={openMaintenance} trend={7} trendLabel={`${maintenanceEmergencies} طارئة`} icon={Wrench} iconBg="bg-orange-500" onClick={() => navigate('/maintenance')} />
       </div>
       {/* ── ROW 2: SECONDARY KPI CARDS (8 smaller cards) ── */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 xl:grid-cols-8 gap-3 mb-4">
+      <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3 mb-4">
         <SmallKpiCard title="الوحدات المتاحة" value={available} icon={DoorOpen} iconBg="bg-emerald-500" onClick={() => navigate('/units')} />
         <SmallKpiCard title="الوحدات المؤجرة" value={leased} icon={Home} iconBg="bg-blue-500" onClick={() => navigate('/units')} />
         <SmallKpiCard title="الرصيد النقدي" value={fmtShort(financeStats.cashBalance)} icon={Wallet} iconBg="bg-teal-500" onClick={() => navigate('/finance/accounts')} />
@@ -447,7 +447,7 @@ export default function DashboardPage() {
         />
       </div>
       {/* ── ROW 4: 5 CHARTS IN A ROW ── */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3 mb-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 lg:grid-cols-5 gap-3 mb-4">
         {/* Chart 1: Donut — Unit Status */}
         <ChartBox title="حالة الوحدات" subtitle={`${totalUnits} وحدة`}>
           <div className="relative" style={{ height: 180 }}>
@@ -548,7 +548,7 @@ export default function DashboardPage() {
         </ChartBox>
       </div>
       {/* ── ROW 5: 4 DATA TABLES ── */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-3 mb-4">
+      <div className="grid grid-cols-1 lg:grid-cols-2 lg:grid-cols-4 gap-3 mb-4">
         {/* Table 1: Projects */}
         <TableBox
           title="المشاريع الإنشائية"

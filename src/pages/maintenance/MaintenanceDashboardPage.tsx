@@ -118,7 +118,7 @@ export default function MaintenanceDashboardPage() {
       </div>
 
       {/* KPI Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 lg:grid-cols-5 gap-4">
         <StatCard title="طلبات مفتوحة" value={openRequests} icon={Wrench} />
         <StatCard title="أوامر عمل جارية" value={inProgressOrders} icon={Clock} />
         <StatCard title="مكتملة هذا الشهر" value={completedThisMonth} icon={CheckCircle2} />

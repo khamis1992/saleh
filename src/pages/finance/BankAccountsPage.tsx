@@ -10,9 +10,10 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
-import { Search, Filter, MoreHorizontal, Pencil, Trash2, TrendingUp, TrendingDown } from 'lucide-react';
+import { Search, Filter, MoreHorizontal, Pencil, Trash2, TrendingUp, TrendingDown, CreditCard, Building2, Wallet } from 'lucide-react';
 import { cn } from '@/utils/cn';
 import { bankAccountStore } from '@/services/stores';
+import { KpiCard } from '@/components/shared/DesignSystem';
 
 const statusLabels: Record<string, string> = {
   active: 'نشط',
@@ -52,6 +53,10 @@ export default function BankAccountsPage() {
     if (search && !acc.bank_name.includes(search) && !acc.account_name.includes(search) && !acc.account_number.includes(search)) return false;
     return true;
   });
+
+  // KPI computations
+  const activeAccounts = accounts.filter((acc: any) => acc.status === 'active').length;
+  const totalBalance = accounts.reduce((s: number, acc: any) => s + (acc.current_balance || 0), 0);
 
   const fmt = (v: number) =>
     formatQAR(v);
@@ -100,7 +105,15 @@ export default function BankAccountsPage() {
   };
 
   return (
-    <div className="min-h-full bg-[#F8FAFC]" dir="rtl">
+    <div className="min-h-full bg-[#f6f9fc]" dir="rtl">
+      {/* KPI Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+        <KpiCard title="الحسابات البنكية" value={accounts.length} subtitle={`${filtered.length} حساب`} icon={Building2} moduleOverride="finance" />
+        <KpiCard title="نشطة" value={activeAccounts} subtitle="حسابات عاملة" icon={CreditCard} moduleOverride="finance" />
+        <KpiCard title="الرصيد الإجمالي" value={formatQAR(totalBalance)} subtitle="ر.ق" icon={Wallet} moduleOverride="finance" />
+        <KpiCard title="متوسط الرصيد" value={accounts.length > 0 ? formatQAR(Math.round(totalBalance / accounts.length)) : '0'} subtitle="لكل حساب" icon={TrendingUp} moduleOverride="finance" />
+      </div>
+
       <PageHeader
         title="الحسابات البنكية"
         description={`إدارة الحسابات البنكية (${accounts.length} حساب)`}

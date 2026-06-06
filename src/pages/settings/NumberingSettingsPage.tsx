@@ -290,7 +290,7 @@ export default function NumberingSettingsPage() {
   };
 
   return (
-    <div className="min-h-full bg-[#F8FAFC]" dir="rtl">
+    <div className="min-h-full bg-[#f6f9fc]" dir="rtl">
       {/* ── PAGE HEADER ─────────────────────────────────────────── */}
       <div className="flex items-center justify-between flex-wrap gap-3 mb-6">
         <div className="flex items-center gap-3">

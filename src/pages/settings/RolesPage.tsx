@@ -96,7 +96,7 @@ export default function RolesPage() {
           <h1 className="text-xl font-bold text-gray-900">{t.settings.roles}</h1>
           <p className="text-xs text-gray-500 mt-0.5">إدارة الأدوار والصلاحيات في النظام</p>
         </div>
-        <Button className="gap-2 bg-[#3B82F6] hover:bg-blue-600 text-white text-sm h-9 rounded-lg px-4">
+        <Button className="gap-2 bg-[#533afd] hover:bg-[#4434d4] text-white text-sm h-9 rounded-full px-4">
           <Plus className="h-4 w-4" />إضافة دور
         </Button>
       </div>
@@ -228,7 +228,7 @@ export default function RolesPage() {
             </Button>
             <Button
               onClick={handleSavePermissions}
-              className="gap-1 bg-[#3B82F6] hover:bg-blue-600 text-white text-sm h-9 rounded-lg"
+              className="gap-1 bg-[#533afd] hover:bg-[#4434d4] text-white text-sm h-9 rounded-full"
             >
               <Save className="h-4 w-4" />حفظ الصلاحيات
             </Button>

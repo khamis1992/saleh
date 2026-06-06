@@ -152,10 +152,12 @@ export function Header() {
   return (
     <>
       <header className="sticky top-0 z-30 h-16 border-b border-slate-200 bg-white/90 backdrop-blur-xl">
-        <div className="flex items-center justify-between h-full px-6">
+        <div className="flex items-center justify-between h-full px-3 sm:px-4 lg:px-6">
           {/* Left side — Breadcrumbs + Role switcher */}
-          <div className="flex items-center gap-4 min-w-0">
-            <Breadcrumbs />
+          <div className="flex items-center gap-2 sm:gap-4 min-w-0">
+            <div className="hidden sm:block">
+              <Breadcrumbs />
+            </div>
 
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
@@ -182,7 +184,7 @@ export function Header() {
           </div>
 
           {/* Right side */}
-          <div className="flex items-center gap-3 shrink-0">
+          <div className="flex items-center gap-1 sm:gap-2 lg:gap-3 shrink-0">
             <button
               onClick={() => setSearchOpen(true)}
               className="hidden md:flex items-center gap-2 h-8 px-3 rounded-lg border border-gray-200 bg-white hover:bg-gray-50 hover:border-gray-300 transition-colors text-xs text-muted-foreground w-[220px] lg:w-[280px]"
@@ -207,13 +209,13 @@ export function Header() {
             <Button
               variant="ghost"
               size="icon"
-              className="h-9 w-9"
+              className="h-8 w-8 sm:h-9 sm:w-9 hidden sm:flex"
               onClick={() => setLocale(locale === 'ar' ? 'en' : 'ar')}
             >
               <Globe className="h-5 w-5" />
             </Button>
 
-            <Button variant="ghost" size="icon" className="h-9 w-9" onClick={toggleTheme}>
+            <Button variant="ghost" size="icon" className="h-8 w-8 sm:h-9 sm:w-9 hidden sm:flex" onClick={toggleTheme}>
               {theme === 'light' ? <Moon className="h-5 w-5" /> : <Sun className="h-5 w-5" />}
             </Button>
 

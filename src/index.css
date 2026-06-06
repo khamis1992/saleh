@@ -9,34 +9,34 @@
 
 @layer base {
   :root {
-    /* Light canvas (professional white) */
-    --background: 210 40% 98%;            /* #f8fafc */
-    --foreground: 215 28% 17%;            /* #1e293b */
+    /* Light canvas — Stripe canvas-soft */
+    --background: 210 50% 98%;            /* #f6f9fc — Stripe canvas-soft */
+    --foreground: 211 65% 15%;            /* #0d253d — Stripe ink */
     --card: 0 0% 100%;                   /* #ffffff */
-    --card-foreground: 215 28% 17%;
+    --card-foreground: 211 65% 15%;
     --popover: 0 0% 100%;
-    --popover-foreground: 215 28% 17%;
+    --popover-foreground: 211 65% 15%;
 
-    /* Professional blue primary */
-    --primary: 211 100% 50%;              /* #007BFF — Professional blue */
+    /* Stripe Electric Indigo primary */
+    --primary: 248 97% 61%;              /* #533afd — Stripe indigo */
     --primary-foreground: 0 0% 100%;
-    --primary-hover: 211 100% 43%;
-    --primary-press: 211 100% 35%;
-    --primary-muted: 211 100% 50% / 0.1;
+    --primary-hover: 248 97% 54%;        /* #4434d4 */
+    --primary-press: 248 50% 35%;        /* #2e2b8c */
+    --primary-muted: 248 97% 61% / 0.1;
 
     /* Surfaces */
     --secondary: 210 17% 97%;            /* #f5f6f8 */
     --secondary-foreground: 215 28% 17%;
-    --muted: 210 17% 97%;
-    --muted-foreground: 215 16% 47%;
-    --accent: 211 100% 50% / 0.06;
+    --muted: 210 50% 98%;                  /* #f6f9fc — Stripe canvas-soft */
+    --muted-foreground: 215 15% 47%;        /* #64748d — Stripe ink-mute */
+    --accent: 248 97% 61% / 0.06;
     --accent-foreground: 211 100% 40%;
 
     /* Borders */
-    --border: 214 20% 90%;
-    --border-strong: 214 15% 83%;
-    --input: 214 20% 90%;
-    --ring: 211 100% 50%;
+    --border: 210 30% 92%;                 /* #e3e8ee — Stripe hairline */
+    --border-strong: 210 25% 85%;
+    --input: 210 30% 92%;
+    --ring: 248 97% 61%;
 
     /* Semantic — Reference palette */
     --destructive: 354 70% 54%;          /* #DC3545 — Red */
@@ -46,6 +46,42 @@
     --warning: 25 100% 60%;              /* #FF8C42 — Orange */
     --warning-foreground: 0 0% 100%;
     --purple: 261 51% 51%;               /* #6F42C1 — Purple */
+
+    /* ── Module accent colors ── */
+    --module-leasing:      248 97% 61%;    /* Indigo #533afd — Stripe */
+    --module-construction:  25 100% 60%;   /* Orange #FF8C42 */
+    --module-procurement:  261 51% 51%;    /* Purple #6F42C1 */
+    --module-maintenance:  354 70% 54%;    /* Red-rose #DC3545 */
+    --module-finance:      134 61% 41%;    /* Green #28A745 */
+    --module-hr:           45 100% 51%;    /* Gold #FFC107 */
+    --module-legal:        220 80% 55%;    /* Steel Blue */
+    --module-reports:      210 17% 40%;    /* Slate */
+    --module-settings:     215 28% 17%;    /* Dark Charcoal */
+    --module-system:       215 28% 17%;    /* Same as settings */
+
+    /* Module accent — 10% opacity backgrounds (for icon squares) */
+    --module-leasing-bg:    211 100% 50% / 0.1;
+    --module-construction-bg: 25 100% 60% / 0.1;
+    --module-procurement-bg: 261 51% 51% / 0.1;
+    --module-maintenance-bg: 354 70% 54% / 0.1;
+    --module-finance-bg:     134 61% 41% / 0.1;
+    --module-hr-bg:          45 100% 51% / 0.1;
+    --module-legal-bg:       220 80% 55% / 0.1;
+    --module-reports-bg:     210 17% 40% / 0.1;
+    --module-settings-bg:    215 28% 17% / 0.1;
+    --module-system-bg:      215 28% 17% / 0.1;
+
+    /* Status colors — shared across modules */
+    --status-active:   134 61% 41%;       /* Green */
+    --status-active-bg: 134 61% 41% / 0.1;
+    --status-pending:   25 100% 60%;     /* Amber/Orange */
+    --status-pending-bg: 25 100% 60% / 0.1;
+    --status-danger:    354 70% 54%;     /* Red */
+    --status-danger-bg:  354 70% 54% / 0.1;
+    --status-info:      211 100% 50%;   /* Blue */
+    --status-info-bg:    211 100% 50% / 0.1;
+    --status-muted:     215 16% 47%;     /* Gray */
+    --status-muted-bg:   215 16% 47% / 0.08;
 
     /* Radius */
     --radius: 0.75rem;
@@ -87,6 +123,13 @@
   h1 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.03em; }
   h2 { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.02em; }
   h3 { font-size: 1.1rem; font-weight: 500; letter-spacing: -0.015em; }
+
+  /* ── ERP Standard: RTL table direction ── */
+  [dir="rtl"] table { direction: rtl; }
+
+  /* ── ERP Standard: Tabular figures for money/number cells ── */
+  .tabular-nums { font-variant-numeric: tabular-nums; }
+  .ltr-only { direction: ltr; font-variant-numeric: tabular-nums; }
 }
 
 /* ═══════════════════════════════════════════════

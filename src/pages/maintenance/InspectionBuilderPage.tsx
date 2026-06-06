@@ -102,13 +102,13 @@ export default function InspectionBuilderPage() {
   };
 
   return (
-    <div className="min-h-full bg-[#F8FAFC]" dir="rtl">
+    <div className="min-h-full bg-[#f6f9fc]" dir="rtl">
       <div className="flex items-center justify-between flex-wrap gap-3 mb-6">
         <div>
           <h1 className="text-xl font-bold text-gray-900">نماذج المعاينات</h1>
           <p className="text-xs text-gray-500 mt-0.5">{forms.length} نموذج — تصميم وإدارة نماذج المعاينات الميدانية</p>
         </div>
-        <Button onClick={() => setShowDialog(true)} className="gap-2 bg-[#3B82F6] hover:bg-blue-600 text-white text-sm h-9 rounded-lg px-4">
+        <Button onClick={() => setShowDialog(true)} className="gap-2 bg-[#533afd] hover:bg-[#4434d4] text-white text-sm h-9 rounded-full px-4">
           <Plus className="h-4 w-4" />نموذج جديد
         </Button>
       </div>

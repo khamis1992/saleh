@@ -2,6 +2,7 @@ import { useMemo, useState, useEffect } from 'react';
 import { formatQAR, formatQARInt } from '@/lib/format';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useLocale } from '@/providers/LocaleContext';
+import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
@@ -13,9 +14,9 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { ArrowRight, Pencil, ClipboardList, TrendingUp, ShoppingCart, DollarSign, History, HardHat, FileText, Plus, Trash2, Save, X, GanttChart, AlertTriangle } from 'lucide-react';
+import { ArrowRight, Pencil, ClipboardList, TrendingUp, ShoppingCart, DollarSign, History, HardHat, FileText, Plus, Trash2, Save, X, GanttChart, AlertTriangle, Users } from 'lucide-react';
 import {
-  projectStore, getLandName, projectBudgetStore, contractorClaimStore,
+  projectStore, getLandName, getEmployeeName, projectBudgetStore, contractorClaimStore,
   purchaseOrderStore, purchaseRequestStore, rfqStore,
   stockTransactionStore, inventoryStore, projectPhaseStore,
   getAllowedStatusTransitions, dailyReportStore,
@@ -197,6 +198,22 @@ export default function ProjectDetailPage() {
 
   if (!project) return <div className="text-center py-12 text-gray-500">المشروع غير موجود</div>;
 
+  // Workflow advancement
+  const workflowOrder = ['idea', 'feasibility', 'design', 'approvals', 'tendering', 'construction', 'testing', 'handover', 'completed', 'converted'];
+  const currentStatusIdx = workflowOrder.indexOf(project.status);
+  const nextStatus = currentStatusIdx >= 0 && currentStatusIdx < workflowOrder.length - 1 ? workflowOrder[currentStatusIdx + 1] : null;
+  const workflowLabels: Record<string, string> = {
+    idea: 'فكرة', feasibility: 'دراسة جدوى', design: 'تصميم', approvals: 'اعتمادات',
+    tendering: 'طرح', construction: 'إنشاء', testing: 'اختبار', handover: 'تسليم', completed: 'مكتمل', converted: 'محول'
+  };
+
+  const advanceStatus = () => {
+    if (!nextStatus) return;
+    projectStore.update(project.id, { status: nextStatus });
+    toast.success(`تم تقديم المشروع إلى مرحلة "${workflowLabels[nextStatus]}"`);
+    setRefresh(r => r + 1);
+  };
+
   const phaseStatusLabel = (s: string) => {
     const map: Record<string, string> = {
       not_started: 'لم يبدأ', in_progress: 'قيد التنفيذ', completed: 'مكتمل',
@@ -224,9 +241,25 @@ export default function ProjectDetailPage() {
           <div>
             <h1 className="text-xl font-bold text-gray-900">{project.project_code} - {project.project_name}</h1>
             <p className="text-xs text-gray-500 mt-0.5">تفاصيل المشروع وإدارته</p>
+            {(project.project_manager_id || project.engineer_id) && (
+              <div className="flex items-center gap-4 mt-2 text-xs text-gray-600">
+                {project.project_manager_id && (
+                  <span className="flex items-center gap-1.5 bg-blue-50 text-blue-700 px-2.5 py-1 rounded-full">
+                    <Users className="h-3.5 w-3.5" />
+                    مدير المشروع: <span className="font-semibold">{getEmployeeName(project.project_manager_id) || project.project_manager_id}</span>
+                  </span>
+                )}
+                {project.engineer_id && (
+                  <span className="flex items-center gap-1.5 bg-amber-50 text-amber-700 px-2.5 py-1 rounded-full">
+                    <HardHat className="h-3.5 w-3.5" />
+                    المهندس المشرف: <span className="font-semibold">{getEmployeeName(project.engineer_id) || project.engineer_id}</span>
+                  </span>
+                )}
+              </div>
+            )}
           </div>
         </div>
-        <Button onClick={() => navigate(`/projects/${project.id}/edit`)} className="gap-2 bg-[#3B82F6] hover:bg-blue-600 text-white text-sm h-9 rounded-lg px-4">
+        <Button onClick={() => navigate(`/projects/${project.id}/edit`)} className="gap-2 bg-[#533afd] hover:bg-[#4434d4] text-white text-sm h-9 rounded-full px-4">
           <Pencil className="h-4 w-4" />{t.common.edit}
         </Button>
       </div>
@@ -250,6 +283,14 @@ export default function ProjectDetailPage() {
             });
           })()}
         />
+        {nextStatus && (
+          <div className="mt-3 pt-3 border-t border-gray-100 flex items-center justify-between">
+            <span className="text-[11px] text-gray-500">الخطوة التالية: <span className="font-semibold text-gray-700">{workflowLabels[nextStatus]}</span></span>
+            <Button size="sm" onClick={advanceStatus} className="h-7 text-xs gap-1 bg-indigo-500 hover:bg-indigo-600 text-white rounded-full">
+              <ArrowRight className="h-3 w-3" /> تقديم للمرحلة التالية
+            </Button>
+          </div>
+        )}
       </div>
 
       {/* ── Next best action banner ── */}
@@ -298,19 +339,19 @@ export default function ProjectDetailPage() {
       {/* ── Quick Actions sticky bar ── */}
       <div className="flex flex-wrap items-center gap-2 mb-4 p-3 bg-white rounded-xl border border-gray-100 shadow-sm">
         <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground ml-2">إجراءات سريعة:</span>
-        <Button variant="outline" size="sm" onClick={() => navigate('/construction/daily-reports')} className="h-8 text-xs gap-1">
+        <Button variant="outline" size="sm" onClick={() => navigate(`/construction/daily-reports?projectId=${project.id}&projectName=${encodeURIComponent(project.project_name)}`)} className="h-8 text-xs gap-1">
           <ClipboardList className="h-3.5 w-3.5" /> تقرير يومي
         </Button>
-        <Button variant="outline" size="sm" onClick={() => navigate('/construction/progress')} className="h-8 text-xs gap-1">
+        <Button variant="outline" size="sm" onClick={() => navigate(`/construction/progress?projectId=${project.id}&projectName=${encodeURIComponent(project.project_name)}`)} className="h-8 text-xs gap-1">
           <TrendingUp className="h-3.5 w-3.5" /> تحديث تقدم
         </Button>
-        <Button variant="outline" size="sm" onClick={() => navigate('/procurement/purchase-requests')} className="h-8 text-xs gap-1">
+        <Button variant="outline" size="sm" onClick={() => navigate(`/procurement/requests?projectId=${project.id}&projectName=${encodeURIComponent(project.project_name)}`)} className="h-8 text-xs gap-1">
           <ShoppingCart className="h-3.5 w-3.5" /> طلب شراء
         </Button>
-        <Button variant="outline" size="sm" onClick={() => navigate('/construction/claims')} className="h-8 text-xs gap-1">
+        <Button variant="outline" size="sm" onClick={() => navigate(`/construction/claims?projectId=${project.id}&projectName=${encodeURIComponent(project.project_name)}`)} className="h-8 text-xs gap-1">
           <DollarSign className="h-3.5 w-3.5" /> مطالبة
         </Button>
-        <Button variant="outline" size="sm" onClick={() => navigate('/construction/risk-register')} className="h-8 text-xs gap-1">
+        <Button variant="outline" size="sm" onClick={() => navigate(`/construction/risk-register?projectId=${project.id}&projectName=${encodeURIComponent(project.project_name)}`)} className="h-8 text-xs gap-1">
           <AlertTriangle className="h-3.5 w-3.5" /> المخاطر
         </Button>
         {project.status === 'completed' && (
@@ -384,7 +425,7 @@ export default function ProjectDetailPage() {
         <TabsContent value="phases">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-base font-semibold text-gray-800">مراحل المشروع</h2>
-            <Button onClick={openPhaseCreate} className="gap-2 bg-[#3B82F6] hover:bg-blue-600 text-white text-sm h-9 rounded-lg px-4">
+            <Button onClick={openPhaseCreate} className="gap-2 bg-[#533afd] hover:bg-[#4434d4] text-white text-sm h-9 rounded-full px-4">
               <Plus className="h-4 w-4" />إضافة مرحلة
             </Button>
           </div>
@@ -512,7 +553,7 @@ export default function ProjectDetailPage() {
                 <Button variant="outline" onClick={() => setPhaseDialogOpen(false)} className="gap-1 text-sm h-9 rounded-lg border-gray-200">
                   <X className="h-4 w-4" />إلغاء
                 </Button>
-                <Button onClick={handlePhaseSave} className="gap-1 bg-[#3B82F6] hover:bg-blue-600 text-white text-sm h-9 rounded-lg">
+                <Button onClick={handlePhaseSave} className="gap-1 bg-[#533afd] hover:bg-[#4434d4] text-white text-sm h-9 rounded-full">
                   <Save className="h-4 w-4" />{editingPhase ? 'تحديث المرحلة' : 'إضافة المرحلة'}
                 </Button>
               </DialogFooter>

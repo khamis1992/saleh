@@ -13,9 +13,10 @@ import {
   AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent,
   AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
-import { Search, Filter, Eye, Trash2, X, Wrench } from 'lucide-react';
-import { maintenanceStore, unitStore, tenantStore } from '@/services/stores';
+import { Search, Filter, Eye, Trash2, X, Wrench, AlertTriangle, CheckCircle2, Clock, TrendingUp } from 'lucide-react';
+import { maintenanceStore, unitStore, tenantStore, workOrderStore } from '@/services/stores';
 import { MaintenanceRequest } from '@/types';
+import { KpiCard } from '@/components/shared/DesignSystem';
 
 export default function MaintenanceRequestListPage() {
   const { t } = useLocale();
@@ -47,6 +48,12 @@ export default function MaintenanceRequestListPage() {
     });
   }, [requests, search, priorityFilter]);
 
+  // KPI computations
+  const workOrders = useMemo(() => workOrderStore.getAll(), []);
+  const openOrders = workOrders.filter((w: any) => w.status !== 'completed' && w.status !== 'closed').length;
+  const emergencyRequests = requests.filter((m: any) => m.priority === 'emergency' || m.priority === 'high').length;
+  const completedRequests = requests.filter((m: any) => m.status === 'completed' || m.status === 'closed').length;
+
   const handleDelete = () => {
     if (!deleteTarget) return;
     maintenanceStore.remove(deleteTarget.id);
@@ -55,8 +62,36 @@ export default function MaintenanceRequestListPage() {
     setDeleteTarget(null);
   };
 
+  const handleCreateWO = (m: MaintenanceRequest) => {
+    const yearCode = new Date().getFullYear();
+    const existing = workOrderStore.getAll();
+    const count = existing.filter((w: any) => w.work_order_number?.includes(String(yearCode))).length + 1;
+    const woNumber = `WO-${yearCode}-${String(count).padStart(3, '0')}`;
+    workOrderStore.create({
+      work_order_number: woNumber,
+      maintenance_request_id: m.id,
+      technician_id: '',
+      scheduled_date: new Date().toISOString().split('T')[0],
+      total_cost: 0,
+      status: 'assigned',
+      diagnosis: m.issue_description || '',
+      notes: `تم إنشاؤه من طلب الصيانة ${m.request_number}`,
+    } as any);
+    maintenanceStore.update(m.id, { status: 'in_progress' } as any);
+    toast.success(`تم إنشاء أمر العمل ${woNumber}`);
+    refresh();
+  };
+
   return (
-    <div className="min-h-full bg-[#F8FAFC]" dir="rtl">
+    <div className="min-h-full bg-[#f6f9fc]" dir="rtl">
+      {/* KPI Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+        <KpiCard title="طلبات الصيانة" value={requests.length} subtitle={`${filtered.length} طلب`} icon={Wrench} moduleOverride="maintenance" />
+        <KpiCard title="طارئة" value={emergencyRequests} subtitle="أولوية عالية" icon={AlertTriangle} trend={emergencyRequests > 0 ? { value: emergencyRequests } : undefined} moduleOverride="maintenance" />
+        <KpiCard title="أوامر عمل" value={openOrders} subtitle="قيد التنفيذ" icon={Clock} moduleOverride="maintenance" />
+        <KpiCard title="مكتملة" value={completedRequests} subtitle="مغلقة ومؤرشفة" icon={CheckCircle2} moduleOverride="maintenance" />
+      </div>
+
       {/* Page Header */}
       <div className="flex items-center justify-between flex-wrap gap-3 mb-6">
         <div>
@@ -67,7 +102,7 @@ export default function MaintenanceRequestListPage() {
         </div>
         <Button
           onClick={() => navigate('/maintenance/requests/create')}
-          className="gap-2 bg-[#3B82F6] hover:bg-blue-600 text-white text-sm h-9 rounded-lg px-4 shadow-sm shadow-blue-500/20 transition-all hover:shadow-md hover:shadow-blue-500/30"
+          className="gap-2 bg-[#533afd] hover:bg-[#4434d4] text-white text-sm h-9 rounded-full px-4 shadow-sm shadow-blue-500/20 transition-all hover:shadow-md hover:shadow-blue-500/30"
         >
           + طلب صيانة جديد
         </Button>
@@ -176,6 +211,16 @@ export default function MaintenanceRequestListPage() {
                           </TooltipTrigger>
                           <TooltipContent>عرض</TooltipContent>
                         </Tooltip>
+                        {m.status === 'approved' && (
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <Button variant="ghost" size="sm" className="h-7 px-2 text-xs text-indigo-600 hover:bg-indigo-50 font-semibold gap-1" onClick={() => handleCreateWO(m)}>
+                                <Wrench className="h-3 w-3" />أمر عمل
+                              </Button>
+                            </TooltipTrigger>
+                            <TooltipContent>إنشاء أمر عمل</TooltipContent>
+                          </Tooltip>
+                        )}
                         <Tooltip>
                           <TooltipTrigger asChild>
                             <Button

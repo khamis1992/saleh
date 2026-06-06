@@ -49,7 +49,7 @@ export function EmptyStateWithAction({
             <Button
               onClick={primaryAction.onClick}
               disabled={primaryAction.disabled}
-              className="bg-[#3B82F6] hover:bg-blue-600 text-white h-9 rounded-lg px-4 text-sm gap-1.5"
+              className="bg-[#533afd] hover:bg-blue-600 text-white h-9 rounded-lg px-4 text-sm gap-1.5"
             >
               {primaryAction.label}
             </Button>

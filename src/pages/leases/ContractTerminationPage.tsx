@@ -136,7 +136,7 @@ export default function ContractTerminationPage() {
   };
 
   return (
-    <div dir="rtl" className="max-w-4xl mx-auto min-h-full bg-[#F8FAFC]">
+    <div dir="rtl" className="max-w-4xl mx-auto min-h-full bg-[#f6f9fc]">
       <div className="flex items-center gap-4 mb-6">
         <Button variant="ghost" onClick={() => navigate('/leases')}>
           <ArrowRight className="h-4 w-4 ml-2" />{t.common.back}

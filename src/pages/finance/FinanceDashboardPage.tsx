@@ -80,7 +80,7 @@ export default function FinanceDashboardPage() {
         <p className="text-xs text-gray-500 mt-0.5">نظرة عامة على الوضع المالي للشركة</p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 lg:grid-cols-4 gap-4">
         <StatCard
           title="إجمالي المستحقات"
           value={totalReceivables}

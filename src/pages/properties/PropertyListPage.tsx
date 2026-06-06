@@ -14,8 +14,9 @@ import {
   AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent,
   AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
-import { Search, Filter, Eye, Pencil, Trash2, Plus, Building2, X } from 'lucide-react';
-import { propertyStore } from '@/services/stores';
+import { Search, Filter, Eye, Pencil, Trash2, Plus, Building2, X, DoorOpen, TrendingUp, Percent } from 'lucide-react';
+import { propertyStore, unitStore } from '@/services/stores';
+import { KpiCard } from '@/components/shared/DesignSystem';
 
 export default function PropertyListPage() {
   const { t } = useLocale();
@@ -38,6 +39,14 @@ export default function PropertyListPage() {
     return true;
   });
 
+  // KPI computations
+  const units = useMemo(() => unitStore.getAll(), [refresh]);
+  const totalUnits = units.length;
+  const leasedUnits = units.filter((u: any) => u.status === 'leased').length;
+  const availableUnits = units.filter((u: any) => u.status === 'available').length;
+  const occupiedRate = totalUnits > 0 ? Math.round((leasedUnits / totalUnits) * 100) : 0;
+  const totalAssetValue = properties.reduce((s: number, p: any) => s + (p.total_asset_value || 0), 0);
+
   const fmt = (v: number) => formatQAR(v);
 
   const handleDelete = () => {
@@ -55,7 +64,40 @@ export default function PropertyListPage() {
   };
 
   return (
-    <div className="min-h-full bg-[#F8FAFC]" dir="rtl">
+    <div className="min-h-full bg-[#f6f9fc]" dir="rtl">
+      {/* KPI Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+        <KpiCard
+          title={t.properties.title}
+          value={properties.length}
+          subtitle={`${filtered.length} ${filtered.length === 1 ? 'عقار' : 'عقار'}`}
+          icon={Building2}
+          moduleOverride="leasing"
+        />
+        <KpiCard
+          title="إجمالي الوحدات"
+          value={totalUnits}
+          subtitle={`${leasedUnits} مؤجرة، ${availableUnits} متاحة`}
+          icon={DoorOpen}
+          moduleOverride="leasing"
+        />
+        <KpiCard
+          title="نسبة الإشغال"
+          value={`${occupiedRate}%`}
+          subtitle="من إجمالي الوحدات"
+          icon={Percent}
+          trend={occupiedRate >= 50 ? { value: occupiedRate, label: 'جيد' } : undefined}
+          moduleOverride="leasing"
+        />
+        <KpiCard
+          title="قيمة الأصول"
+          value={formatQARInt(totalAssetValue)}
+          subtitle="إجمالي القيمة الدفترية"
+          icon={TrendingUp}
+          moduleOverride="leasing"
+        />
+      </div>
+
       {/* Page Header */}
       <div className="flex items-center justify-between flex-wrap gap-3 mb-6">
         <div>
@@ -66,7 +108,7 @@ export default function PropertyListPage() {
         </div>
         <Button
           onClick={() => navigate('/properties/create')}
-          className="gap-2 bg-[#3B82F6] hover:bg-blue-600 text-white text-sm h-9 rounded-lg px-4 shadow-sm shadow-blue-500/20 transition-all hover:shadow-md hover:shadow-blue-500/30"
+          className="gap-2 bg-[#533afd] hover:bg-[#4434d4] text-white text-sm h-9 rounded-full px-4 shadow-sm shadow-blue-500/20 transition-all hover:shadow-md hover:shadow-blue-500/30"
         >
           <Plus className="h-4 w-4" />
           {t.properties.create}

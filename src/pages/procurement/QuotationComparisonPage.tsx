@@ -1,5 +1,5 @@
-import { useState, useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useMemo, useEffect } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useLocale } from '@/providers/LocaleContext';
 import { PageHeader } from '@/components/shared/PageHeader';
 import { LineItemsTable } from '@/components/shared/Phase2Components';
@@ -71,8 +71,12 @@ const quotationItemsMap: Record<string, { itemName: string; description: string;
 
 export default function QuotationComparisonPage() {
   const { t } = useLocale();
-  const [selectedRfqId, setSelectedRfqId] = useState('');
+  const [searchParams] = useSearchParams();
+  const rfqIdFromUrl = searchParams.get('rfqId') || '';
+  const [selectedRfqId, setSelectedRfqId] = useState(rfqIdFromUrl);
   const [refresh, setRefresh] = useState(0);
+
+  useEffect(() => { if (rfqIdFromUrl) setSelectedRfqId(rfqIdFromUrl); }, [rfqIdFromUrl]);
 
   const rfqs = useMemo(() => rfqStore.getAll(), [refresh]);
   const quotations = useMemo(() => vendorQuotationStore.getAll(), [refresh]);
@@ -157,28 +161,43 @@ export default function QuotationComparisonPage() {
 
       {/* RFQ Selection */}
       <Card className="mb-4">
-        <CardContent className="p-4">
-          <div className="flex items-center gap-4 flex-wrap">
-            <div className="flex-1 min-w-[250px] max-w-md">
-              <label className="text-sm font-medium mb-1 block">اختر طلب عرض السعر (RFQ)</label>
-              <Select value={selectedRfqId} onValueChange={setSelectedRfqId}>
-                <SelectTrigger>
-                  <SelectValue placeholder="اختر RFQ للمقارنة" />
-                </SelectTrigger>
-                <SelectContent>
-                  {rfqs.map((rfq: any) => (
-                    <SelectItem key={rfq.id} value={rfq.id}>
-                      {rfq.rfq_number} - {rfq.title}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
+        <CardContent className="p-5">
+          <div className="space-y-4">
+            <label className="text-sm font-bold text-gray-800 block">اختر طلب عرض السعر (RFQ)</label>
+            <Select value={selectedRfqId} onValueChange={setSelectedRfqId}>
+              <SelectTrigger className="h-11 text-sm rounded-lg w-full">
+                <SelectValue placeholder="اختر RFQ للمقارنة" />
+              </SelectTrigger>
+              <SelectContent>
+                {rfqs.map((rfq: any) => (
+                  <SelectItem key={rfq.id} value={rfq.id} className="text-sm py-2">
+                    {rfq.rfq_number} - {rfq.title}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
             {selectedRfq && (
-              <div className="flex items-center gap-3 text-sm text-muted-foreground">
-                <span>المشروع: <strong>{getProjectName(selectedRfq.project_id)}</strong></span>
-                <span>الحالة: <Badge variant="outline">{statusLabels[selectedRfq.status] || selectedRfq.status}</Badge></span>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-1">
+                <div className="flex flex-col gap-0.5 bg-gray-50 rounded-lg p-2.5 min-w-0">
+                  <span className="text-[10px] text-gray-400">المشروع</span>
+                  <span className="font-semibold text-gray-800 text-xs break-words">{getProjectName(selectedRfq.project_id)}</span>
+                </div>
+                <div className="flex flex-col gap-0.5 bg-gray-50 rounded-lg p-2.5">
+                  <span className="text-[10px] text-gray-400">الحالة</span>
+                  <Badge variant="outline" className="text-[10px] px-1.5 py-0 self-start">{statusLabels[selectedRfq.status] || selectedRfq.status}</Badge>
+                </div>
+                <div className="flex flex-col gap-0.5 bg-gray-50 rounded-lg p-2.5">
+                  <span className="text-[10px] text-gray-400">آخر موعد</span>
+                  <span className="font-semibold text-gray-800 text-xs">{selectedRfq.submission_deadline || '-'}</span>
+                </div>
+                <div className="flex flex-col gap-0.5 bg-gray-50 rounded-lg p-2.5">
+                  <span className="text-[10px] text-gray-400">عدد العروض</span>
+                  <span className="font-semibold text-gray-800 text-sm">{rfqQuotations.length}</span>
+                </div>
               </div>
+            )}
+            {selectedRfq?.description && (
+              <p className="text-xs text-gray-500 bg-gray-50 rounded-lg px-3 py-2.5 break-words leading-relaxed">{selectedRfq.description}</p>
             )}
           </div>
         </CardContent>
@@ -210,66 +229,67 @@ export default function QuotationComparisonPage() {
       {selectedRfq && rfqQuotations.length > 0 && (
         <>
           {/* Quotations summary cards */}
-          <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-${Math.min(rfqQuotations.length, 4)} gap-4 mb-4`}>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-4">
-              {rfqQuotations.map((qtn: any) => (
-                <Card
-                  key={qtn.id}
-                  className={qtn.is_recommended ? 'border-green-500 border-2' : ''}
-                >
-                  <CardContent className="p-4">
-                    <div className="flex items-center justify-between mb-3">
-                      <h3 className="font-semibold text-sm">{vendorNames[qtn.id] || qtn.quotation_number}</h3>
-                      {qtn.is_recommended && (
-                        <Badge className="bg-green-100 text-green-700 text-xs">
-                          <Trophy className="h-3 w-3 ml-1" />
-                          موصى به
-                        </Badge>
-                      )}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
+            {rfqQuotations.map((qtn: any) => (
+              <Card
+                key={qtn.id}
+                className={qtn.is_recommended ? 'border-green-500 border-2 min-w-0' : 'min-w-0'}
+                dir="rtl"
+              >
+                <CardContent className="p-5">
+                  <div className="flex items-start justify-between gap-2 mb-4">
+                    <h3 className="font-semibold text-sm leading-snug break-words min-w-0 flex-1 text-right">
+                      {vendorNames[qtn.id] || qtn.quotation_number}
+                    </h3>
+                    {qtn.is_recommended && (
+                      <Badge className="bg-green-100 text-green-700 text-xs shrink-0 whitespace-nowrap">
+                        <Trophy className="h-3 w-3 ml-1" />
+                        موصى به
+                      </Badge>
+                    )}
+                  </div>
+                  <div className="space-y-3 text-sm">
+                    <div className="flex justify-between gap-2">
+                      <span className="text-muted-foreground shrink-0">رقم العرض:</span>
+                      <span className="font-medium text-right break-words">{qtn.quotation_number}</span>
                     </div>
-                    <div className="space-y-2 text-sm">
-                      <div className="flex justify-between">
-                        <span className="text-muted-foreground">رقم العرض:</span>
-                        <span className="font-medium">{qtn.quotation_number}</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-muted-foreground">الإجمالي:</span>
-                        <span className="font-bold font-mono">{formattedAmount(qtn.total_amount)}</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-muted-foreground">مدة التوريد:</span>
-                        <span className="font-mono">{qtn.delivery_time_days} يوم</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-muted-foreground">التقييم:</span>
-                        <span className={`font-mono ${qtn.evaluation_score >= 90 ? 'text-green-600' : qtn.evaluation_score >= 80 ? 'text-amber-600' : 'text-red-600'}`}>
-                          <Star className="h-3 w-3 inline ml-1 fill-amber-400 text-amber-400" />
-                          {qtn.evaluation_score}/100
-                        </span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-muted-foreground">شروط الدفع:</span>
-                        <span className="text-xs max-w-[140px] text-left">{qtn.payment_terms}</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-muted-foreground">الضمان:</span>
-                        <span className="text-xs">{qtn.warranty_terms}</span>
-                      </div>
-                      <div className="pt-2">
-                        <Button
-                          size="sm"
-                          className="w-full bg-green-600 hover:bg-green-700 text-white"
-                          onClick={() => handleCreatePO(qtn.id)}
-                        >
-                          <ShoppingCart className="h-4 w-4 ml-2" />
-                          تحويل لأمر شراء
-                        </Button>
-                      </div>
+                    <div className="flex justify-between gap-2">
+                      <span className="text-muted-foreground shrink-0">الإجمالي:</span>
+                      <span className="font-bold font-mono ltr-only break-words">{formattedAmount(qtn.total_amount)}</span>
                     </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+                    <div className="flex justify-between gap-2">
+                      <span className="text-muted-foreground shrink-0">مدة التوريد:</span>
+                      <span className="font-mono whitespace-nowrap">{qtn.delivery_time_days} يوم</span>
+                    </div>
+                    <div className="flex justify-between gap-2">
+                      <span className="text-muted-foreground shrink-0">التقييم:</span>
+                      <span className={`font-mono whitespace-nowrap ${qtn.evaluation_score >= 90 ? 'text-green-600' : qtn.evaluation_score >= 80 ? 'text-amber-600' : 'text-red-600'}`}>
+                        <Star className="h-3 w-3 inline ml-1 fill-amber-400 text-amber-400" />
+                        {qtn.evaluation_score}/100
+                      </span>
+                    </div>
+                    <div className="flex justify-between gap-2 items-start">
+                      <span className="text-muted-foreground shrink-0">شروط الدفع:</span>
+                      <span className="text-right break-words leading-relaxed text-xs">{qtn.payment_terms}</span>
+                    </div>
+                    <div className="flex justify-between gap-2 items-start">
+                      <span className="text-muted-foreground shrink-0">الضمان:</span>
+                      <span className="text-right break-words leading-relaxed text-xs">{qtn.warranty_terms}</span>
+                    </div>
+                    <div className="pt-2">
+                      <Button
+                        size="sm"
+                        className="w-full max-w-full bg-green-600 hover:bg-green-700 text-white"
+                        onClick={() => handleCreatePO(qtn.id)}
+                      >
+                        <ShoppingCart className="h-4 w-4 ml-2" />
+                        تحويل لأمر شراء
+                      </Button>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
           </div>
 
           {/* Side-by-side item comparison table */}

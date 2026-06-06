@@ -178,7 +178,7 @@ export default function RentInvoiceCreatePage() {
   };
 
   return (
-    <div className="min-h-full bg-[#F8FAFC]" dir="rtl">
+    <div className="min-h-full bg-[#f6f9fc]" dir="rtl">
       <PageHeader
         title="فاتورة إيجار جديدة"
         description="إنشاء فاتورة إيجار جديدة لعقد نشط — يتم احتساب الإجمالي تلقائياً"

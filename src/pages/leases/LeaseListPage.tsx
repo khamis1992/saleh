@@ -14,9 +14,10 @@ import {
   AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent,
   AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
-import { Search, Filter, Eye, Pencil, Trash2, Plus, Play, FileText, X } from 'lucide-react';
-import { leaseStore, unitStore, propertyStore } from '@/services/stores';
+import { Search, Filter, Eye, Pencil, Trash2, Plus, Play, FileText, X, CreditCard, AlertCircle, TrendingUp } from 'lucide-react';
+import { leaseStore, unitStore, propertyStore, invoiceStore } from '@/services/stores';
 import { activateLeaseContract } from '@/utils/exportUtils';
+import { KpiCard } from '@/components/shared/DesignSystem';
 
 export default function LeaseListPage() {
   const { t } = useLocale();
@@ -54,6 +55,13 @@ export default function LeaseListPage() {
     return true;
   });
 
+  // KPI computations
+  const invoices = useMemo(() => invoiceStore.getAll(), [refresh]);
+  const activeContracts = leases.filter((l: any) => l.status === 'active').length;
+  const expiringSoon = leases.filter((l: any) => l.status === 'active' && l.end_date && new Date(l.end_date) < new Date(Date.now() + 30 * 86400000)).length;
+  const overdueInvoices = invoices.filter((i: any) => i.status === 'overdue' || i.balance > 0).length;
+  const totalRentValue = leases.reduce((s: number, l: any) => s + (l.monthly_rent || 0), 0);
+
   const fmt = (v: number) => formatQAR(v);
 
   const handleDelete = () => {
@@ -81,7 +89,15 @@ export default function LeaseListPage() {
   }
 
   return (
-    <div className="min-h-full bg-[#F8FAFC]" dir="rtl">
+    <div className="min-h-full bg-[#f6f9fc]" dir="rtl">
+      {/* KPI Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+        <KpiCard title={t.leases.title} value={leases.length} subtitle={`${activeContracts} عقد نشط`} icon={FileText} moduleOverride="leasing" />
+        <KpiCard title="تنتهي قريباً" value={expiringSoon} subtitle="خلال 30 يوم" icon={AlertCircle} trend={expiringSoon > 0 ? { value: expiringSoon, label: 'تحتاج متابعة' } : undefined} moduleOverride="leasing" />
+        <KpiCard title="متأخرات" value={overdueInvoices} subtitle="فواتير متأخرة" icon={AlertCircle} moduleOverride="leasing" />
+        <KpiCard title="قيمة الإيجارات" value={formatQARInt(totalRentValue)} subtitle="الإيجار الشهري الإجمالي" icon={CreditCard} moduleOverride="leasing" />
+      </div>
+
       {/* Page Header */}
       <div className="flex items-center justify-between flex-wrap gap-3 mb-6">
         <div>
@@ -92,7 +108,7 @@ export default function LeaseListPage() {
         </div>
         <Button
           onClick={() => navigate('/leases/create')}
-          className="gap-2 bg-[#3B82F6] hover:bg-blue-600 text-white text-sm h-9 rounded-lg px-4 shadow-sm shadow-blue-500/20 transition-all hover:shadow-md hover:shadow-blue-500/30"
+          className="gap-2 bg-[#533afd] hover:bg-[#4434d4] text-white text-sm h-9 rounded-full px-4 shadow-sm shadow-blue-500/20 transition-all hover:shadow-md hover:shadow-blue-500/30"
         >
           <Plus className="h-4 w-4" />
           {t.leases.create}

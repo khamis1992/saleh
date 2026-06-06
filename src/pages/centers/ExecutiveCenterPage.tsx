@@ -144,7 +144,7 @@ export default function ExecutiveCenterPage() {
             </div>
             <Link to="/units" className="text-xs text-blue-600 hover:underline">كل الوحدات</Link>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-1.5">
+          <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 lg:grid-cols-10 gap-1.5">
             {(() => { const us = JSON.parse(localStorage.getItem('erp_units') || '[]'); return us.slice(0, 80).map((u: any) => { const c = u.status === 'leased' ? 'bg-emerald-500 text-white' : u.status === 'under_maintenance' ? 'bg-amber-500 text-white' : u.status === 'available' ? 'bg-gray-200 text-gray-600 border border-dashed border-gray-300' : 'bg-red-500 text-white'; return <div key={u.id} title={u.unit_code + ' · ' + u.status} className={cn('aspect-square rounded-md flex items-center justify-center text-[9px] font-bold cursor-pointer transition-transform hover:scale-110', c)}>{(u.unit_code || '').slice(-3) || '?'}</div>; }); })()}
           </div>
           <div className="flex items-center gap-3 mt-3 text-[11px] text-muted-foreground flex-wrap">

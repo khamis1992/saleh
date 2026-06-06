@@ -1,5 +1,6 @@
 import { formatQAR } from '@/lib/format';
 import { useState, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useLocale } from '@/providers/LocaleContext';
 import { PageHeader } from '@/components/shared/PageHeader';
 import { StatusBadge } from '@/components/shared/StatusBadge';
@@ -10,8 +11,9 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
-import { Search, Filter, MoreHorizontal, Pencil, Trash2 } from 'lucide-react';
+import { Search, Filter, MoreHorizontal, Pencil, Trash2, Wrench, TrendingUp, Clock, AlertTriangle } from 'lucide-react';
 import { equipmentStore, getProjectName } from '@/services/stores';
+import { KpiCard } from '@/components/shared/DesignSystem';
 
 const categoryLabels: Record<string, string> = {
   vehicle: 'مركبة',
@@ -52,6 +54,7 @@ const emptyForm = {
 
 export default function EquipmentPage() {
   const { t } = useLocale();
+  const navigate = useNavigate();
   const [search, setSearch] = useState('');
   const [categoryFilter, setCategoryFilter] = useState('all');
   const [statusFilter, setStatusFilter] = useState('all');
@@ -68,6 +71,11 @@ export default function EquipmentPage() {
     if (search && !eq.equipment_name.includes(search) && !eq.equipment_code.includes(search)) return false;
     return true;
   });
+
+  // KPI computations
+  const activeEquipment = items.filter((eq: any) => eq.status === 'active').length;
+  const underMaintenance = items.filter((eq: any) => eq.status === 'maintenance').length;
+  const totalEquipmentValue = items.reduce((s: number, eq: any) => s + (eq.purchase_cost || 0), 0);
 
   const fmt = (v: number) =>
     formatQAR(v);
@@ -126,7 +134,15 @@ export default function EquipmentPage() {
   };
 
   return (
-    <div className="min-h-full bg-[#F8FAFC]" dir="rtl">
+    <div className="min-h-full bg-[#f6f9fc]" dir="rtl">
+      {/* KPI Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+        <KpiCard title="المعدات" value={items.length} subtitle={`${filtered.length} معدة`} icon={Wrench} moduleOverride="maintenance" />
+        <KpiCard title="نشطة" value={activeEquipment} subtitle="معدات عاملة" icon={TrendingUp} moduleOverride="maintenance" />
+        <KpiCard title="صيانة" value={underMaintenance} subtitle="قيد الصيانة" icon={Clock} trend={underMaintenance > 0 ? { value: underMaintenance } : undefined} moduleOverride="maintenance" />
+        <KpiCard title="قيمة المعدات" value={formatQAR(totalEquipmentValue)} subtitle="ر.ق" icon={AlertTriangle} moduleOverride="maintenance" />
+      </div>
+
       <div className="flex items-center justify-between flex-wrap gap-3 mb-6">
         <div>
           <h1 className="text-xl font-bold text-gray-900">المعدات</h1>
@@ -208,6 +224,10 @@ export default function EquipmentPage() {
                           </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="start">
+                          <DropdownMenuItem onClick={() => navigate(`/maintenance/requests?assetId=${eq.id}&assetName=${encodeURIComponent(eq.equipment_name)}`)}>
+                            <Wrench className="h-4 w-4 ml-2" />
+                            طلب صيانة
+                          </DropdownMenuItem>
                           <DropdownMenuItem onClick={() => openEdit(eq)}>
                             <Pencil className="h-4 w-4 ml-2" />
                             تعديل

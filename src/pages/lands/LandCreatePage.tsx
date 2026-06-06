@@ -7,8 +7,9 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { ArrowRight, Save, Map, Landmark } from 'lucide-react';
+import { ArrowRight, Save, Map, Landmark, MapPin } from 'lucide-react';
 import { landStore, getAllowedStatusTransitions } from '@/services/stores';
+import LocationPicker from '@/components/maps/LocationPicker';
 import type { Land, LandStatus } from '@/types';
 
 export default function LandCreatePage() {
@@ -55,7 +56,7 @@ export default function LandCreatePage() {
   };
 
   return (
-    <div className="min-h-full bg-[#F8FAFC]" dir="rtl">
+    <div className="min-h-full bg-[#f6f9fc]" dir="rtl">
       {/* Page Header */}
       <div className="flex items-center justify-between flex-wrap gap-3 mb-6">
         <div className="flex items-center gap-3">
@@ -67,7 +68,7 @@ export default function LandCreatePage() {
             <p className="text-xs text-gray-500 mt-0.5">{isEdit ? 'تعديل بيانات الأرض' : 'إضافة أرض جديدة إلى السجل'}</p>
           </div>
         </div>
-        <Button onClick={handleSave} className="gap-2 bg-[#3B82F6] hover:bg-blue-600 text-white text-sm h-9 rounded-lg px-4">
+        <Button onClick={handleSave} className="gap-2 bg-[#533afd] hover:bg-[#4434d4] text-white text-sm h-9 rounded-full px-4">
           <Save className="h-4 w-4" />{t.common.save}
         </Button>
       </div>
@@ -99,8 +100,6 @@ export default function LandCreatePage() {
             </div>
             <div className="space-y-1.5"><Label className="text-xs font-medium text-gray-500">{t.lands.municipality}</Label><Input value={form.municipality || ''} onChange={e => update('municipality', e.target.value)} placeholder="البلدية" className="h-9 text-sm rounded-lg border-gray-200" /></div>
             <div className="space-y-1.5"><Label className="text-xs font-medium text-gray-500">{t.lands.area} (م²)</Label><Input type="number" value={form.area_sqm || ''} onChange={e => update('area_sqm', Number(e.target.value))} className="h-9 text-sm rounded-lg border-gray-200" /></div>
-            <div className="space-y-1.5"><Label className="text-xs font-medium text-gray-500">خط العرض</Label><Input type="number" value={form.gps_lat || ''} onChange={e => update('gps_lat', Number(e.target.value))} className="h-9 text-sm rounded-lg border-gray-200" /></div>
-            <div className="space-y-1.5"><Label className="text-xs font-medium text-gray-500">خط الطول</Label><Input type="number" value={form.gps_lng || ''} onChange={e => update('gps_lng', Number(e.target.value))} className="h-9 text-sm rounded-lg border-gray-200" /></div>
             <div className="space-y-1.5"><Label className="text-xs font-medium text-gray-500">{t.lands.status}</Label>
               <Select value={form.status || 'available'} onValueChange={v => update('status', v)}>
                 <SelectTrigger className="h-9 text-sm rounded-lg border-gray-200"><SelectValue /></SelectTrigger>
@@ -119,6 +118,65 @@ export default function LandCreatePage() {
               </Select>
             </div>
           </div>
+        </div>
+
+        {/* ── LOCATION MAP PICKER ── */}
+        <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+          <div className="flex items-center gap-3 mb-5">
+            <div className="h-10 w-10 rounded-xl bg-purple-50 flex items-center justify-center">
+              <MapPin className="h-5 w-5 text-purple-600" />
+            </div>
+            <div>
+              <h2 className="text-base font-semibold text-gray-800">الموقع الجغرافي</h2>
+              <p className="text-xs text-gray-400 mt-0.5">
+                انقر على الخريطة لتحديد موقع الأرض — يمكنك سحب العلامة لتعديلها لاحقاً
+              </p>
+            </div>
+          </div>
+
+          {/* Interactive Map */}
+          <LocationPicker
+            lat={form.gps_lat || 0}
+            lng={form.gps_lng || 0}
+            onLocationChange={(lat, lng) => {
+              update('gps_lat', lat);
+              update('gps_lng', lng);
+            }}
+            height="320px"
+          />
+
+          {/* Manual coordinate entry (compact, below map) */}
+          <div className="grid grid-cols-2 gap-3 mt-4">
+            <div className="space-y-1">
+              <Label className="text-[10px] font-medium text-gray-400">خط العرض (Latitude)</Label>
+              <Input
+                type="number"
+                step="any"
+                value={form.gps_lat || ''}
+                onChange={e => update('gps_lat', Number(e.target.value))}
+                placeholder="25.2854"
+                className="h-8 text-xs rounded-lg border-gray-200 font-mono"
+              />
+            </div>
+            <div className="space-y-1">
+              <Label className="text-[10px] font-medium text-gray-400">خط الطول (Longitude)</Label>
+              <Input
+                type="number"
+                step="any"
+                value={form.gps_lng || ''}
+                onChange={e => update('gps_lng', Number(e.target.value))}
+                placeholder="51.5310"
+                className="h-8 text-xs rounded-lg border-gray-200 font-mono"
+              />
+            </div>
+          </div>
+
+          {(form.gps_lat && form.gps_lat !== 0) && (
+            <p className="text-[11px] text-emerald-600 mt-2 flex items-center gap-1">
+              <MapPin className="h-3 w-3" />
+              تم تحديد الموقع — سيظهر على خريطة الأراضي الرئيسية
+            </p>
+          )}
         </div>
 
         {/* Financial Info */}
@@ -162,7 +220,7 @@ export default function LandCreatePage() {
 
         <div className="flex items-center gap-3 justify-end">
           <Button variant="outline" onClick={() => navigate('/lands')} className="h-9 text-sm rounded-lg">{t.common.cancel}</Button>
-          <Button onClick={handleSave} className="gap-2 bg-[#3B82F6] hover:bg-blue-600 text-white text-sm h-9 rounded-lg px-4"><Save className="h-4 w-4" />{t.common.save}</Button>
+          <Button onClick={handleSave} className="gap-2 bg-[#533afd] hover:bg-[#4434d4] text-white text-sm h-9 rounded-full px-4"><Save className="h-4 w-4" />{t.common.save}</Button>
         </div>
       </div>
     </div>

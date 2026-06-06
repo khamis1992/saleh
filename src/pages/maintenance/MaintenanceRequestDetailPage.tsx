@@ -41,7 +41,7 @@ export default function MaintenanceRequestDetailPage() {
 
   if (!request) {
     return (
-      <div className="min-h-full bg-[#F8FAFC]" dir="rtl">
+      <div className="min-h-full bg-[#f6f9fc]" dir="rtl">
         <div className="flex items-center gap-4 mb-6">
           <Button variant="ghost" onClick={() => navigate('/maintenance/requests')}>
             <ArrowRight className="h-4 w-4 ml-2" />{t.common.back}
@@ -104,7 +104,7 @@ export default function MaintenanceRequestDetailPage() {
   };
 
   return (
-    <div className="min-h-full bg-[#F8FAFC]" dir="rtl">
+    <div className="min-h-full bg-[#f6f9fc]" dir="rtl">
       <div className="flex items-center gap-4 mb-6">
         <Button variant="ghost" onClick={() => navigate('/maintenance/requests')}>
           <ArrowRight className="h-4 w-4 ml-2" />{t.common.back}

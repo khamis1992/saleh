@@ -63,6 +63,8 @@ interface DataTableProps<TData, TValue> {
   toolbar?: React.ReactNode;
   /** On row click handler */
   onRowClick?: (row: TData) => void;
+  /** Table direction (rtl/ltr). Auto-detects from document if not set. */
+  dir?: 'rtl' | 'ltr';
 }
 
 /**
@@ -85,6 +87,7 @@ export function DataTable<TData, TValue>({
   emptyIcon,
   toolbar,
   onRowClick,
+  dir,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -140,7 +143,7 @@ export function DataTable<TData, TValue>({
       )}
 
       {/* Table */}
-      <Table>
+      <Table dir={dir}>
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id}>
@@ -248,7 +251,7 @@ export function DataTable<TData, TValue>({
                 onClick={() => table.setPageIndex(page - 1)}
                 className={`h-8 min-w-[32px] px-2 rounded-lg text-xs font-bold flex items-center justify-center transition-colors ${
                   pageIndex + 1 === page
-                    ? 'bg-[#3B82F6] text-white'
+                    ? 'bg-[#533afd] text-white'
                     : 'text-gray-500 hover:text-gray-700 hover:bg-gray-50'
                 }`}
               >

@@ -10,8 +10,9 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
-import { Search, Filter, MoreHorizontal, Pencil, Trash2 } from 'lucide-react';
+import { Search, Filter, MoreHorizontal, Pencil, Trash2, Users, TrendingUp, DollarSign, CreditCard } from 'lucide-react';
 import { payrollStore, employeeStore } from '@/services/stores';
+import { KpiCard } from '@/components/shared/DesignSystem';
 
 const statusLabels: Record<string, string> = {
   draft: 'مسودة',
@@ -51,6 +52,11 @@ export default function PayrollPage() {
     }
     return true;
   });
+
+  // KPI computations
+  const paidPayrolls = records.filter((r: any) => r.status === 'paid').length;
+  const draftPayrolls = records.filter((r: any) => r.status === 'draft').length;
+  const totalPayrollAmount = records.reduce((s: number, r: any) => s + ((r.net_pay || r.net_salary || 0)), 0);
 
   const computedNetSalary = form.basic_salary + form.allowances + form.overtime_pay - form.deductions;
 
@@ -101,7 +107,15 @@ export default function PayrollPage() {
     formatQAR(v);
 
   return (
-    <div className="min-h-full bg-[#F8FAFC]" dir="rtl">
+    <div className="min-h-full bg-[#f6f9fc]" dir="rtl">
+      {/* KPI Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+        <KpiCard title="كشوف الرواتب" value={records.length} subtitle={`${filtered.length} كشف`} icon={Users} moduleOverride="hr" />
+        <KpiCard title="مدفوعة" value={paidPayrolls} subtitle="تم صرفها" icon={CreditCard} moduleOverride="hr" />
+        <KpiCard title="مسودات" value={draftPayrolls} subtitle="قيد الإعداد" icon={TrendingUp} moduleOverride="hr" />
+        <KpiCard title="إجمالي الرواتب" value={formatQAR(totalPayrollAmount)} subtitle="ر.ق" icon={DollarSign} moduleOverride="hr" />
+      </div>
+
       <div className="flex items-center justify-between flex-wrap gap-3 mb-6">
         <div>
           <h1 className="text-xl font-bold text-gray-900">الرواتب</h1>

@@ -228,8 +228,51 @@ export default function FinanceJournalEntriesPage() {
     setDeleteTarget(entry);
   };
 
+  // Trial balance computation
+  const trialBalance = useMemo(() => {
+    const balances: Record<string, { debits: number; credits: number; account_name: string }> = {};
+    const allEntries = entryStore.getAll();
+    allEntries.forEach((je: JournalEntry) => {
+      (je.lines || []).forEach((line: JournalEntryLine) => {
+        if (!balances[line.account_id]) {
+          balances[line.account_id] = { debits: 0, credits: 0, account_name: line.account_id };
+        }
+        balances[line.account_id].debits += line.debit || 0;
+        balances[line.account_id].credits += line.credit || 0;
+      });
+    });
+    return Object.entries(balances).map(([id, b]) => ({
+      account_id: id,
+      ...b,
+      net: b.debits - b.credits,
+    }));
+  }, [entries]);
+
   return (
-    <div className="min-h-full bg-[#F8FAFC]" dir="rtl">
+    <div className="min-h-full bg-[#f6f9fc]" dir="rtl">
+      {/* Trial Balance Summary */}
+      {trialBalance.length > 0 && (
+        <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-4 mb-4">
+          <div className="flex items-center justify-between mb-3">
+            <h3 className="text-sm font-semibold text-gray-800">ميزان المراجعة</h3>
+            <span className="text-[10px] text-gray-400">{trialBalance.length} حساب</span>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+            {trialBalance.slice(0, 8).map((tb) => (
+              <div key={tb.account_id} className="bg-gray-50 rounded-lg p-2 text-xs">
+                <div className="text-[10px] text-gray-400 truncate">{tb.account_id}</div>
+                <div className="flex justify-between gap-1 mt-0.5">
+                  <span className="text-green-600 font-mono">{formatQAR(tb.debits)}</span>
+                  <span className="text-red-500 font-mono">{formatQAR(tb.credits)}</span>
+                </div>
+                <div className={`text-[11px] font-bold mt-0.5 ${tb.net >= 0 ? 'text-green-700' : 'text-red-600'}`}>
+                  {tb.net >= 0 ? '+' : ''}{formatQARInt(tb.net)}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
       {/* Page Header */}
       <div className="flex items-center justify-between flex-wrap gap-3 mb-6">
         <div>
@@ -240,7 +283,7 @@ export default function FinanceJournalEntriesPage() {
         </div>
         <Button
           onClick={handleCreate}
-          className="gap-2 bg-[#3B82F6] hover:bg-blue-600 text-white text-sm h-9 rounded-lg px-4 shadow-sm shadow-blue-500/20 transition-all hover:shadow-md hover:shadow-blue-500/30"
+          className="gap-2 bg-[#533afd] hover:bg-[#4434d4] text-white text-sm h-9 rounded-full px-4 shadow-sm shadow-blue-500/20 transition-all hover:shadow-md hover:shadow-blue-500/30"
         >
           <Plus className="h-4 w-4" />
           قيد جديد

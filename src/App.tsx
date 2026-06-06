@@ -1,8 +1,10 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { AppLayout } from '@/components/layout/AppLayout';
+import { ModuleLayout } from '@/components/layout/ModuleLayout';
 import { useAuth } from '@/providers/AuthContext';
 import LoginPage from '@/pages/auth/LoginPage';
 import DashboardPage from '@/pages/dashboard/DashboardPage';
+import ExecutiveDashboardPage from '@/pages/dashboard/ExecutiveDashboardPage';
 
 // Module pages
 import LandListPage from '@/pages/lands/LandListPage';
@@ -93,11 +95,18 @@ import ContractorContractsPage from '@/pages/construction/ContractorContractsPag
 import ContractorClaimsPage from '@/pages/construction/ContractorClaimsPage';
 import DailyReportsPage from '@/pages/construction/DailyReportsPage';
 import ProgressUpdatesPage from '@/pages/construction/ProgressUpdatesPage';
+
+// Merged mega-pages — now replaced by ModuleLayout sub-navigation
+import MyWorkPage from '@/pages/MyWorkPage';
+import FinanceMergedPage from '@/pages/FinanceMergedPage';
+import MaintenanceMergedPage from '@/pages/MaintenanceMergedPage';
+import QueuesMergedPage from '@/pages/QueuesMergedPage';
 import WarehousesPage from '@/pages/inventory/WarehousesPage';
 import InventoryItemsPage from '@/pages/inventory/InventoryItemsPage';
 import StockTransactionsPage from '@/pages/inventory/StockTransactionsPage';
 import ProjectBudgetsPage from '@/pages/budgets/ProjectBudgetsPage';
 import QuotationComparisonPage from '@/pages/procurement/QuotationComparisonPage';
+import RFQListPage from '@/pages/procurement/RFQListPage';
 import VendorScorecardPage from '@/pages/procurement/VendorScorecardPage';
 
 // Phase 3 pages
@@ -158,6 +167,7 @@ export default function App() {
       <Route path="/" element={<ProtectedRoute><AppLayout /></ProtectedRoute>}>
         <Route index element={<Navigate to="/dashboard" />} />
         <Route path="dashboard" element={<DashboardPage />} />
+        <Route path="executive-dashboard" element={<ExecutiveDashboardPage />} />
 
         {/* Work Centers (Phase 1) */}
         <Route path="centers/executive" element={<ExecutiveCenterPage />} />
@@ -240,17 +250,46 @@ export default function App() {
         <Route path="rent-collection/invoices/:id/edit" element={<RentInvoiceCreatePage />} />
         <Route path="rent-collection/receipts" element={<RentReceiptsPage />} />
 
-        {/* Maintenance */}
-        <Route path="maintenance" element={<Navigate to="/maintenance/requests" />} />
-        <Route path="maintenance/requests" element={<MaintenanceRequestListPage />} />
-        <Route path="maintenance/requests/:id" element={<MaintenanceRequestDetailPage />} />
+        {/* Maintenance — sub-navigation */}
+        <Route path="maintenance" element={<ModuleLayout subNav={[
+          { title: 'طلبات الصيانة', href: '/maintenance/requests' },
+          { title: 'أوامر العمل', href: '/maintenance/work-orders' },
+          { title: 'الصيانة الوقائية', href: '/maintenance/preventive' },
+          { title: 'المعاينات', href: '/maintenance/inspections' },
+          { title: 'الأصول', href: '/maintenance/assets' },
+        ]} />}>
+          <Route index element={<Navigate to="/maintenance/requests" replace />} />
+          <Route path="requests" element={<MaintenanceRequestListPage />} />
+          <Route path="requests/:id" element={<MaintenanceRequestDetailPage />} />
+          <Route path="work-orders" element={<WorkOrdersPage />} />
+          <Route path="preventive" element={<PreventiveMaintenancePage />} />
+          <Route path="inspections" element={<InspectionsPage />} />
+          <Route path="assets" element={<AssetRegistryPage />} />
+          <Route path="inspection-builder" element={<InspectionBuilderPage />} />
+          <Route path="dashboard" element={<MaintenanceDashboardPage />} />
+        </Route>
 
-        {/* Finance */}
-        <Route path="finance" element={<FinanceAccountsPage />} />
-        <Route path="finance/accounts" element={<FinanceAccountsPage />} />
-        <Route path="finance/journal-entries" element={<FinanceJournalEntriesPage />} />
-        <Route path="finance/period-closing" element={<PeriodClosingPage />} />
-        <Route path="finance/three-way-match" element={<ThreeWayMatchPage />} />
+        {/* Finance — sub-navigation */}
+        <Route path="finance" element={<ModuleLayout subNav={[
+          { title: 'الحسابات', href: '/finance/accounts' },
+          { title: 'قيود اليومية', href: '/finance/journal-entries' },
+          { title: 'مراكز التكلفة', href: '/finance/cost-centers' },
+          { title: 'حسابات بنكية', href: '/finance/bank-accounts' },
+          { title: 'شيكات', href: '/finance/cheques' },
+          { title: 'لوحة مالية', href: '/finance/dashboard' },
+        ]} />}>
+          <Route index element={<Navigate to="/finance/accounts" replace />} />
+          <Route path="accounts" element={<FinanceAccountsPage />} />
+          <Route path="journal-entries" element={<FinanceJournalEntriesPage />} />
+          <Route path="cost-centers" element={<CostCentersPage />} />
+          <Route path="bank-accounts" element={<BankAccountsPage />} />
+          <Route path="cheques" element={<ChequesPage />} />
+          <Route path="dashboard" element={<FinanceDashboardPage />} />
+          <Route path="period-closing" element={<PeriodClosingPage />} />
+          <Route path="three-way-match" element={<ThreeWayMatchPage />} />
+          <Route path="cash-flow-forecast" element={<CashFlowForecastPage />} />
+          <Route path="valuation" element={<PropertyValuationPage />} />
+        </Route>
 
         {/* Settings & Users */}
         <Route path="settings" element={<SettingsPage />} />
@@ -282,11 +321,25 @@ export default function App() {
         <Route path="construction/daily-reports" element={<DailyReportsPage />} />
         <Route path="construction/progress" element={<ProgressUpdatesPage />} />
 
-        {/* Procurement & Inventory (Phase 2) */}
-        <Route path="procurement/vendors" element={<VendorsPage />} />
-        <Route path="procurement/purchase-requests" element={<PurchaseRequestsPage />} />
-        <Route path="procurement/purchase-orders" element={<PurchaseOrdersPage />} />
-        <Route path="procurement/goods-receipts" element={<GoodsReceiptsPage />} />
+        {/* Procurement & Inventory — sub-navigation */}
+        <Route path="procurement" element={<ModuleLayout subNav={[
+          { title: 'طلبات الشراء', href: '/procurement/requests' },
+          { title: 'عروض الأسعار', href: '/procurement/rfqs' },
+          { title: 'أوامر الشراء', href: '/procurement/orders' },
+          { title: 'استلام البضائع', href: '/procurement/receipts' },
+          { title: 'الموردون', href: '/procurement/vendors' },
+        ]} />}>
+          <Route index element={<Navigate to="/procurement/requests" replace />} />
+          <Route path="requests" element={<PurchaseRequestsPage />} />
+          <Route path="rfqs" element={<RFQListPage />} />
+          <Route path="orders" element={<PurchaseOrdersPage />} />
+          <Route path="receipts" element={<GoodsReceiptsPage />} />
+          <Route path="vendors" element={<VendorsPage />} />
+        </Route>
+        {/* Keep old procurement routes for backward compatibility */}
+        <Route path="procurement/purchase-requests" element={<Navigate to="/procurement/requests" replace />} />
+        <Route path="procurement/purchase-orders" element={<Navigate to="/procurement/orders" replace />} />
+        <Route path="procurement/goods-receipts" element={<Navigate to="/procurement/receipts" replace />} />
         <Route path="procurement/quotation-comparison" element={<QuotationComparisonPage />} />
         <Route path="procurement/vendor-scorecard" element={<VendorScorecardPage />} />
         <Route path="inventory" element={<Navigate to="/inventory/warehouses" />} />
@@ -304,21 +357,6 @@ export default function App() {
         <Route path="rent-collection/schedules" element={<RentSchedulesPage />} />
 
         {/* Finance extended */}
-        <Route path="finance/dashboard" element={<FinanceDashboardPage />} />
-        <Route path="finance/valuation" element={<PropertyValuationPage />} />
-        <Route path="finance/cash-flow-forecast" element={<CashFlowForecastPage />} />
-        <Route path="finance/cost-centers" element={<CostCentersPage />} />
-        <Route path="finance/bank-accounts" element={<BankAccountsPage />} />
-        <Route path="finance/cheques" element={<ChequesPage />} />
-
-        {/* Maintenance extended */}
-        <Route path="maintenance/work-orders" element={<WorkOrdersPage />} />
-        <Route path="maintenance/preventive" element={<PreventiveMaintenancePage />} />
-        <Route path="maintenance/inspections" element={<InspectionsPage />} />
-        <Route path="maintenance/assets" element={<AssetRegistryPage />} />
-        <Route path="maintenance/inspection-builder" element={<InspectionBuilderPage />} />
-        <Route path="maintenance/dashboard" element={<MaintenanceDashboardPage />} />
-
         {/* Calendar */}
         <Route path="calendar" element={<CalendarPage />} />
 
@@ -340,12 +378,51 @@ export default function App() {
         {/* System */}
         <Route path="system/audit-log" element={<AuditLogPage />} />
 
-        {/* HR (Phase 3) */}
-        <Route path="hr" element={<Navigate to="/hr/employees" />} />
-        <Route path="hr/employees" element={<EmployeesPage />} />
-        <Route path="hr/attendance" element={<AttendancePage />} />
-        <Route path="hr/payroll" element={<PayrollPage />} />
-        <Route path="hr/leaves" element={<LeaveManagementPage />} />
+        {/* Merged mega-pages (standalone routes, no conflicts) */}
+        {/* ── LEASING MODULE — separate pages (no sub-nav) ── */}
+        <Route path="leasing" element={<Navigate to="/leasing/properties" replace />} />
+        <Route path="leasing/properties" element={<PropertyListPage />} />
+        <Route path="leasing/units" element={<UnitListPage />} />
+        <Route path="leasing/tenants" element={<TenantListPage />} />
+        <Route path="leasing/leases" element={<LeaseListPage />} />
+        <Route path="leasing/collections" element={<RentInvoicesPage />} />
+
+        {/* ── CONSTRUCTION MODULE — sub-navigation ── */}
+        <Route path="construction-all" element={<ModuleLayout subNav={[
+          { title: 'المشاريع', href: '/construction-all/projects' },
+          { title: 'المقاولون', href: '/construction-all/contractors' },
+          { title: 'المطالبات', href: '/construction-all/claims' },
+          { title: 'التقدم', href: '/construction-all/progress' },
+          { title: 'التقارير', href: '/construction-all/reports' },
+        ]} />}>
+          <Route index element={<Navigate to="/construction-all/projects" replace />} />
+          <Route path="projects" element={<ProjectListPage />} />
+          <Route path="contractors" element={<ContractorListPage />} />
+          <Route path="claims" element={<ContractorClaimsPage />} />
+          <Route path="progress" element={<ProgressUpdatesPage />} />
+          <Route path="reports" element={<DailyReportsPage />} />
+        </Route>
+
+        {/* Redirect old merged-page paths */}
+        <Route path="properties-units" element={<Navigate to="/leasing/properties" replace />} />
+        <Route path="tenants-leases" element={<Navigate to="/leasing/tenants" replace />} />
+        <Route path="collections" element={<Navigate to="/leasing/collections" replace />} />
+        <Route path="my-work" element={<MyWorkPage />} />
+        <Route path="queues" element={<QueuesMergedPage />} />
+
+        {/* HR — sub-navigation */}
+        <Route path="hr" element={<ModuleLayout subNav={[
+          { title: 'الموظفون', href: '/hr/employees' },
+          { title: 'الحضور', href: '/hr/attendance' },
+          { title: 'الرواتب', href: '/hr/payroll' },
+          { title: 'الإجازات', href: '/hr/leaves' },
+        ]} />}>
+          <Route index element={<Navigate to="/hr/employees" replace />} />
+          <Route path="employees" element={<EmployeesPage />} />
+          <Route path="attendance" element={<AttendancePage />} />
+          <Route path="payroll" element={<PayrollPage />} />
+          <Route path="leaves" element={<LeaveManagementPage />} />
+        </Route>
 
         {/* Settings extended */}
         <Route path="settings/numbering" element={<NumberingSettingsPage />} />

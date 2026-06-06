@@ -293,7 +293,7 @@ export default function ProjectTasksPage() {
   }
 
   return (
-    <div className="min-h-full bg-[#F8FAFC]" dir="rtl">
+    <div className="min-h-full bg-[#f6f9fc]" dir="rtl">
 
       {/* ── PAGE HEADER ─────────────────────────────────────────── */}
       <div className="flex items-center justify-between flex-wrap gap-4 mb-5">
@@ -722,7 +722,7 @@ export default function ProjectTasksPage() {
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setModalOpen(false)} className="h-9 text-sm rounded-lg">إلغاء</Button>
-            <Button onClick={handleSave} className="bg-[#3B82F6] hover:bg-blue-600 text-white text-sm h-9 rounded-lg px-4">{editId ? 'تحديث' : 'حفظ'}</Button>
+            <Button onClick={handleSave} className="bg-[#533afd] hover:bg-[#4434d4] text-white text-sm h-9 rounded-full px-4">{editId ? 'تحديث' : 'حفظ'}</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>

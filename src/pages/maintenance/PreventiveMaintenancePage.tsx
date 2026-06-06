@@ -271,7 +271,7 @@ export default function PreventiveMaintenancePage() {
   };
 
   return (
-    <div className="min-h-full bg-[#F8FAFC]" dir="rtl">
+    <div className="min-h-full bg-[#f6f9fc]" dir="rtl">
       <PageHeader
         title="الصيانة الوقائية"
         description="جدولة ومتابعة الصيانة الوقائية للأصول والمعدات"
@@ -283,7 +283,7 @@ export default function PreventiveMaintenancePage() {
       <div className="flex justify-end mb-4">
         <Button
           onClick={generateWorkOrders}
-          className="gap-2 bg-[#3B82F6] hover:bg-blue-600 text-white text-sm h-9 rounded-lg px-4 shadow-sm shadow-blue-500/20 transition-all hover:shadow-md hover:shadow-blue-500/30"
+          className="gap-2 bg-[#533afd] hover:bg-[#4434d4] text-white text-sm h-9 rounded-full px-4 shadow-sm shadow-blue-500/20 transition-all hover:shadow-md hover:shadow-blue-500/30"
         >
           <Play className="h-4 w-4" />
           إنشاء أوامر عمل من الجداول المستحقة

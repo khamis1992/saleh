@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { AlertTriangle, Plus, X, Save, Info, MousePointerClick, ShieldAlert } from 'lucide-react';
 import { PageHeader } from '@/components/shared/PageHeader';
 import { Card, CardContent } from '@/components/ui/card';
@@ -82,6 +83,9 @@ function saveRisks(risks: Risk[]) {
 }
 
 export default function RiskRegisterPage() {
+  const [searchParams] = useSearchParams();
+  const projectId = searchParams.get('projectId') || '';
+  const projectName = searchParams.get('projectName') || '';
   const [risks, setRisks] = useState<Risk[]>([]);
   const [showAdd, setShowAdd] = useState(false);
   const [form, setForm] = useState<Partial<Risk>>({ category: 'financial', likelihood: 3, impact: 3, status: 'open' });

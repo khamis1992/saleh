@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Button } from '@/components/ui/button';
-import { projectStore, landStore, contractorStore } from '@/services/stores';
+import { projectStore, landStore, contractorStore, projectPhaseStore } from '@/services/stores';
 import { toast } from 'sonner';
 import { formatQARInt } from '@/lib/format';
 
@@ -168,15 +168,19 @@ export default function ProjectWizardPage() {
       } as any);
 
       // create 3 default phases
-      const phaseStore = (window as any).__phaseStore;
-      if (phaseStore) {
-        for (let i = 1; i <= 3; i++) {
-          phaseStore.create({
-            project_id: project.id, phase_name: ['دراسة الجدوى والتصميم', 'الأعمال الإنشائية', 'التشطيبات والتسليم'][i - 1],
-            sequence_number: i, budget_amount: Math.round(budget / 3), actual_cost: 0,
-            progress_percentage: 0, status: 'not_started',
-          } as any);
-        }
+      for (let i = 1; i <= 3; i++) {
+        projectPhaseStore.create({
+          id: `phase-${project.id}-${i}`,
+          project_id: project.id,
+          phase_name: ['دراسة الجدوى والتصميم', 'الأعمال الإنشائية', 'التشطيبات والتسليم'][i - 1],
+          sequence_number: i,
+          budget_amount: Math.round(budget / 3),
+          actual_cost: 0,
+          progress_percentage: 0,
+          status: 'not_started',
+          planned_start: startDate,
+          planned_end: endDate,
+        } as any);
       }
 
       toast.success(`تم إنشاء المشروع ${name} بنجاح`);

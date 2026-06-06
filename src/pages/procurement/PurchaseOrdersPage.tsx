@@ -25,9 +25,10 @@ import {
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import {
-  Search, Filter, Eye, Pencil, Trash2, Plus, FileText, Truck, AlertTriangle, X,
+  Search, Filter, Eye, Pencil, Trash2, Plus, FileText, Truck, AlertTriangle, X, ShoppingCart, TrendingUp, Clock, CheckCircle2,
 } from 'lucide-react';
 import { projectStore, purchaseOrderStore } from '@/services/stores';
+import { KpiCard } from '@/components/shared/DesignSystem';
 
 interface POItem {
   itemName: string;
@@ -60,6 +61,7 @@ export default function PurchaseOrdersPage() {
   const [statusFilter, setStatusFilter] = useState('all');
   const [loading, setLoading] = useState(true);
   const [refresh, setRefresh] = useState(0);
+  const [editId, setEditId] = useState<string | null>(null);
   const [deleteTarget, setDeleteTarget] = useState<PurchaseOrder | null>(null);
   const [showModal, setShowModal] = useState(false);
   const [showDetail, setShowDetail] = useState<PurchaseOrder | null>(null);
@@ -86,6 +88,11 @@ export default function PurchaseOrdersPage() {
     });
   }, [data, search, statusFilter]);
 
+  // KPI computations
+  const pendingOrders = data.filter((po: any) => po.status === 'draft' || po.status === 'in_progress').length;
+  const deliveredOrders = data.filter((po: any) => po.status === 'delivered' || po.status === 'completed').length;
+  const totalPOValue = data.reduce((s: number, po: any) => s + (po.total_amount || 0), 0);
+
   const handleCopyCode = (code: string) => {
     navigator.clipboard.writeText(code).then(() => {
       toast.success('تم نسخ رقم الأمر');
@@ -93,6 +100,7 @@ export default function PurchaseOrdersPage() {
   };
 
   const openCreate = () => {
+    setEditId(null);
     const allPOs = purchaseOrderStore.getAll() as PurchaseOrder[];
     setForm({
       po_number: `PO-${new Date().getFullYear()}-${String(allPOs.length + 1).padStart(3, '0')}`,
@@ -103,11 +111,9 @@ export default function PurchaseOrdersPage() {
     });
     setShowModal(true);
   };
-
   const savePO = () => {
     if (!form.po_number || !form.vendor || !form.project) return;
     const total = (form.items || []).reduce((s, i) => s + i.total, 0);
-
     const projects = projectStore.getAll();
     const prj = projects.find((p: any) => p.project_name === form.project || p.id === form.project);
     if (prj) {
@@ -115,28 +121,33 @@ export default function PurchaseOrdersPage() {
       if (total > remaining) {
         const warnMsg = `تحذير: إجمالي أمر الشراء (${fmt(total)}) يتجاوز الميزانية المتبقية للمشروع (${fmt(remaining)})`;
         setBudgetWarning(warnMsg);
+        toast.warning(warnMsg);
       } else {
         setBudgetWarning(null);
       }
     }
 
-    const newPO: Omit<PurchaseOrder, 'id'> = {
-      po_number: form.po_number || '',
-      vendor: form.vendor || '',
-      project: form.project || '',
-      order_date: form.order_date || '',
-      expected_delivery: form.expected_delivery || '',
-      delivery_location: form.delivery_location || '',
-      total_amount: total,
-      receipt_status: form.receipt_status || 'none',
-      payment_status: form.payment_status || 'unpaid',
-      items: form.items || [],
-      status: form.status || 'draft',
-      notes: form.notes || '',
-    };
-    purchaseOrderStore.create(newPO as any);
-    toast.success('تم إنشاء أمر الشراء بنجاح');
-    setRefresh(r => r + 1); setShowModal(false);
+    if (editId) {
+      purchaseOrderStore.update(editId, { ...form, items: form.items || [], total_amount: total } as any);
+      toast.success('تم تحديث أمر الشراء بنجاح');
+    } else {
+      const newPO: Omit<PurchaseOrder, 'id'> = { ...form, total_amount: total } as any;
+      purchaseOrderStore.create({ ...newPO, items: form.items || [] } as any);
+      toast.success('تم إنشاء أمر الشراء بنجاح');
+    }
+    setRefresh(r => r + 1); setShowModal(false); setEditId(null);
+  };
+
+  const openEdit = (po: PurchaseOrder) => {
+    setEditId(po.id);
+    setForm({
+      po_number: po.po_number, vendor: po.vendor, project: po.project,
+      order_date: po.order_date, expected_delivery: po.expected_delivery,
+      delivery_location: po.delivery_location, total_amount: po.total_amount,
+      receipt_status: po.receipt_status, payment_status: po.payment_status,
+      items: po.items || [], status: po.status, notes: po.notes || '',
+    });
+    setShowModal(true);
   };
 
   const addItem = () => {
@@ -180,7 +191,15 @@ export default function PurchaseOrdersPage() {
   };
 
   return (
-    <div className="min-h-full bg-[#F8FAFC]" dir="rtl">
+    <div className="min-h-full bg-[#f6f9fc]" dir="rtl">
+      {/* KPI Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+        <KpiCard title="أوامر الشراء" value={data.length} subtitle={`${filtered.length} أمر`} icon={ShoppingCart} moduleOverride="procurement" />
+        <KpiCard title="معلقة" value={pendingOrders} subtitle="بانتظار التسليم" icon={Clock} trend={pendingOrders > 0 ? { value: pendingOrders } : undefined} moduleOverride="procurement" />
+        <KpiCard title="مسلمة" value={deliveredOrders} subtitle="تم استلامها" icon={Truck} moduleOverride="procurement" />
+        <KpiCard title="القيمة الإجمالية" value={formatQARInt(totalPOValue)} subtitle="ر.ق" icon={TrendingUp} moduleOverride="procurement" />
+      </div>
+
       {/* Page Header */}
       <div className="flex items-center justify-between flex-wrap gap-3 mb-6">
         <div>
@@ -191,7 +210,7 @@ export default function PurchaseOrdersPage() {
         </div>
         <Button
           onClick={openCreate}
-          className="gap-2 bg-[#3B82F6] hover:bg-blue-600 text-white text-sm h-9 rounded-lg px-4 shadow-sm shadow-blue-500/20 transition-all hover:shadow-md hover:shadow-blue-500/30"
+          className="gap-2 bg-[#533afd] hover:bg-[#4434d4] text-white text-sm h-9 rounded-full px-4 shadow-sm shadow-blue-500/20 transition-all hover:shadow-md hover:shadow-blue-500/30"
         >
           <Plus className="h-4 w-4" />
           أمر شراء جديد
@@ -324,9 +343,18 @@ export default function PurchaseOrdersPage() {
                           </TooltipTrigger>
                           <TooltipContent>عرض</TooltipContent>
                         </Tooltip>
+                        {/* GR Link */}
                         <Tooltip>
                           <TooltipTrigger asChild>
-                            <Button variant="ghost" size="sm" className="h-7 w-7 p-0 text-gray-400 hover:text-amber-600 hover:bg-amber-50">
+                            <Button variant="ghost" size="sm" className="h-7 px-2 text-xs text-emerald-600 hover:bg-emerald-50 font-semibold gap-1" onClick={() => navigate(`/procurement/receipts?poNumber=${po.po_number}`)}>
+                              <Truck className="h-3 w-3" />استلام
+                            </Button>
+                          </TooltipTrigger>
+                          <TooltipContent>استلام بضائع</TooltipContent>
+                        </Tooltip>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Button variant="ghost" size="sm" className="h-7 w-7 p-0 text-gray-400 hover:text-amber-600 hover:bg-amber-50" onClick={() => openEdit(po)}>
                               <Pencil className="h-3.5 w-3.5" />
                             </Button>
                           </TooltipTrigger>
@@ -521,7 +549,7 @@ export default function PurchaseOrdersPage() {
                 </div>
               )}
               <LineItemsTable
-                items={showDetail.items.map((it) => ({ ...it, id: it.itemName }))}
+                items={(showDetail.items || []).map((it) => ({ ...it, id: it.itemName }))}
               />
             </div>
           )}

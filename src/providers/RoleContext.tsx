@@ -13,12 +13,12 @@ export type UserRole =
 
 export const ROLES: { value: UserRole; label: string; center: string }[] = [
   { value: 'admin', label: 'مدير النظام', center: '/dashboard' },
-  { value: 'executive', label: 'المدير العام', center: '/centers/executive' },
-  { value: 'project_manager', label: 'مدير مشاريع', center: '/centers/construction' },
-  { value: 'property_manager', label: 'مدير عقارات', center: '/centers/property' },
-  { value: 'accountant', label: 'محاسب', center: '/centers/finance' },
-  { value: 'maintenance_manager', label: 'مدير صيانة', center: '/centers/maintenance' },
-  { value: 'technician', label: 'فني صيانة', center: '/maintenance/work-orders' },
+  { value: 'executive', label: 'المدير العام', center: '/dashboard' },
+  { value: 'project_manager', label: 'مدير مشاريع', center: '/construction-all' },
+  { value: 'property_manager', label: 'مدير عقارات', center: '/leasing' },
+  { value: 'accountant', label: 'محاسب', center: '/finance' },
+  { value: 'maintenance_manager', label: 'مدير صيانة', center: '/maintenance' },
+  { value: 'technician', label: 'فني صيانة', center: '/maintenance' },
   { value: 'legal_officer', label: 'مسؤول قانوني', center: '/legal/notices' },
   { value: 'hr_manager', label: 'مدير موارد بشرية', center: '/hr/employees' },
 ];

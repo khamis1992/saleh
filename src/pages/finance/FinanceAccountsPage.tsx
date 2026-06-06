@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import { useLocale } from '@/providers/LocaleContext';
 import { toast } from 'sonner';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
@@ -16,12 +17,15 @@ import {
   Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter,
 } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
-import { Search, Filter, Eye, Pencil, Trash2, Plus, BookOpen, X } from 'lucide-react';
-import { chartOfAccountsStore } from '@/services/stores';
+import { Search, Filter, Eye, Pencil, Trash2, Plus, BookOpen, X, TrendingUp, TrendingDown, CreditCard, Wallet, FileText } from 'lucide-react';
+import { chartOfAccountsStore, journalEntryStore } from '@/services/stores';
+import { KpiCard } from '@/components/shared/DesignSystem';
 import { Account } from '@/types';
 
 export default function FinanceAccountsPage() {
   const { t } = useLocale();
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const [accounts, setAccounts] = useState<Account[]>(() => chartOfAccountsStore.getAll());
   const [search, setSearch] = useState('');
   const [typeFilter, setTypeFilter] = useState('all');
@@ -53,6 +57,12 @@ export default function FinanceAccountsPage() {
       return true;
     });
   }, [accounts, search, typeFilter]);
+
+  // KPI computations
+  const assetAccounts = accounts.filter((a) => a.account_type === 'asset').length;
+  const liabilityAccounts = accounts.filter((a) => a.account_type === 'liability').length;
+  const revenueAccounts = accounts.filter((a) => a.account_type === 'revenue').length;
+  const expenseAccounts = accounts.filter((a) => a.account_type === 'expense').length;
 
   const handleDelete = () => {
     if (!deleteTarget) return;
@@ -91,7 +101,16 @@ export default function FinanceAccountsPage() {
   };
 
   return (
-    <div className="min-h-full bg-[#F8FAFC]" dir="rtl">
+    <div className="min-h-full bg-[#f6f9fc]" dir="rtl">
+      {/* KPI Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+        <KpiCard title="دليل الحسابات" value={accounts.length} subtitle={`${filtered.length} حساب`} icon={BookOpen} moduleOverride="finance" />
+        <KpiCard title="الأصول" value={assetAccounts} subtitle="حسابات الأصول" icon={TrendingUp} moduleOverride="finance" />
+        <KpiCard title="الالتزامات" value={liabilityAccounts} subtitle="حسابات الخصوم" icon={CreditCard} moduleOverride="finance" />
+        <KpiCard title="الإيرادات والمصروفات" value={`${revenueAccounts} / ${expenseAccounts}`} subtitle="دخل / مصروف" icon={Wallet} moduleOverride="finance" />
+      </div>
+
+
       {/* Page Header */}
       <div className="flex items-center justify-between flex-wrap gap-3 mb-6">
         <div>
@@ -102,7 +121,7 @@ export default function FinanceAccountsPage() {
         </div>
         <Button
           onClick={() => setShowCreateModal(true)}
-          className="gap-2 bg-[#3B82F6] hover:bg-blue-600 text-white text-sm h-9 rounded-lg px-4 shadow-sm shadow-blue-500/20"
+          className="gap-2 bg-[#533afd] hover:bg-[#4434d4] text-white text-sm h-9 rounded-full px-4 shadow-sm shadow-blue-500/20"
         >
           <Plus className="h-4 w-4" />
           إضافة حساب
@@ -231,6 +250,14 @@ export default function FinanceAccountsPage() {
                             </Button>
                           </TooltipTrigger>
                           <TooltipContent>تعديل</TooltipContent>
+                        </Tooltip>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Button variant="ghost" size="sm" className="h-7 px-2 text-xs text-indigo-600 hover:bg-indigo-50 font-semibold gap-1" onClick={() => navigate(`/finance/journal-entries?accountId=${a.id}`)}>
+                              <FileText className="h-3 w-3" />قيود
+                            </Button>
+                          </TooltipTrigger>
+                          <TooltipContent>عرض قيود الحساب</TooltipContent>
                         </Tooltip>
                         <Tooltip>
                           <TooltipTrigger asChild>

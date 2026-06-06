@@ -10,8 +10,9 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
-import { Search, Filter, MoreHorizontal, Pencil, Trash2 } from 'lucide-react';
+import { Search, Filter, MoreHorizontal, Pencil, Trash2, CreditCard, TrendingUp, Clock, CheckCircle2 } from 'lucide-react';
 import { chequeStore, getTenantName } from '@/services/stores';
+import { KpiCard } from '@/components/shared/DesignSystem';
 
 const statusLabels: Record<string, string> = {
   received: 'مستلم',
@@ -62,6 +63,12 @@ export default function ChequesPage() {
     return true;
   });
 
+  // KPI computations
+  const clearedCheques = cheques.filter((c: any) => c.status === 'cleared').length;
+  const bouncedCheques = cheques.filter((c: any) => c.status === 'bounced').length;
+  const pendingCheques = cheques.filter((c: any) => c.status === 'received' || c.status === 'deposited').length;
+  const totalChequeValue = cheques.reduce((s: number, c: any) => s + (c.amount || 0), 0);
+
   const openCreate = () => {
     setEditId(null);
     setForm(emptyForm);
@@ -106,7 +113,15 @@ export default function ChequesPage() {
   };
 
   return (
-    <div className="min-h-full bg-[#F8FAFC]" dir="rtl">
+    <div className="min-h-full bg-[#f6f9fc]" dir="rtl">
+      {/* KPI Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+        <KpiCard title="الشيكات" value={cheques.length} subtitle={`${filtered.length} شيك`} icon={CreditCard} moduleOverride="finance" />
+        <KpiCard title="مصرفة" value={clearedCheques} subtitle="تم صرفها" icon={CheckCircle2} moduleOverride="finance" />
+        <KpiCard title="معلقة" value={pendingCheques} subtitle="بانتظار الصرف" icon={Clock} trend={pendingCheques > 0 ? { value: pendingCheques } : undefined} moduleOverride="finance" />
+        <KpiCard title="القيمة الإجمالية" value={formatQAR(totalChequeValue)} subtitle="ر.ق" icon={TrendingUp} moduleOverride="finance" />
+      </div>
+
       <PageHeader
         title="الشيكات"
         description="إدارة الشيكات المستلمة من المستأجرين"

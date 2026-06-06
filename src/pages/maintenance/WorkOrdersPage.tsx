@@ -193,7 +193,7 @@ export default function WorkOrdersPage() {
   const fmt = (v: number) => formatQAR(v);
 
   return (
-    <div className="min-h-full bg-[#F8FAFC]" dir="rtl">
+    <div className="min-h-full bg-[#f6f9fc]" dir="rtl">
       <PageHeader
         title="أوامر العمل"
         description="إدارة أوامر العمل والصيانة للفنيين"

@@ -1,5 +1,5 @@
 import { formatQAR, formatThousand } from '@/lib/format';
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { toast } from 'sonner';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -19,6 +19,7 @@ import {
   List, GanttChart, Truck, Wrench, RefreshCw, AlertCircle, Trash,
 } from 'lucide-react';
 import { stockTransactionStore, warehouseStore, inventoryStore } from '@/services/stores';
+import { KpiCard } from '@/components/shared/DesignSystem';
 import { generateJournalEntry } from '@/utils/exportUtils';
 
 const typeMeta: Record<string, { label: string; icon: any; direction: 'in' | 'out' | 'neutral'; color: string; bg: string }> = {
@@ -46,7 +47,8 @@ export default function StockTransactionsPage() {
   const [deleteTarget, setDeleteTarget] = useState<any | null>(null);
   const [viewMode, setViewMode] = useState<'timeline' | 'table'>('timeline');
 
-  const transactions = useMemo(() => { const d = stockTransactionStore.getAll(); setTimeout(() => setLoading(false), 300); return d; }, [refresh]);
+  const transactions = useMemo(() => { return stockTransactionStore.getAll(); }, [refresh]);
+  useEffect(() => { const t = setTimeout(() => setLoading(false), 300); return () => clearTimeout(t); }, [refresh]);
   const warehouses = useMemo(() => warehouseStore.getAll(), []);
   const items = useMemo(() => inventoryStore.getAll(), []);
 
@@ -144,7 +146,15 @@ export default function StockTransactionsPage() {
   const getWarehouseName = (id: string) => warehouses.find((w: any) => w.id === id)?.warehouse_name || id;
 
   return (
-    <div className="min-h-full bg-[#F8FAFC]" dir="rtl">
+    <div className="min-h-full bg-[#f6f9fc]" dir="rtl">
+      {/* KPI Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+        <KpiCard title="حركات المخزون" value={transactions.length} subtitle={`${filtered.length} حركة`} icon={ArrowLeftRight} moduleOverride="procurement" />
+        <KpiCard title="وارد" value={totalInCount} subtitle={formatQARInt(totalInflow)} icon={ArrowDown} moduleOverride="procurement" />
+        <KpiCard title="منصرف" value={totalOutCount} subtitle={formatQARInt(totalOutflow)} icon={ArrowUp} moduleOverride="procurement" />
+        <KpiCard title="صافي التدفق" value={formatQARInt(netFlow)} subtitle={netFlow >= 0 ? 'فائض' : 'عجز'} icon={Wallet} trend={{ value: netFlow >= 0 ? 100 : -100 }} moduleOverride="procurement" />
+      </div>
+
       {/* Page Header */}
       <div className="flex items-center justify-between flex-wrap gap-3 mb-6">
         <div>
@@ -156,7 +166,7 @@ export default function StockTransactionsPage() {
             <button onClick={() => setViewMode('timeline')} className={`p-1.5 rounded-md transition-colors ${viewMode === 'timeline' ? 'bg-[#3B82F6] text-white' : 'text-gray-400 hover:text-gray-600'}`}><GanttChart className="h-4 w-4" /></button>
             <button onClick={() => setViewMode('table')} className={`p-1.5 rounded-md transition-colors ${viewMode === 'table' ? 'bg-[#3B82F6] text-white' : 'text-gray-400 hover:text-gray-600'}`}><List className="h-4 w-4" /></button>
           </div>
-          <Button onClick={openCreate} className="gap-2 bg-[#3B82F6] hover:bg-blue-600 text-white text-sm h-9 rounded-lg px-4 shadow-sm shadow-blue-500/20">
+          <Button onClick={openCreate} className="gap-2 bg-[#533afd] hover:bg-[#4434d4] text-white text-sm h-9 rounded-full px-4 shadow-sm shadow-blue-500/20">
             <Plus className="h-4 w-4" />حركة جديدة
           </Button>
         </div>

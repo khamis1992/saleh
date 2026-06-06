@@ -133,7 +133,7 @@ export function StepperForm({
           <Button variant="outline" onClick={goBack} disabled={isFirst} className="h-9 text-sm gap-1">
             <ChevronRight className="h-4 w-4" /> السابق
           </Button>
-          <Button onClick={goNext} disabled={submitting} className="h-9 text-sm gap-1 bg-[#3B82F6] hover:bg-blue-600 text-white">
+          <Button onClick={goNext} disabled={submitting} className="h-9 text-sm gap-1 bg-[#533afd] hover:bg-blue-600 text-white">
             {isLast ? (submitting ? 'جاري الإنشاء...' : completeLabel) : 'التالي'}
             {!isLast && <ChevronLeft className="h-4 w-4" />}
           </Button>

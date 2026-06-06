@@ -247,6 +247,8 @@ export interface PurchaseOrder {
   status: string;
   notes: string;
   items?: any[];
+  pr_id?: string;
+  pr_number?: string;
 }
 export interface PRLineItem {
   item_name: string;
@@ -268,6 +270,8 @@ export interface PurchaseRequest {
   estimated_total: number;
   items: PRLineItem[];
   status: string;
+  linked_po_id?: string;
+  linked_po_number?: string;
 }
 
 import { seedContractorClaims } from '@/pages/construction/ContractorClaimsPage';

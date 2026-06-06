@@ -60,7 +60,7 @@ export default function ContractorDetailPage() {
             <p className="text-xs text-gray-500 mt-0.5">تفاصيل المقاول وسجل التعاملات</p>
           </div>
         </div>
-        <Button onClick={() => navigate(`/contractors/${contractor.id}/edit`)} className="gap-2 bg-[#3B82F6] hover:bg-blue-600 text-white text-sm h-9 rounded-lg px-4">
+        <Button onClick={() => navigate(`/contractors/${contractor.id}/edit`)} className="gap-2 bg-[#533afd] hover:bg-[#4434d4] text-white text-sm h-9 rounded-full px-4">
           <Pencil className="h-4 w-4" />{t.common.edit}
         </Button>
       </div>

@@ -13,8 +13,9 @@ import {
   AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent,
   AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
-import { Search, Filter, Eye, Pencil, Trash2, Plus, Users, X } from 'lucide-react';
-import { tenantStore } from '@/services/stores';
+import { Search, Filter, Eye, Pencil, Trash2, Plus, Users, X, UserPlus, Phone, Calendar } from 'lucide-react';
+import { tenantStore, leaseStore } from '@/services/stores';
+import { KpiCard } from '@/components/shared/DesignSystem';
 
 export default function TenantListPage() {
   const { t } = useLocale();
@@ -37,6 +38,12 @@ export default function TenantListPage() {
     return true;
   });
 
+  // KPI computations
+  const leases = useMemo(() => leaseStore.getAll(), [refresh]);
+  const activeLeases = leases.filter((l: any) => l.status === 'active').length;
+  const individualTenants = tenants.filter((t: any) => t.tenant_type === 'individual').length;
+  const companyTenants = tenants.filter((t: any) => t.tenant_type === 'company').length;
+
   const handleDelete = () => {
     if (!deleteTarget) return;
     tenantStore.remove(deleteTarget.id);
@@ -52,7 +59,15 @@ export default function TenantListPage() {
   };
 
   return (
-    <div className="min-h-full bg-[#F8FAFC]" dir="rtl">
+    <div className="min-h-full bg-[#f6f9fc]" dir="rtl">
+      {/* KPI Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+        <KpiCard title={t.tenants.title} value={tenants.length} subtitle={`${filtered.length} مستأجر`} icon={Users} moduleOverride="leasing" />
+        <KpiCard title="عقود نشطة" value={activeLeases} subtitle="عقود إيجار سارية" icon={Calendar} moduleOverride="leasing" />
+        <KpiCard title="أفراد" value={individualTenants} subtitle="مستأجرين أفراد" icon={UserPlus} moduleOverride="leasing" />
+        <KpiCard title="شركات" value={companyTenants} subtitle="مستأجرين شركات" icon={Phone} moduleOverride="leasing" />
+      </div>
+
       {/* Page Header */}
       <div className="flex items-center justify-between flex-wrap gap-3 mb-6">
         <div>
@@ -63,7 +78,7 @@ export default function TenantListPage() {
         </div>
         <Button
           onClick={() => navigate('/tenants/create')}
-          className="gap-2 bg-[#3B82F6] hover:bg-blue-600 text-white text-sm h-9 rounded-lg px-4 shadow-sm shadow-blue-500/20 transition-all hover:shadow-md hover:shadow-blue-500/30"
+          className="gap-2 bg-[#533afd] hover:bg-[#4434d4] text-white text-sm h-9 rounded-full px-4 shadow-sm shadow-blue-500/20 transition-all hover:shadow-md hover:shadow-blue-500/30"
         >
           <Plus className="h-4 w-4" />
           {t.tenants.create}

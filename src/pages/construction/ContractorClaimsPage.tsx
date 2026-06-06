@@ -1,5 +1,6 @@
 import { formatQAR } from '@/lib/format';
 import { useState, useMemo } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { useLocale } from '@/providers/LocaleContext';
 import { toast } from 'sonner';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
@@ -21,7 +22,7 @@ import {
   X, ChevronLeft, ChevronRight, Calendar, Users, Briefcase,
   Plus, RefreshCw, Download, FileText, ClipboardList, Wallet, XCircle, Building2,
   CheckCircle2, Hourglass, Hammer, Banknote, MoreVertical, ChevronsLeft, ChevronsRight,
-  LayoutGrid,
+  LayoutGrid, HardHat,
 } from 'lucide-react';
 import { contractorStore, projectStore, getProjectName } from '@/services/stores';
 import { createStore } from '@/services/dataService';
@@ -318,6 +319,9 @@ const emptyClaimForm: ClaimForm = {
 // ============================================================
 export default function ContractorClaimsPage() {
   const { t } = useLocale();
+  const [searchParams] = useSearchParams();
+  const projectId = searchParams.get('projectId') || '';
+  const projectName = searchParams.get('projectName') || '';
   const [refresh, setRefresh] = useState(0);
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
@@ -529,6 +533,14 @@ export default function ContractorClaimsPage() {
   // ============================================================
   return (
     <div className="min-h-full bg-[#F8FAFC]" dir="rtl">
+
+      {projectId && (
+        <div className="bg-indigo-50 border border-indigo-200 rounded-xl px-4 py-2.5 mb-4 flex items-center gap-2">
+          <HardHat className="h-4 w-4 text-indigo-600" />
+          <span className="text-xs text-indigo-700 font-medium">المشروع: {decodeURIComponent(projectName)}</span>
+          <span className="text-[10px] text-indigo-400">({projectId})</span>
+        </div>
+      )}
 
       {/* ── PAGE HEADER ─────────────────────────────────────────── */}
       <div className="flex items-center justify-between gap-4 mb-5">

@@ -144,7 +144,7 @@ export default function RentInvoicesPage() {
     s === 'paid' ? 'مدفوعة' : s === 'partially_paid' ? 'مدفوعة جزئياً' : s === 'issued' ? 'مصدرة' : s === 'overdue' ? 'متأخرة' : s === 'draft' ? 'مسودة' : s;
 
   return (
-    <div className="min-h-full bg-[#F8FAFC]" dir="rtl">
+    <div className="min-h-full bg-[#f6f9fc]" dir="rtl">
       {/* Page Header */}
       <div className="flex items-center justify-between flex-wrap gap-3 mb-6">
         <div>
@@ -163,7 +163,7 @@ export default function RentInvoicesPage() {
           </Button>
           <Button
             onClick={() => navigate('/rent-collection/invoices/create')}
-            className="gap-2 bg-[#3B82F6] hover:bg-blue-600 text-white text-sm h-9 rounded-lg px-4 shadow-sm shadow-blue-500/20 transition-all hover:shadow-md hover:shadow-blue-500/30"
+            className="gap-2 bg-[#533afd] hover:bg-[#4434d4] text-white text-sm h-9 rounded-full px-4 shadow-sm shadow-blue-500/20 transition-all hover:shadow-md hover:shadow-blue-500/30"
           >
             <Plus className="h-4 w-4" />
             فاتورة جديدة

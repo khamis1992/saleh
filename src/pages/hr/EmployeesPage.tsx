@@ -1,4 +1,4 @@
-import { formatQAR } from '@/lib/format';
+import { formatQAR, formatQARInt } from '@/lib/format';
 import { useState, useMemo } from 'react';
 import { toast } from 'sonner';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
@@ -15,8 +15,9 @@ import {
   AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent,
   AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
-import { Search, Filter, Pencil, Trash2, Users, X } from 'lucide-react';
-import { employeeStore } from '@/services/stores';
+import { Search, Filter, Pencil, Trash2, Users, X, UserCheck, Calendar, DollarSign, TrendingUp } from 'lucide-react';
+import { employeeStore, leaveRequestStore, payrollStore } from '@/services/stores';
+import { KpiCard } from '@/components/shared/DesignSystem';
 
 const statusLabels: Record<string, string> = {
   active: 'نشط',
@@ -70,6 +71,13 @@ export default function EmployeesPage() {
     if (search && !emp.full_name.includes(search) && !emp.employee_code.includes(search) && !emp.job_title.includes(search)) return false;
     return true;
   });
+
+  // KPI computations
+  const leaves = useMemo(() => leaveRequestStore.getAll(), [refresh]);
+  const payrolls = useMemo(() => payrollStore.getAll(), [refresh]);
+  const activeEmployees = employees.filter((emp: any) => emp.status === 'active').length;
+  const onLeave = leaves.filter((l: any) => l.status === 'approved').length;
+  const totalPayroll = payrolls.reduce((s: number, p: any) => s + (p.net_pay || p.total_amount || 0), 0);
 
   const fmt = (v: number) =>
     formatQAR(v);
@@ -137,7 +145,15 @@ export default function EmployeesPage() {
   };
 
   return (
-    <div className="min-h-full bg-[#F8FAFC]" dir="rtl">
+    <div className="min-h-full bg-[#f6f9fc]" dir="rtl">
+      {/* KPI Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+        <KpiCard title="الموظفون" value={employees.length} subtitle={`${filtered.length} موظف`} icon={Users} moduleOverride="hr" />
+        <KpiCard title="نشطون" value={activeEmployees} subtitle="موظفين حاليين" icon={UserCheck} moduleOverride="hr" />
+        <KpiCard title="في إجازة" value={onLeave} subtitle="إجازات معتمدة" icon={Calendar} moduleOverride="hr" />
+        <KpiCard title="إجمالي الرواتب" value={formatQARInt(totalPayroll)} subtitle="ر.ق" icon={DollarSign} moduleOverride="hr" />
+      </div>
+
       {/* Page Header */}
       <div className="flex items-center justify-between flex-wrap gap-3 mb-6">
         <div>
@@ -146,7 +162,7 @@ export default function EmployeesPage() {
         </div>
         <Button
           onClick={openCreate}
-          className="gap-2 bg-[#3B82F6] hover:bg-blue-600 text-white text-sm h-9 rounded-lg px-4 shadow-sm shadow-blue-500/20 transition-all hover:shadow-md hover:shadow-blue-500/30"
+          className="gap-2 bg-[#533afd] hover:bg-[#4434d4] text-white text-sm h-9 rounded-full px-4 shadow-sm shadow-blue-500/20 transition-all hover:shadow-md hover:shadow-blue-500/30"
         >
           + إضافة موظف
         </Button>

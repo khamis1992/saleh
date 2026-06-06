@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Plus, Wrench, AlertTriangle, Calendar, Package, Search } from 'lucide-react';
 import { PageHeader } from '@/components/shared/PageHeader';
 import { Card, CardContent } from '@/components/ui/card';
@@ -65,6 +66,7 @@ function loadAssets(): Asset[] {
 function saveAssets(assets: Asset[]) { localStorage.setItem('erp_assets', JSON.stringify(assets)); }
 
 export default function AssetRegistryPage() {
+  const navigate = useNavigate();
   const [assets, setAssets] = useState<Asset[]>([]);
   const [search, setSearch] = useState('');
   const [filterCategory, setFilterCategory] = useState('all');
@@ -242,8 +244,8 @@ export default function AssetRegistryPage() {
                           <span className={cn('text-[10px] px-1.5 py-0.5 rounded font-semibold', st.bg, st.text)}>{st.label}</span>
                         </td>
                         <td className="p-3">
-                          <Button size="sm" variant="outline" onClick={() => logService(a.id)} className="h-7 text-[11px]">
-                            <Wrench className="h-3 w-3" /> صيانة
+                          <Button size="sm" variant="outline" onClick={() => navigate(`/maintenance/requests?assetId=${a.id}&assetName=${encodeURIComponent(a.asset_name)}`)} className="h-7 text-[11px]">
+                            <Wrench className="h-3 w-3" /> طلب صيانة
                           </Button>
                         </td>
                       </tr>

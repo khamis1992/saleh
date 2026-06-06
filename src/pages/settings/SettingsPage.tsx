@@ -118,7 +118,7 @@ export default function SettingsPage() {
   };
 
   return (
-    <div className="min-h-full bg-[#F8FAFC]" dir="rtl">
+    <div className="min-h-full bg-[#f6f9fc]" dir="rtl">
 
       {/* ── Page Header ── */}
       <div className="flex items-center justify-between flex-wrap gap-3 mb-6">
@@ -129,7 +129,7 @@ export default function SettingsPage() {
         <div className="flex items-center gap-2">
           <Button
             onClick={handleSave}
-            className="gap-2 bg-[#3B82F6] hover:bg-blue-600 text-white text-sm h-9 rounded-lg px-4"
+            className="gap-2 bg-[#533afd] hover:bg-[#4434d4] text-white text-sm h-9 rounded-full px-4"
           >
             {saved ? <CheckCircle2 className="h-4 w-4" /> : <Save className="h-4 w-4" />}
             {saved ? 'تم الحفظ' : 'حفظ التغييرات'}

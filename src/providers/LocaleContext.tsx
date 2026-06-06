@@ -5,6 +5,7 @@ interface LocaleContextType {
   locale: Locale;
   setLocale: (locale: Locale) => void;
   t: TranslationDict;
+  tt: (key: string, fallback: string) => string;
   dir: 'rtl' | 'ltr';
 }
 
@@ -30,8 +31,22 @@ export function LocaleProvider({ children }: { children: React.ReactNode }) {
   const t = getTranslations(locale);
   const dir = locale === 'ar' ? 'rtl' : 'ltr';
 
+  // Dotted-key translation lookup with Arabic fallback
+  const tt = (key: string, fallback: string): string => {
+    const keys = key.split('.');
+    let current: any = t;
+    for (const k of keys) {
+      if (current && typeof current === 'object' && k in current) {
+        current = current[k];
+      } else {
+        return fallback;
+      }
+    }
+    return typeof current === 'string' ? current : fallback;
+  };
+
   return (
-    <LocaleContext.Provider value={{ locale, setLocale, t, dir }}>
+    <LocaleContext.Provider value={{ locale, setLocale, t, tt, dir }}>
       {children}
     </LocaleContext.Provider>
   );

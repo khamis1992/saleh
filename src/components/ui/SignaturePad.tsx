@@ -111,7 +111,7 @@ export function SignaturePad({ onSave, onClear, width = 500, height = 200 }: Sig
           size="sm"
           onClick={save}
           disabled={!hasSignature}
-          className="gap-1 text-xs h-8 rounded-lg bg-[#3B82F6] hover:bg-blue-600"
+          className="gap-1 text-xs h-8 rounded-lg bg-[#533afd] hover:bg-blue-600"
         >
           <Check className="h-3.5 w-3.5" />
           اعتماد التوقيع

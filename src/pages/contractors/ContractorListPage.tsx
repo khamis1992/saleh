@@ -13,8 +13,9 @@ import {
   AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent,
   AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
-import { Search, Filter, Eye, Pencil, Trash2, Star, Plus, HardHat, X } from 'lucide-react';
-import { contractorStore } from '@/services/stores';
+import { Search, Filter, Eye, Pencil, Trash2, Star, Plus, HardHat, X, Users, FileText, AlertTriangle } from 'lucide-react';
+import { contractorStore, contractorClaimStore } from '@/services/stores';
+import { KpiCard } from '@/components/shared/DesignSystem';
 
 export default function ContractorListPage() {
   const { t } = useLocale();
@@ -37,6 +38,10 @@ export default function ContractorListPage() {
     return true;
   });
 
+  // KPI computations
+  const claims = useMemo(() => contractorClaimStore.getAll(), [refresh]);
+  const pendingClaims = claims.filter((c: any) => c.status === 'submitted' || c.status === 'verified').length;
+
   const handleDelete = () => {
     if (!deleteTarget) return;
     contractorStore.remove(deleteTarget.id);
@@ -52,7 +57,15 @@ export default function ContractorListPage() {
   };
 
   return (
-    <div className="min-h-full bg-[#F8FAFC]" dir="rtl">
+    <div className="min-h-full bg-[#f6f9fc]" dir="rtl">
+      {/* KPI Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+        <KpiCard title={t.contractors.title} value={contractors.length} subtitle={`${filtered.length} مقاول`} icon={HardHat} moduleOverride="construction" />
+        <KpiCard title="مطالبات معلقة" value={pendingClaims} subtitle="بانتظار الاعتماد" icon={AlertTriangle} moduleOverride="construction" />
+        <KpiCard title="مقاولون معتمدون" value={contractors.filter((c: any) => c.status === 'active').length} subtitle="نشطون حالياً" icon={Users} moduleOverride="construction" />
+        <KpiCard title="إجمالي المطالبات" value={claims.length} subtitle="جميع المطالبات" icon={FileText} moduleOverride="construction" />
+      </div>
+
       {/* Page Header */}
       <div className="flex items-center justify-between flex-wrap gap-3 mb-6">
         <div>
@@ -63,7 +76,7 @@ export default function ContractorListPage() {
         </div>
         <Button
           onClick={() => navigate('/contractors/create')}
-          className="gap-2 bg-[#3B82F6] hover:bg-blue-600 text-white text-sm h-9 rounded-lg px-4 shadow-sm shadow-blue-500/20 transition-all hover:shadow-md hover:shadow-blue-500/30"
+          className="gap-2 bg-[#533afd] hover:bg-[#4434d4] text-white text-sm h-9 rounded-full px-4 shadow-sm shadow-blue-500/20 transition-all hover:shadow-md hover:shadow-blue-500/30"
         >
           <Plus className="h-4 w-4" />
           {t.contractors.create}

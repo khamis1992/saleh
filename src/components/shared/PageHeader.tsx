@@ -21,7 +21,7 @@ export function PageHeader({ title, description, children, createLabel, onCreate
       <div className="flex items-center gap-2">
         {children}
         {createLabel && (
-          <Button onClick={onCreate} disabled={createDisabled} className="bg-[#3B82F6] hover:bg-blue-600 text-white text-sm h-9 rounded-lg px-4">
+          <Button onClick={onCreate} disabled={createDisabled} className="bg-[#533afd] hover:bg-blue-600 text-white text-sm h-9 rounded-lg px-4">
             <Plus className="h-4 w-4 ml-2" />
             {createLabel}
           </Button>

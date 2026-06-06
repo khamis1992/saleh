@@ -498,7 +498,7 @@ export default function LeaseDetailPage() {
             </div>
             <Button
               onClick={() => setShowUpload(true)}
-              className="gap-2 bg-[#3B82F6] hover:bg-blue-600 text-white text-sm h-9 rounded-lg px-4 shadow-sm shadow-blue-500/20"
+              className="gap-2 bg-[#533afd] hover:bg-[#4434d4] text-white text-sm h-9 rounded-full px-4 shadow-sm shadow-blue-500/20"
             >
               <Upload className="h-4 w-4" />
               رفع مستند

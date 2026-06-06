@@ -4,12 +4,16 @@ import { cn } from '@/utils/cn';
 /**
  * Standard table design — matches the /lands reference.
  * Card container: white, rounded-xl, shadow-sm, gray-100 border, overflow-hidden.
+ * RTL-aware: forward dir to the <table> so columns reverse correctly in Arabic.
  */
-const Table = React.forwardRef<HTMLTableElement, React.HTMLAttributes<HTMLTableElement>>(
-  ({ className, ...props }, ref) => (
+interface TableProps extends React.HTMLAttributes<HTMLTableElement> {
+  dir?: 'rtl' | 'ltr';
+}
+const Table = React.forwardRef<HTMLTableElement, TableProps>(
+  ({ className, dir, ...props }, ref) => (
     <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-      <div className="overflow-x-auto">
-        <table ref={ref} className={cn('w-full caption-bottom text-sm', className)} {...props} />
+      <div className="overflow-x-auto" dir={dir}>
+        <table ref={ref} className={cn('w-full caption-bottom text-sm', className)} dir={dir} {...props} />
       </div>
     </div>
   )
@@ -49,7 +53,7 @@ const TableHead = React.forwardRef<HTMLTableCellElement, React.ThHTMLAttributes<
     <th
       ref={ref}
       className={cn(
-        'h-11 px-4 text-right align-middle whitespace-nowrap text-[12px] font-semibold text-gray-500 [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]',
+        'h-11 px-4 text-start align-middle whitespace-nowrap text-[12px] font-semibold text-gray-500 [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]',
         className
       )}
       {...props}

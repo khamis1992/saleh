@@ -9,8 +9,9 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
-import { Search, Filter, MoreHorizontal, Pencil, Trash2 } from 'lucide-react';
+import { Search, Filter, MoreHorizontal, Pencil, Trash2, Users, Clock, TrendingUp, AlertTriangle } from 'lucide-react';
 import { attendanceStore, employeeStore } from '@/services/stores';
+import { KpiCard } from '@/components/shared/DesignSystem';
 
 const statusLabels: Record<string, string> = {
   present: 'حاضر',
@@ -50,6 +51,12 @@ export default function AttendancePage() {
     }
     return true;
   });
+
+  // KPI computations
+  const presentCount = records.filter((r: any) => r.status === 'present').length;
+  const absentCount = records.filter((r: any) => r.status === 'absent').length;
+  const lateCount = records.filter((r: any) => r.status === 'late').length;
+  const attendanceRate = records.length > 0 ? Math.round((presentCount / records.length) * 100) : 0;
 
   const openCreate = () => {
     setEditId(null);
@@ -105,7 +112,15 @@ export default function AttendancePage() {
   };
 
   return (
-    <div className="min-h-full bg-[#F8FAFC]" dir="rtl">
+    <div className="min-h-full bg-[#f6f9fc]" dir="rtl">
+      {/* KPI Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+        <KpiCard title="سجلات الحضور" value={records.length} subtitle={`${filtered.length} سجل`} icon={Users} moduleOverride="hr" />
+        <KpiCard title="نسبة الحضور" value={`${attendanceRate}%`} subtitle="من إجمالي السجلات" icon={TrendingUp} moduleOverride="hr" />
+        <KpiCard title="متأخرون" value={lateCount} subtitle="تأخير عن الدوام" icon={Clock} trend={lateCount > 0 ? { value: lateCount } : undefined} moduleOverride="hr" />
+        <KpiCard title="غائبون" value={absentCount} subtitle="غياب غير مبرر" icon={AlertTriangle} moduleOverride="hr" />
+      </div>
+
       {/* Page Header */}
       <div className="flex items-center justify-between flex-wrap gap-3 mb-6">
         <div>

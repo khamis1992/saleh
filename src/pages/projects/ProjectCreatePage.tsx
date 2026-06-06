@@ -8,7 +8,7 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { ArrowRight, Save, HardHat } from 'lucide-react';
-import { projectStore, landStore } from '@/services/stores';
+import { projectStore, landStore, employeeStore } from '@/services/stores';
 import type { Project } from '@/types';
 
 export default function ProjectCreatePage() {
@@ -22,16 +22,18 @@ export default function ProjectCreatePage() {
     description: '', planned_start_date: '', planned_end_date: '',
     estimated_budget: 0, approved_budget: 0, actual_cost: 0,
     completion_percentage: 0, status: 'construction',
+    project_manager_id: '', engineer_id: '',
   });
 
   const lands = landStore.getAll();
+  const employees = employeeStore.getAll();
 
   useEffect(() => {
     if (id && isEdit) {
       const existing = projectStore.getById(id);
       if (existing) {
-        const { id: _, company_id: __, project_manager_id: ___, engineer_id: ____,
-          actual_start_date: _____, actual_end_date: ______, notes: _______, created_at: ________, updated_at: _________, ...rest } = existing;
+        const { id: _, company_id: __, actual_start_date: _____, actual_end_date: ______,
+          notes: _______, created_at: ________, updated_at: _________, ...rest } = existing;
         setForm(rest);
       }
     }
@@ -47,7 +49,8 @@ export default function ProjectCreatePage() {
       approved_budget: Number(form.approved_budget) || 0,
       actual_cost: Number(form.actual_cost) || 0,
       completion_percentage: Number(form.completion_percentage) || 0,
-      project_manager_id: '', engineer_id: '',
+      project_manager_id: form.project_manager_id || '',
+      engineer_id: form.engineer_id || '',
       actual_start_date: form.planned_start_date, actual_end_date: '',
     };
     if (isEdit && id) {
@@ -63,7 +66,7 @@ export default function ProjectCreatePage() {
   };
 
   return (
-    <div className="min-h-full bg-[#F8FAFC]" dir="rtl">
+    <div className="min-h-full bg-[#f6f9fc]" dir="rtl">
       <div className="flex items-center justify-between flex-wrap gap-3 mb-6">
         <div className="flex items-center gap-3">
           <Button variant="ghost" size="sm" onClick={() => navigate('/projects')} className="text-xs text-gray-500">
@@ -74,7 +77,7 @@ export default function ProjectCreatePage() {
             <p className="text-xs text-gray-500 mt-0.5">{isEdit ? 'تعديل بيانات المشروع' : 'إنشاء مشروع جديد'}</p>
           </div>
         </div>
-        <Button onClick={handleSave} className="gap-2 bg-[#3B82F6] hover:bg-blue-600 text-white text-sm h-9 rounded-lg px-4">
+        <Button onClick={handleSave} className="gap-2 bg-[#533afd] hover:bg-[#4434d4] text-white text-sm h-9 rounded-full px-4">
           <Save className="h-4 w-4" />{t.common.save}
         </Button>
       </div>
@@ -111,6 +114,24 @@ export default function ProjectCreatePage() {
                 </SelectContent>
               </Select>
             </div>
+            <div className="space-y-1.5"><Label className="text-xs font-medium text-gray-500">مدير المشروع</Label>
+              <Select value={form.project_manager_id || ''} onValueChange={v => update('project_manager_id', v)}>
+                <SelectTrigger className="h-9 text-sm rounded-lg border-gray-200"><SelectValue placeholder="اختر مدير المشروع" /></SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="">— غير محدد —</SelectItem>
+                  {employees.filter(e => e.status === 'active').map(e => <SelectItem key={e.id} value={e.id}>{e.full_name} — {e.job_title}</SelectItem>)}
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="space-y-1.5"><Label className="text-xs font-medium text-gray-500">المهندس المشرف</Label>
+              <Select value={form.engineer_id || ''} onValueChange={v => update('engineer_id', v)}>
+                <SelectTrigger className="h-9 text-sm rounded-lg border-gray-200"><SelectValue placeholder="اختر المهندس المشرف" /></SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="">— غير محدد —</SelectItem>
+                  {employees.filter(e => e.status === 'active').map(e => <SelectItem key={e.id} value={e.id}>{e.full_name} — {e.job_title}</SelectItem>)}
+                </SelectContent>
+              </Select>
+            </div>
             <div className="space-y-1.5"><Label className="text-xs font-medium text-gray-500">تاريخ البداية</Label><Input type="date" value={form.planned_start_date} onChange={e => update('planned_start_date', e.target.value)} className="h-9 text-sm rounded-lg border-gray-200" /></div>
             <div className="space-y-1.5"><Label className="text-xs font-medium text-gray-500">{t.projects.plannedEnd}</Label><Input type="date" value={form.planned_end_date} onChange={e => update('planned_end_date', e.target.value)} className="h-9 text-sm rounded-lg border-gray-200" /></div>
             <div className="space-y-1.5"><Label className="text-xs font-medium text-gray-500">{t.projects.budget}</Label><Input type="number" value={form.approved_budget || ''} onChange={e => update('approved_budget', e.target.value)} className="h-9 text-sm rounded-lg border-gray-200" /></div>
@@ -142,7 +163,7 @@ export default function ProjectCreatePage() {
         </div>
         <div className="flex items-center gap-3 justify-end">
           <Button variant="outline" onClick={() => navigate('/projects')} className="h-9 text-sm rounded-lg">{t.common.cancel}</Button>
-          <Button onClick={handleSave} className="gap-2 bg-[#3B82F6] hover:bg-blue-600 text-white text-sm h-9 rounded-lg px-4"><Save className="h-4 w-4" />{t.common.save}</Button>
+          <Button onClick={handleSave} className="gap-2 bg-[#533afd] hover:bg-[#4434d4] text-white text-sm h-9 rounded-full px-4"><Save className="h-4 w-4" />{t.common.save}</Button>
         </div>
       </div>
     </div>

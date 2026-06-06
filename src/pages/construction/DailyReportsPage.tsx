@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { useLocale } from '@/providers/LocaleContext';
 import { PageHeader } from '@/components/shared/PageHeader';
 import { StatusBadge } from '@/components/shared/StatusBadge';
@@ -11,7 +12,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
-import { Search, Filter, MoreHorizontal, Eye, Trash2, ClipboardList, Cloud, Users, AlertTriangle } from 'lucide-react';
+import { Search, Filter, MoreHorizontal, Eye, Trash2, ClipboardList, Cloud, Users, AlertTriangle, HardHat } from 'lucide-react';
 import { projectStore, getProjectName, dailyReportStore } from '@/services/stores';
 import { createStore } from '@/services/dataService';
 import type { ProjectDailyReport } from '@/types';
@@ -129,6 +130,9 @@ const emptyReportForm: ReportForm = {
 
 export default function DailyReportsPage() {
   const { t } = useLocale();
+  const [searchParams] = useSearchParams();
+  const projectId = searchParams.get('projectId') || '';
+  const projectName = searchParams.get('projectName') || '';
   const [refresh, setRefresh] = useState(0);
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
@@ -140,10 +144,11 @@ export default function DailyReportsPage() {
   const projects = useMemo(() => projectStore.getAll(), [refresh]);
 
   const filtered = useMemo(() => reports.filter((r) => {
+    if (projectId && r.project_id !== projectId) return false;
     if (statusFilter !== 'all' && r.approval_status !== statusFilter) return false;
     if (search && !r.report_number.includes(search) && !r.work_completed_today.includes(search)) return false;
     return true;
-  }), [reports, search, statusFilter]);
+  }), [reports, search, statusFilter, projectId]);
 
   function handleCreate() {
     setEditingId(null);
@@ -199,7 +204,14 @@ export default function DailyReportsPage() {
   }
 
   return (
-    <div className="min-h-full bg-[#F8FAFC]" dir="rtl">
+    <div className="min-h-full bg-[#f6f9fc]" dir="rtl">
+      {projectId && (
+        <div className="bg-indigo-50 border border-indigo-200 rounded-xl px-4 py-2.5 mb-4 flex items-center gap-2">
+          <HardHat className="h-4 w-4 text-indigo-600" />
+          <span className="text-xs text-indigo-700 font-medium">المشروع: {decodeURIComponent(projectName)}</span>
+          <span className="text-[10px] text-indigo-400">({projectId})</span>
+        </div>
+      )}
       <PageHeader
         title="التقارير اليومية"
         description="التقارير اليومية للمشاريع - سير العمل والملاحظات"

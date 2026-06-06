@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { useLocale } from '@/providers/LocaleContext';
 import { PageHeader } from '@/components/shared/PageHeader';
 import { StatusBadge } from '@/components/shared/StatusBadge';
@@ -11,7 +12,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
-import { Search, Filter, MoreHorizontal, Eye, Trash2, TrendingUp, ArrowUp, ArrowDown } from 'lucide-react';
+import { Search, Filter, MoreHorizontal, Eye, Trash2, TrendingUp, ArrowUp, ArrowDown, HardHat } from 'lucide-react';
 import { projectStore, getProjectName } from '@/services/stores';
 import { createStore } from '@/services/dataService';
 import type { ProjectProgressUpdate } from '@/types';
@@ -100,6 +101,9 @@ const emptyProgressForm: ProgressForm = {
 
 export default function ProgressUpdatesPage() {
   const { t } = useLocale();
+  const [searchParams] = useSearchParams();
+  const projectId = searchParams.get('projectId') || '';
+  const projectName = searchParams.get('projectName') || '';
   const [refresh, setRefresh] = useState(0);
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
@@ -111,10 +115,11 @@ export default function ProgressUpdatesPage() {
   const projects = useMemo(() => projectStore.getAll(), [refresh]);
 
   const filtered = useMemo(() => updates.filter((u) => {
+    if (projectId && u.project_id !== projectId) return false;
     if (statusFilter !== 'all' && u.approval_status !== statusFilter) return false;
     if (search && !u.description.includes(search) && !u.project_id.includes(search)) return false;
     return true;
-  }), [updates, search, statusFilter]);
+  }), [updates, search, statusFilter, projectId]);
 
   function getPhaseName(id: string) {
     return phaseNames[id] || id;
@@ -178,7 +183,14 @@ export default function ProgressUpdatesPage() {
   }
 
   return (
-    <div className="min-h-full bg-[#F8FAFC]" dir="rtl">
+    <div className="min-h-full bg-[#f6f9fc]" dir="rtl">
+      {projectId && (
+        <div className="bg-indigo-50 border border-indigo-200 rounded-xl px-4 py-2.5 mb-4 flex items-center gap-2">
+          <HardHat className="h-4 w-4 text-indigo-600" />
+          <span className="text-xs text-indigo-700 font-medium">المشروع: {decodeURIComponent(projectName)}</span>
+          <span className="text-[10px] text-indigo-400">({projectId})</span>
+        </div>
+      )}
       <PageHeader
         title="تحديثات تقدم المشاريع"
         description="متابعة تحديثات نسبة الإنجاز في المشاريع والمراحل"

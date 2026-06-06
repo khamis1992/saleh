@@ -137,7 +137,7 @@ export default function ChangeOrdersPage() {
   };
 
   return (
-    <div className="min-h-full bg-[#F8FAFC]" dir="rtl">
+    <div className="min-h-full bg-[#f6f9fc]" dir="rtl">
       <PageHeader
         title="أوامر التغيير"
         description={`إدارة أوامر التغيير في عقود المقاولين (${orders.length} أمر)`}

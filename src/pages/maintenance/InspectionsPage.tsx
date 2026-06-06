@@ -150,7 +150,7 @@ export default function InspectionsPage() {
   };
 
   return (
-    <div className="min-h-full bg-[#F8FAFC]" dir="rtl">
+    <div className="min-h-full bg-[#f6f9fc]" dir="rtl">
       <PageHeader
         title="سجل المعاينات"
         description={`سجل معاينات الوحدات (${inspections.length} معاينة)`}
