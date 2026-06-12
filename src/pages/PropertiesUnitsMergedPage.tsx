@@ -88,7 +88,7 @@ export default function PropertiesUnitsMergedPage() {
               <div>
                 <div className="text-xs text-[#64748d]">{t.units.statuses.available}</div>
                 <div className="text-2xl font-bold mt-1 text-emerald-600">{available}</div>
-                <div className="text-[12px] text-[#64748d]">{underMaint} {t.units.statuses.under_maintenance}</div>
+                <div className="text-xs text-[#64748d]">{underMaint} {t.units.statuses.under_maintenance}</div>
               </div>
               <div className="h-10 w-10 rounded-lg bg-emerald-50 flex items-center justify-center">
                 <MapPin className="h-5 w-5 text-emerald-600" />
@@ -122,11 +122,11 @@ export default function PropertiesUnitsMergedPage() {
                 <Table>
                   <TableHeader>
                     <TableRow>
-                      <TableHead className="text-[12px] font-bold text-[#64748d] h-9">{t.properties.name}</TableHead>
-                      <TableHead className="text-[12px] font-bold text-[#64748d] h-9">{t.properties.type}</TableHead>
-                      <TableHead className="text-[12px] font-bold text-[#64748d] h-9">{t.properties.address}</TableHead>
-                      <TableHead className="text-[12px] font-bold text-[#64748d] h-9">{t.units.title}</TableHead>
-                      <TableHead className="text-[12px] font-bold text-[#64748d] h-9">{t.common.status}</TableHead>
+                      <TableHead className="text-xs font-bold text-[#64748d] h-9">{t.properties.name}</TableHead>
+                      <TableHead className="text-xs font-bold text-[#64748d] h-9">{t.properties.type}</TableHead>
+                      <TableHead className="text-xs font-bold text-[#64748d] h-9">{t.properties.address}</TableHead>
+                      <TableHead className="text-xs font-bold text-[#64748d] h-9">{t.units.title}</TableHead>
+                      <TableHead className="text-xs font-bold text-[#64748d] h-9">{t.common.status}</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
@@ -137,13 +137,13 @@ export default function PropertiesUnitsMergedPage() {
                         <TableRow key={p.id} className="hover:bg-[rgba(83,58,253,0.06)]/30 cursor-pointer" onClick={() => navigate(`/properties/${p.id}`)}>
                           <TableCell>
                             <div className="font-medium text-sm">{p.property_name}</div>
-                            <div className="text-[12px] text-[#64748d]">{p.property_code}</div>
+                            <div className="text-xs text-[#64748d]">{p.property_code}</div>
                           </TableCell>
                           <TableCell className="text-sm text-[#64748d]">{p.property_type?.includes('residential') ? t.properties.types.residential_building : p.property_type?.includes('commercial') ? t.properties.types.commercial_building : p.property_type || '—'}</TableCell>
                           <TableCell className="text-sm text-[#64748d]">{(p as any).city || (p as any).district || '—'}</TableCell>
                           <TableCell className="text-sm">{pu.length} {t.units.title} · {rate}% {t.dashboard.occupancyRate}</TableCell>
                           <TableCell>
-                            <Badge className={`text-[12px] ${propStatus[p.status] || ''}`}>{propLabels[p.status] || p.status}</Badge>
+                            <Badge className={`text-xs ${propStatus[p.status] || ''}`}>{propLabels[p.status] || p.status}</Badge>
                           </TableCell>
                           <TableCell onClick={(e) => e.stopPropagation()}>
                             <div className="flex items-center gap-1">
@@ -169,11 +169,11 @@ export default function PropertiesUnitsMergedPage() {
                 <Table>
                   <TableHeader>
                     <TableRow>
-                      <TableHead className="text-[12px] font-bold text-[#64748d] h-9">{t.units.title}</TableHead>
-                      <TableHead className="text-[12px] font-bold text-[#64748d] h-9">{t.properties.name}</TableHead>
-                      <TableHead className="text-[12px] font-bold text-[#64748d] h-9">{t.units.type}</TableHead>
-                      <TableHead className="text-[12px] font-bold text-[#64748d] h-9">{t.units.rent}</TableHead>
-                      <TableHead className="text-[12px] font-bold text-[#64748d] h-9">{t.common.status}</TableHead>
+                      <TableHead className="text-xs font-bold text-[#64748d] h-9">{t.units.title}</TableHead>
+                      <TableHead className="text-xs font-bold text-[#64748d] h-9">{t.properties.name}</TableHead>
+                      <TableHead className="text-xs font-bold text-[#64748d] h-9">{t.units.type}</TableHead>
+                      <TableHead className="text-xs font-bold text-[#64748d] h-9">{t.units.rent}</TableHead>
+                      <TableHead className="text-xs font-bold text-[#64748d] h-9">{t.common.status}</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
@@ -188,7 +188,7 @@ export default function PropertiesUnitsMergedPage() {
                           <TableCell className="text-sm text-[#64748d]">{u.unit_type === 'apartment' ? t.units.types.apartment : u.unit_type === 'villa' ? t.units.types.villa : u.unit_type === 'shop' ? t.units.types.shop : u.unit_type || '—'}</TableCell>
                           <TableCell className="text-sm font-medium">{u.actual_rent || u.expected_monthly_rent || 0}</TableCell>
                           <TableCell>
-                            <Badge className={`text-[12px] ${unitStatus[u.status] || ''}`}>{unitLabels[u.status] || u.status}</Badge>
+                            <Badge className={`text-xs ${unitStatus[u.status] || ''}`}>{unitLabels[u.status] || u.status}</Badge>
                           </TableCell>
                           <TableCell onClick={(e) => e.stopPropagation()}>
                             <div className="flex items-center gap-1">

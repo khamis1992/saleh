@@ -61,7 +61,7 @@ export default function CollectionsPage() {
               <div>
                 <div className="text-xs text-[#64748d]">مستحقات معلقة</div>
                 <div className="text-2xl font-bold mt-1 text-[#ea2261]">{fmt(totalReceivables)}</div>
-                <div className="text-[12px] text-[#ea2261] mt-0.5">{overdue.length} فاتورة</div>
+                <div className="text-xs text-[#ea2261] mt-0.5">{overdue.length} فاتورة</div>
               </div>
               <div className="h-10 w-10 rounded-lg bg-red-50 flex items-center justify-center">
                 <AlertTriangle className="h-5 w-5 text-[#ea2261]" />
@@ -88,7 +88,7 @@ export default function CollectionsPage() {
               <div>
                 <div className="text-xs text-[#64748d]">إيصالات اليوم</div>
                 <div className="text-2xl font-bold mt-1 text-[#533afd]">{todayReceipts.length}</div>
-                <div className="text-[12px] text-[#533afd] mt-0.5">
+                <div className="text-xs text-[#533afd] mt-0.5">
                   {fmt(todayReceipts.reduce((s, r) => s + r.amount, 0))}
                 </div>
               </div>
@@ -129,7 +129,7 @@ export default function CollectionsPage() {
                 <TabsTrigger value="invoices" className="h-9 text-xs data-[state=active]:bg-[rgba(83,58,253,0.06)] data-[state=active]:text-[#533afd] rounded-lg px-3">{tt('rentCollection.invoices', 'الفواتير')}</TabsTrigger>
                 <TabsTrigger value="receipts" className="h-9 text-xs data-[state=active]:bg-[rgba(83,58,253,0.06)] data-[state=active]:text-[#533afd] rounded-lg px-3">الإيصالات</TabsTrigger>
                 <TabsTrigger value="overdue" className="h-9 text-xs data-[state=active]:bg-red-50 data-[state=active]:text-[#ea2261] rounded-lg px-3">
-                  المتأخرات {overdue.length > 0 && <span className="mr-1 bg-[#ea2261] text-white text-[12px] px-1.5 py-0.5 rounded-full">{overdue.length}</span>}
+                  المتأخرات {overdue.length > 0 && <span className="mr-1 bg-[#ea2261] text-white text-xs px-1.5 py-0.5 rounded-full">{overdue.length}</span>}
                 </TabsTrigger>
               </TabsList>
             </div>
@@ -140,13 +140,13 @@ export default function CollectionsPage() {
                 <Table>
                   <TableHeader>
                     <TableRow>
-                      <TableHead className="text-[12px] font-bold text-[#64748d] h-9">{tt('rentCollection.invoiceNumber', 'رقم الفاتورة')}</TableHead>
-                      <TableHead className="text-[12px] font-bold text-[#64748d] h-9">{tt('leases.tenant', 'المستأجر')}</TableHead>
-                      <TableHead className="text-[12px] font-bold text-[#64748d] h-9">{tt('common.amount', 'المبلغ')}</TableHead>
-                      <TableHead className="text-[12px] font-bold text-[#64748d] h-9">{tt('budgets.remaining', 'المتبقي')}</TableHead>
-                      <TableHead className="text-[12px] font-bold text-[#64748d] h-9">{tt('rentCollection.dueDate', 'تاريخ الاستحقاق')}</TableHead>
-                      <TableHead className="text-[12px] font-bold text-[#64748d] h-9">{tt('legal.status', 'الحالة')}</TableHead>
-                      <TableHead className="text-[12px] font-bold text-[#64748d] h-9 w-[80px]"></TableHead>
+                      <TableHead className="text-xs font-bold text-[#64748d] h-9">{tt('rentCollection.invoiceNumber', 'رقم الفاتورة')}</TableHead>
+                      <TableHead className="text-xs font-bold text-[#64748d] h-9">{tt('leases.tenant', 'المستأجر')}</TableHead>
+                      <TableHead className="text-xs font-bold text-[#64748d] h-9">{tt('common.amount', 'المبلغ')}</TableHead>
+                      <TableHead className="text-xs font-bold text-[#64748d] h-9">{tt('budgets.remaining', 'المتبقي')}</TableHead>
+                      <TableHead className="text-xs font-bold text-[#64748d] h-9">{tt('rentCollection.dueDate', 'تاريخ الاستحقاق')}</TableHead>
+                      <TableHead className="text-xs font-bold text-[#64748d] h-9">{tt('legal.status', 'الحالة')}</TableHead>
+                      <TableHead className="text-xs font-bold text-[#64748d] h-9 w-[80px]"></TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
@@ -160,7 +160,7 @@ export default function CollectionsPage() {
                         </TableCell>
                         <TableCell className="text-sm text-[#64748d]">{inv.due_date}</TableCell>
                         <TableCell>
-                          <Badge className={`text-[12px] border ${statusColors[inv.status] || ''}`}>
+                          <Badge className={`text-xs border ${statusColors[inv.status] || ''}`}>
                             {statusLabels[inv.status] || inv.status}
                           </Badge>
                         </TableCell>
@@ -182,11 +182,11 @@ export default function CollectionsPage() {
                 <Table>
                   <TableHeader>
                     <TableRow>
-                      <TableHead className="text-[12px] font-bold text-[#64748d] h-9">رقم الإيصال</TableHead>
-                      <TableHead className="text-[12px] font-bold text-[#64748d] h-9">{tt('leases.tenant', 'المستأجر')}</TableHead>
-                      <TableHead className="text-[12px] font-bold text-[#64748d] h-9">{tt('common.amount', 'المبلغ')}</TableHead>
-                      <TableHead className="text-[12px] font-bold text-[#64748d] h-9">الطريقة</TableHead>
-                      <TableHead className="text-[12px] font-bold text-[#64748d] h-9">{tt('common.date', 'التاريخ')}</TableHead>
+                      <TableHead className="text-xs font-bold text-[#64748d] h-9">رقم الإيصال</TableHead>
+                      <TableHead className="text-xs font-bold text-[#64748d] h-9">{tt('leases.tenant', 'المستأجر')}</TableHead>
+                      <TableHead className="text-xs font-bold text-[#64748d] h-9">{tt('common.amount', 'المبلغ')}</TableHead>
+                      <TableHead className="text-xs font-bold text-[#64748d] h-9">الطريقة</TableHead>
+                      <TableHead className="text-xs font-bold text-[#64748d] h-9">{tt('common.date', 'التاريخ')}</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
@@ -220,12 +220,12 @@ export default function CollectionsPage() {
                   <Table>
                     <TableHeader>
                       <TableRow>
-                        <TableHead className="text-[12px] font-bold text-[#64748d] h-9">{tt('leases.tenant', 'المستأجر')}</TableHead>
-                        <TableHead className="text-[12px] font-bold text-[#64748d] h-9">{tt('rentCollection.invoiceNumber', 'رقم الفاتورة')}</TableHead>
-                        <TableHead className="text-[12px] font-bold text-[#64748d] h-9">المبلغ المستحق</TableHead>
-                        <TableHead className="text-[12px] font-bold text-[#64748d] h-9">{tt('rentCollection.dueDate', 'تاريخ الاستحقاق')}</TableHead>
-                        <TableHead className="text-[12px] font-bold text-[#64748d] h-9">أيام التأخير</TableHead>
-                        <TableHead className="text-[12px] font-bold text-[#64748d] h-9 w-[120px]"></TableHead>
+                        <TableHead className="text-xs font-bold text-[#64748d] h-9">{tt('leases.tenant', 'المستأجر')}</TableHead>
+                        <TableHead className="text-xs font-bold text-[#64748d] h-9">{tt('rentCollection.invoiceNumber', 'رقم الفاتورة')}</TableHead>
+                        <TableHead className="text-xs font-bold text-[#64748d] h-9">المبلغ المستحق</TableHead>
+                        <TableHead className="text-xs font-bold text-[#64748d] h-9">{tt('rentCollection.dueDate', 'تاريخ الاستحقاق')}</TableHead>
+                        <TableHead className="text-xs font-bold text-[#64748d] h-9">أيام التأخير</TableHead>
+                        <TableHead className="text-xs font-bold text-[#64748d] h-9 w-[120px]"></TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
@@ -238,12 +238,12 @@ export default function CollectionsPage() {
                             <TableCell className="text-sm font-bold text-[#ea2261]">{fmt(inv.balance || inv.total)}</TableCell>
                             <TableCell className="text-sm text-[#ea2261]">{inv.due_date}</TableCell>
                             <TableCell>
-                              <Badge className={`text-[12px] ${daysLate > 60 ? 'bg-[#ea2261] text-white' : daysLate > 30 ? 'bg-red-100 text-[#ea2261]' : 'bg-amber-100 text-[#9b6829]'}`}>
+                              <Badge className={`text-xs ${daysLate > 60 ? 'bg-[#ea2261] text-white' : daysLate > 30 ? 'bg-red-100 text-[#ea2261]' : 'bg-amber-100 text-[#9b6829]'}`}>
                                 {daysLate} يوم
                               </Badge>
                             </TableCell>
                             <TableCell>
-                              <Button size="sm" className="h-7 text-[12px] bg-[#533afd] hover:bg-[#533afd]/90 text-white rounded-lg" onClick={() => navigate('/wizards/payment')}>
+                              <Button size="sm" className="h-7 text-xs bg-[#533afd] hover:bg-[#533afd]/90 text-white rounded-lg" onClick={() => navigate('/wizards/payment')}>
                                 سجل دفعة
                               </Button>
                             </TableCell>

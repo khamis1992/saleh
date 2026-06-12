@@ -252,7 +252,7 @@ export default function MyWorkPage() {
                 <div className={cn('h-9 w-9 rounded-lg bg-gradient-to-br flex items-center justify-center', a.gradient)}>
                   <a.icon className="h-4.5 w-4.5 text-white" />
                 </div>
-                <span className="text-[12px] font-semibold text-[#273951] text-center leading-tight">{a.label}</span>
+                <span className="text-xs font-semibold text-[#273951] text-center leading-tight">{a.label}</span>
               </button>
             ))}
           </div>
@@ -287,7 +287,7 @@ export default function MyWorkPage() {
                       {urgentInGroup > 0 && (
                         <Badge className="bg-red-50 text-[#ea2261] border-0 h-5 text-[11px]">{urgentInGroup}</Badge>
                       )}
-                      <span className="ml-auto text-[12px] text-[#64748d]">{groupTasks.length}</span>
+                      <span className="ml-auto text-xs text-[#64748d]">{groupTasks.length}</span>
                       {isCollapsed ? <ChevronDown className="h-3.5 w-3.5 text-[#64748d]" /> : <ChevronUp className="h-3.5 w-3.5 text-[#64748d]" />}
                     </button>
                     {!isCollapsed && groupTasks.slice(0, 3).map(task => {
@@ -300,14 +300,14 @@ export default function MyWorkPage() {
                         >
                           <span className={cn('h-1.5 w-1.5 rounded-full shrink-0', tcfg.stripe)} />
                           <span className="flex-1 truncate">{task.title}</span>
-                          <span className={cn('text-[12px] font-medium shrink-0', tcfg.accent)}>{tcfg.label}</span>
+                          <span className={cn('text-xs font-medium shrink-0', tcfg.accent)}>{tcfg.label}</span>
                         </div>
                       );
                     })}
                     {!isCollapsed && groupTasks.length > 3 && (
                       <button
                         onClick={() => navigate(CATEGORY_LINK[cat] || '/dashboard')}
-                        className="w-full text-center py-1.5 text-[12px] font-medium text-[#533afd] hover:bg-[rgba(83,58,253,0.06)] transition-colors flex items-center justify-center gap-1"
+                        className="w-full text-center py-1.5 text-xs font-medium text-[#533afd] hover:bg-[rgba(83,58,253,0.06)] transition-colors flex items-center justify-center gap-1"
                       >
                         <span>+{groupTasks.length - 3} عنصر آخر</span>
                         <ArrowRight className="h-3 w-3" />
@@ -348,7 +348,7 @@ export default function MyWorkPage() {
                     <div className={cn('w-1 h-8 rounded-full', tcfg.stripe)} />
                     <div className="flex-1 min-w-0">
                       <p className="text-[13px] font-semibold text-[#273951] truncate">{task.title}</p>
-                      <p className="text-[12px] text-[#64748d]">{task.module}</p>
+                      <p className="text-xs text-[#64748d]">{task.module}</p>
                     </div>
                   </div>
                 );
@@ -382,7 +382,7 @@ export default function MyWorkPage() {
                     <div className={cn('w-1 h-8 rounded-full', 'bg-gray-300')} />
                     <div className="flex-1 min-w-0">
                       <p className="text-[13px] font-medium text-[#273951] truncate">{task.title}</p>
-                      <p className="text-[12px] text-[#64748d]">{task.module}</p>
+                      <p className="text-xs text-[#64748d]">{task.module}</p>
                     </div>
                   </div>
                 );

@@ -72,23 +72,23 @@ export default function QueuesMergedPage() {
               <TabsList className="h-9 bg-transparent gap-0 p-0 flex-nowrap">
                 <TabsTrigger value="approvals" className="h-9 text-xs data-[state=active]:bg-[rgba(83,58,253,0.06)] data-[state=active]:text-[#533afd] rounded-lg px-3 whitespace-nowrap">
                   <Shield className="h-3.5 w-3.5 ml-1" /> اعتمادات
-                  {pendingApprovals.length > 0 && <span className="mr-1 bg-[#9b6829] text-white text-[12px] px-1.5 py-0.5 rounded-full">{pendingApprovals.length}</span>}
+                  {pendingApprovals.length > 0 && <span className="mr-1 bg-[#9b6829] text-white text-xs px-1.5 py-0.5 rounded-full">{pendingApprovals.length}</span>}
                 </TabsTrigger>
                 <TabsTrigger value="collection" className="h-9 text-xs data-[state=active]:bg-[rgba(83,58,253,0.06)] data-[state=active]:text-[#533afd] rounded-lg px-3 whitespace-nowrap">
                   <DollarSign className="h-3.5 w-3.5 ml-1" /> تحصيل
-                  {overdueInvoices.length > 0 && <span className="mr-1 bg-[#ea2261] text-white text-[12px] px-1.5 py-0.5 rounded-full">{overdueInvoices.length}</span>}
+                  {overdueInvoices.length > 0 && <span className="mr-1 bg-[#ea2261] text-white text-xs px-1.5 py-0.5 rounded-full">{overdueInvoices.length}</span>}
                 </TabsTrigger>
                 <TabsTrigger value="maintenance" className="h-9 text-xs data-[state=active]:bg-[rgba(83,58,253,0.06)] data-[state=active]:text-[#533afd] rounded-lg px-3 whitespace-nowrap">
                   <Wrench className="h-3.5 w-3.5 ml-1" /> صيانة
-                  {newRequests.length > 0 && <span className="mr-1 bg-[#9b6829] text-white text-[12px] px-1.5 py-0.5 rounded-full">{newRequests.length}</span>}
+                  {newRequests.length > 0 && <span className="mr-1 bg-[#9b6829] text-white text-xs px-1.5 py-0.5 rounded-full">{newRequests.length}</span>}
                 </TabsTrigger>
                 <TabsTrigger value="construction" className="h-9 text-xs data-[state=active]:bg-[rgba(83,58,253,0.06)] data-[state=active]:text-[#533afd] rounded-lg px-3 whitespace-nowrap">
                   <HardHat className="h-3.5 w-3.5 ml-1" /> إنشاءات
-                  {delayedPhases.length > 0 && <span className="mr-1 bg-[#ea2261] text-white text-[12px] px-1.5 py-0.5 rounded-full">{delayedPhases.length}</span>}
+                  {delayedPhases.length > 0 && <span className="mr-1 bg-[#ea2261] text-white text-xs px-1.5 py-0.5 rounded-full">{delayedPhases.length}</span>}
                 </TabsTrigger>
                 <TabsTrigger value="procurement" className="h-9 text-xs data-[state=active]:bg-[rgba(83,58,253,0.06)] data-[state=active]:text-[#533afd] rounded-lg px-3 whitespace-nowrap">
                   <ShoppingCart className="h-3.5 w-3.5 ml-1" /> مشتريات
-                  {pendingPRs.length > 0 && <span className="mr-1 bg-[#9b6829] text-white text-[12px] px-1.5 py-0.5 rounded-full">{pendingPRs.length}</span>}
+                  {pendingPRs.length > 0 && <span className="mr-1 bg-[#9b6829] text-white text-xs px-1.5 py-0.5 rounded-full">{pendingPRs.length}</span>}
                 </TabsTrigger>
               </TabsList>
             </div>
@@ -102,22 +102,22 @@ export default function QueuesMergedPage() {
                   <Table>
                     <TableHeader>
                       <TableRow>
-                        <TableHead className="text-[12px] font-bold text-[#64748d] h-9">{tt('equipment.equipmentType', 'النوع')}</TableHead>
-                        <TableHead className="text-[12px] font-bold text-[#64748d] h-9">{tt('properties.address', 'العنوان')}</TableHead>
-                        <TableHead className="text-[12px] font-bold text-[#64748d] h-9">{tt('common.amount', 'المبلغ')}</TableHead>
-                        <TableHead className="text-[12px] font-bold text-[#64748d] h-9 w-[120px]"></TableHead>
+                        <TableHead className="text-xs font-bold text-[#64748d] h-9">{tt('equipment.equipmentType', 'النوع')}</TableHead>
+                        <TableHead className="text-xs font-bold text-[#64748d] h-9">{tt('properties.address', 'العنوان')}</TableHead>
+                        <TableHead className="text-xs font-bold text-[#64748d] h-9">{tt('common.amount', 'المبلغ')}</TableHead>
+                        <TableHead className="text-xs font-bold text-[#64748d] h-9 w-[120px]"></TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
                       {pendingApprovals.map((a, i) => (
                         <TableRow key={i} className="hover:bg-[rgba(83,58,253,0.06)]/30">
-                          <TableCell><Badge className="text-[12px] bg-amber-50 text-[#9b6829]">{a.type}</Badge></TableCell>
+                          <TableCell><Badge className="text-xs bg-amber-50 text-[#9b6829]">{a.type}</Badge></TableCell>
                           <TableCell className="text-sm">{a.title}</TableCell>
                           <TableCell className="text-sm font-medium">{fmt(a.amount)}</TableCell>
                           <TableCell>
                             <div className="flex gap-1">
-                              <Button size="sm" className="h-7 text-[12px] bg-emerald-600 hover:bg-emerald-700 text-white">اعتماد</Button>
-                              <Button size="sm" variant="outline" className="h-7 text-[12px] text-[#ea2261]">رفض</Button>
+                              <Button size="sm" className="h-7 text-xs bg-emerald-600 hover:bg-emerald-700 text-white">اعتماد</Button>
+                              <Button size="sm" variant="outline" className="h-7 text-xs text-[#ea2261]">رفض</Button>
                             </div>
                           </TableCell>
                         </TableRow>
@@ -138,7 +138,7 @@ export default function QueuesMergedPage() {
                       {dueToday.map(inv => (
                         <div key={inv.id} className="border border-red-200 bg-red-50 rounded-lg p-3 cursor-pointer hover:bg-red-100" onClick={() => navigate('/collections')}>
                           <div className="text-xs text-[#ea2261] font-bold">{fmt(inv.balance || inv.total)}</div>
-                          <div className="text-[12px] text-red-500 mt-0.5">{inv.invoice_number}</div>
+                          <div className="text-xs text-red-500 mt-0.5">{inv.invoice_number}</div>
                         </div>
                       ))}
                     </div>
@@ -151,7 +151,7 @@ export default function QueuesMergedPage() {
                       {overdueInvoices.slice(0, 6).map(inv => (
                         <div key={inv.id} className="border border-red-200 bg-red-50 rounded-lg p-3 cursor-pointer hover:bg-red-100" onClick={() => navigate('/collections')}>
                           <div className="text-xs text-[#ea2261] font-bold">{fmt(inv.balance || inv.total)}</div>
-                          <div className="text-[12px] text-red-500 mt-0.5">{inv.invoice_number} — {inv.due_date}</div>
+                          <div className="text-xs text-red-500 mt-0.5">{inv.invoice_number} — {inv.due_date}</div>
                         </div>
                       ))}
                     </div>
@@ -169,12 +169,12 @@ export default function QueuesMergedPage() {
                 <div className="bg-red-50 border border-red-200 rounded-xl p-4">
                   <div className="text-xs text-[#ea2261] font-bold mb-2">{tt('maintenance.priorities.emergency', 'طارئة')}</div>
                   <div className="text-2xl font-bold text-[#ea2261]">{emergency.length}</div>
-                  {emergency.length > 0 && <Button size="sm" className="mt-2 h-7 text-[12px]" onClick={() => navigate('/maintenance/requests')}>عرض</Button>}
+                  {emergency.length > 0 && <Button size="sm" className="mt-2 h-7 text-xs" onClick={() => navigate('/maintenance/requests')}>عرض</Button>}
                 </div>
                 <div className="bg-amber-50 border border-amber-200 rounded-xl p-4">
                   <div className="text-xs text-[#9b6829] font-bold mb-2">جديدة</div>
                   <div className="text-2xl font-bold text-[#9b6829]">{newRequests.length}</div>
-                  {newRequests.length > 0 && <Button size="sm" className="mt-2 h-7 text-[12px]" onClick={() => navigate('/maintenance/requests')}>عرض</Button>}
+                  {newRequests.length > 0 && <Button size="sm" className="mt-2 h-7 text-xs" onClick={() => navigate('/maintenance/requests')}>عرض</Button>}
                 </div>
                 <div className="bg-[rgba(83,58,253,0.06)] border border-blue-200 rounded-xl p-4">
                   <div className="text-xs text-[#533afd] font-bold mb-2">{tt('maintenance.statuses.in_progress', 'قيد التنفيذ')}</div>

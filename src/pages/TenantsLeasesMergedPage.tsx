@@ -40,19 +40,19 @@ export default function TenantsLeasesMergedPage() {
       {/* KPI cards */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
         <Card><CardContent className="p-3">
-          <div className="text-[12px] text-[#64748d]">{t.tenants.title}</div>
+          <div className="text-xs text-[#64748d]">{t.tenants.title}</div>
           <div className="text-xl font-bold">{tenants.length}</div>
         </CardContent></Card>
         <Card><CardContent className="p-3">
-          <div className="text-[12px] text-[#64748d]">{t.leases.title}</div>
+          <div className="text-xs text-[#64748d]">{t.leases.title}</div>
           <div className="text-xl font-bold">{leases.length}</div>
         </CardContent></Card>
         <Card><CardContent className="p-3">
-          <div className="text-[12px] text-[#64748d]">{tt('leases.active_leases','عقود نشطة')}</div>
+          <div className="text-xs text-[#64748d]">{tt('leases.active_leases','عقود نشطة')}</div>
           <div className="text-xl font-bold text-emerald-600">{activeLeases.length}</div>
         </CardContent></Card>
         <Card><CardContent className="p-3">
-          <div className="text-[12px] text-[#64748d]">{tt('leases.expiring_soon','تنتهي قريباً')}</div>
+          <div className="text-xs text-[#64748d]">{tt('leases.expiring_soon','تنتهي قريباً')}</div>
           <div className="text-xl font-bold text-amber-500">{expiringSoon.length}</div>
         </CardContent></Card>
       </div>
@@ -82,10 +82,10 @@ export default function TenantsLeasesMergedPage() {
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead className="text-[12px] font-bold text-[#64748d] h-9">{t.tenants.name}</TableHead>
-                    <TableHead className="text-[12px] font-bold text-[#64748d] h-9">{t.tenants.type}</TableHead>
-                    <TableHead className="text-[12px] font-bold text-[#64748d] h-9">{tt('hr.phone', 'رقم الجوال')}</TableHead>
-                    <TableHead className="text-[12px] font-bold text-[#64748d] h-9">البريد</TableHead>
+                    <TableHead className="text-xs font-bold text-[#64748d] h-9">{t.tenants.name}</TableHead>
+                    <TableHead className="text-xs font-bold text-[#64748d] h-9">{t.tenants.type}</TableHead>
+                    <TableHead className="text-xs font-bold text-[#64748d] h-9">{tt('hr.phone', 'رقم الجوال')}</TableHead>
+                    <TableHead className="text-xs font-bold text-[#64748d] h-9">البريد</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -121,12 +121,12 @@ export default function TenantsLeasesMergedPage() {
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead className="text-[12px] font-bold text-[#64748d] h-9">العقد</TableHead>
-                    <TableHead className="text-[12px] font-bold text-[#64748d] h-9">{tt('leases.tenant', 'المستأجر')}</TableHead>
-                    <TableHead className="text-[12px] font-bold text-[#64748d] h-9">{tt('system.module', 'الوحدة')}</TableHead>
-                    <TableHead className="text-[12px] font-bold text-[#64748d] h-9">{tt('units.rent', 'الإيجار')}</TableHead>
-                    <TableHead className="text-[12px] font-bold text-[#64748d] h-9">النهاية</TableHead>
-                    <TableHead className="text-[12px] font-bold text-[#64748d] h-9">{tt('legal.status', 'الحالة')}</TableHead>
+                    <TableHead className="text-xs font-bold text-[#64748d] h-9">العقد</TableHead>
+                    <TableHead className="text-xs font-bold text-[#64748d] h-9">{tt('leases.tenant', 'المستأجر')}</TableHead>
+                    <TableHead className="text-xs font-bold text-[#64748d] h-9">{tt('system.module', 'الوحدة')}</TableHead>
+                    <TableHead className="text-xs font-bold text-[#64748d] h-9">{tt('units.rent', 'الإيجار')}</TableHead>
+                    <TableHead className="text-xs font-bold text-[#64748d] h-9">النهاية</TableHead>
+                    <TableHead className="text-xs font-bold text-[#64748d] h-9">{tt('legal.status', 'الحالة')}</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -140,7 +140,7 @@ export default function TenantsLeasesMergedPage() {
                         <TableCell className="text-sm text-[#64748d]">{getUnitCode(l.unit_id)}</TableCell>
                         <TableCell className="text-sm font-bold">{fmt(l.rent_amount)}</TableCell>
                         <TableCell className="text-sm text-[#64748d]">{l.end_date}</TableCell>
-                        <TableCell><Badge className={`text-[12px] ${st}`}>{leaseLabels[l.status] || l.status}</Badge></TableCell>
+                        <TableCell><Badge className={`text-xs ${st}`}>{leaseLabels[l.status] || l.status}</Badge></TableCell>
                       </TableRow>
                     );
                   })}

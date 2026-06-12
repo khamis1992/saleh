@@ -459,7 +459,7 @@ export default function LeasingMergedPage() {
                             </TableCell>
                             {/* كود الوحدة */}
                             <TableCell>
-                              <span className="font-mono text-[12px] text-[#3B82F6] font-semibold">{u.unit_code}</span>
+                              <span className="font-mono text-xs text-[#3B82F6] font-semibold">{u.unit_code}</span>
                             </TableCell>
                             {/* الإجراءات */}
                             <TableCell onClick={e => e.stopPropagation()}>
@@ -627,7 +627,7 @@ export default function LeasingMergedPage() {
                     </div>
                     {/* Footer link */}
                     <div className="px-5 py-3 border-t border-gray-50">
-                      <button onClick={() => navigate('/tenants')} className="text-[12px] text-[#533afd] hover:text-[#3d2bb3] font-semibold flex items-center gap-1">
+                      <button onClick={() => navigate('/tenants')} className="text-xs text-[#533afd] hover:text-[#3d2bb3] font-semibold flex items-center gap-1">
                         عرض جميع المستأجرين
                         <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
                       </button>
@@ -759,7 +759,7 @@ export default function LeasingMergedPage() {
                     </div>
                     {/* Footer link */}
                     <div className="px-5 py-3 border-t border-gray-50">
-                      <button onClick={() => navigate('/leases')} className="text-[12px] text-[#533afd] hover:text-[#3d2bb3] font-semibold flex items-center gap-1">
+                      <button onClick={() => navigate('/leases')} className="text-xs text-[#533afd] hover:text-[#3d2bb3] font-semibold flex items-center gap-1">
                         عرض جميع العقود
                         <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
                       </button>
@@ -841,7 +841,7 @@ export default function LeasingMergedPage() {
                     </div>
                     <div className="min-w-0">
                       <div className="text-[11px] text-[#64748d]">إجمالي الفواتير</div>
-                      <div className="text-[15px] font-bold text-[#1E293B]">{fmt(totalInvoiced)}</div>
+                      <div className="text-sm font-bold text-[#1E293B]">{fmt(totalInvoiced)}</div>
                       <div className="text-[10px] text-[#94a3b8]">{invoices.length} فاتورة</div>
                     </div>
                   </div>
@@ -852,7 +852,7 @@ export default function LeasingMergedPage() {
                     </div>
                     <div className="min-w-0">
                       <div className="text-[11px] text-[#64748d]">المبالغ المستحقة</div>
-                      <div className="text-[15px] font-bold text-[#1E293B]">{fmt(totalDue)}</div>
+                      <div className="text-sm font-bold text-[#1E293B]">{fmt(totalDue)}</div>
                       <div className="text-[10px] text-[#94a3b8]">{invoices.filter(i => i.status !== 'paid' && i.status !== 'cancelled').length} فاتورة</div>
                     </div>
                   </div>
@@ -863,7 +863,7 @@ export default function LeasingMergedPage() {
                     </div>
                     <div className="min-w-0">
                       <div className="text-[11px] text-[#64748d]">المتأخرات</div>
-                      <div className="text-[15px] font-bold text-red-600">{fmt(totalOverdue)}</div>
+                      <div className="text-sm font-bold text-red-600">{fmt(totalOverdue)}</div>
                       <div className="text-[10px] text-[#94a3b8]">{overdueInvs.length} مستأجر متأخر</div>
                     </div>
                   </div>
@@ -874,7 +874,7 @@ export default function LeasingMergedPage() {
                     </div>
                     <div className="min-w-0">
                       <div className="text-[11px] text-[#64748d]">المستحق اليوم</div>
-                      <div className="text-[15px] font-bold text-[#1E293B]">{fmt(dueToday.reduce((s, i) => s + (i.balance || 0), 0))}</div>
+                      <div className="text-sm font-bold text-[#1E293B]">{fmt(dueToday.reduce((s, i) => s + (i.balance || 0), 0))}</div>
                       <div className="text-[10px] text-[#94a3b8]">{dueToday.length} فواتير</div>
                     </div>
                   </div>
@@ -885,7 +885,7 @@ export default function LeasingMergedPage() {
                     </div>
                     <div className="min-w-0">
                       <div className="text-[11px] text-[#64748d]">تم التحصيل هذا الشهر</div>
-                      <div className="text-[15px] font-bold text-emerald-600">{fmt(collected)}</div>
+                      <div className="text-sm font-bold text-emerald-600">{fmt(collected)}</div>
                       <div className="text-[10px] text-[#94a3b8]">نسبة التحصيل {collectionRate}%</div>
                     </div>
                   </div>
@@ -900,7 +900,7 @@ export default function LeasingMergedPage() {
                         <Plus className="h-4 w-4 text-emerald-600" />
                       </div>
                       <div className="min-w-0">
-                        <div className="text-[12px] font-semibold text-[#1E293B]">تسجيل دفعة</div>
+                        <div className="text-xs font-semibold text-[#1E293B]">تسجيل دفعة</div>
                         <div className="text-[10px] text-[#94a3b8]">إضافة دفعة لمستأجر</div>
                       </div>
                     </button>
@@ -909,7 +909,7 @@ export default function LeasingMergedPage() {
                         <MessageSquare className="h-4 w-4 text-blue-600" />
                       </div>
                       <div className="min-w-0">
-                        <div className="text-[12px] font-semibold text-[#1E293B]">إرسال تذكير</div>
+                        <div className="text-xs font-semibold text-[#1E293B]">إرسال تذكير</div>
                         <div className="text-[10px] text-[#94a3b8]">إرسال تذكير دفع</div>
                       </div>
                     </button>
@@ -918,7 +918,7 @@ export default function LeasingMergedPage() {
                         <FileText className="h-4 w-4 text-[#533afd]" />
                       </div>
                       <div className="min-w-0">
-                        <div className="text-[12px] font-semibold text-[#1E293B]">إنشاء فاتورة</div>
+                        <div className="text-xs font-semibold text-[#1E293B]">إنشاء فاتورة</div>
                         <div className="text-[10px] text-[#94a3b8]">إصدار فاتورة جديدة</div>
                       </div>
                     </button>
@@ -927,7 +927,7 @@ export default function LeasingMergedPage() {
                         <Printer className="h-4 w-4 text-teal-600" />
                       </div>
                       <div className="min-w-0">
-                        <div className="text-[12px] font-semibold text-[#1E293B]">طباعة إيصال</div>
+                        <div className="text-xs font-semibold text-[#1E293B]">طباعة إيصال</div>
                         <div className="text-[10px] text-[#94a3b8]">طباعة إيصال دفعة</div>
                       </div>
                     </button>
@@ -936,7 +936,7 @@ export default function LeasingMergedPage() {
                         <BarChart3 className="h-4 w-4 text-orange-500" />
                       </div>
                       <div className="min-w-0">
-                        <div className="text-[12px] font-semibold text-[#1E293B]">تقرير التحصيل</div>
+                        <div className="text-xs font-semibold text-[#1E293B]">تقرير التحصيل</div>
                         <div className="text-[10px] text-[#94a3b8]">عرض تقرير التحصيل</div>
                       </div>
                     </button>
@@ -1036,7 +1036,7 @@ export default function LeasingMergedPage() {
                     </div>
                     {dueToday.length > 0 && (
                       <div className="px-5 py-3 border-t border-gray-50">
-                        <button className="text-[12px] text-[#533afd] hover:text-[#3d2bb3] font-semibold">عرض جميع المستحق اليوم</button>
+                        <button className="text-xs text-[#533afd] hover:text-[#3d2bb3] font-semibold">عرض جميع المستحق اليوم</button>
                       </div>
                     )}
                   </div>
@@ -1100,7 +1100,7 @@ export default function LeasingMergedPage() {
                       </Table>
                     </div>
                     <div className="px-5 py-3 border-t border-gray-50">
-                      <button className="text-[12px] text-[#533afd] hover:text-[#3d2bb3] font-semibold">عرض جميع المتأخرات</button>
+                      <button className="text-xs text-[#533afd] hover:text-[#3d2bb3] font-semibold">عرض جميع المتأخرات</button>
                     </div>
                   </div>
 
