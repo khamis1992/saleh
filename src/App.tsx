@@ -49,6 +49,7 @@ import RentInvoiceCreatePage from '@/pages/rent-collection/RentInvoiceCreatePage
 import RentReceiptsPage from '@/pages/rent-collection/RentReceiptsPage';
 
 import MaintenanceRequestListPage from '@/pages/maintenance/MaintenanceRequestListPage';
+import MaintenanceRequestsPage from '@/components/projects/MaintenanceRequestsPage';
 import MaintenanceRequestDetailPage from '@/pages/maintenance/MaintenanceRequestDetailPage';
 
 import FinanceAccountsPage from '@/pages/finance/FinanceAccountsPage';
@@ -272,7 +273,7 @@ export default function App() {
           { title: 'الأصول', href: '/maintenance/assets' },
         ]} />}>
           <Route index element={<Navigate to="/maintenance/requests" replace />} />
-          <Route path="requests" element={<MaintenanceRequestListPage />} />
+          <Route path="requests" element={<MaintenanceRequestsPage />} />
           <Route path="requests/:id" element={<MaintenanceRequestDetailPage />} />
           <Route path="work-orders" element={<WorkOrdersPage />} />
           <Route path="preventive" element={<PreventiveMaintenancePage />} />
