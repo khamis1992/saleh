@@ -153,7 +153,7 @@ export function Geocoder({ onSelect, defaultQuery = '', countryCodes = 'qa,sa,ae
                       {parseFloat(r.lat).toFixed(6)}, {parseFloat(r.lon).toFixed(6)}
                     </p>
                     {r.type && (
-                      <span className="text-[12px] text-[#64748d] mt-0.5 inline-block">
+                      <span className="text-xs text-[#64748d] mt-0.5 inline-block">
                         {r.type}
                       </span>
                     )}
@@ -176,7 +176,7 @@ export function Geocoder({ onSelect, defaultQuery = '', countryCodes = 'qa,sa,ae
         <p className="text-xs text-red-500 mt-1">{error}</p>
       )}
 
-      <p className="text-[12px] text-[#64748d] mt-1" dir="ltr">
+      <p className="text-xs text-[#64748d] mt-1" dir="ltr">
         © OpenStreetMap contributors — Nominatim
       </p>
     </div>

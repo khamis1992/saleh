@@ -70,7 +70,7 @@ interface DataTableProps<TData, TValue> {
 /**
  * DataTable — matches the standard /lands design.
  * - White card container (rounded-xl, shadow-sm, border-gray-100, overflow-hidden)
- * - Header bg-[#F9FAFB], h-11, text-[12px] font-semibold text-gray-500
+ * - Header bg-[#F9FAFB], h-11, text-xs font-semibold text-gray-500
  * - Body rows border-gray-50, hover:bg-[#F9FAFB]
  * - Footer pagination: rows-per-page Select, "X-Y من N" counter, numbered page buttons (active blue), prev/next
  */

@@ -258,7 +258,7 @@ export function SimpleSidebar() {
               <div className="font-bold text-sm text-white whitespace-nowrap tracking-tight">
                 {companyName}
               </div>
-              <div className="text-[12px] text-indigo-300/60 whitespace-nowrap mt-0.5">
+              <div className="text-xs text-indigo-300/60 whitespace-nowrap mt-0.5">
                 {t.app.shortName}
               </div>
             </div>
@@ -278,7 +278,7 @@ export function SimpleSidebar() {
                   <button
                     onClick={() => toggleGroup(group.key)}
                     className={cn(
-                      'w-full flex items-center gap-2 px-5 py-1.5 text-[12px] font-bold uppercase tracking-widest transition-colors',
+                      'w-full flex items-center gap-2 px-5 py-1.5 text-xs font-bold uppercase tracking-widest transition-colors',
                       hasActiveChild
                         ? 'text-indigo-300'
                         : 'text-white/20 hover:text-white/40',
@@ -340,7 +340,7 @@ export function SimpleSidebar() {
                 <div className="text-xs font-medium text-white truncate">
                   {userName}
                 </div>
-                <div className="text-[12px] text-white/40 truncate">
+                <div className="text-xs text-white/40 truncate">
                   {roleLabel}
                 </div>
               </div>
@@ -366,7 +366,7 @@ export function SimpleSidebar() {
               <CollapseIconCollapsed className="h-4 w-4" />
             ) : (
               <>
-                <span className="text-[12px] tracking-wide">{tt('nav.collapseSidebar', 'طي القائمة')}</span>
+                <span className="text-xs tracking-wide">{tt('nav.collapseSidebar', 'طي القائمة')}</span>
                 <CollapseIconExpanded className="h-3.5 w-3.5" />
               </>
             )}
