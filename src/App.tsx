@@ -36,6 +36,7 @@ import TenantCreatePage from '@/pages/tenants/TenantCreatePage';
 import TenantDetailPage from '@/pages/tenants/TenantDetailPage';
 
 import LeaseListPage from '@/pages/leases/LeaseListPage';
+import LeasingLeasesPage from '@/components/projects/LeasingLeasesPage';
 import LeaseCreatePage from '@/pages/leases/LeaseCreatePage';
 import LeaseDetailPage from '@/pages/leases/LeaseDetailPage';
 import ContractRenewalPage from '@/pages/leases/ContractRenewalPage';
@@ -395,7 +396,7 @@ export default function App() {
         <Route path="leasing/properties" element={<LeasingPropertiesPage />} />
         <Route path="leasing/units" element={<LeasingUnitsPage />} />
         <Route path="leasing/tenants" element={<LeasingTenantsPage />} />
-        <Route path="leasing/leases" element={<LeaseListPage />} />
+        <Route path="leasing/leases" element={<LeasingLeasesPage />} />
         <Route path="leasing/collections" element={<RentInvoicesPage />} />
 
         {/* ── CONSTRUCTION MODULE — sub-navigation ── */}
