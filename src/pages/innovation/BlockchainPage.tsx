@@ -182,11 +182,11 @@ export default function BlockchainPage() {
                 <div className="space-y-1 pt-2 border-t text-xs">
                   <div className="flex items-center justify-between">
                     <span className="text-[#64748d]">معاملة السك:</span>
-                    <code className="font-mono text-[12px]">{truncate(token.mint_tx_hash || '-', 16)}</code>
+                    <code className="font-mono text-xs">{truncate(token.mint_tx_hash || '-', 16)}</code>
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="text-[#64748d]">IPFS:</span>
-                    <code className="font-mono text-[12px]">{truncate(token.metadata_ipfs_hash, 16)}</code>
+                    <code className="font-mono text-xs">{truncate(token.metadata_ipfs_hash, 16)}</code>
                   </div>
                 </div>
               </CardContent>
@@ -311,7 +311,7 @@ export default function BlockchainPage() {
                   </p>
                   <div className="flex flex-wrap gap-1">
                     {w.signers.map((s, i) => (
-                      <code key={i} className="text-[12px] font-mono bg-white px-1.5 py-0.5 rounded border">
+                      <code key={i} className="text-xs font-mono bg-white px-1.5 py-0.5 rounded border">
                         {truncate(s, 12)}
                       </code>
                     ))}

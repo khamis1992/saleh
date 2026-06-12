@@ -320,25 +320,25 @@ export default function ZATCAInvoicePage() {
                     <TableRow key={inv.id}>
                       <TableCell>
                         <div>
-                          <p className="font-mono text-[12px] font-semibold">{inv.invoice_number}</p>
-                          <p className="text-[12px] text-[#64748d] mt-0.5 font-mono">{inv.uuid.slice(0, 8)}…</p>
+                          <p className="font-mono text-xs font-semibold">{inv.invoice_number}</p>
+                          <p className="text-xs text-[#64748d] mt-0.5 font-mono">{inv.uuid.slice(0, 8)}…</p>
                         </div>
                       </TableCell>
-                      <TableCell className="text-[12px]">
+                      <TableCell className="text-xs">
                         {inv.issue_date}
-                        <span className="block text-[12px] text-[#64748d]">{inv.issue_time}</span>
+                        <span className="block text-xs text-[#64748d]">{inv.issue_time}</span>
                       </TableCell>
                       <TableCell>
                         <div className="flex flex-col gap-0.5">
-                          <span className="text-[12px]">{ZATCA_TYPE_LABELS_AR[inv.invoice_type]}</span>
-                          <span className="text-[12px] text-[#64748d]">{ZATCA_SUBTYPE_LABELS_AR[inv.subtype]}</span>
+                          <span className="text-xs">{ZATCA_TYPE_LABELS_AR[inv.invoice_type]}</span>
+                          <span className="text-xs text-[#64748d]">{ZATCA_SUBTYPE_LABELS_AR[inv.subtype]}</span>
                         </div>
                       </TableCell>
-                      <TableCell className="text-[12px]">
+                      <TableCell className="text-xs">
                         {inv.buyer_name || <span className="text-[#64748d]">— بيع مباشر —</span>}
                       </TableCell>
-                      <TableCell className="text-[12px] font-semibold">{formatSAR(inv.total_incl_vat)}</TableCell>
-                      <TableCell className="text-[12px] text-violet-600 font-semibold">{formatSAR(inv.total_vat)}</TableCell>
+                      <TableCell className="text-xs font-semibold">{formatSAR(inv.total_incl_vat)}</TableCell>
+                      <TableCell className="text-xs text-violet-600 font-semibold">{formatSAR(inv.total_vat)}</TableCell>
                       <TableCell>
                         <Badge className={STATUS_VARIANT[inv.clearance_status]}>
                           {ZATCA_STATUS_LABELS_AR[inv.clearance_status]}
@@ -350,7 +350,7 @@ export default function ZATCAInvoicePage() {
                             <Eye className="h-3.5 w-3.5" />
                           </Button>
                           {inv.clearance_status === 'queued' && (
-                            <Button variant="ghost" size="sm" onClick={() => handleSimulateClearance(inv)} className="h-7 px-2 text-[12px] text-emerald-600">
+                            <Button variant="ghost" size="sm" onClick={() => handleSimulateClearance(inv)} className="h-7 px-2 text-xs text-emerald-600">
                               <Send className="h-3 w-3 ml-1" /> اعتماد
                             </Button>
                           )}
@@ -389,19 +389,19 @@ export default function ZATCAInvoicePage() {
                   <CardContent className="space-y-3">
                     <div className="flex items-center justify-between">
                       <span className="text-xs text-[#64748d]">الرقم التسلسلي</span>
-                      <span className="font-mono text-[12px] font-semibold">{csid.serial}</span>
+                      <span className="font-mono text-xs font-semibold">{csid.serial}</span>
                     </div>
                     <div className="flex items-center justify-between">
                       <span className="text-xs text-[#64748d]">تاريخ الإصدار</span>
-                      <span className="text-[12px]">{csid.issued_at.split('T')[0]}</span>
+                      <span className="text-xs">{csid.issued_at.split('T')[0]}</span>
                     </div>
                     <div className="flex items-center justify-between">
                       <span className="text-xs text-[#64748d]">{tt('documents.expiryDate', 'تاريخ الانتهاء')}</span>
-                      <span className="text-[12px]">{(csid as any).expiry_date?.split('T')[0] || '-'}</span>
+                      <span className="text-xs">{(csid as any).expiry_date?.split('T')[0] || '-'}</span>
                     </div>
                     <div className="flex items-center justify-between">
                       <span className="text-xs text-[#64748d]">الأيام المتبقية</span>
-                      <span className={`text-[12px] font-bold ${days < 30 ? 'text-[#ea2261]' : days < 90 ? 'text-[#9b6829]' : 'text-emerald-600'}`}>
+                      <span className={`text-xs font-bold ${days < 30 ? 'text-[#ea2261]' : days < 90 ? 'text-[#9b6829]' : 'text-emerald-600'}`}>
                         {days > 0 ? `${days} يوم` : t.leases.statuses.terminated || tt('leases.statuses.terminated','منتهي')}
                       </span>
                     </div>
@@ -411,7 +411,7 @@ export default function ZATCAInvoicePage() {
                         {active ? 'فعّال' : csid.status === 'revoked' ? 'مُلغى' : t.leases.statuses.terminated || tt('leases.statuses.terminated','منتهي')}
                       </Badge>
                     </div>
-                    <p className="text-[12px] text-[#64748d] pt-2 border-t">{csid.notes}</p>
+                    <p className="text-xs text-[#64748d] pt-2 border-t">{csid.notes}</p>
                     {active && (
                       <Button variant="outline" size="sm" onClick={() => handleRevokeCsid(csid.id)} className="w-full text-[#ea2261] hover:bg-red-50">
                         إلغاء التنشيط
@@ -449,12 +449,12 @@ export default function ZATCAInvoicePage() {
                       </div>
                       <div className="flex-1 pb-4">
                         <div className="flex items-center justify-between">
-                          <p className="font-mono text-[12px] font-semibold">{inv.invoice_number}</p>
+                          <p className="font-mono text-xs font-semibold">{inv.invoice_number}</p>
                           <Badge className={STATUS_VARIANT[inv.clearance_status as keyof typeof STATUS_VARIANT]}>
                             {ZATCA_STATUS_LABELS_AR[inv.clearance_status as keyof typeof ZATCA_STATUS_LABELS_AR]}
                           </Badge>
                         </div>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mt-2 text-[12px] font-mono">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mt-2 text-xs font-mono">
                           <div className="bg-[#f6f9fc] p-2 rounded">
                             <p className="text-[#64748d]">XML Hash</p>
                             <p className="break-all">{inv.xml_hash.slice(0, 32)}…</p>
@@ -465,7 +465,7 @@ export default function ZATCAInvoicePage() {
                           </div>
                         </div>
                         {prev && (
-                          <p className="text-[12px] text-[#64748d] mt-1">
+                          <p className="text-xs text-[#64748d] mt-1">
                             ↑ يشير إلى: <span className="font-mono">{prev.chain_hash.slice(0, 16)}…</span>
                           </p>
                         )}
@@ -497,7 +497,7 @@ export default function ZATCAInvoicePage() {
                       {check.passed ? <CheckCircle2 className="h-5 w-5 text-emerald-600" /> : <XCircle className="h-5 w-5 text-[#ea2261]" />}
                       <div>
                         <p className="text-sm font-medium">{check.id} - {check.label}</p>
-                        {check.hint && <p className="text-[12px] text-[#64748d]">{check.hint}</p>}
+                        {check.hint && <p className="text-xs text-[#64748d]">{check.hint}</p>}
                       </div>
                     </div>
                     <Badge className={check.passed ? 'bg-emerald-100 text-emerald-700' : 'bg-red-100 text-[#ea2261]'}>
@@ -666,19 +666,19 @@ function CreateInvoiceDialog({ open, onClose, onCreate, nextCounter, nextInvoice
               {lines.map((line, idx) => (
                 <div key={idx} className="grid grid-cols-12 gap-2 items-end p-2 bg-[#f6f9fc] rounded">
                   <div className="col-span-5">
-                    {idx === 0 && <Label className="text-[12px]">{tt('maintenance.description', 'الوصف')}</Label>}
+                    {idx === 0 && <Label className="text-xs">{tt('maintenance.description', 'الوصف')}</Label>}
                     <Input value={line.description} onChange={e => { const nl = [...lines]; nl[idx] = { ...nl[idx], description: e.target.value }; setLines(nl); }} className="h-8 text-sm" placeholder="وصف البند" />
                   </div>
                   <div className="col-span-2">
-                    {idx === 0 && <Label className="text-[12px]">{tt('inventory.quantity', 'الكمية')}</Label>}
+                    {idx === 0 && <Label className="text-xs">{tt('inventory.quantity', 'الكمية')}</Label>}
                     <Input type="number" value={line.quantity} onChange={e => { const nl = [...lines]; nl[idx] = { ...nl[idx], quantity: parseFloat(e.target.value) || 0 }; setLines(nl); }} className="h-8 text-sm" />
                   </div>
                   <div className="col-span-3">
-                    {idx === 0 && <Label className="text-[12px]">السعر (قبل الضريبة)</Label>}
+                    {idx === 0 && <Label className="text-xs">السعر (قبل الضريبة)</Label>}
                     <Input type="number" value={line.unit_price} onChange={e => { const nl = [...lines]; nl[idx] = { ...nl[idx], unit_price: parseFloat(e.target.value) || 0 }; setLines(nl); }} className="h-8 text-sm" />
                   </div>
                   <div className="col-span-2">
-                    {idx === 0 && <Label className="text-[12px]">التصنيف</Label>}
+                    {idx === 0 && <Label className="text-xs">التصنيف</Label>}
                     <Select value={line.vat_category} onValueChange={(v: 'S' | 'Z' | 'E' | 'O') => { const nl = [...lines]; nl[idx] = { ...nl[idx], vat_category: v }; setLines(nl); }}>
                       <SelectTrigger className="h-8 text-sm"><SelectValue /></SelectTrigger>
                       <SelectContent>
@@ -697,15 +697,15 @@ function CreateInvoiceDialog({ open, onClose, onCreate, nextCounter, nextInvoice
           {/* Totals Summary */}
           <div className="bg-[rgba(83,58,253,0.06)] border border-blue-200 rounded-lg p-3 grid grid-cols-3 gap-3 text-sm">
             <div>
-              <p className="text-[12px] text-[#64748d]">الإجمالي قبل الضريبة</p>
+              <p className="text-xs text-[#64748d]">الإجمالي قبل الضريبة</p>
               <p className="font-bold text-lg">{formatSAR(total.excl)}</p>
             </div>
             <div>
-              <p className="text-[12px] text-[#64748d]">الضريبة (15%)</p>
+              <p className="text-xs text-[#64748d]">الضريبة (15%)</p>
               <p className="font-bold text-lg text-violet-600">{formatSAR(total.vat)}</p>
             </div>
             <div>
-              <p className="text-[12px] text-[#64748d]">الإجمالي شامل</p>
+              <p className="text-xs text-[#64748d]">الإجمالي شامل</p>
               <p className="font-bold text-lg text-[#533afd]">{formatSAR(total.incl)}</p>
             </div>
           </div>
@@ -761,15 +761,15 @@ function InvoiceDetailDialog({ invoice, onClose, onClear, onReject }: {
               <Field label="العداد (ICV)" value={String(invoice.counter)} mono />
             </div>
             <div className="grid grid-cols-3 gap-3 p-3 bg-[rgba(83,58,253,0.06)] border border-blue-200 rounded-lg">
-              <div><p className="text-[12px] text-[#64748d]">قبل الضريبة</p><p className="font-bold">{formatSAR(invoice.total_excl_vat)}</p></div>
-              <div><p className="text-[12px] text-[#64748d]">الضريبة</p><p className="font-bold text-violet-600">{formatSAR(invoice.total_vat)}</p></div>
-              <div><p className="text-[12px] text-[#64748d]">{tt('common.total', 'الإجمالي')}</p><p className="font-bold text-[#533afd]">{formatSAR(invoice.total_incl_vat)}</p></div>
+              <div><p className="text-xs text-[#64748d]">قبل الضريبة</p><p className="font-bold">{formatSAR(invoice.total_excl_vat)}</p></div>
+              <div><p className="text-xs text-[#64748d]">الضريبة</p><p className="font-bold text-violet-600">{formatSAR(invoice.total_vat)}</p></div>
+              <div><p className="text-xs text-[#64748d]">{tt('common.total', 'الإجمالي')}</p><p className="font-bold text-[#533afd]">{formatSAR(invoice.total_incl_vat)}</p></div>
             </div>
             <div className="space-y-1">
-              <p className="text-[12px] text-[#64748d] font-mono">XML Hash (SHA-256): {invoice.xml_hash}</p>
-              <p className="text-[12px] text-[#64748d] font-mono">Chain Hash: {invoice.chain_hash}</p>
-              <p className="text-[12px] text-[#64748d] font-mono">CSID: {invoice.csid_serial}</p>
-              <p className="text-[12px] text-[#64748d] font-mono">Previous: {invoice.previous_invoice_hash}</p>
+              <p className="text-xs text-[#64748d] font-mono">XML Hash (SHA-256): {invoice.xml_hash}</p>
+              <p className="text-xs text-[#64748d] font-mono">Chain Hash: {invoice.chain_hash}</p>
+              <p className="text-xs text-[#64748d] font-mono">CSID: {invoice.csid_serial}</p>
+              <p className="text-xs text-[#64748d] font-mono">Previous: {invoice.previous_invoice_hash}</p>
             </div>
             {invoice.clearance_status === 'queued' && !rejectMode && (
               <div className="flex gap-2 pt-2">
@@ -813,14 +813,14 @@ function InvoiceDetailDialog({ invoice, onClose, onClear, onReject }: {
               <TableBody>
                 {invoice.line_items.map((line: any) => (
                   <TableRow key={line.id}>
-                    <TableCell className="text-[12px]">{line.id}</TableCell>
-                    <TableCell className="text-[12px]">{line.description}</TableCell>
-                    <TableCell className="text-[12px]">{line.quantity}</TableCell>
-                    <TableCell className="text-[12px]">{formatSAR(line.unit_price)}</TableCell>
-                    <TableCell className="text-[12px]">
+                    <TableCell className="text-xs">{line.id}</TableCell>
+                    <TableCell className="text-xs">{line.description}</TableCell>
+                    <TableCell className="text-xs">{line.quantity}</TableCell>
+                    <TableCell className="text-xs">{formatSAR(line.unit_price)}</TableCell>
+                    <TableCell className="text-xs">
                       <Badge variant="outline">{line.vat_category} ({(line.vat_rate * 100).toFixed(0)}%)</Badge>
                     </TableCell>
-                    <TableCell className="text-[12px] font-semibold">{formatSAR(line.quantity * line.unit_price * (line.vat_category === 'S' ? line.vat_rate : 0))}</TableCell>
+                    <TableCell className="text-xs font-semibold">{formatSAR(line.quantity * line.unit_price * (line.vat_category === 'S' ? line.vat_rate : 0))}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>
@@ -828,7 +828,7 @@ function InvoiceDetailDialog({ invoice, onClose, onClear, onReject }: {
           </TabsContent>
 
           <TabsContent value="xml">
-            <pre className="bg-gray-900 text-green-400 p-3 rounded-lg text-[12px] font-mono overflow-x-auto max-h-96" dir="ltr">
+            <pre className="bg-gray-900 text-green-400 p-3 rounded-lg text-xs font-mono overflow-x-auto max-h-96" dir="ltr">
               {invoice.xml_content}
             </pre>
             <Button onClick={() => { navigator.clipboard.writeText(invoice.xml_content); toast.success('تم نسخ XML'); }} variant="outline" size="sm" className="mt-2">
@@ -840,11 +840,11 @@ function InvoiceDetailDialog({ invoice, onClose, onClear, onReject }: {
             <div className="space-y-3">
               <div className="flex flex-col items-center p-6 bg-white border-2 border-[#e5edf5] rounded-lg">
                 <QrCode className="h-32 w-32 text-[#273951]" />
-                <p className="mt-3 text-[12px] text-[#64748d]">QR Code (مشفّر بـ TLV 5-tags، base64-url)</p>
+                <p className="mt-3 text-xs text-[#64748d]">QR Code (مشفّر بـ TLV 5-tags، base64-url)</p>
               </div>
               <div className="bg-[#f6f9fc] p-3 rounded-lg">
-                <p className="text-[12px] text-[#64748d] mb-1 font-semibold">الـ Payload الخام (Base64-URL):</p>
-                <p className="text-[12px] font-mono break-all">{invoice.qr_payload}</p>
+                <p className="text-xs text-[#64748d] mb-1 font-semibold">الـ Payload الخام (Base64-URL):</p>
+                <p className="text-xs font-mono break-all">{invoice.qr_payload}</p>
               </div>
             </div>
           </TabsContent>
@@ -857,8 +857,8 @@ function InvoiceDetailDialog({ invoice, onClose, onClear, onReject }: {
 function Field({ label, value, mono = false }: { label: string; value: string; mono?: boolean }) {
   return (
     <div>
-      <p className="text-[12px] text-[#64748d]">{label}</p>
-      <p className={`text-[12px] font-semibold ${mono ? 'font-mono' : ''}`}>{value}</p>
+      <p className="text-xs text-[#64748d]">{label}</p>
+      <p className={`text-xs font-semibold ${mono ? 'font-mono' : ''}`}>{value}</p>
     </div>
   );
 }

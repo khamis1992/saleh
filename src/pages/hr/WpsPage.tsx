@@ -111,16 +111,16 @@ export default function WpsPage() {
                 <TableBody>
                   {files.map(f => (
                     <TableRow key={f.id}>
-                      <TableCell className="font-mono text-[12px] font-semibold">{f.file_name}</TableCell>
-                      <TableCell className="text-[12px]">{f.period_label}</TableCell>
-                      <TableCell className="text-[12px]">{f.employee_count}</TableCell>
-                      <TableCell className="text-[12px] font-semibold">{formatQAR(f.total_net)}</TableCell>
+                      <TableCell className="font-mono text-xs font-semibold">{f.file_name}</TableCell>
+                      <TableCell className="text-xs">{f.period_label}</TableCell>
+                      <TableCell className="text-xs">{f.employee_count}</TableCell>
+                      <TableCell className="text-xs font-semibold">{formatQAR(f.total_net)}</TableCell>
                       <TableCell><Badge className={STATUS_VARIANTS[f.status]}>{STATUS_LABELS[f.status]}</Badge></TableCell>
                       <TableCell>
                         <div className="flex items-center gap-1">
                           <Button variant="ghost" size="sm" onClick={() => handlePreviewSIF(f)} className="h-7 w-7 p-0"><Eye className="h-3.5 w-3.5" /></Button>
                           {f.status === 'draft' && (
-                            <Button variant="ghost" size="sm" onClick={() => handleSubmit(f)} className="text-[12px] text-[#533afd] h-7"><Send className="h-3 w-3 ml-1" /> تقديم</Button>
+                            <Button variant="ghost" size="sm" onClick={() => handleSubmit(f)} className="text-xs text-[#533afd] h-7"><Send className="h-3 w-3 ml-1" /> تقديم</Button>
                           )}
                         </div>
                       </TableCell>
@@ -146,12 +146,12 @@ export default function WpsPage() {
                 <TableBody>
                   {items.map(item => (
                     <TableRow key={item.id}>
-                      <TableCell className="font-semibold text-[12px]">{item.employee_name}</TableCell>
-                      <TableCell className="text-[12px] font-mono">{item.labor_id}</TableCell>
-                      <TableCell className="text-[12px]">{UAE_BANK_CODES.find(b => b.code === item.bank_code)?.name_ar || item.bank_code}</TableCell>
-                      <TableCell className="text-[12px]">{formatQAR(item.basic_salary)}</TableCell>
-                      <TableCell className="text-[12px]">{formatQAR(item.housing_allowance + item.transport_allowance + item.other_allowances)}</TableCell>
-                      <TableCell className="text-[12px] font-bold text-emerald-600">{formatQAR(item.net_salary)}</TableCell>
+                      <TableCell className="font-semibold text-xs">{item.employee_name}</TableCell>
+                      <TableCell className="text-xs font-mono">{item.labor_id}</TableCell>
+                      <TableCell className="text-xs">{UAE_BANK_CODES.find(b => b.code === item.bank_code)?.name_ar || item.bank_code}</TableCell>
+                      <TableCell className="text-xs">{formatQAR(item.basic_salary)}</TableCell>
+                      <TableCell className="text-xs">{formatQAR(item.housing_allowance + item.transport_allowance + item.other_allowances)}</TableCell>
+                      <TableCell className="text-xs font-bold text-emerald-600">{formatQAR(item.net_salary)}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -165,7 +165,7 @@ export default function WpsPage() {
         <Dialog open onOpenChange={() => setPreviewFile(null)}>
           <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto" dir={dir}>
             <DialogHeader><DialogTitle>معاينة ملف SIF — {previewFile.file_name}</DialogTitle></DialogHeader>
-            <pre className="bg-gray-900 text-green-400 p-3 rounded text-[12px] font-mono overflow-x-auto" dir="ltr">
+            <pre className="bg-gray-900 text-green-400 p-3 rounded text-xs font-mono overflow-x-auto" dir="ltr">
               {previewFile.sif_content}
             </pre>
             <DialogFooter><Button onClick={() => setPreviewFile(null)}>إغلاق</Button></DialogFooter>

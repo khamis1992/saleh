@@ -107,18 +107,18 @@ export default function GosiPage() {
                 <TableBody>
                   {filings.map(f => (
                     <TableRow key={f.id}>
-                      <TableCell className="font-semibold text-[12px]">{f.period_label}</TableCell>
-                      <TableCell className="text-[12px]">
+                      <TableCell className="font-semibold text-xs">{f.period_label}</TableCell>
+                      <TableCell className="text-xs">
                         <Badge variant="outline">{f.subscriber_type === 'saudi' ? 'سعودي' : 'غير سعودي'}</Badge>
                       </TableCell>
-                      <TableCell className="text-[12px] font-semibold">{f.total_contributions.toFixed(2)} SAR</TableCell>
-                      <TableCell className="text-[12px]">{f.total_employee_share.toFixed(2)} SAR</TableCell>
-                      <TableCell className="text-[12px]">{f.total_employer_share.toFixed(2)} SAR</TableCell>
-                      <TableCell className="text-[12px]">{f.total_saned.toFixed(2)} SAR</TableCell>
+                      <TableCell className="text-xs font-semibold">{f.total_contributions.toFixed(2)} SAR</TableCell>
+                      <TableCell className="text-xs">{f.total_employee_share.toFixed(2)} SAR</TableCell>
+                      <TableCell className="text-xs">{f.total_employer_share.toFixed(2)} SAR</TableCell>
+                      <TableCell className="text-xs">{f.total_saned.toFixed(2)} SAR</TableCell>
                       <TableCell><Badge className={STATUS_VARIANTS[f.status]}>{STATUS_LABELS[f.status]}</Badge></TableCell>
                       <TableCell>
                         {f.status === 'draft' && (
-                          <Button variant="ghost" size="sm" onClick={() => handleSubmit(f)} className="text-[12px] text-[#533afd] h-7">
+                          <Button variant="ghost" size="sm" onClick={() => handleSubmit(f)} className="text-xs text-[#533afd] h-7">
                             <Send className="h-3 w-3 ml-1" /> تقديم
                           </Button>
                         )}
@@ -150,18 +150,18 @@ export default function GosiPage() {
                     });
                     return (
                       <TableRow key={c.id}>
-                        <TableCell className="font-semibold text-[12px]">{c.subscriber_name}</TableCell>
-                        <TableCell className="text-[12px]">{c.nationality}</TableCell>
-                        <TableCell className="text-[12px]">{c.gross_salary.toFixed(0)} SAR</TableCell>
-                        <TableCell className="text-[12px] font-semibold">{calc.contributory_wage.toFixed(0)} SAR {calc.is_capped && <span className="text-[12px] text-[#9b6829]">(الحد الأقصى)</span>}</TableCell>
-                        <TableCell className="text-[12px]">{calc.total_employee_share.toFixed(2)} SAR</TableCell>
-                        <TableCell className="text-[12px]">{calc.total_employer_share.toFixed(2)} SAR</TableCell>
+                        <TableCell className="font-semibold text-xs">{c.subscriber_name}</TableCell>
+                        <TableCell className="text-xs">{c.nationality}</TableCell>
+                        <TableCell className="text-xs">{c.gross_salary.toFixed(0)} SAR</TableCell>
+                        <TableCell className="text-xs font-semibold">{calc.contributory_wage.toFixed(0)} SAR {calc.is_capped && <span className="text-xs text-[#9b6829]">(الحد الأقصى)</span>}</TableCell>
+                        <TableCell className="text-xs">{calc.total_employee_share.toFixed(2)} SAR</TableCell>
+                        <TableCell className="text-xs">{calc.total_employer_share.toFixed(2)} SAR</TableCell>
                       </TableRow>
                     );
                   })}
                 </TableBody>
               </Table>
-              <div className="mt-3 p-3 bg-[#f6f9fc] rounded-lg text-[12px] text-[#64748d]">
+              <div className="mt-3 p-3 bg-[#f6f9fc] rounded-lg text-xs text-[#64748d]">
                 <p><strong>ملاحظة:</strong> الحد الأقصى لأجر الاشتراك = 9,000 SAR. حصة السعودة (فرع 1) = 9% موظف + 9% صاحب عمل + 2% مخاطر مهنية.</p>
               </div>
             </CardContent>

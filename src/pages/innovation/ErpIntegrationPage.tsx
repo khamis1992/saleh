@@ -140,7 +140,7 @@ export default function ErpIntegrationPage() {
                   </div>
                   <div className="text-right shrink-0">
                     <p className="text-lg font-bold text-[#533afd]">{study.fit_score}%</p>
-                    <p className="text-[12px] text-[#64748d]">درجة التوافق</p>
+                    <p className="text-xs text-[#64748d]">درجة التوافق</p>
                   </div>
                 </div>
               </CardHeader>

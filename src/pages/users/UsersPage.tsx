@@ -328,17 +328,17 @@ export default function UsersPage() {
 
                 {/* Email */}
                 <TableCell  dir="ltr">
-                  <span className="text-[12px] text-gray-500 font-mono">{u.email}</span>
+                  <span className="text-xs text-gray-500 font-mono">{u.email}</span>
                 </TableCell>
 
                 {/* Role */}
                 <TableCell >
-                  <span className="text-[12px] font-medium text-[#334155]">{u.role}</span>
+                  <span className="text-xs font-medium text-[#334155]">{u.role}</span>
                 </TableCell>
 
                 {/* Department */}
                 <TableCell >
-                  <span className="inline-flex items-center gap-1.5 text-[12px] text-gray-600">
+                  <span className="inline-flex items-center gap-1.5 text-xs text-gray-600">
                     <span className="h-1.5 w-1.5 rounded-full bg-gray-300" />
                     {u.department}
                   </span>

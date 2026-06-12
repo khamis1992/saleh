@@ -175,11 +175,11 @@ export default function BiometricDevicesPage() {
                     </div>
                     <div className="bg-[#f6f9fc] rounded-lg p-2">
                       <p className="text-[#64748d]">IP</p>
-                      <p className="font-semibold font-mono text-[12px]">{device.ip_address}</p>
+                      <p className="font-semibold font-mono text-xs">{device.ip_address}</p>
                     </div>
                     <div className="bg-[#f6f9fc] rounded-lg p-2">
                       <p className="text-[#64748d]">البرنامج الثابت</p>
-                      <p className="font-semibold font-mono text-[12px]">{device.firmware_version}</p>
+                      <p className="font-semibold font-mono text-xs">{device.firmware_version}</p>
                     </div>
                   </div>
                   <div className="flex items-center justify-between pt-2 border-t text-xs text-[#64748d]">

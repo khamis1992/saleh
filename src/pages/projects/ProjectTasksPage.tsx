@@ -180,12 +180,12 @@ function KpiCard({
   return (
     <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-4 flex flex-col gap-2 hover:shadow-md transition-shadow">
       <div className="flex items-center justify-between">
-        <p className="text-[12px] font-medium text-gray-500">{label}</p>
+        <p className="text-xs font-medium text-gray-500">{label}</p>
         <div className={`h-9 w-9 rounded-full ${c.bg} flex items-center justify-center`}>
           <div className={c.text}>{icon}</div>
         </div>
       </div>
-      <p className="text-[28px] font-extrabold text-[#1E293B] tabular-nums leading-none">{value}</p>
+      <p className="text-3xl font-extrabold text-[#1E293B] tabular-nums leading-none">{value}</p>
       <div className="flex items-center gap-1.5">
         <span className={`h-1.5 w-1.5 rounded-full ${c.dot}`} />
         <span className="text-[11px] text-gray-500 font-medium">{sublabel}</span>
@@ -302,8 +302,8 @@ export default function ProjectTasksPage() {
             <GanttChart className="h-5 w-5 text-blue-600" />
           </div>
           <div>
-            <h1 className="text-[20px] font-bold text-[#1E293B] leading-tight">مهام المشاريع</h1>
-            <p className="text-[12px] text-gray-500 mt-0.5">إدارة مهام المشاريع والمراحل</p>
+            <h1 className="text-xl font-bold text-[#1E293B] leading-tight">مهام المشاريع</h1>
+            <p className="text-xs text-gray-500 mt-0.5">إدارة مهام المشاريع والمراحل</p>
           </div>
         </div>
         <Button
@@ -374,7 +374,7 @@ export default function ProjectTasksPage() {
 
         {/* Project */}
         <Select value={projectFilter} onValueChange={v => { setProjectFilter(v); setCurrentPage(1); }}>
-          <SelectTrigger className="h-9 w-[160px] text-[12px] border-gray-200 rounded-lg bg-gray-50 gap-1.5">
+          <SelectTrigger className="h-9 w-[160px] text-xs border-gray-200 rounded-lg bg-gray-50 gap-1.5">
             <Building2 className="h-3.5 w-3.5 text-gray-400" />
             <SelectValue placeholder="جميع المشاريع" />
           </SelectTrigger>
@@ -386,7 +386,7 @@ export default function ProjectTasksPage() {
 
         {/* Responsible (Assignee) */}
         <Select value={assigneeFilter} onValueChange={v => { setAssigneeFilter(v); setCurrentPage(1); }}>
-          <SelectTrigger className="h-9 w-[160px] text-[12px] border-gray-200 rounded-lg bg-gray-50 gap-1.5">
+          <SelectTrigger className="h-9 w-[160px] text-xs border-gray-200 rounded-lg bg-gray-50 gap-1.5">
             <UserIcon className="h-3.5 w-3.5 text-gray-400" />
             <SelectValue placeholder="جميع المسؤولين" />
           </SelectTrigger>
@@ -398,7 +398,7 @@ export default function ProjectTasksPage() {
 
         {/* Priority */}
         <Select value={priorityFilter} onValueChange={v => { setPriorityFilter(v); setCurrentPage(1); }}>
-          <SelectTrigger className="h-9 w-[150px] text-[12px] border-gray-200 rounded-lg bg-gray-50 gap-1.5">
+          <SelectTrigger className="h-9 w-[150px] text-xs border-gray-200 rounded-lg bg-gray-50 gap-1.5">
             <Flag className="h-3.5 w-3.5 text-gray-400" />
             <SelectValue placeholder="جميع الأولويات" />
           </SelectTrigger>
@@ -413,7 +413,7 @@ export default function ProjectTasksPage() {
 
         {/* Status */}
         <Select value={statusFilter} onValueChange={v => { setStatusFilter(v); setCurrentPage(1); }}>
-          <SelectTrigger className="h-9 w-[150px] text-[12px] border-gray-200 rounded-lg bg-gray-50 gap-1.5">
+          <SelectTrigger className="h-9 w-[150px] text-xs border-gray-200 rounded-lg bg-gray-50 gap-1.5">
             <Filter className="h-3.5 w-3.5 text-gray-400" />
             <SelectValue placeholder="جميع الحالات" />
           </SelectTrigger>
@@ -434,7 +434,7 @@ export default function ProjectTasksPage() {
               type="date"
               value={dateFrom}
               onChange={e => { setDateFrom(e.target.value); setCurrentPage(1); }}
-              className="h-9 w-[150px] text-[12px] border-gray-200 rounded-lg bg-gray-50 pl-8"
+              className="h-9 w-[150px] text-xs border-gray-200 rounded-lg bg-gray-50 pl-8"
               dir="ltr"
             />
             <Calendar className="absolute left-2.5 top-2.5 h-3.5 w-3.5 text-gray-400 pointer-events-none" />
@@ -445,7 +445,7 @@ export default function ProjectTasksPage() {
               type="date"
               value={dateTo}
               onChange={e => { setDateTo(e.target.value); setCurrentPage(1); }}
-              className="h-9 w-[150px] text-[12px] border-gray-200 rounded-lg bg-gray-50 pl-8"
+              className="h-9 w-[150px] text-xs border-gray-200 rounded-lg bg-gray-50 pl-8"
               dir="ltr"
             />
             <Calendar className="absolute left-2.5 top-2.5 h-3.5 w-3.5 text-gray-400 pointer-events-none" />
@@ -455,7 +455,7 @@ export default function ProjectTasksPage() {
         {/* Reset */}
         <Button
           variant="outline" size="sm" onClick={handleReset}
-          className="h-9 border-gray-200 text-gray-500 hover:text-gray-800 rounded-lg gap-1.5 text-[12px] mr-auto"
+          className="h-9 border-gray-200 text-gray-500 hover:text-gray-800 rounded-lg gap-1.5 text-xs mr-auto"
         >
           <RefreshCw className="h-3.5 w-3.5" />
           إعادة ضبط
@@ -527,7 +527,7 @@ export default function ProjectTasksPage() {
                           <div className="h-7 w-7 rounded-md bg-indigo-50 flex items-center justify-center flex-shrink-0">
                             <Building2 className="h-3.5 w-3.5 text-indigo-500" />
                           </div>
-                          <span className="text-[12px] text-[#334155] max-w-[140px] truncate">
+                          <span className="text-xs text-[#334155] max-w-[140px] truncate">
                             {getProjectName(t.project_id) || t.project_id}
                           </span>
                         </div>
@@ -538,7 +538,7 @@ export default function ProjectTasksPage() {
                         <div className="flex items-center gap-2">
                           <EmployeeAvatar id={t.assigned_to} name={assigneeName} />
                           <div className="min-w-0">
-                            <p className="text-[12px] font-semibold text-[#1E293B] leading-tight truncate max-w-[140px]">{assigneeName}</p>
+                            <p className="text-xs font-semibold text-[#1E293B] leading-tight truncate max-w-[140px]">{assigneeName}</p>
                             <p className="text-[10px] text-gray-400 mt-0.5 truncate max-w-[140px]">{getEmployeeRole(t.assigned_to)}</p>
                           </div>
                         </div>
@@ -548,7 +548,7 @@ export default function ProjectTasksPage() {
                       <TableCell className="px-3" dir="ltr">
                         <div className="flex items-center gap-1.5">
                           <Calendar className="h-3.5 w-3.5 text-gray-400" />
-                          <span className="text-[12px] text-[#334155] tabular-nums">{t.start_date || '—'}</span>
+                          <span className="text-xs text-[#334155] tabular-nums">{t.start_date || '—'}</span>
                         </div>
                       </TableCell>
 
@@ -556,7 +556,7 @@ export default function ProjectTasksPage() {
                       <TableCell className="px-3" dir="ltr">
                         <div className="flex items-center gap-1.5">
                           <Calendar className="h-3.5 w-3.5 text-gray-400" />
-                          <span className={`text-[12px] tabular-nums ${overdue ? 'text-red-600 font-semibold' : 'text-[#334155]'}`}>{t.due_date || '—'}</span>
+                          <span className={`text-xs tabular-nums ${overdue ? 'text-red-600 font-semibold' : 'text-[#334155]'}`}>{t.due_date || '—'}</span>
                         </div>
                       </TableCell>
 

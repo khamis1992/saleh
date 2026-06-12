@@ -101,22 +101,22 @@ export default function RegulatoryPage() {
                               <Shield className="h-4 w-4 text-[#64748d]" />
                             </div>
                             <div>
-                              <p className="text-[12px] font-semibold">{meta.name_ar}</p>
-                              <p className="text-[12px] text-[#64748d]">{meta.country}</p>
+                              <p className="text-xs font-semibold">{meta.name_ar}</p>
+                              <p className="text-xs text-[#64748d]">{meta.country}</p>
                             </div>
                           </div>
                         </TableCell>
-                        <TableCell className="text-[12px]">{r.registration_type}</TableCell>
-                        <TableCell className="font-mono text-[12px]">{r.reference}</TableCell>
-                        <TableCell className="text-[12px]">{r.issue_date}</TableCell>
-                        <TableCell className="text-[12px]">
+                        <TableCell className="text-xs">{r.registration_type}</TableCell>
+                        <TableCell className="font-mono text-xs">{r.reference}</TableCell>
+                        <TableCell className="text-xs">{r.issue_date}</TableCell>
+                        <TableCell className="text-xs">
                           {r.expiry_date ? (
                             <span className={days <= 0 ? 'text-[#ea2261] font-semibold' : days <= 30 ? 'text-[#9b6829] font-semibold' : ''}>
-                              {r.expiry_date} {days > 0 && days <= 30 && <span className="text-[12px]">({days} يوم)</span>}
+                              {r.expiry_date} {days > 0 && days <= 30 && <span className="text-xs">({days} يوم)</span>}
                             </span>
                           ) : '—'}
                         </TableCell>
-                        <TableCell className="text-[12px] font-semibold">{meta.fee_currency} {r.fee_amount.toLocaleString()}</TableCell>
+                        <TableCell className="text-xs font-semibold">{meta.fee_currency} {r.fee_amount.toLocaleString()}</TableCell>
                         <TableCell>
                           <Badge className={REGULATORY_STATUS_VARIANTS[r.status]}>{REGULATORY_STATUS_LABELS_AR[r.status]}</Badge>
                         </TableCell>

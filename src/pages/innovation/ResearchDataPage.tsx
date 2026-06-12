@@ -250,15 +250,15 @@ export default function ResearchDataPage() {
                 {/* Price & Yield */}
                 <div className="grid grid-cols-3 gap-2">
                   <div className="text-center p-2 bg-[#f6f9fc] rounded-lg">
-                    <p className="text-[12px] text-[#64748d]">متوسط / م²</p>
+                    <p className="text-xs text-[#64748d]">متوسط / م²</p>
                     <p className="text-sm font-bold">{formatQAR(mi.avg_price_sqm)}</p>
                   </div>
                   <div className="text-center p-2 bg-[#f6f9fc] rounded-lg">
-                    <p className="text-[12px] text-[#64748d]">العائد الإيجاري</p>
+                    <p className="text-xs text-[#64748d]">العائد الإيجاري</p>
                     <p className="text-sm font-bold text-[#533afd]">{mi.avg_rent_yield}%</p>
                   </div>
                   <div className="text-center p-2 bg-[#f6f9fc] rounded-lg">
-                    <p className="text-[12px] text-[#64748d]">الإشغال</p>
+                    <p className="text-xs text-[#64748d]">الإشغال</p>
                     <p className="text-sm font-bold">{mi.occupancy_rate}%</p>
                   </div>
                 </div>
@@ -266,14 +266,14 @@ export default function ResearchDataPage() {
                 {/* YoY Changes */}
                 <div className="grid grid-cols-2 gap-2">
                   <div className="text-center p-2 bg-[#f6f9fc] rounded-lg">
-                    <p className="text-[12px] text-[#64748d]">تغير السعر السنوي</p>
+                    <p className="text-xs text-[#64748d]">تغير السعر السنوي</p>
                     <p className={`text-sm font-bold flex items-center justify-center gap-1 ${yoyPriceClr}`}>
                       {mi.yoy_price_change >= 0 ? <TrendingUp className="h-3 w-3" /> : <TrendingDown className="h-3 w-3" />}
                       {mi.yoy_price_change > 0 ? '+' : ''}{mi.yoy_price_change}%
                     </p>
                   </div>
                   <div className="text-center p-2 bg-[#f6f9fc] rounded-lg">
-                    <p className="text-[12px] text-[#64748d]">تغير الإيجار السنوي</p>
+                    <p className="text-xs text-[#64748d]">تغير الإيجار السنوي</p>
                     <p className={`text-sm font-bold flex items-center justify-center gap-1 ${yoyRentClr}`}>
                       {mi.yoy_rent_change >= 0 ? <TrendingUp className="h-3 w-3" /> : <TrendingDown className="h-3 w-3" />}
                       {mi.yoy_rent_change > 0 ? '+' : ''}{mi.yoy_rent_change}%
@@ -284,11 +284,11 @@ export default function ResearchDataPage() {
                 {/* Supply & Demand */}
                 <div className="grid grid-cols-2 gap-2">
                   <div className="text-center p-2 bg-[#f6f9fc] rounded-lg">
-                    <p className="text-[12px] text-[#64748d]">المعروض الجديد</p>
+                    <p className="text-xs text-[#64748d]">المعروض الجديد</p>
                     <p className="text-sm font-bold">{mi.supply_pipeline.toLocaleString('en-US')} وحدة</p>
                   </div>
                   <div>
-                    <div className="flex justify-between text-[12px] text-[#64748d] mb-1">
+                    <div className="flex justify-between text-xs text-[#64748d] mb-1">
                       <span>مؤشر الطلب</span>
                       <span>{mi.demand_index}/100</span>
                     </div>

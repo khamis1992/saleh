@@ -159,8 +159,8 @@ function NumberingSection({
           <div className={meta.colors.iconColor}>{meta.icon}</div>
         </div>
         <div className="flex-1 text-right">
-          <h2 className="text-[15px] font-bold text-[#1E293B] leading-tight">{meta.label}</h2>
-          <p className="text-[12px] text-gray-500 mt-0.5">{meta.subtitle}</p>
+          <h2 className="text-sm font-bold text-[#1E293B] leading-tight">{meta.label}</h2>
+          <p className="text-xs text-gray-500 mt-0.5">{meta.subtitle}</p>
         </div>
         <ChevronUp className={`h-4 w-4 text-gray-400 transition-transform flex-shrink-0 ${collapsed ? 'rotate-180' : ''}`} />
       </button>
@@ -173,7 +173,7 @@ function NumberingSection({
             <div className="lg:col-span-3 grid grid-cols-1 sm:grid-cols-2 gap-3">
               {/* Field 1: البداية (Separator) */}
               <div className="space-y-1.5">
-                <label className="text-[12px] font-medium text-gray-700 flex items-center gap-1.5">
+                <label className="text-xs font-medium text-gray-700 flex items-center gap-1.5">
                   <Info className="h-3 w-3 text-gray-400" />
                   البداية
                 </label>
@@ -193,7 +193,7 @@ function NumberingSection({
 
               {/* Field 2: الفاصل (Use year yes/no) */}
               <div className="space-y-1.5">
-                <label className="text-[12px] font-medium text-gray-700 flex items-center gap-1.5">
+                <label className="text-xs font-medium text-gray-700 flex items-center gap-1.5">
                   <Link2 className="h-3 w-3 text-gray-400" />
                   الفاصل
                 </label>
@@ -210,7 +210,7 @@ function NumberingSection({
 
               {/* Field 3: السنة (Prefix) */}
               <div className="space-y-1.5">
-                <label className="text-[12px] font-medium text-gray-700 flex items-center gap-1.5">
+                <label className="text-xs font-medium text-gray-700 flex items-center gap-1.5">
                   <Calendar className="h-3 w-3 text-gray-400" />
                   السنة
                 </label>
@@ -225,7 +225,7 @@ function NumberingSection({
 
               {/* Field 4: عدد الأرقام */}
               <div className="space-y-1.5">
-                <label className="text-[12px] font-medium text-gray-700 flex items-center gap-1.5">
+                <label className="text-xs font-medium text-gray-700 flex items-center gap-1.5">
                   <Hash className="h-3 w-3 text-gray-400" />
                   عدد الأرقام
                 </label>
@@ -250,7 +250,7 @@ function NumberingSection({
                 <Eye className="h-3.5 w-3.5" />
                 معاينة التنسيق
               </div>
-              <p className={`text-[22px] font-extrabold ${meta.colors.previewText} font-mono tracking-wide`} dir="ltr">
+              <p className={`text-2xl font-extrabold ${meta.colors.previewText} font-mono tracking-wide`} dir="ltr">
                 {preview}
               </p>
               <p className="text-[11px] text-gray-500">
@@ -298,8 +298,8 @@ export default function NumberingSettingsPage() {
             <Hash className="h-5 w-5 text-blue-600" />
           </div>
           <div>
-            <h1 className="text-[20px] font-bold text-[#1E293B] leading-tight">إعدادات الترقيم</h1>
-            <p className="text-[12px] text-gray-500 mt-1">تخصيص وتنسيق أرقام جميع السجلات في النظام وفقاً لاحتياجات عملك</p>
+            <h1 className="text-xl font-bold text-[#1E293B] leading-tight">إعدادات الترقيم</h1>
+            <p className="text-xs text-gray-500 mt-1">تخصيص وتنسيق أرقام جميع السجلات في النظام وفقاً لاحتياجات عملك</p>
           </div>
         </div>
         <div className="flex items-center gap-2">

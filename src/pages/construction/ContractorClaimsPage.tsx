@@ -266,12 +266,12 @@ function KpiCard({
   return (
     <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-4 flex flex-col gap-2.5 hover:shadow-md transition-shadow">
       <div className="flex items-center justify-between">
-        <p className="text-[12px] font-medium text-gray-500">{label}</p>
+        <p className="text-xs font-medium text-gray-500">{label}</p>
         <div className={`h-9 w-9 rounded-lg ${c.bg} flex items-center justify-center`}>
           <div className={c.text}>{icon}</div>
         </div>
       </div>
-      <p className={`text-[20px] font-extrabold tabular-nums leading-tight ${valueColor}`}>
+      <p className={`text-xl font-extrabold tabular-nums leading-tight ${valueColor}`}>
         {value}
       </p>
       {sublabel && (
@@ -545,7 +545,7 @@ export default function ContractorClaimsPage() {
       {/* ── PAGE HEADER ─────────────────────────────────────────── */}
       <div className="flex items-center justify-between gap-4 mb-5">
         <div>
-          <h1 className="text-[22px] font-bold text-[#1E293B] tracking-tight">مطالبات المقاولين</h1>
+          <h1 className="text-2xl font-bold text-[#1E293B] tracking-tight">مطالبات المقاولين</h1>
           <p className="text-[13px] text-gray-500 mt-1">إدارة ومراجعة المطالبات المالية للمقاولين ومتابعة دورة الموافقات</p>
         </div>
         <div className="flex items-center gap-2">
@@ -619,14 +619,14 @@ export default function ContractorClaimsPage() {
             value={dateRange}
             onChange={e => setDateRange(e.target.value)}
             placeholder="نطاق التاريخ"
-            className="h-9 text-[12px] border-gray-200 rounded-lg bg-gray-50 cursor-pointer pl-9 pr-3"
+            className="h-9 text-xs border-gray-200 rounded-lg bg-gray-50 cursor-pointer pl-9 pr-3"
           />
           <Calendar className="absolute left-3 top-2.5 h-3.5 w-3.5 text-gray-400 pointer-events-none" />
         </div>
 
         {/* Status */}
         <Select value={statusFilter} onValueChange={setStatusFilter}>
-          <SelectTrigger className="h-9 w-[150px] text-[12px] border-gray-200 rounded-lg bg-gray-50 gap-1.5">
+          <SelectTrigger className="h-9 w-[150px] text-xs border-gray-200 rounded-lg bg-gray-50 gap-1.5">
             <Filter className="h-3.5 w-3.5 text-gray-400" />
             <SelectValue placeholder="جميع الحالات" />
           </SelectTrigger>
@@ -649,13 +649,13 @@ export default function ContractorClaimsPage() {
             placeholder="البحث في المطالبات..."
             value={search}
             onChange={e => setSearch(e.target.value)}
-            className="pr-9 h-9 text-[12px] border-gray-200 rounded-lg bg-gray-50 focus:bg-white"
+            className="pr-9 h-9 text-xs border-gray-200 rounded-lg bg-gray-50 focus:bg-white"
           />
         </div>
 
         {/* Contractor (extra) */}
         <Select value={contractorFilter} onValueChange={setContractorFilter}>
-          <SelectTrigger className="h-9 w-[160px] text-[12px] border-gray-200 rounded-lg bg-gray-50 gap-1.5">
+          <SelectTrigger className="h-9 w-[160px] text-xs border-gray-200 rounded-lg bg-gray-50 gap-1.5">
             <Users className="h-3.5 w-3.5 text-gray-400" />
             <SelectValue placeholder="جميع المقاولين" />
           </SelectTrigger>
@@ -670,7 +670,7 @@ export default function ContractorClaimsPage() {
         {/* Reset */}
         <Button
           variant="outline" size="sm" onClick={handleReset}
-          className="h-9 border-gray-200 text-gray-500 hover:text-gray-800 rounded-lg gap-1.5 text-[12px] mr-auto"
+          className="h-9 border-gray-200 text-gray-500 hover:text-gray-800 rounded-lg gap-1.5 text-xs mr-auto"
         >
           <RefreshCw className="h-3.5 w-3.5" />
           إعادة تعيين
@@ -741,7 +741,7 @@ export default function ContractorClaimsPage() {
                           <div className="h-7 w-7 rounded-md bg-indigo-50 flex items-center justify-center flex-shrink-0">
                             <FileText className="h-3.5 w-3.5 text-indigo-500" />
                           </div>
-                          <span className="text-[12px] font-bold text-[#1E293B] tabular-nums whitespace-nowrap">
+                          <span className="text-xs font-bold text-[#1E293B] tabular-nums whitespace-nowrap">
                             {clm.claim_number}
                           </span>
                         </div>
@@ -753,7 +753,7 @@ export default function ContractorClaimsPage() {
                           <div className="h-7 w-7 rounded-md bg-blue-50 flex items-center justify-center flex-shrink-0">
                             <Building2 className="h-3.5 w-3.5 text-blue-500" />
                           </div>
-                          <span className="text-[12px] font-medium text-[#334155] leading-tight max-w-[130px] truncate">
+                          <span className="text-xs font-medium text-[#334155] leading-tight max-w-[130px] truncate">
                             {getContractorName(clm.contractor_id)}
                           </span>
                         </div>
@@ -761,7 +761,7 @@ export default function ContractorClaimsPage() {
 
                       {/* Project */}
                       <TableCell className="px-3">
-                        <span className="text-[12px] text-[#334155] max-w-[130px] truncate inline-block align-middle font-medium">
+                        <span className="text-xs text-[#334155] max-w-[130px] truncate inline-block align-middle font-medium">
                           {getProjectName(clm.project_id)}
                         </span>
                       </TableCell>
@@ -969,11 +969,11 @@ export default function ContractorClaimsPage() {
                 </div>
                 <div className="bg-white border border-gray-100 rounded-lg p-3">
                   <p className="text-[10px] text-gray-400 mb-1">مبلغ المطالب</p>
-                  <p className="text-[15px] font-bold text-[#1E293B] tabular-nums">{fmt(viewingClaim.claimed_amount)}</p>
+                  <p className="text-sm font-bold text-[#1E293B] tabular-nums">{fmt(viewingClaim.claimed_amount)}</p>
                 </div>
                 <div className="bg-white border border-gray-100 rounded-lg p-3">
                   <p className="text-[10px] text-gray-400 mb-1">صافي المستحق</p>
-                  <p className="text-[15px] font-bold text-emerald-600 tabular-nums">{fmt(viewingClaim.net_payable)}</p>
+                  <p className="text-sm font-bold text-emerald-600 tabular-nums">{fmt(viewingClaim.net_payable)}</p>
                 </div>
                 <div className="bg-white border border-gray-100 rounded-lg p-3">
                   <p className="text-[10px] text-gray-400 mb-1">نسبة الإنجاز</p>
@@ -988,14 +988,14 @@ export default function ContractorClaimsPage() {
               {viewingClaim.engineer_notes && (
                 <div className="bg-amber-50 border border-amber-200 rounded-lg p-3">
                   <p className="text-[10px] font-semibold text-amber-700 mb-1">ملاحظات المهندس</p>
-                  <p className="text-[12px] text-amber-900">{viewingClaim.engineer_notes}</p>
+                  <p className="text-xs text-amber-900">{viewingClaim.engineer_notes}</p>
                 </div>
               )}
 
               {viewingClaim.notes && (
                 <div className="bg-gray-50 border border-gray-200 rounded-lg p-3">
                   <p className="text-[10px] font-semibold text-gray-700 mb-1">ملاحظات</p>
-                  <p className="text-[12px] text-gray-700">{viewingClaim.notes}</p>
+                  <p className="text-xs text-gray-700">{viewingClaim.notes}</p>
                 </div>
               )}
             </div>

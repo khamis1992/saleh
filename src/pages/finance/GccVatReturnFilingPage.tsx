@@ -87,18 +87,18 @@ export default function GccVatReturnFilingPage() {
             <TableBody>
               {filtered.map(r => (
                 <TableRow key={r.id}>
-                  <TableCell className="font-semibold text-[12px]">{r.period_label}</TableCell>
+                  <TableCell className="font-semibold text-xs">{r.period_label}</TableCell>
                   <TableCell><Badge variant="outline">{COUNTRY_LABELS[r.country]}</Badge></TableCell>
-                  <TableCell className="text-[12px]">{formatQAR(r.standard_rated_sales)}</TableCell>
-                  <TableCell className="text-[12px]">{formatQAR(r.standard_rated_purchases)}</TableCell>
-                  <TableCell className="text-[12px] text-[#533afd] font-semibold">{formatQAR(r.total_output_vat)}</TableCell>
-                  <TableCell className="text-[12px] text-emerald-600 font-semibold">{formatQAR(r.total_input_vat)}</TableCell>
-                  <TableCell className="text-[12px] font-bold text-violet-600">{formatQAR(r.vat_payable)}</TableCell>
+                  <TableCell className="text-xs">{formatQAR(r.standard_rated_sales)}</TableCell>
+                  <TableCell className="text-xs">{formatQAR(r.standard_rated_purchases)}</TableCell>
+                  <TableCell className="text-xs text-[#533afd] font-semibold">{formatQAR(r.total_output_vat)}</TableCell>
+                  <TableCell className="text-xs text-emerald-600 font-semibold">{formatQAR(r.total_input_vat)}</TableCell>
+                  <TableCell className="text-xs font-bold text-violet-600">{formatQAR(r.vat_payable)}</TableCell>
                   <TableCell><Badge className={STATUS_VARIANTS[r.status]}>{STATUS_LABELS[r.status]}</Badge></TableCell>
                   <TableCell>
                     <div className="flex items-center gap-1">
                       {(r.status === 'ready' || r.status === 'draft') && (
-                        <Button variant="ghost" size="sm" onClick={() => handleSubmit(r)} className="text-[12px] text-[#533afd] h-7">
+                        <Button variant="ghost" size="sm" onClick={() => handleSubmit(r)} className="text-xs text-[#533afd] h-7">
                           <Send className="h-3 w-3 ml-1" /> تقديم
                         </Button>
                       )}

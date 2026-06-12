@@ -257,7 +257,7 @@ export default function UaeCorporateTaxPage() {
                     <TableCell>{formatQAR(p.revenue)}</TableCell>
                     <TableCell className="text-[#ea2261] font-semibold">{formatQAR(p.tax_due)}</TableCell>
                     <TableCell><Badge className={STATUS_VARIANTS[p.status]}>{STATUS_LABELS_AR[p.status]}</Badge></TableCell>
-                    <TableCell className="text-[12px]">{p.filed_at || '—'}</TableCell>
+                    <TableCell className="text-xs">{p.filed_at || '—'}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>
@@ -300,7 +300,7 @@ function StatCard({ icon: Icon, label, value, color }: { icon: any; label: strin
 function Field({ label, value }: { label: string; value: string }) {
   return (
     <div>
-      <p className="text-[12px] text-[#64748d]">{label}</p>
+      <p className="text-xs text-[#64748d]">{label}</p>
       <p className="text-[13px] font-semibold">{value}</p>
     </div>
   );
