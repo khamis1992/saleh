@@ -21,6 +21,7 @@ import ContractorCreatePage from '@/pages/contractors/ContractorCreatePage';
 import ContractorDetailPage from '@/pages/contractors/ContractorDetailPage';
 
 import PropertyListPage from '@/pages/properties/PropertyListPage';
+import LeasingPropertiesPage from '@/components/projects/LeasingPropertiesPage';
 import PropertyCreatePage from '@/pages/properties/PropertyCreatePage';
 import PropertyDetailPage from '@/pages/properties/PropertyDetailPage';
 
@@ -389,7 +390,7 @@ export default function App() {
         {/* Merged mega-pages (standalone routes, no conflicts) */}
         {/* ── LEASING MODULE — separate pages (no sub-nav) ── */}
         <Route path="leasing" element={<Navigate to="/leasing/properties" replace />} />
-        <Route path="leasing/properties" element={<PropertyListPage />} />
+        <Route path="leasing/properties" element={<LeasingPropertiesPage />} />
         <Route path="leasing/units" element={<UnitListPage />} />
         <Route path="leasing/tenants" element={<TenantListPage />} />
         <Route path="leasing/leases" element={<LeaseListPage />} />
