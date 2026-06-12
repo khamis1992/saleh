@@ -44,6 +44,7 @@ import ContractTerminationPage from '@/pages/leases/ContractTerminationPage';
 import LeasingPipelinePage from '@/pages/leases/LeasingPipelinePage';
 
 import RentInvoicesPage from '@/pages/rent-collection/RentInvoicesPage';
+import LeasingCollectionsPage from '@/components/projects/LeasingCollectionsPage';
 import RentInvoiceCreatePage from '@/pages/rent-collection/RentInvoiceCreatePage';
 import RentReceiptsPage from '@/pages/rent-collection/RentReceiptsPage';
 
@@ -397,7 +398,7 @@ export default function App() {
         <Route path="leasing/units" element={<LeasingUnitsPage />} />
         <Route path="leasing/tenants" element={<LeasingTenantsPage />} />
         <Route path="leasing/leases" element={<LeasingLeasesPage />} />
-        <Route path="leasing/collections" element={<RentInvoicesPage />} />
+        <Route path="leasing/collections" element={<LeasingCollectionsPage />} />
 
         {/* ── CONSTRUCTION MODULE — sub-navigation ── */}
         <Route path="construction-all" element={<ModuleLayout subNav={[
