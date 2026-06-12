@@ -104,7 +104,7 @@ import FinanceMergedPage from '@/pages/FinanceMergedPage';
 import MaintenanceMergedPage from '@/pages/MaintenanceMergedPage';
 import QueuesMergedPage from '@/pages/QueuesMergedPage';
 import WarehousesPage from '@/pages/inventory/WarehousesPage';
-import InventoryItemsPage from '@/pages/inventory/InventoryItemsPage';
+import InventoryPage from '@/components/projects/InventoryItemsPage';
 import StockTransactionsPage from '@/pages/inventory/StockTransactionsPage';
 import ProjectBudgetsPage from '@/pages/budgets/ProjectBudgetsPage';
 import QuotationComparisonPage from '@/pages/procurement/QuotationComparisonPage';
@@ -351,7 +351,7 @@ export default function App() {
         <Route path="procurement/vendor-scorecard" element={<VendorScorecardPage />} />
         <Route path="inventory" element={<Navigate to="/inventory/warehouses" />} />
         <Route path="inventory/warehouses" element={<WarehousesPage />} />
-        <Route path="inventory/items" element={<InventoryItemsPage />} />
+        <Route path="inventory/items" element={<InventoryPage />} />
         <Route path="inventory/transactions" element={<StockTransactionsPage />} />
 
         {/* Equipment */}
