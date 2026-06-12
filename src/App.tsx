@@ -109,6 +109,7 @@ import StockTransactionsPage from '@/pages/inventory/StockTransactionsPage';
 import ProjectBudgetsPage from '@/pages/budgets/ProjectBudgetsPage';
 import QuotationComparisonPage from '@/pages/procurement/QuotationComparisonPage';
 import RFQListPage from '@/pages/procurement/RFQListPage';
+import ProcurementRFQsPage from '@/components/projects/ProcurementRFQsPage';
 import VendorScorecardPage from '@/pages/procurement/VendorScorecardPage';
 
 // Phase 3 pages
@@ -131,10 +132,13 @@ import NumberingSettingsPage from '@/pages/settings/NumberingSettingsPage';
 
 // Missing imports — pages exist but weren't registered
 import VendorsPage from '@/pages/procurement/VendorsPage';
+import ProcurementVendorsPage from '@/components/projects/ProcurementVendorsPage';
 import PurchaseRequestsPage from '@/pages/procurement/PurchaseRequestsPage';
 import ProcurementRequestsPage from '@/components/projects/ProcurementRequestsPage';
 import PurchaseOrdersPage from '@/pages/procurement/PurchaseOrdersPage';
+import ProcurementOrdersPage from '@/components/projects/ProcurementOrdersPage';
 import GoodsReceiptsPage from '@/pages/procurement/GoodsReceiptsPage';
+import ProcurementReceiptsPage from '@/components/projects/ProcurementReceiptsPage';
 import RentSchedulesPage from '@/pages/rent-collection/RentSchedulesPage';
 import ChequesPage from '@/pages/finance/ChequesPage';
 import FinanceDashboardPage from '@/pages/finance/FinanceDashboardPage';
@@ -334,10 +338,10 @@ export default function App() {
         ]} />}>
           <Route index element={<Navigate to="/procurement/requests" replace />} />
           <Route path="requests" element={<ProcurementRequestsPage />} />
-          <Route path="rfqs" element={<RFQListPage />} />
-          <Route path="orders" element={<PurchaseOrdersPage />} />
-          <Route path="receipts" element={<GoodsReceiptsPage />} />
-          <Route path="vendors" element={<VendorsPage />} />
+          <Route path="rfqs" element={<ProcurementRFQsPage />} />
+          <Route path="orders" element={<ProcurementOrdersPage />} />
+          <Route path="receipts" element={<ProcurementReceiptsPage />} />
+          <Route path="vendors" element={<ProcurementVendorsPage />} />
         </Route>
         {/* Keep old procurement routes for backward compatibility */}
         <Route path="procurement/purchase-requests" element={<Navigate to="/procurement/requests" replace />} />
