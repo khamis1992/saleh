@@ -84,7 +84,7 @@ export default function EmailDeliveryLogPage() {
           {messages.length === 0 ? <tr><td colSpan={7} className="text-center p-12"><Mail className="h-12 w-12 text-gray-300 mx-auto mb-2" /><div className="text-[#64748d]">لا توجد رسائل</div></td></tr> :
             messages.map(m => (
               <tr key={m.id} className="border-t hover:bg-[#f6f9fc]">
-                <td className="p-3"><div className="font-medium text-xs">{m.to_name}</div><code className="text-[12px] text-[#64748d]">{m.to_email}</code></td>
+                <td className="p-3"><div className="font-medium text-xs">{m.to_name}</div><code className="text-xs text-[#64748d]">{m.to_email}</code></td>
                 <td className="p-3"><div className="max-w-xs truncate text-xs font-medium">{m.subject}</div></td>
                 <td className="p-3 text-xs">{getEmailProviderName(m.provider_id)}</td>
                 <td className="p-3"><Badge className={statusMeta[m.status]?.color}>{statusMeta[m.status]?.label}</Badge></td>

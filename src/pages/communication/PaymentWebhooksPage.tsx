@@ -170,7 +170,7 @@ export default function PaymentWebhooksPage() {
                       </div>
                       <div>
                         <div className="font-medium text-xs">{eventLabels[w.event]}</div>
-                        <code className="text-[12px] text-[#64748d]">{w.event}</code>
+                        <code className="text-xs text-[#64748d]">{w.event}</code>
                       </div>
                     </div>
                   </td>

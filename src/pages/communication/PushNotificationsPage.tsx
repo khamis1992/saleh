@@ -71,10 +71,10 @@ export default function PushNotificationsPage() {
                   <div className={`h-1.5 bg-gradient-to-r ${meta.color}`} />
                   <CardContent className="p-4">
                     <div className="flex items-center justify-between mb-2">
-                      <div className="flex items-center gap-3"><div className={`h-10 w-10 rounded-lg bg-gradient-to-br ${meta.color} flex items-center justify-center text-xl`}>{meta.logo}</div><div><h3 className="font-bold text-sm">{p.display_name}{p.is_default && <Star className="h-3 w-3 text-amber-500 fill-amber-500 inline ml-1" />}</h3><p className="text-[12px] text-[#64748d]">{meta.description}</p></div></div>
+                      <div className="flex items-center gap-3"><div className={`h-10 w-10 rounded-lg bg-gradient-to-br ${meta.color} flex items-center justify-center text-xl`}>{meta.logo}</div><div><h3 className="font-bold text-sm">{p.display_name}{p.is_default && <Star className="h-3 w-3 text-amber-500 fill-amber-500 inline ml-1" />}</h3><p className="text-xs text-[#64748d]">{meta.description}</p></div></div>
                       {p.status === 'active' ? <Badge className="bg-emerald-100 text-emerald-700">{tt('leases.statuses.active', 'نشط')}</Badge> : <Badge variant="secondary">معطل</Badge>}
                     </div>
-                    <div className="text-[12px] text-[#64748d]">App ID: {p.app_id}{p.whatsapp_phone_number ? ` • ${p.whatsapp_phone_number}` : ''}</div>
+                    <div className="text-xs text-[#64748d]">App ID: {p.app_id}{p.whatsapp_phone_number ? ` • ${p.whatsapp_phone_number}` : ''}</div>
                   </CardContent>
                 </Card>
               );
@@ -86,7 +86,7 @@ export default function PushNotificationsPage() {
           <Card><CardContent className="p-0">
             <table className="w-full text-sm"><thead className="bg-[#f6f9fc] text-xs"><tr><th className="text-right p-3">{tt('system.user', 'المستخدم')}</th><th className="text-right p-3">الجهاز</th><th className="text-right p-3">اللغة</th><th className="text-right p-3">{tt('legal.status', 'الحالة')}</th><th className="text-right p-3">مستلم/مفتوح</th><th className="text-right p-3">آخر ظهور</th></tr></thead>
               <tbody>{subscribers.map(s => (
-                <tr key={s.id} className="border-t hover:bg-[#f6f9fc]"><td className="p-3"><div className="font-medium text-xs">{s.name}</div><code className="text-[12px] text-[#64748d]">{s.email}</code></td><td className="p-3 text-xs">{s.device_model}</td><td className="p-3 text-xs">{s.language === 'ar' ? 'عربي' : 'English'}</td><td className="p-3">{s.subscribed ? <Badge className="bg-emerald-100 text-emerald-700">مشترك</Badge> : <Badge variant="secondary">غير مشترك</Badge>}</td><td className="p-3 text-xs">{s.total_received} / {s.total_opened}</td><td className="p-3 text-xs text-[#64748d]">{formatDate(s.last_seen_at)}</td></tr>
+                <tr key={s.id} className="border-t hover:bg-[#f6f9fc]"><td className="p-3"><div className="font-medium text-xs">{s.name}</div><code className="text-xs text-[#64748d]">{s.email}</code></td><td className="p-3 text-xs">{s.device_model}</td><td className="p-3 text-xs">{s.language === 'ar' ? 'عربي' : 'English'}</td><td className="p-3">{s.subscribed ? <Badge className="bg-emerald-100 text-emerald-700">مشترك</Badge> : <Badge variant="secondary">غير مشترك</Badge>}</td><td className="p-3 text-xs">{s.total_received} / {s.total_opened}</td><td className="p-3 text-xs text-[#64748d]">{formatDate(s.last_seen_at)}</td></tr>
               ))}</tbody></table>
           </CardContent></Card>
         </TabsContent>
@@ -96,11 +96,11 @@ export default function PushNotificationsPage() {
             {campaigns.map(c => (
               <Card key={c.id}><CardContent className="p-4">
                 <div className="flex items-center justify-between mb-2">
-                  <div className="flex items-center gap-3"><div className="h-10 w-10 rounded-lg bg-[rgba(83,58,253,0.10)] flex items-center justify-center"><Send className="h-5 w-5 text-[#533afd]" /></div><div><h3 className="font-bold text-sm">{c.name}</h3><p className="text-[12px] text-[#64748d]">{c.provider} • {c.audience_count} مشترك</p></div></div>
+                  <div className="flex items-center gap-3"><div className="h-10 w-10 rounded-lg bg-[rgba(83,58,253,0.10)] flex items-center justify-center"><Send className="h-5 w-5 text-[#533afd]" /></div><div><h3 className="font-bold text-sm">{c.name}</h3><p className="text-xs text-[#64748d]">{c.provider} • {c.audience_count} مشترك</p></div></div>
                   {c.status === 'completed' ? <Badge className="bg-emerald-100 text-emerald-700">مكتملة</Badge> : c.status === 'scheduled' ? <Badge className="bg-amber-100 text-[#9b6829]">مجدولة</Badge> : <Badge variant="secondary">{c.status}</Badge>}
                 </div>
                 <div className="p-2 bg-[#f6f9fc] rounded text-xs">{c.title}: {c.body}</div>
-                <div className="flex justify-between text-[12px] text-[#64748d] mt-2">
+                <div className="flex justify-between text-xs text-[#64748d] mt-2">
                   <span>تم التوصيل: {c.delivered_count}</span><span>مفتوحة: {c.opened_count}</span><span>فشل: {c.failed_count}</span>
                   {c.scheduled_at && <span>مجدولة: {formatDate(c.scheduled_at)}</span>}
                 </div>

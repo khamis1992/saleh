@@ -126,7 +126,7 @@ export default function CheckoutDemoPage() {
                   <Lock className="h-5 w-5 text-emerald-600" />
                   صفحة دفع آمنة (Hosted Checkout)
                 </CardTitle>
-                <Badge variant="outline" className="text-[12px]">SSL/TLS 1.3</Badge>
+                <Badge variant="outline" className="text-xs">SSL/TLS 1.3</Badge>
               </div>
             </CardHeader>
             <CardContent>
@@ -268,7 +268,7 @@ function FormStep({ data, setData, gateways, onNext, onCancel }: any) {
                 <CreditCard className="h-4 w-4 text-[#533afd]" />
                 <span className="font-medium text-sm">{g.display_name}</span>
               </div>
-              <div className="text-[12px] text-[#64748d] mt-1">{g.supported_methods.length} وسائل دفع</div>
+              <div className="text-xs text-[#64748d] mt-1">{g.supported_methods.length} وسائل دفع</div>
             </label>
           ))}
         </div>

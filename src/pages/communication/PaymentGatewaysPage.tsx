@@ -149,40 +149,40 @@ export default function PaymentGatewaysPage() {
                           <Badge variant="secondary">معطل</Badge>
                         )}
                         {g.mode === 'live' ? (
-                          <Badge variant="outline" className="text-[12px]">مباشر</Badge>
+                          <Badge variant="outline" className="text-xs">مباشر</Badge>
                         ) : (
-                          <Badge variant="outline" className="text-[12px] bg-amber-50 text-[#9b6829]">اختبار</Badge>
+                          <Badge variant="outline" className="text-xs bg-amber-50 text-[#9b6829]">اختبار</Badge>
                         )}
                       </div>
                     </div>
 
                     <div className="grid grid-cols-3 gap-2 my-4 py-3 border-y border-[#e5edf5]">
                       <div className="text-center">
-                        <div className="text-[12px] text-[#64748d]">المعاملات</div>
+                        <div className="text-xs text-[#64748d]">المعاملات</div>
                         <div className="text-base font-bold">{txCount}</div>
                       </div>
                       <div className="text-center border-x border-[#e5edf5]">
-                        <div className="text-[12px] text-[#64748d]">حجم التداول</div>
+                        <div className="text-xs text-[#64748d]">حجم التداول</div>
                         <div className="text-base font-bold">{formatQARInt(vol)}</div>
                       </div>
                       <div className="text-center">
-                        <div className="text-[12px] text-[#64748d]">الرسوم</div>
+                        <div className="text-xs text-[#64748d]">الرسوم</div>
                         <div className="text-base font-bold">{g.transaction_fee_percent}%</div>
                       </div>
                     </div>
 
                     <div className="flex flex-wrap gap-1 mb-3 min-h-[28px]">
                       {g.supported_methods.slice(0, 5).map(m => (
-                        <span key={m} className="text-[12px] px-2 py-0.5 bg-gray-100 rounded-full">
+                        <span key={m} className="text-xs px-2 py-0.5 bg-gray-100 rounded-full">
                           {methodLabels[m]?.icon} {methodLabels[m]?.name || m}
                         </span>
                       ))}
                       {g.supported_methods.length > 5 && (
-                        <span className="text-[12px] px-2 py-0.5 bg-gray-100 rounded-full">+{g.supported_methods.length - 5}</span>
+                        <span className="text-xs px-2 py-0.5 bg-gray-100 rounded-full">+{g.supported_methods.length - 5}</span>
                       )}
                     </div>
 
-                    <div className="flex items-center justify-between text-[12px] text-[#64748d] mb-3">
+                    <div className="flex items-center justify-between text-xs text-[#64748d] mb-3">
                       <span>Merchant: <code className="text-gray-700">{g.merchant_id}</code></span>
                       <span>تسوية: {g.settlement_days} يوم</span>
                     </div>
@@ -241,7 +241,7 @@ export default function PaymentGatewaysPage() {
                                 {g.display_name}
                                 {g.is_default && <Star className="h-3 w-3 text-amber-500 fill-amber-500" />}
                               </div>
-                              <div className="text-[12px] text-[#64748d]">{meta.name}</div>
+                              <div className="text-xs text-[#64748d]">{meta.name}</div>
                             </div>
                           </div>
                         </td>
@@ -259,12 +259,12 @@ export default function PaymentGatewaysPage() {
                         <td className="p-3">
                           <div className="flex flex-wrap gap-0.5">
                             {g.supported_methods.slice(0, 4).map(m => (
-                              <span key={m} className="text-[12px] px-1.5 py-0.5 bg-gray-100 rounded">
+                              <span key={m} className="text-xs px-1.5 py-0.5 bg-gray-100 rounded">
                                 {methodLabels[m]?.name || m}
                               </span>
                             ))}
                             {g.supported_methods.length > 4 && (
-                              <span className="text-[12px] px-1.5 py-0.5 bg-gray-100 rounded">+{g.supported_methods.length - 4}</span>
+                              <span className="text-xs px-1.5 py-0.5 bg-gray-100 rounded">+{g.supported_methods.length - 4}</span>
                             )}
                           </div>
                         </td>
@@ -301,10 +301,10 @@ export default function PaymentGatewaysPage() {
                     <div key={key} className="border rounded-lg p-3 text-center hover:shadow-[rgba(50,50,93,0.20)_0px_4px_8px_-2px]">
                       <div className="text-3xl mb-1">{meta.icon}</div>
                       <div className="font-medium text-sm">{meta.name}</div>
-                      <div className="text-[12px] text-[#64748d] mt-1">{supportedBy.length} بوابة نشطة</div>
+                      <div className="text-xs text-[#64748d] mt-1">{supportedBy.length} بوابة نشطة</div>
                       <div className="flex justify-center gap-1 mt-2">
                         {supportedBy.map(g => (
-                          <span key={g.id} className="text-[12px] px-1.5 py-0.5 bg-emerald-50 text-emerald-700 rounded">
+                          <span key={g.id} className="text-xs px-1.5 py-0.5 bg-emerald-50 text-emerald-700 rounded">
                             {providerMeta[g.provider].name.slice(0, 3)}
                           </span>
                         ))}

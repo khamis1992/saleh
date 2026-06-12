@@ -146,10 +146,10 @@ export default function ESignaturePage() {
                   <div className={`h-1.5 bg-gradient-to-r ${meta.color}`} />
                   <CardContent className="p-4">
                     <div className="flex items-center justify-between mb-2">
-                      <div className="flex items-center gap-3"><div className={`h-10 w-10 rounded-lg bg-gradient-to-br ${meta.color} flex items-center justify-center text-xl`}>{meta.logo}</div><div><h3 className="font-bold text-sm">{p.display_name}{p.is_default && <Star className="h-3 w-3 text-amber-500 fill-amber-500 inline ml-1" />}</h3><p className="text-[12px] text-[#64748d]">{meta.description}</p></div></div>
+                      <div className="flex items-center gap-3"><div className={`h-10 w-10 rounded-lg bg-gradient-to-br ${meta.color} flex items-center justify-center text-xl`}>{meta.logo}</div><div><h3 className="font-bold text-sm">{p.display_name}{p.is_default && <Star className="h-3 w-3 text-amber-500 fill-amber-500 inline ml-1" />}</h3><p className="text-xs text-[#64748d]">{meta.description}</p></div></div>
                       {p.status === 'active' ? <Badge className="bg-emerald-100 text-emerald-700">{tt('leases.statuses.active', 'نشط')}</Badge> : <Badge variant="secondary">معطل</Badge>}
                     </div>
-                    <div className="flex items-center justify-between text-[12px] text-[#64748d]">
+                    <div className="flex items-center justify-between text-xs text-[#64748d]">
                       <span>يدعم العربية: {p.supports_arabic ? '✅' : '❌'}</span>
                       <span>Account: {p.account_id}</span>
                     </div>
@@ -188,7 +188,7 @@ export default function ESignaturePage() {
                           {d.declined_count > 0 && <span className="text-[#ea2261]">✗ {d.declined_count}</span>}
                           <span className="text-[#64748d]">من {d.signer_count}</span>
                         </div>
-                        {d.expires_at && <div className="text-[12px] text-[#64748d] mt-1">تنتهي: {formatDate(d.expires_at)}</div>}
+                        {d.expires_at && <div className="text-xs text-[#64748d] mt-1">تنتهي: {formatDate(d.expires_at)}</div>}
                       </div>
                       <div className="flex items-start gap-1">
                         <Button size="sm" variant="ghost" onClick={() => setViewDoc(d)}><Eye className="h-3.5 w-3.5" /></Button>
@@ -198,7 +198,7 @@ export default function ESignaturePage() {
                     {/* Signer list */}
                     {dsSigners.length > 0 && (
                       <div className="mt-3 pt-2 border-t">
-                        <div className="text-[12px] text-[#64748d] mb-1">الموقّعون:</div>
+                        <div className="text-xs text-[#64748d] mb-1">الموقّعون:</div>
                         <div className="space-y-1">
                           {dsSigners.map(s => (
                             <div key={s.id} className="flex items-center justify-between text-xs bg-[#f6f9fc] rounded px-2 py-1">
@@ -207,12 +207,12 @@ export default function ESignaturePage() {
                                 <span className="text-[#64748d]">{s.email}</span>
                               </div>
                               <div className="flex items-center gap-2">
-                                {s.status === 'signed' ? <Badge className="bg-emerald-100 text-emerald-700 text-[12px]">✓ وقّع</Badge> :
-                                 s.status === 'declined' ? <Badge className="bg-red-100 text-[#ea2261] text-[12px]">✗ رفض</Badge> :
-                                 s.status === 'viewed' ? <Badge className="bg-[rgba(83,58,253,0.10)] text-[#533afd] text-[12px]">👁 شاهد</Badge> :
-                                 <Badge variant="outline" className="text-[12px]">⏳ {s.status}</Badge>}
+                                {s.status === 'signed' ? <Badge className="bg-emerald-100 text-emerald-700 text-xs">✓ وقّع</Badge> :
+                                 s.status === 'declined' ? <Badge className="bg-red-100 text-[#ea2261] text-xs">✗ رفض</Badge> :
+                                 s.status === 'viewed' ? <Badge className="bg-[rgba(83,58,253,0.10)] text-[#533afd] text-xs">👁 شاهد</Badge> :
+                                 <Badge variant="outline" className="text-xs">⏳ {s.status}</Badge>}
                                 {s.status !== 'signed' && s.status !== 'declined' && (d.status === 'sent' || d.status === 'in_progress') && (
-                                  <Button size="sm" variant="ghost" className="h-5 text-[12px]" onClick={() => handleSimulateSign(d, s.id)}>محاكاة توقيع</Button>
+                                  <Button size="sm" variant="ghost" className="h-5 text-xs" onClick={() => handleSimulateSign(d, s.id)}>محاكاة توقيع</Button>
                                 )}
                               </div>
                             </div>
@@ -233,7 +233,7 @@ export default function ESignaturePage() {
               <tbody>{signers.map(s => (
                 <tr key={s.id} className="border-t hover:bg-[#f6f9fc]">
                   <td className="p-3 text-xs">{getESignDocumentName(s.document_id)}</td>
-                  <td className="p-3"><div className="text-xs font-medium">{s.name}</div><code className="text-[12px] text-[#64748d]">{s.email}</code></td>
+                  <td className="p-3"><div className="text-xs font-medium">{s.name}</div><code className="text-xs text-[#64748d]">{s.email}</code></td>
                   <td className="p-3 text-xs">{s.role === 'tenant' ? 'مستأجر' : s.role === 'landlord' ? 'مالك' : s.role}</td>
                   <td className="p-3">{s.status === 'signed' ? <Badge className="bg-emerald-100 text-emerald-700">✓ وقّع</Badge> : s.status === 'declined' ? <Badge className="bg-red-100 text-[#ea2261]">✗ رفض</Badge> : s.status === 'viewed' ? <Badge className="bg-[rgba(83,58,253,0.10)] text-[#533afd]">👁 شاهد</Badge> : <Badge variant="outline">{s.status}</Badge>}</td>
                   <td className="p-3 text-xs text-[#64748d]">{s.signed_at ? formatDate(s.signed_at) : '-'}</td>
@@ -253,9 +253,9 @@ export default function ESignaturePage() {
                 };
                 return (
                   <tr key={e.id} className="border-t hover:bg-[#f6f9fc]">
-                    <td className="p-3"><Badge variant="outline" className="text-[12px]">{eventLabels[e.event_type] || e.event_type}</Badge></td>
-                    <td className="p-3 text-xs">{e.actor_name}<br /><code className="text-[12px] text-[#64748d]">{e.actor_email}</code></td>
-                    <td className="p-3"><code className="text-[12px]">{e.ip_address}</code></td>
+                    <td className="p-3"><Badge variant="outline" className="text-xs">{eventLabels[e.event_type] || e.event_type}</Badge></td>
+                    <td className="p-3 text-xs">{e.actor_name}<br /><code className="text-xs text-[#64748d]">{e.actor_email}</code></td>
+                    <td className="p-3"><code className="text-xs">{e.ip_address}</code></td>
                     <td className="p-3 text-xs">{e.details}</td>
                     <td className="p-3 text-xs text-[#64748d]">{formatDate(e.event_at)}</td>
                   </tr>

@@ -208,7 +208,7 @@ export default function SmsTemplatesPage() {
                 <div className="p-3 bg-gray-900 text-green-400 rounded-lg text-xs mb-3 font-mono" dir={dir} style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>
                   {t.body}
                 </div>
-                <div className="flex items-center justify-between text-[12px] text-[#64748d] mb-3">
+                <div className="flex items-center justify-between text-xs text-[#64748d] mb-3">
                   <span>{t.body.length} حرف</span>
                   <span>{segments} مقاطع SMS</span>
                   <span>{t.variables.length} متغير</span>
@@ -216,7 +216,7 @@ export default function SmsTemplatesPage() {
                 {t.variables.length > 0 && (
                   <div className="flex flex-wrap gap-1 mb-3">
                     {t.variables.map(v => (
-                      <span key={v} className="text-[12px] px-2 py-0.5 bg-[rgba(83,58,253,0.06)] text-[#533afd] rounded">
+                      <span key={v} className="text-xs px-2 py-0.5 bg-[rgba(83,58,253,0.06)] text-[#533afd] rounded">
                         <Variable className="h-2.5 w-2.5 inline ml-0.5" />{`{{${v}}}`}
                       </span>
                     ))}
@@ -340,7 +340,7 @@ function TemplateDialog({ template, onSave, onClose }: any) {
               rows={5}
               dir={dir}
             />
-            <div className="text-[12px] text-[#64748d] mt-1 flex justify-between">
+            <div className="text-xs text-[#64748d] mt-1 flex justify-between">
               <span>{form.body.length} حرف - {Math.ceil(form.body.length / 70)} مقاطع</span>
               <span>المتغيرات: {(form.body.match(/\{\{([^}]+)\}\}/g) || []).length}</span>
             </div>
@@ -350,7 +350,7 @@ function TemplateDialog({ template, onSave, onClose }: any) {
             <Label className="mb-2 block">إدراج متغير</Label>
             <div className="flex flex-wrap gap-1">
               {Object.keys(previewVars).map(v => (
-                <button key={v} onClick={() => insertVariable(v)} className="text-[12px] px-2 py-1 bg-[rgba(83,58,253,0.06)] text-[#533afd] rounded hover:bg-[rgba(83,58,253,0.10)]">
+                <button key={v} onClick={() => insertVariable(v)} className="text-xs px-2 py-1 bg-[rgba(83,58,253,0.06)] text-[#533afd] rounded hover:bg-[rgba(83,58,253,0.10)]">
                   + {`{{${v}}}`}
                 </button>
               ))}

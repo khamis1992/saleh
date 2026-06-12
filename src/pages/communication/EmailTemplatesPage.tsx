@@ -111,14 +111,14 @@ export default function EmailTemplatesPage() {
                 <h3 className="font-bold mb-1">{t.name}</h3>
                 <div className="text-xs text-[#64748d] mb-3 font-medium">{t.subject}</div>
                 <div className="p-3 bg-[#f6f9fc] rounded-lg text-xs mb-3 max-h-24 overflow-y-auto" dangerouslySetInnerHTML={{ __html: t.body_html.replace(/<[^>]+>/g, '').substring(0, 200) + '...' }} />
-                <div className="flex items-center justify-between text-[12px] text-[#64748d] mb-3">
+                <div className="flex items-center justify-between text-xs text-[#64748d] mb-3">
                   <span>HTML: {t.body_html.length} حرف</span>
                   <span>متغيرات: {t.variables.length}</span>
                 </div>
                 {t.variables.length > 0 && (
                   <div className="flex flex-wrap gap-1 mb-3">
-                    {t.variables.slice(0, 6).map((v: string) => <span key={v} className="text-[12px] px-2 py-0.5 bg-[rgba(83,58,253,0.06)] text-[#533afd] rounded">{`{{${v}}}`}</span>)}
-                    {t.variables.length > 6 && <span className="text-[12px] text-[#64748d]">+{t.variables.length - 6}</span>}
+                    {t.variables.slice(0, 6).map((v: string) => <span key={v} className="text-xs px-2 py-0.5 bg-[rgba(83,58,253,0.06)] text-[#533afd] rounded">{`{{${v}}}`}</span>)}
+                    {t.variables.length > 6 && <span className="text-xs text-[#64748d]">+{t.variables.length - 6}</span>}
                   </div>
                 )}
                 <div className="flex items-center gap-1 pt-2 border-t">
@@ -163,7 +163,7 @@ function TemplateDialog({ template, onSave, onClose }: any) {
           <div className="col-span-3"><Label>نص بديل (Text)</Label><Textarea value={form.body_text} onChange={e => setForm(f => ({ ...f, body_text: e.target.value }))} className="mt-1.5" rows={3} /></div>
           <div className="col-span-3">
             <Label className="mb-2 block">إدراج متغير</Label>
-            <div className="flex flex-wrap gap-1">{vars.map(v => <button key={v} onClick={() => insertVar(v)} className="text-[12px] px-2 py-1 bg-[rgba(83,58,253,0.06)] text-[#533afd] rounded hover:bg-[rgba(83,58,253,0.10)]">+ {`{{${v}}}`}</button>)}</div>
+            <div className="flex flex-wrap gap-1">{vars.map(v => <button key={v} onClick={() => insertVar(v)} className="text-xs px-2 py-1 bg-[rgba(83,58,253,0.06)] text-[#533afd] rounded hover:bg-[rgba(83,58,253,0.10)]">+ {`{{${v}}}`}</button>)}</div>
           </div>
         </div>
         <DialogFooter><Button variant="outline" onClick={onClose}>{tt('common.cancel', 'إلغاء')}</Button><Button onClick={() => onSave(form)} className="bg-[#533afd] hover:bg-[#533afd]">{tt('common.save', 'حفظ')}</Button></DialogFooter>

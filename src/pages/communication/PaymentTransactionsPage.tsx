@@ -228,16 +228,16 @@ export default function PaymentTransactionsPage() {
                       <td className="p-3">
                         <div>
                           <code className="text-xs font-medium">{t.reference}</code>
-                          <div className="text-[12px] text-[#64748d] font-mono">{t.gateway_reference}</div>
+                          <div className="text-xs text-[#64748d] font-mono">{t.gateway_reference}</div>
                         </div>
                       </td>
                       <td className="p-3">
                         <div className="font-medium">{t.customer_name}</div>
-                        <div className="text-[12px] text-[#64748d]">{t.customer_email}</div>
+                        <div className="text-xs text-[#64748d]">{t.customer_email}</div>
                       </td>
                       <td className="p-3">
                         <div className="font-bold">{formatQAR(t.amount)}</div>
-                        {t.fee > 0 && <div className="text-[12px] text-[#64748d]">رسوم: {formatQAR(t.fee)}</div>}
+                        {t.fee > 0 && <div className="text-xs text-[#64748d]">رسوم: {formatQAR(t.fee)}</div>}
                       </td>
                       <td className="p-3">
                         <Badge className={method?.color}>
@@ -365,7 +365,7 @@ function TransactionDialog({ transaction, onClose, onRefund }: {
                     </div>
                     <div className="flex-1">
                       <div className="text-sm font-medium">{step.label}</div>
-                      <div className="text-[12px] text-[#64748d]">{step.time ? formatDate(step.time) : '-'}</div>
+                      <div className="text-xs text-[#64748d]">{step.time ? formatDate(step.time) : '-'}</div>
                     </div>
                   </div>
                 );

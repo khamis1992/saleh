@@ -106,7 +106,7 @@ export default function EmailSettingsPage() {
                 {!p.is_default && p.status === 'active' && (
                   <Button size="sm" variant="ghost" onClick={() => handleSetDefault(p)} className="w-full text-xs"><Star className="h-3 w-3 ml-1" /> اجعله افتراضي</Button>
                 )}
-                {sentCount > 0 && <div className="text-[12px] text-[#64748d] text-center mt-2 border-t pt-2">{sentCount} رسالة مرسلة</div>}
+                {sentCount > 0 && <div className="text-xs text-[#64748d] text-center mt-2 border-t pt-2">{sentCount} رسالة مرسلة</div>}
               </CardContent>
             </Card>
           );

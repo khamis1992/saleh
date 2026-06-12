@@ -101,10 +101,10 @@ export default function SmsDeliveryLogPage() {
                 const Icon = meta.icon;
                 return (
                   <tr key={m.id} className="border-t hover:bg-[#f6f9fc]">
-                    <td className="p-3"><div className="flex items-center gap-2"><div className="h-8 w-8 rounded-full bg-violet-100 flex items-center justify-center"><Smartphone className="h-4 w-4 text-violet-600" /></div><div><div className="font-medium text-xs">{m.to_name}</div><code className="text-[12px] text-[#64748d]">{m.to_phone}</code></div></div></td>
+                    <td className="p-3"><div className="flex items-center gap-2"><div className="h-8 w-8 rounded-full bg-violet-100 flex items-center justify-center"><Smartphone className="h-4 w-4 text-violet-600" /></div><div><div className="font-medium text-xs">{m.to_name}</div><code className="text-xs text-[#64748d]">{m.to_phone}</code></div></div></td>
                     <td className="p-3"><div className="max-w-xs truncate text-xs">{m.body}</div></td>
                     <td className="p-3 text-xs">{getSmsProviderName(m.provider_id)}</td>
-                    <td className="p-3"><Badge className={meta.color}><Icon className="h-3 w-3 ml-1" />{meta.label}</Badge>{m.error_message && <div className="text-[12px] text-[#ea2261] mt-1">{m.error_message}</div>}</td>
+                    <td className="p-3"><Badge className={meta.color}><Icon className="h-3 w-3 ml-1" />{meta.label}</Badge>{m.error_message && <div className="text-xs text-[#ea2261] mt-1">{m.error_message}</div>}</td>
                     <td className="p-3 text-xs">{formatQAR(m.cost)}</td>
                     <td className="p-3 text-xs text-[#64748d]">{formatDate(m.created_at)}</td>
                     <td className="p-3"><Button size="sm" variant="ghost" onClick={() => setView(m)}><Eye className="h-3.5 w-3.5" /></Button></td>

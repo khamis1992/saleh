@@ -167,7 +167,7 @@ export default function SmsSettingsPage() {
                 </div>
 
                 {sentCount > 0 && (
-                  <div className="text-[12px] text-[#64748d] text-center mt-2 border-t pt-2">
+                  <div className="text-xs text-[#64748d] text-center mt-2 border-t pt-2">
                     {sentCount} رسالة مرسلة عبر هذا المزود
                   </div>
                 )}
