@@ -124,6 +124,20 @@
   h2 { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.02em; }
   h3 { font-size: 1.1rem; font-weight: 500; letter-spacing: -0.015em; }
 
+  /* ── ERP Standard Typographic Scale ──
+     Use these Tailwind classes consistently across all modules.
+     Avoid arbitrary text-[XXpx] values — they fragment the design.
+
+     text-xs   0.75rem (12px)  — badges, meta, footnotes, table headers
+     text-[13px]  0.8125rem    — filter chips, small buttons, stat labels
+     text-sm   0.875rem (14px) — body text, table cells, form labels
+     text-base 1rem    (16px)  — dialog titles, empty state headings
+     text-lg   1.125rem(18px)  — section subheadings
+     text-xl   1.25rem (20px)  — card titles
+     text-2xl  1.5rem  (24px) — page headings, hero values
+     text-3xl  1.875rem(30px)  — dashboard KPIs
+  */
+
   /* ── ERP Standard: RTL table direction ── */
   [dir="rtl"] table { direction: rtl; }
 
