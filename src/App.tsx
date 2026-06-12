@@ -52,7 +52,8 @@ import MaintenanceRequestListPage from '@/pages/maintenance/MaintenanceRequestLi
 import MaintenanceRequestsPage from '@/components/projects/MaintenanceRequestsPage';
 import MaintenanceRequestDetailPage from '@/pages/maintenance/MaintenanceRequestDetailPage';
 
-import FinanceAccountsPage from '@/pages/finance/FinanceAccountsPage';
+import FinanceAccountsPageOld from '@/pages/finance/FinanceAccountsPage';
+import FinanceAccountsPage from '@/components/projects/FinanceAccountsPage';
 import FinanceJournalEntriesPage from '@/pages/finance/FinanceJournalEntriesPage';
 import PeriodClosingPage from '@/pages/finance/PeriodClosingPage';
 import ThreeWayMatchPage from '@/pages/finance/ThreeWayMatchPage';
