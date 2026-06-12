@@ -126,7 +126,8 @@ import AttendancePageOld from '@/pages/hr/AttendancePage';
 import AttendancePage from '@/components/projects/AttendancePage';
 import PayrollPageOld from '@/pages/hr/PayrollPage';
 import PayrollPage from '@/components/projects/PayrollPage';
-import LeaveManagementPage from '@/pages/hr/LeaveManagementPage';
+import LeaveManagementPageOld from '@/pages/hr/LeaveManagementPage';
+import LeaveManagementPage from '@/components/projects/LeaveManagementPage';
 import CostCentersPage from '@/pages/finance/CostCentersPage';
 import BankAccountsPage from '@/pages/finance/BankAccountsPage';
 
