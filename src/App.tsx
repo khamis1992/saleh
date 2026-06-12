@@ -105,7 +105,8 @@ import PurchaseRequestWizardPage from '@/pages/wizards/PurchaseRequestWizardPage
 import ContractorContractsPage from '@/pages/construction/ContractorContractsPage';
 import ContractorClaimsPage from '@/pages/construction/ContractorClaimsPage';
 import DailyReportsPage from '@/pages/construction/DailyReportsPage';
-import ProgressUpdatesPage from '@/pages/construction/ProgressUpdatesPage';
+import ProgressUpdatesPageOld from '@/pages/construction/ProgressUpdatesPage';
+import ProgressUpdatesPage from '@/components/projects/ProgressUpdatesPage';
 
 // Merged mega-pages — now replaced by ModuleLayout sub-navigation
 import MyWorkPage from '@/pages/MyWorkPage';
