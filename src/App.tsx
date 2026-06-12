@@ -132,6 +132,7 @@ import NumberingSettingsPage from '@/pages/settings/NumberingSettingsPage';
 // Missing imports — pages exist but weren't registered
 import VendorsPage from '@/pages/procurement/VendorsPage';
 import PurchaseRequestsPage from '@/pages/procurement/PurchaseRequestsPage';
+import ProcurementRequestsPage from '@/components/projects/ProcurementRequestsPage';
 import PurchaseOrdersPage from '@/pages/procurement/PurchaseOrdersPage';
 import GoodsReceiptsPage from '@/pages/procurement/GoodsReceiptsPage';
 import RentSchedulesPage from '@/pages/rent-collection/RentSchedulesPage';
@@ -332,7 +333,7 @@ export default function App() {
           { title: 'الموردون', href: '/procurement/vendors' },
         ]} />}>
           <Route index element={<Navigate to="/procurement/requests" replace />} />
-          <Route path="requests" element={<PurchaseRequestsPage />} />
+          <Route path="requests" element={<ProcurementRequestsPage />} />
           <Route path="rfqs" element={<RFQListPage />} />
           <Route path="orders" element={<PurchaseOrdersPage />} />
           <Route path="receipts" element={<GoodsReceiptsPage />} />
