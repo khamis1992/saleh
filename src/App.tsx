@@ -11,10 +11,12 @@ import LandListPage from '@/pages/lands/LandListPage';
 import LandCreatePage from '@/pages/lands/LandCreatePage';
 
 import ProjectListPage from '@/pages/projects/ProjectListPage';
+import ConstructionProjectsPage from '@/components/projects/ConstructionProjectsPage';
 import ProjectCreatePage from '@/pages/projects/ProjectCreatePage';
 import ProjectDetailPage from '@/pages/projects/ProjectDetailPage';
 
 import ContractorListPage from '@/pages/contractors/ContractorListPage';
+import ConstructionContractorsPage from '@/components/projects/ConstructionContractorsPage';
 import ContractorCreatePage from '@/pages/contractors/ContractorCreatePage';
 import ContractorDetailPage from '@/pages/contractors/ContractorDetailPage';
 
@@ -396,8 +398,8 @@ export default function App() {
           { title: 'التقارير', href: '/construction-all/reports' },
         ]} />}>
           <Route index element={<Navigate to="/construction-all/projects" replace />} />
-          <Route path="projects" element={<ProjectListPage />} />
-          <Route path="contractors" element={<ContractorListPage />} />
+          <Route path="projects" element={<ConstructionProjectsPage />} />
+          <Route path="contractors" element={<ConstructionContractorsPage />} />
           <Route path="claims" element={<ContractorClaimsPage />} />
           <Route path="progress" element={<ProgressUpdatesPage />} />
           <Route path="reports" element={<DailyReportsPage />} />
