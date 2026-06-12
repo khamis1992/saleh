@@ -120,7 +120,8 @@ import ProcurementRFQsPage from '@/components/projects/ProcurementRFQsPage';
 import VendorScorecardPage from '@/pages/procurement/VendorScorecardPage';
 
 // Phase 3 pages
-import EmployeesPage from '@/pages/hr/EmployeesPage';
+import EmployeesPageOld from '@/pages/hr/EmployeesPage';
+import EmployeesPage from '@/components/projects/EmployeesPage';
 import AttendancePage from '@/pages/hr/AttendancePage';
 import PayrollPage from '@/pages/hr/PayrollPage';
 import LeaveManagementPage from '@/pages/hr/LeaveManagementPage';
