@@ -22,7 +22,7 @@ export function Scorecard({ label, value, target, delta, sublabel, icon, iconBg 
   return (
     <div className={cn('bg-white rounded-xl border border-gray-100 shadow-sm p-4 flex flex-col gap-2.5', className)}>
       <div className="flex items-start justify-between gap-2">
-        <p className="text-[12px] font-medium text-gray-500 leading-tight">{label}</p>
+        <p className="text-xs font-medium text-gray-500 leading-tight">{label}</p>
         {icon && <div className={cn('h-8 w-8 rounded-lg flex items-center justify-center shrink-0', iconBg)}>{icon}</div>}
       </div>
       <div>

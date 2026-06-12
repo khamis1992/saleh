@@ -176,11 +176,11 @@ export function PhotoUpload({
                 />
               </div>
               {p.result && p.result.originalSize !== p.result.compressedSize && (
-                <p className="text-[12px] text-[#64748d] mt-1">
+                <p className="text-xs text-[#64748d] mt-1">
                   {formatBytes(p.result.originalSize)} → {formatBytes(p.result.compressedSize)} • {p.result.width}×{p.result.height}
                 </p>
               )}
-              {p.error && <p className="text-[12px] text-[#ea2261] mt-1">{p.error}</p>}
+              {p.error && <p className="text-xs text-[#ea2261] mt-1">{p.error}</p>}
             </div>
           ))}
         </div>
@@ -205,7 +205,7 @@ export function PhotoUpload({
                   <X className="h-4 w-4" />
                 </button>
               </div>
-              <div className="absolute bottom-1 right-1 bg-black/60 text-white text-[12px] px-1.5 py-0.5 rounded">
+              <div className="absolute bottom-1 right-1 bg-black/60 text-white text-xs px-1.5 py-0.5 rounded">
                 {i + 1}
               </div>
             </div>

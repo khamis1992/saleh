@@ -10,7 +10,7 @@ export function FieldTooltip({ help }: FieldTooltipProps) {
   return (
     <Tooltip>
       <TooltipTrigger asChild>
-        <span className="inline-flex items-center justify-center h-5 w-5 rounded-full bg-gray-100 text-[#64748d] text-[12px] font-bold cursor-help hover:bg-[rgba(83,58,253,0.10)] hover:text-[#533afd] transition-colors ml-1">
+        <span className="inline-flex items-center justify-center h-5 w-5 rounded-full bg-gray-100 text-[#64748d] text-xs font-bold cursor-help hover:bg-[rgba(83,58,253,0.10)] hover:text-[#533afd] transition-colors ml-1">
           ?
         </span>
       </TooltipTrigger>

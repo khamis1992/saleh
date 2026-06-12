@@ -45,7 +45,7 @@ export function RequiredField({ children, label, help }: RequiredFieldProps) {
         <span className="text-xs font-medium text-gray-700">{label}</span>
         <span className="text-red-500 text-xs">*</span>
         {help && (
-          <span className="text-[12px] text-[#64748d]">{help}</span>
+          <span className="text-xs text-[#64748d]">{help}</span>
         )}
       </div>
       {children}

@@ -139,7 +139,7 @@ export function HelpDrawer({ open, onClose }: { open: boolean; onClose: () => vo
             </div>
             <div>
               <h2 className="text-sm font-bold text-[#273951]">{tt('help.title', 'المساعدة')}</h2>
-              <p className="text-[12px] text-[#64748d]">{help?.title || tt('help.pageExplanation', 'شرح الصفحة')}</p>
+              <p className="text-xs text-[#64748d]">{help?.title || tt('help.pageExplanation', 'شرح الصفحة')}</p>
             </div>
           </div>
           <button onClick={onClose} className="h-8 w-8 rounded-lg hover:bg-[#f6f9fc] flex items-center justify-center transition-colors">

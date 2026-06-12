@@ -248,12 +248,12 @@ export function FileUpload({
                   />
                 </div>
                 {p.result && p.result.kind === 'compressed' && p.result.originalSize !== p.result.compressedSize && (
-                  <p className="text-[12px] text-[#64748d] mt-1">
+                  <p className="text-xs text-[#64748d] mt-1">
                     {formatBytes(p.result.originalSize)} → {formatBytes(p.result.compressedSize)}
                     {p.result.width && p.result.height && ` • ${p.result.width}×${p.result.height}`}
                   </p>
                 )}
-                {p.error && <p className="text-[12px] text-[#ea2261] mt-1">{p.error}</p>}
+                {p.error && <p className="text-xs text-[#ea2261] mt-1">{p.error}</p>}
               </div>
             );
           })}

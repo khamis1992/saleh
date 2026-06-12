@@ -121,7 +121,7 @@ export function PortalLayout({ portalType }: PortalLayoutProps) {
             </div>
             <div className="hidden sm:block">
               <p className="text-sm font-bold text-[#061b31] leading-tight">{info.title}</p>
-              <p className="text-[12px] text-[#64748d] leading-tight">{info.subtitle}</p>
+              <p className="text-xs text-[#64748d] leading-tight">{info.subtitle}</p>
             </div>
           </div>
 
@@ -134,7 +134,7 @@ export function PortalLayout({ portalType }: PortalLayoutProps) {
                   key={item.to}
                   to={item.to}
                   className={cn(
-                    'flex items-center gap-1.5 px-3 h-9 rounded-lg text-[12px] font-medium transition-colors whitespace-nowrap',
+                    'flex items-center gap-1.5 px-3 h-9 rounded-lg text-xs font-medium transition-colors whitespace-nowrap',
                     isActive
                       ? 'bg-gray-900 text-white'
                       : 'text-[#64748d] hover:bg-[#f6f9fc] hover:text-[#061b31]',
@@ -152,7 +152,7 @@ export function PortalLayout({ portalType }: PortalLayoutProps) {
             {/* Language toggle */}
             <button
               onClick={() => setLocale(locale === 'ar' ? 'en' : 'ar')}
-              className="hidden sm:flex items-center gap-1 px-2 h-9 rounded-lg text-[12px] font-medium text-[#64748d] hover:bg-[#f6f9fc]"
+              className="hidden sm:flex items-center gap-1 px-2 h-9 rounded-lg text-xs font-medium text-[#64748d] hover:bg-[#f6f9fc]"
               title="تبديل اللغة"
             >
               <Globe className="h-3.5 w-3.5" />
@@ -163,13 +163,13 @@ export function PortalLayout({ portalType }: PortalLayoutProps) {
               <DropdownMenuTrigger asChild>
                 <button className="flex items-center gap-2 px-1.5 h-9 rounded-lg hover:bg-[#f6f9fc]">
                   <Avatar className="h-8 w-8">
-                    <AvatarFallback className={cn('text-white text-[12px] font-bold', info.accent)}>
+                    <AvatarFallback className={cn('text-white text-xs font-bold', info.accent)}>
                       {session.displayName.charAt(0)}
                     </AvatarFallback>
                   </Avatar>
                   <div className="hidden md:block text-right">
-                    <p className="text-[12px] font-semibold text-[#061b31] leading-tight">{session.displayName}</p>
-                    <p className="text-[12px] text-[#64748d] leading-tight">{session.email}</p>
+                    <p className="text-xs font-semibold text-[#061b31] leading-tight">{session.displayName}</p>
+                    <p className="text-xs text-[#64748d] leading-tight">{session.email}</p>
                   </div>
                   <ChevronDown className="h-3.5 w-3.5 text-[#64748d]" />
                 </button>
@@ -245,7 +245,7 @@ export function PortalLayout({ portalType }: PortalLayoutProps) {
 
       {/* Footer */}
       <footer className="px-4 lg:px-8 py-6 border-t border-[#e5edf5] bg-white/50">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-[12px] text-[#64748d]">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-[#64748d]">
           <div className="flex items-center gap-3">
             <span>© 2026 Land2 ERP — {info.title}</span>
           </div>

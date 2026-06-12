@@ -131,7 +131,7 @@ export function SectionCard({ title, description, actions, children, className }
         <div className="flex items-center justify-between px-5 py-3.5 border-b border-gray-100">
           <div className="min-w-0">
             <h3 className="text-sm font-semibold text-gray-800">{title}</h3>
-            {description && <p className="text-[12px] text-gray-400 mt-0.5">{description}</p>}
+            {description && <p className="text-xs text-gray-400 mt-0.5">{description}</p>}
           </div>
           {actions && <div className="flex items-center gap-2 shrink-0">{actions}</div>}
         </div>
@@ -264,7 +264,7 @@ export function DataTableView({
                 <th
                   key={col.key}
                   className={cn(
-                    'px-4 py-3 text-[12px] font-semibold text-gray-500 uppercase tracking-wider',
+                    'px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider',
                     col.className,
                   )}
                 >

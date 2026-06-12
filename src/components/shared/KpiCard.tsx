@@ -43,8 +43,8 @@ export function KpiCard({ label, value, sublabel, icon, color = 'blue', trend, t
       <CardContent className="p-4">
         <div className="flex items-start justify-between gap-3">
           <div className="flex-1 min-w-0">
-            <p className="text-[12px] font-medium text-gray-500 leading-tight">{label}</p>
-            <p className="text-[22px] font-extrabold text-[#1E293B] mt-1.5 tabular-nums leading-tight">{value}</p>
+            <p className="text-xs font-medium text-gray-500 leading-tight">{label}</p>
+            <p className="text-2xl font-extrabold text-[#1E293B] mt-1.5 tabular-nums leading-tight">{value}</p>
             {sublabel && <p className="text-[11px] text-gray-400 mt-0.5">{sublabel}</p>}
             {trend && (
               <div className={cn(
