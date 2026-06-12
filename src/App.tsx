@@ -152,6 +152,7 @@ import AuditLogPage from '@/pages/system/AuditLogPage';
 import ProjectConversionPage from '@/pages/projects/ProjectConversionPage';
 import BuildingsPage from '@/pages/properties/BuildingsPage';
 import EquipmentPage from '@/pages/equipment/EquipmentPage';
+import EquipmentPageNew from '@/components/projects/EquipmentPage';
 import LegalNoticesPage from '@/pages/legal/LegalNoticesPage';
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
@@ -355,7 +356,7 @@ export default function App() {
         <Route path="inventory/transactions" element={<StockTransactionsPage />} />
 
         {/* Equipment */}
-        <Route path="equipment" element={<EquipmentPage />} />
+        <Route path="equipment" element={<EquipmentPageNew />} />
 
         {/* Budgets (Phase 2) */}
         <Route path="budgets" element={<ProjectBudgetsPage />} />
