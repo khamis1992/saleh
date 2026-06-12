@@ -164,7 +164,8 @@ import ProjectConversionPage from '@/pages/projects/ProjectConversionPage';
 import BuildingsPage from '@/pages/properties/BuildingsPage';
 import EquipmentPage from '@/pages/equipment/EquipmentPage';
 import EquipmentPageNew from '@/components/projects/EquipmentPage';
-import LegalNoticesPage from '@/pages/legal/LegalNoticesPage';
+import LegalNoticesPageOld from '@/pages/legal/LegalNoticesPage';
+import LegalNoticesPage from '@/components/projects/LegalNoticesPage';
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { user, loading } = useAuth();
