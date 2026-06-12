@@ -26,6 +26,7 @@ import PropertyCreatePage from '@/pages/properties/PropertyCreatePage';
 import PropertyDetailPage from '@/pages/properties/PropertyDetailPage';
 
 import UnitListPage from '@/pages/units/UnitListPage';
+import LeasingUnitsPage from '@/components/projects/LeasingUnitsPage';
 import UnitCreatePage from '@/pages/units/UnitCreatePage';
 import UnitDetailPage from '@/pages/units/UnitDetailPage';
 
@@ -391,7 +392,7 @@ export default function App() {
         {/* ── LEASING MODULE — separate pages (no sub-nav) ── */}
         <Route path="leasing" element={<Navigate to="/leasing/properties" replace />} />
         <Route path="leasing/properties" element={<LeasingPropertiesPage />} />
-        <Route path="leasing/units" element={<UnitListPage />} />
+        <Route path="leasing/units" element={<LeasingUnitsPage />} />
         <Route path="leasing/tenants" element={<TenantListPage />} />
         <Route path="leasing/leases" element={<LeaseListPage />} />
         <Route path="leasing/collections" element={<RentInvoicesPage />} />
