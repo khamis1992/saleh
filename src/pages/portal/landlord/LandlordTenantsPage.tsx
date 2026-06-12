@@ -81,11 +81,11 @@ export default function LandlordTenantsPage() {
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
         <div>
           <h1 className="text-2xl font-bold text-[#061b31]">دليل المستأجرين</h1>
-          <p className="text-[12px] text-[#64748d] mt-0.5">جميع المستأجرين النشطين في محفظتك</p>
+          <p className="text-xs text-[#64748d] mt-0.5">جميع المستأجرين النشطين في محفظتك</p>
         </div>
         <div className="bg-emerald-50 border border-emerald-200 rounded-xl px-4 py-2">
-          <p className="text-[12px] text-emerald-600">{tt('dashboard.totalReceivables', 'إجمالي المستحقات')}</p>
-          <p className="text-[16px] font-bold text-emerald-700">{fmt(totalBalance)}</p>
+          <p className="text-xs text-emerald-600">{tt('dashboard.totalReceivables', 'إجمالي المستحقات')}</p>
+          <p className="text-base font-bold text-emerald-700">{fmt(totalBalance)}</p>
         </div>
       </div>
 
@@ -109,7 +109,7 @@ export default function LandlordTenantsPage() {
             <button
               key={b.v}
               onClick={() => setStatusFilter(b.v)}
-              className={`px-3 h-10 rounded-lg text-[12px] font-medium ${
+              className={`px-3 h-10 rounded-lg text-xs font-medium ${
                 statusFilter === b.v ? 'bg-emerald-600 text-white' : 'bg-white text-gray-700 border border-[#e5edf5]'
               }`}
             >
@@ -124,7 +124,7 @@ export default function LandlordTenantsPage() {
         <Card className="border-0 shadow-[rgba(50,50,93,0.20)_0px_4px_8px_-2px]">
           <CardContent className="py-12 text-center">
             <User className="h-12 w-12 mx-auto text-gray-300 mb-3" />
-            <p className="text-[#64748d] text-[14px]">لا يوجد مستأجرين مطابقين</p>
+            <p className="text-[#64748d] text-sm">لا يوجد مستأجرين مطابقين</p>
           </CardContent>
         </Card>
       ) : (
@@ -143,15 +143,15 @@ export default function LandlordTenantsPage() {
                       </div>
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-1 flex-wrap">
-                          <p className="text-[14px] font-bold text-[#061b31]">{name}</p>
+                          <p className="text-sm font-bold text-[#061b31]">{name}</p>
                           <StatusBadge status={lease.status} />
                           {balance > 0 && (
-                            <span className="text-[12px] px-2 py-0.5 rounded-full bg-red-50 text-[#ea2261] font-medium flex items-center gap-1">
+                            <span className="text-xs px-2 py-0.5 rounded-full bg-red-50 text-[#ea2261] font-medium flex items-center gap-1">
                               <AlertCircle className="h-3 w-3" /> مستحق {fmt(balance)}
                             </span>
                           )}
                         </div>
-                        <p className="text-[12px] text-[#64748d] flex items-center gap-3 flex-wrap">
+                        <p className="text-xs text-[#64748d] flex items-center gap-3 flex-wrap">
                           <span className="flex items-center gap-1">
                             <Hash className="h-3 w-3" /> {lease.contract_number}
                           </span>
@@ -166,20 +166,20 @@ export default function LandlordTenantsPage() {
                         </p>
                         <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 mt-3">
                           <div>
-                            <p className="text-[12px] text-[#64748d]">العقار</p>
-                            <p className="text-[12px] font-semibold text-[#061b31]">{property?.property_name || '—'}</p>
+                            <p className="text-xs text-[#64748d]">العقار</p>
+                            <p className="text-xs font-semibold text-[#061b31]">{property?.property_name || '—'}</p>
                           </div>
                           <div>
-                            <p className="text-[12px] text-[#64748d]">{tt('system.module', 'الوحدة')}</p>
-                            <p className="text-[12px] font-semibold text-[#061b31]">{unit?.unit_number || '—'}</p>
+                            <p className="text-xs text-[#64748d]">{tt('system.module', 'الوحدة')}</p>
+                            <p className="text-xs font-semibold text-[#061b31]">{unit?.unit_number || '—'}</p>
                           </div>
                           <div>
-                            <p className="text-[12px] text-[#64748d]">{tt('leases.rentAmount', 'قيمة الإيجار')}</p>
-                            <p className="text-[12px] font-semibold text-emerald-600">{fmt(lease.rent_amount)}</p>
+                            <p className="text-xs text-[#64748d]">{tt('leases.rentAmount', 'قيمة الإيجار')}</p>
+                            <p className="text-xs font-semibold text-emerald-600">{fmt(lease.rent_amount)}</p>
                           </div>
                           <div>
-                            <p className="text-[12px] text-[#64748d]">ينتهي في</p>
-                            <p className="text-[12px] font-semibold text-[#061b31]">{formatDate(lease.end_date)}</p>
+                            <p className="text-xs text-[#64748d]">ينتهي في</p>
+                            <p className="text-xs font-semibold text-[#061b31]">{formatDate(lease.end_date)}</p>
                           </div>
                         </div>
                       </div>

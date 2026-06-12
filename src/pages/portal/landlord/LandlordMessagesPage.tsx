@@ -135,7 +135,7 @@ export default function LandlordMessagesPage() {
     <div className="space-y-4">
       <div>
         <h1 className="text-2xl font-bold text-[#061b31]">الرسائل</h1>
-        <p className="text-[12px] text-[#64748d] mt-0.5">تواصل مع المستأجرين</p>
+        <p className="text-xs text-[#64748d] mt-0.5">تواصل مع المستأجرين</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 h-[600px]">
@@ -148,13 +148,13 @@ export default function LandlordMessagesPage() {
                 placeholder="ابحث عن مستأجر..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="pr-10 h-9 text-[12px]"
+                className="pr-10 h-9 text-xs"
               />
             </div>
           </CardHeader>
           <CardContent className="flex-1 overflow-y-auto p-2">
             {filteredTenants.length === 0 ? (
-              <p className="text-center text-[#64748d] py-6 text-[12px]">لا يوجد مستأجرين</p>
+              <p className="text-center text-[#64748d] py-6 text-xs">لا يوجد مستأجرين</p>
             ) : (
               <div className="space-y-1">
                 {filteredTenants.map(({ tenant }) => {
@@ -174,8 +174,8 @@ export default function LandlordMessagesPage() {
                         <AvatarFallback className={TENANT_PALETTE[colorIdx]}>{initials}</AvatarFallback>
                       </Avatar>
                       <div className="flex-1 min-w-0">
-                        <p className="text-[12px] font-semibold text-[#061b31] truncate">{name}</p>
-                        <p className="text-[12px] text-[#64748d] truncate">{tenant.phone}</p>
+                        <p className="text-xs font-semibold text-[#061b31] truncate">{name}</p>
+                        <p className="text-xs text-[#64748d] truncate">{tenant.phone}</p>
                       </div>
                     </button>
                   );
@@ -197,10 +197,10 @@ export default function LandlordMessagesPage() {
                     </AvatarFallback>
                   </Avatar>
                   <div className="flex-1">
-                    <CardTitle className="text-[14px] font-bold text-[#061b31]">
+                    <CardTitle className="text-sm font-bold text-[#061b31]">
                       {activeTenant.full_name || activeTenant.company_name}
                     </CardTitle>
-                    <p className="text-[12px] text-[#64748d]">
+                    <p className="text-xs text-[#64748d]">
                       {activeUnit ? `وحدة ${activeUnit.unit_number}` : ''} · {activeTenant.phone}
                     </p>
                   </div>
@@ -210,7 +210,7 @@ export default function LandlordMessagesPage() {
                 {messages.length === 0 ? (
                   <div className="text-center py-12 text-[#64748d]">
                     <MessageCircle className="h-10 w-10 mx-auto text-gray-300 mb-2" />
-                    <p className="text-[12px]">لا توجد رسائل بعد. ابدأ المحادثة الآن.</p>
+                    <p className="text-xs">لا توجد رسائل بعد. ابدأ المحادثة الآن.</p>
                   </div>
                 ) : (
                   messages.map((m) => (
@@ -220,8 +220,8 @@ export default function LandlordMessagesPage() {
                           ? 'bg-emerald-600 text-white rounded-tr-none'
                           : 'bg-gray-100 text-[#061b31] rounded-tl-none'
                       }`}>
-                        <p className="text-[12px] leading-relaxed">{m.body}</p>
-                        <p className={`text-[12px] mt-1 ${m.from === 'landlord' ? 'text-emerald-100' : 'text-[#64748d]'}`}>
+                        <p className="text-xs leading-relaxed">{m.body}</p>
+                        <p className={`text-xs mt-1 ${m.from === 'landlord' ? 'text-emerald-100' : 'text-[#64748d]'}`}>
                           {formatDate(m.created_at)}
                         </p>
                       </div>
@@ -235,7 +235,7 @@ export default function LandlordMessagesPage() {
                     value={reply}
                     onChange={(e) => setReply(e.target.value)}
                     placeholder="اكتب رسالتك..."
-                    className="text-[12px] min-h-[40px] max-h-[80px]"
+                    className="text-xs min-h-[40px] max-h-[80px]"
                     onKeyDown={(e) => {
                       if (e.key === 'Enter' && !e.shiftKey) {
                         e.preventDefault();

@@ -158,9 +158,9 @@ export default function TenantNoticesPage() {
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
         <div>
           <h1 className="text-2xl font-bold text-[#061b31]">{tt('legal.notices', 'الإشعارات')}</h1>
-          <p className="text-[12px] text-[#64748d] mt-0.5">طلبات التجديد والإخلاء وإشعارات النظام</p>
+          <p className="text-xs text-[#64748d] mt-0.5">طلبات التجديد والإخلاء وإشعارات النظام</p>
         </div>
-        <Button onClick={() => setOpen(true)} className="bg-[#533afd] hover:bg-blue-700 h-10 text-[12px]">
+        <Button onClick={() => setOpen(true)} className="bg-[#533afd] hover:bg-blue-700 h-10 text-xs">
           <Plus className="h-4 w-4 ml-1" />
           إشعار جديد
         </Button>
@@ -169,7 +169,7 @@ export default function TenantNoticesPage() {
       {/* System notifications */}
       {systemNotices.length > 0 && (
         <div className="space-y-2">
-          <p className="text-[12px] font-bold uppercase tracking-wider text-[#64748d]">إشعارات النظام</p>
+          <p className="text-xs font-bold uppercase tracking-wider text-[#64748d]">إشعارات النظام</p>
           {systemNotices.map((sn) => {
             const Icon = sn.icon;
             return (
@@ -179,7 +179,7 @@ export default function TenantNoticesPage() {
                 </div>
                 <div className="flex-1">
                   <p className={`text-[13px] font-semibold text-${sn.color}-900`}>{sn.title}</p>
-                  <p className={`text-[12px] text-${sn.color}-700 mt-1`}>{sn.body}</p>
+                  <p className={`text-xs text-${sn.color}-700 mt-1`}>{sn.body}</p>
                 </div>
               </div>
             );
@@ -190,8 +190,8 @@ export default function TenantNoticesPage() {
       {/* My submitted notices */}
       <div>
         <div className="flex items-center justify-between mb-2">
-          <p className="text-[12px] font-bold uppercase tracking-wider text-[#64748d]">طلباتي المقدمة</p>
-          <span className="text-[12px] text-[#64748d]">{notices.length} إشعار</span>
+          <p className="text-xs font-bold uppercase tracking-wider text-[#64748d]">طلباتي المقدمة</p>
+          <span className="text-xs text-[#64748d]">{notices.length} إشعار</span>
         </div>
         {notices.length === 0 ? (
           <Card className="border-0 shadow-[rgba(50,50,93,0.20)_0px_4px_8px_-2px]">
@@ -215,7 +215,7 @@ export default function TenantNoticesPage() {
                       <div className="flex-1">
                         <div className="flex items-start justify-between gap-2 mb-1">
                           <p className="text-[13px] font-semibold text-[#061b31]">{n.subject}</p>
-                          <span className={`text-[12px] px-2 py-0.5 rounded-full font-medium ${
+                          <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${
                             n.status === 'approved' ? 'bg-emerald-50 text-emerald-700' :
                             n.status === 'rejected' ? 'bg-red-50 text-[#ea2261]' :
                             n.status === 'under_review' ? 'bg-[rgba(83,58,253,0.06)] text-[#533afd]' :
@@ -224,8 +224,8 @@ export default function TenantNoticesPage() {
                             {STATUS_LABELS[n.status]}
                           </span>
                         </div>
-                        <p className="text-[12px] text-[#64748d] line-clamp-2 whitespace-pre-line">{n.body}</p>
-                        <p className="text-[12px] text-[#64748d] mt-1 flex items-center gap-1">
+                        <p className="text-xs text-[#64748d] line-clamp-2 whitespace-pre-line">{n.body}</p>
+                        <p className="text-xs text-[#64748d] mt-1 flex items-center gap-1">
                           <Clock className="h-3 w-3" />
                           {formatDateLong(n.created_at)}
                         </p>
@@ -244,14 +244,14 @@ export default function TenantNoticesPage() {
         <DialogContent className="max-w-xl">
           <DialogHeader>
             <DialogTitle>إشعار جديد</DialogTitle>
-            <DialogDescription className="text-[12px]">
+            <DialogDescription className="text-xs">
               اختر نوع الإشعار واملأ التفاصيل
             </DialogDescription>
           </DialogHeader>
 
           <div className="space-y-4">
             <div>
-              <Label className="text-[12px] mb-2 block">نوع الإشعار</Label>
+              <Label className="text-xs mb-2 block">نوع الإشعار</Label>
               <div className="grid grid-cols-1 gap-2">
                 {NOTICE_TYPES.map((t) => {
                   const Icon = t.icon;
@@ -270,7 +270,7 @@ export default function TenantNoticesPage() {
                       </div>
                       <div className="flex-1">
                         <p className="text-[13px] font-semibold text-[#061b31]">{t.label}</p>
-                        <p className="text-[12px] text-[#64748d]">{t.description}</p>
+                        <p className="text-xs text-[#64748d]">{t.description}</p>
                       </div>
                     </button>
                   );
@@ -279,7 +279,7 @@ export default function TenantNoticesPage() {
             </div>
 
             <div>
-              <Label className="text-[12px]">الموضوع</Label>
+              <Label className="text-xs">الموضوع</Label>
               <Input
                 value={subject}
                 onChange={(e) => setSubject(e.target.value)}
@@ -290,7 +290,7 @@ export default function TenantNoticesPage() {
 
             {type === 'vacate' && (
               <div>
-                <Label className="text-[12px]">تاريخ الإخلاء المقترح</Label>
+                <Label className="text-xs">تاريخ الإخلاء المقترح</Label>
                 <Input
                   type="date"
                   value={vacateDate}
@@ -301,7 +301,7 @@ export default function TenantNoticesPage() {
             )}
 
             <div>
-              <Label className="text-[12px]">التفاصيل</Label>
+              <Label className="text-xs">التفاصيل</Label>
               <Textarea
                 value={body}
                 onChange={(e) => setBody(e.target.value)}

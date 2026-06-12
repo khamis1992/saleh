@@ -74,7 +74,7 @@ export default function PortalSelectorPage() {
 
       {/* Hero */}
       <section className="px-4 lg:px-8 py-12 lg:py-20 max-w-6xl mx-auto text-center">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[rgba(83,58,253,0.06)] border border-blue-200 text-[12px] font-medium text-[#533afd] mb-4">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[rgba(83,58,253,0.06)] border border-blue-200 text-xs font-medium text-[#533afd] mb-4">
           <ShieldCheck className="h-3.5 w-3.5" />
           <span>بوابات خارجية آمنة</span>
         </div>
@@ -99,7 +99,7 @@ export default function PortalSelectorPage() {
                     <Icon className="h-6 w-6" />
                   </div>
                   <CardTitle className="text-lg font-bold text-[#061b31]">{p.title}</CardTitle>
-                  <CardDescription className="text-[12px] text-[#64748d]">{p.subtitle}</CardDescription>
+                  <CardDescription className="text-xs text-[#64748d]">{p.subtitle}</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <p className="text-[13px] text-[#64748d] leading-relaxed min-h-[60px]">
@@ -107,7 +107,7 @@ export default function PortalSelectorPage() {
                   </p>
                   <ul className="space-y-1.5">
                     {p.features.map((f, i) => (
-                      <li key={i} className="flex items-center gap-2 text-[12px] text-gray-700">
+                      <li key={i} className="flex items-center gap-2 text-xs text-gray-700">
                         <CheckCircle2 className={`h-3.5 w-3.5 ${p.accentText} flex-shrink-0`} />
                         <span>{f}</span>
                       </li>
@@ -134,21 +134,21 @@ export default function PortalSelectorPage() {
               <ShieldCheck className="h-5 w-5" />
             </div>
             <p className="text-[13px] font-semibold text-[#061b31]">تشفير من طرف إلى طرف</p>
-            <p className="text-[12px] text-[#64748d] mt-1">جميع البيانات محمية</p>
+            <p className="text-xs text-[#64748d] mt-1">جميع البيانات محمية</p>
           </div>
           <div>
             <div className="inline-flex h-10 w-10 rounded-full bg-emerald-50 items-center justify-center text-emerald-600 mb-2">
               <Clock className="h-5 w-5" />
             </div>
             <p className="text-[13px] font-semibold text-[#061b31]">متاحة 24/7</p>
-            <p className="text-[12px] text-[#64748d] mt-1">وصول في أي وقت</p>
+            <p className="text-xs text-[#64748d] mt-1">وصول في أي وقت</p>
           </div>
           <div>
             <div className="inline-flex h-10 w-10 rounded-full bg-amber-50 items-center justify-center text-[#9b6829] mb-2">
               <Globe className="h-5 w-5" />
             </div>
             <p className="text-[13px] font-semibold text-[#061b31]">عربي / English</p>
-            <p className="text-[12px] text-[#64748d] mt-1">دعم ثنائي اللغة</p>
+            <p className="text-xs text-[#64748d] mt-1">دعم ثنائي اللغة</p>
           </div>
         </div>
       </section>

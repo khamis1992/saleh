@@ -73,14 +73,14 @@ export default function LandlordPerformancePage() {
     <div className="space-y-6">
       <div>
         <h1 className="text-2xl font-bold text-[#061b31]">أداء العقارات</h1>
-        <p className="text-[12px] text-[#64748d] mt-0.5">NOI، ROI، ونسب الإشغال لكل عقار</p>
+        <p className="text-xs text-[#64748d] mt-0.5">NOI، ROI، ونسب الإشغال لكل عقار</p>
       </div>
 
       {/* Portfolio totals */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <Card className="border-0 shadow-[rgba(50,50,93,0.20)_0px_4px_8px_-2px]">
           <CardContent className="p-5">
-            <p className="text-[12px] text-[#64748d]">إجمالي الأصول</p>
+            <p className="text-xs text-[#64748d]">إجمالي الأصول</p>
             <p className="text-lg font-bold text-[#061b31]">
               {fmtInt(properties.reduce((s, p) => s + p.total_asset_value, 0))}
             </p>
@@ -88,7 +88,7 @@ export default function LandlordPerformancePage() {
         </Card>
         <Card className="border-0 shadow-[rgba(50,50,93,0.20)_0px_4px_8px_-2px]">
           <CardContent className="p-5">
-            <p className="text-[12px] text-[#64748d]">إجمالي الإيراد السنوي</p>
+            <p className="text-xs text-[#64748d]">إجمالي الإيراد السنوي</p>
             <p className="text-lg font-bold text-emerald-600">
               {fmtInt(performance.reduce((s, p) => s + p.annualRent, 0))}
             </p>
@@ -96,7 +96,7 @@ export default function LandlordPerformancePage() {
         </Card>
         <Card className="border-0 shadow-[rgba(50,50,93,0.20)_0px_4px_8px_-2px]">
           <CardContent className="p-5">
-            <p className="text-[12px] text-[#64748d]">صافي الدخل التشغيلي (NOI)</p>
+            <p className="text-xs text-[#64748d]">صافي الدخل التشغيلي (NOI)</p>
             <p className="text-lg font-bold text-[#061b31]">
               {fmtInt(performance.reduce((s, p) => s + p.noi, 0))}
             </p>
@@ -104,7 +104,7 @@ export default function LandlordPerformancePage() {
         </Card>
         <Card className="border-0 shadow-[rgba(50,50,93,0.20)_0px_4px_8px_-2px]">
           <CardContent className="p-5">
-            <p className="text-[12px] text-[#64748d]">متوسط ROI</p>
+            <p className="text-xs text-[#64748d]">متوسط ROI</p>
             <p className="text-lg font-bold text-[#533afd]">
               {performance.length > 0
                 ? (performance.reduce((s, p) => s + p.roi, 0) / performance.length).toFixed(1)
@@ -153,7 +153,7 @@ export default function LandlordPerformancePage() {
                     <Building2 className="h-4 w-4 text-emerald-600" />
                     {p.property.property_name}
                   </CardTitle>
-                  <CardDescription className="text-[12px] flex items-center gap-1">
+                  <CardDescription className="text-xs flex items-center gap-1">
                     <MapPin className="h-3 w-3" />
                     {p.property.address}
                   </CardDescription>
@@ -164,30 +164,30 @@ export default function LandlordPerformancePage() {
             <CardContent className="space-y-3">
               <div className="grid grid-cols-3 gap-2">
                 <div className="p-3 bg-[rgba(83,58,253,0.06)] rounded-lg">
-                  <p className="text-[12px] text-[#64748d]">الإشغال</p>
-                  <p className="text-[16px] font-bold text-[#533afd]">{p.occupancy.toFixed(0)}%</p>
+                  <p className="text-xs text-[#64748d]">الإشغال</p>
+                  <p className="text-base font-bold text-[#533afd]">{p.occupancy.toFixed(0)}%</p>
                 </div>
                 <div className="p-3 bg-emerald-50 rounded-lg">
-                  <p className="text-[12px] text-[#64748d]">إيراد سنوي</p>
-                  <p className="text-[12px] font-bold text-emerald-600">{fmtInt(p.annualRent)}</p>
+                  <p className="text-xs text-[#64748d]">إيراد سنوي</p>
+                  <p className="text-xs font-bold text-emerald-600">{fmtInt(p.annualRent)}</p>
                 </div>
                 <div className="p-3 bg-amber-50 rounded-lg">
-                  <p className="text-[12px] text-[#64748d]">NOI</p>
-                  <p className="text-[12px] font-bold text-[#9b6829]">{fmtInt(p.noi)}</p>
+                  <p className="text-xs text-[#64748d]">NOI</p>
+                  <p className="text-xs font-bold text-[#9b6829]">{fmtInt(p.noi)}</p>
                 </div>
               </div>
               <div className="grid grid-cols-3 gap-2">
                 <div>
-                  <p className="text-[12px] text-[#64748d]">{tt('properties.assetValue', 'قيمة الأصل')}</p>
-                  <p className="text-[12px] font-semibold">{fmtInt(p.property.total_asset_value)}</p>
+                  <p className="text-xs text-[#64748d]">{tt('properties.assetValue', 'قيمة الأصل')}</p>
+                  <p className="text-xs font-semibold">{fmtInt(p.property.total_asset_value)}</p>
                 </div>
                 <div>
-                  <p className="text-[12px] text-[#64748d]">Cap Rate</p>
-                  <p className="text-[12px] font-semibold">{p.capRate.toFixed(1)}%</p>
+                  <p className="text-xs text-[#64748d]">Cap Rate</p>
+                  <p className="text-xs font-semibold">{p.capRate.toFixed(1)}%</p>
                 </div>
                 <div>
-                  <p className="text-[12px] text-[#64748d]">ROI</p>
-                  <p className="text-[12px] font-semibold text-[#533afd]">{p.roi.toFixed(1)}%</p>
+                  <p className="text-xs text-[#64748d]">ROI</p>
+                  <p className="text-xs font-semibold text-[#533afd]">{p.roi.toFixed(1)}%</p>
                 </div>
               </div>
             </CardContent>

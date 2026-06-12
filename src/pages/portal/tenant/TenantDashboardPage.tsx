@@ -104,9 +104,9 @@ export default function TenantDashboardPage() {
           </div>
           <div className="flex-1">
             <p className="text-[13px] font-semibold text-red-900">لديك {overdueInvoices.length} فاتورة متأخرة</p>
-            <p className="text-[12px] text-[#ea2261] mt-0.5">يرجى سداد المبلغ لتجنب رسوم التأخير الإضافية</p>
+            <p className="text-xs text-[#ea2261] mt-0.5">يرجى سداد المبلغ لتجنب رسوم التأخير الإضافية</p>
           </div>
-          <Button size="sm" className="bg-red-600 hover:bg-red-700 text-white h-9 text-[12px]" onClick={() => navigate('/portal/tenant/pay')}>
+          <Button size="sm" className="bg-red-600 hover:bg-red-700 text-white h-9 text-xs" onClick={() => navigate('/portal/tenant/pay')}>
             ادفع الآن
           </Button>
         </div>
@@ -121,10 +121,10 @@ export default function TenantDashboardPage() {
               <div className="h-10 w-10 rounded-xl bg-red-50 flex items-center justify-center">
                 <Wallet className="h-5 w-5 text-[#ea2261]" />
               </div>
-              <span className="text-[12px] text-[#64748d] font-medium">المستحق</span>
+              <span className="text-xs text-[#64748d] font-medium">المستحق</span>
             </div>
             <p className="text-2xl font-bold text-[#061b31]">{fmt(totalBalance)}</p>
-            <p className="text-[12px] text-[#64748d] mt-1">
+            <p className="text-xs text-[#64748d] mt-1">
               {totalBalance > 0 ? 'مبلغ مستحق السداد' : 'لا يوجد مستحقات'}
             </p>
           </CardContent>
@@ -137,12 +137,12 @@ export default function TenantDashboardPage() {
               <div className="h-10 w-10 rounded-xl bg-amber-50 flex items-center justify-center">
                 <Calendar className="h-5 w-5 text-[#9b6829]" />
               </div>
-              <span className="text-[12px] text-[#64748d] font-medium">الاستحقاق</span>
+              <span className="text-xs text-[#64748d] font-medium">الاستحقاق</span>
             </div>
             <p className="text-lg font-bold text-[#061b31]">
               {nextDue ? formatDate(nextDue.due_date) : 'لا يوجد'}
             </p>
-            <p className="text-[12px] text-[#64748d] mt-1">
+            <p className="text-xs text-[#64748d] mt-1">
               {daysToDue === null
                 ? '—'
                 : daysToDue < 0
@@ -161,10 +161,10 @@ export default function TenantDashboardPage() {
               <div className="h-10 w-10 rounded-xl bg-emerald-50 flex items-center justify-center">
                 <CheckCircle2 className="h-5 w-5 text-emerald-600" />
               </div>
-              <span className="text-[12px] text-[#64748d] font-medium">إجمالي المدفوع</span>
+              <span className="text-xs text-[#64748d] font-medium">إجمالي المدفوع</span>
             </div>
             <p className="text-2xl font-bold text-[#061b31]">{fmt(totalPaid)}</p>
-            <p className="text-[12px] text-[#64748d] mt-1">{receipts.length} إيصال دفع</p>
+            <p className="text-xs text-[#64748d] mt-1">{receipts.length} إيصال دفع</p>
           </CardContent>
         </Card>
 
@@ -175,10 +175,10 @@ export default function TenantDashboardPage() {
               <div className="h-10 w-10 rounded-xl bg-violet-50 flex items-center justify-center">
                 <Wrench className="h-5 w-5 text-violet-600" />
               </div>
-              <span className="text-[12px] text-[#64748d] font-medium">صيانة مفتوحة</span>
+              <span className="text-xs text-[#64748d] font-medium">صيانة مفتوحة</span>
             </div>
             <p className="text-2xl font-bold text-[#061b31]">{openMaintenance.length}</p>
-            <p className="text-[12px] text-[#64748d] mt-1">طلبات قيد المعالجة</p>
+            <p className="text-xs text-[#64748d] mt-1">طلبات قيد المعالجة</p>
           </CardContent>
         </Card>
       </div>
@@ -194,28 +194,28 @@ export default function TenantDashboardPage() {
               <div className="p-4 border-2 border-blue-100 hover:border-blue-300 hover:bg-[rgba(83,58,253,0.06)]/50 rounded-xl transition-all">
                 <CreditCard className="h-6 w-6 text-[#533afd] mb-2" />
                 <p className="text-[13px] font-semibold text-[#061b31]">ادفع الإيجار</p>
-                <p className="text-[12px] text-[#64748d]">سداد الفاتورة</p>
+                <p className="text-xs text-[#64748d]">سداد الفاتورة</p>
               </div>
             </Link>
             <Link to="/portal/tenant/maintenance" className="group">
               <div className="p-4 border-2 border-violet-100 hover:border-violet-300 hover:bg-violet-50/50 rounded-xl transition-all">
                 <Wrench className="h-6 w-6 text-violet-600 mb-2" />
                 <p className="text-[13px] font-semibold text-[#061b31]">طلب صيانة</p>
-                <p className="text-[12px] text-[#64748d]">فتح طلب جديد</p>
+                <p className="text-xs text-[#64748d]">فتح طلب جديد</p>
               </div>
             </Link>
             <Link to="/portal/tenant/lease" className="group">
               <div className="p-4 border-2 border-emerald-100 hover:border-emerald-300 hover:bg-emerald-50/50 rounded-xl transition-all">
                 <FileText className="h-6 w-6 text-emerald-600 mb-2" />
                 <p className="text-[13px] font-semibold text-[#061b31]">عقد الإيجار</p>
-                <p className="text-[12px] text-[#64748d]">عرض التفاصيل</p>
+                <p className="text-xs text-[#64748d]">عرض التفاصيل</p>
               </div>
             </Link>
             <Link to="/portal/tenant/invoices" className="group">
               <div className="p-4 border-2 border-amber-100 hover:border-amber-300 hover:bg-amber-50/50 rounded-xl transition-all">
                 <Receipt className="h-6 w-6 text-[#9b6829] mb-2" />
                 <p className="text-[13px] font-semibold text-[#061b31]">{tt('rentCollection.invoices', 'الفواتير')}</p>
-                <p className="text-[12px] text-[#64748d]">عرض الكل</p>
+                <p className="text-xs text-[#64748d]">عرض الكل</p>
               </div>
             </Link>
           </div>
@@ -228,10 +228,10 @@ export default function TenantDashboardPage() {
           <CardHeader className="flex flex-row items-center justify-between">
             <div>
               <CardTitle className="text-base font-bold text-[#061b31]">ملخص عقد الإيجار</CardTitle>
-              <CardDescription className="text-[12px]">التفاصيل الرئيسية للعقد الحالي</CardDescription>
+              <CardDescription className="text-xs">التفاصيل الرئيسية للعقد الحالي</CardDescription>
             </div>
             <Link to="/portal/tenant/lease">
-              <Button variant="ghost" size="sm" className="h-8 text-[12px] text-[#533afd]">
+              <Button variant="ghost" size="sm" className="h-8 text-xs text-[#533afd]">
                 التفاصيل الكاملة
                 <ArrowLeft className="h-3 w-3 mr-1" />
               </Button>
@@ -242,15 +242,15 @@ export default function TenantDashboardPage() {
               <div className="space-y-3">
                 <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
                   <div>
-                    <p className="text-[12px] text-[#64748d] mb-1">{tt('leases.contractNumber', 'رقم العقد')}</p>
+                    <p className="text-xs text-[#64748d] mb-1">{tt('leases.contractNumber', 'رقم العقد')}</p>
                     <p className="text-[13px] font-semibold text-[#061b31]">{activeLease.contract_number}</p>
                   </div>
                   <div>
-                    <p className="text-[12px] text-[#64748d] mb-1">{tt('leases.rentAmount', 'قيمة الإيجار')}</p>
+                    <p className="text-xs text-[#64748d] mb-1">{tt('leases.rentAmount', 'قيمة الإيجار')}</p>
                     <p className="text-[13px] font-semibold text-[#061b31]">{fmt(activeLease.rent_amount)}</p>
                   </div>
                   <div>
-                    <p className="text-[12px] text-[#64748d] mb-1">{tt('leases.paymentFrequency', 'دورية الدفع')}</p>
+                    <p className="text-xs text-[#64748d] mb-1">{tt('leases.paymentFrequency', 'دورية الدفع')}</p>
                     <p className="text-[13px] font-semibold text-[#061b31]">
                       {activeLease.payment_frequency === 'monthly' ? 'شهري' :
                        activeLease.payment_frequency === 'quarterly' ? 'ربع سنوي' :
@@ -259,32 +259,32 @@ export default function TenantDashboardPage() {
                     </p>
                   </div>
                   <div>
-                    <p className="text-[12px] text-[#64748d] mb-1">تاريخ البدء</p>
+                    <p className="text-xs text-[#64748d] mb-1">تاريخ البدء</p>
                     <p className="text-[13px] font-semibold text-[#061b31]">{formatDate(activeLease.start_date)}</p>
                   </div>
                   <div>
-                    <p className="text-[12px] text-[#64748d] mb-1">{tt('documents.expiryDate', 'تاريخ الانتهاء')}</p>
+                    <p className="text-xs text-[#64748d] mb-1">{tt('documents.expiryDate', 'تاريخ الانتهاء')}</p>
                     <p className="text-[13px] font-semibold text-[#061b31]">{formatDate(activeLease.end_date)}</p>
                   </div>
                   <div>
-                    <p className="text-[12px] text-[#64748d] mb-1">حالة العقد</p>
+                    <p className="text-xs text-[#64748d] mb-1">حالة العقد</p>
                     <StatusBadge status={activeLease.status} />
                   </div>
                 </div>
                 <div className="pt-3 border-t border-[#e5edf5] flex items-center justify-between">
-                  <p className="text-[12px] text-[#64748d]">
+                  <p className="text-xs text-[#64748d]">
                     <MapPin className="h-3 w-3 inline ml-1" />
                     {property?.address}
                   </p>
                   <div className="flex gap-2">
                     <Link to="/portal/tenant/inspections">
-                      <Button variant="outline" size="sm" className="h-8 text-[12px]">
+                      <Button variant="outline" size="sm" className="h-8 text-xs">
                         <ClipboardList className="h-3.5 w-3.5 ml-1" />
                         فحص الانتقال
                       </Button>
                     </Link>
                     <Link to="/portal/tenant/notices">
-                      <Button variant="outline" size="sm" className="h-8 text-[12px]">
+                      <Button variant="outline" size="sm" className="h-8 text-xs">
                         <FileSignature className="h-3.5 w-3.5 ml-1" />
                         طلب تجديد
                       </Button>
@@ -303,7 +303,7 @@ export default function TenantDashboardPage() {
           <CardHeader className="flex flex-row items-center justify-between">
             <CardTitle className="text-base font-bold text-[#061b31]">آخر طلبات الصيانة</CardTitle>
             <Link to="/portal/tenant/maintenance">
-              <Button variant="ghost" size="sm" className="h-7 text-[12px] text-[#533afd]">
+              <Button variant="ghost" size="sm" className="h-7 text-xs text-[#533afd]">
                 الكل
                 <ArrowLeft className="h-3 w-3 mr-1" />
               </Button>
@@ -313,17 +313,17 @@ export default function TenantDashboardPage() {
             {maintenance.length === 0 ? (
               <div className="text-center py-6 text-[#64748d]">
                 <Wrench className="h-8 w-8 mx-auto text-gray-300 mb-2" />
-                <p className="text-[12px]">لا توجد طلبات صيانة</p>
+                <p className="text-xs">لا توجد طلبات صيانة</p>
               </div>
             ) : (
               <div className="space-y-2">
                 {maintenance.slice(0, 4).map((m) => (
                   <div key={m.id} className="p-3 bg-[#f6f9fc] rounded-lg">
                     <div className="flex items-start justify-between gap-2 mb-1">
-                      <p className="text-[12px] font-semibold text-[#061b31] line-clamp-1">{m.description}</p>
+                      <p className="text-xs font-semibold text-[#061b31] line-clamp-1">{m.description}</p>
                       <StatusBadge status={m.status} />
                     </div>
-                    <p className="text-[12px] text-[#64748d]">{m.request_number} · {m.priority === 'emergency' ? '🚨 طارئ' : m.priority === 'high' ? 'عالية' : m.priority === 'medium' ? 'متوسطة' : 'منخفضة'}</p>
+                    <p className="text-xs text-[#64748d]">{m.request_number} · {m.priority === 'emergency' ? '🚨 طارئ' : m.priority === 'high' ? 'عالية' : m.priority === 'medium' ? 'متوسطة' : 'منخفضة'}</p>
                   </div>
                 ))}
               </div>
@@ -341,8 +341,8 @@ export default function TenantDashboardPage() {
             </div>
             <div className="flex-1">
               <p className="text-[13px] font-semibold text-[#061b31] mb-1">تحتاج مساعدة؟</p>
-              <p className="text-[12px] text-[#64748d] mb-2">فريق إدارة العقار متاح لمساعدتك في أي استفسار</p>
-              <div className="flex flex-wrap gap-3 text-[12px]">
+              <p className="text-xs text-[#64748d] mb-2">فريق إدارة العقار متاح لمساعدتك في أي استفسار</p>
+              <div className="flex flex-wrap gap-3 text-xs">
                 <a href="tel:+97444445555" className="flex items-center gap-1 text-gray-700 hover:text-[#533afd]">
                   <Phone className="h-3 w-3" /> +974 4444 5555
                 </a>

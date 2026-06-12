@@ -121,10 +121,10 @@ export default function LandlordDashboardPage() {
               <div className="h-10 w-10 rounded-xl bg-[rgba(83,58,253,0.06)] flex items-center justify-center">
                 <Home className="h-5 w-5 text-[#533afd]" />
               </div>
-              <span className="text-[12px] text-[#64748d] font-medium">إجمالي</span>
+              <span className="text-xs text-[#64748d] font-medium">إجمالي</span>
             </div>
             <p className="text-2xl font-bold text-[#061b31]">{totalUnits}</p>
-            <p className="text-[12px] text-[#64748d] mt-1">وحدة · {leasedUnits} مؤجرة · {availableUnits} متاحة</p>
+            <p className="text-xs text-[#64748d] mt-1">وحدة · {leasedUnits} مؤجرة · {availableUnits} متاحة</p>
           </CardContent>
         </Card>
 
@@ -134,10 +134,10 @@ export default function LandlordDashboardPage() {
               <div className="h-10 w-10 rounded-xl bg-emerald-50 flex items-center justify-center">
                 <TrendingUp className="h-5 w-5 text-emerald-600" />
               </div>
-              <span className="text-[12px] text-[#64748d] font-medium">الإشغال</span>
+              <span className="text-xs text-[#64748d] font-medium">الإشغال</span>
             </div>
             <p className="text-2xl font-bold text-[#061b31]">{occupancyRate.toFixed(0)}%</p>
-            <p className="text-[12px] text-[#64748d] mt-1">نسبة الإشغال الحالية</p>
+            <p className="text-xs text-[#64748d] mt-1">نسبة الإشغال الحالية</p>
           </CardContent>
         </Card>
 
@@ -147,10 +147,10 @@ export default function LandlordDashboardPage() {
               <div className="h-10 w-10 rounded-xl bg-amber-50 flex items-center justify-center">
                 <Wallet className="h-5 w-5 text-[#9b6829]" />
               </div>
-              <span className="text-[12px] text-[#64748d] font-medium">{tt('leases.frequencies.monthly', 'شهري')}</span>
+              <span className="text-xs text-[#64748d] font-medium">{tt('leases.frequencies.monthly', 'شهري')}</span>
             </div>
             <p className="text-lg font-bold text-[#061b31]">{fmt(monthlyRevenue)}</p>
-            <p className="text-[12px] text-[#64748d] mt-1">إيراد شهري (سنوي: {fmtInt(annualRevenue)})</p>
+            <p className="text-xs text-[#64748d] mt-1">إيراد شهري (سنوي: {fmtInt(annualRevenue)})</p>
           </CardContent>
         </Card>
 
@@ -160,10 +160,10 @@ export default function LandlordDashboardPage() {
               <div className="h-10 w-10 rounded-xl bg-red-50 flex items-center justify-center">
                 <AlertTriangle className="h-5 w-5 text-[#ea2261]" />
               </div>
-              <span className="text-[12px] text-[#64748d] font-medium">مستحقات</span>
+              <span className="text-xs text-[#64748d] font-medium">مستحقات</span>
             </div>
             <p className="text-lg font-bold text-[#061b31]">{fmt(totalReceivables)}</p>
-            <p className="text-[12px] text-[#64748d] mt-1">إجمالي المستحقات غير المحصلة</p>
+            <p className="text-xs text-[#64748d] mt-1">إجمالي المستحقات غير المحصلة</p>
           </CardContent>
         </Card>
       </div>
@@ -176,7 +176,7 @@ export default function LandlordDashboardPage() {
               <BarChart3 className="h-4 w-4 text-emerald-600" />
               أداء العقارات
             </CardTitle>
-            <CardDescription className="text-[12px]">الإيراد الشهري المتوقع لكل عقار</CardDescription>
+            <CardDescription className="text-xs">الإيراد الشهري المتوقع لكل عقار</CardDescription>
           </CardHeader>
           <CardContent>
             {propertyPerformance.length === 0 ? (
@@ -209,7 +209,7 @@ export default function LandlordDashboardPage() {
               عقود تنتهي قريباً
             </CardTitle>
             <Link to="/portal/landlord/renewals">
-              <Button variant="ghost" size="sm" className="h-7 text-[12px] text-emerald-600">
+              <Button variant="ghost" size="sm" className="h-7 text-xs text-emerald-600">
                 الكل
                 <ArrowLeft className="h-3 w-3 mr-1" />
               </Button>
@@ -217,7 +217,7 @@ export default function LandlordDashboardPage() {
           </CardHeader>
           <CardContent>
             {expiringSoon.length === 0 ? (
-              <p className="text-center text-[#64748d] py-6 text-[12px]">لا توجد عقود تنتهي قريباً</p>
+              <p className="text-center text-[#64748d] py-6 text-xs">لا توجد عقود تنتهي قريباً</p>
             ) : (
               <div className="space-y-2">
                 {expiringSoon.slice(0, 4).map((l) => {
@@ -225,12 +225,12 @@ export default function LandlordDashboardPage() {
                   return (
                     <div key={l.id} className="p-3 bg-amber-50/50 border border-amber-100 rounded-lg">
                       <div className="flex items-center justify-between">
-                        <p className="text-[12px] font-semibold text-[#061b31]">{l.contract_number}</p>
-                        <span className="text-[12px] px-2 py-0.5 rounded-full bg-amber-100 text-[#9b6829] font-medium">
+                        <p className="text-xs font-semibold text-[#061b31]">{l.contract_number}</p>
+                        <span className="text-xs px-2 py-0.5 rounded-full bg-amber-100 text-[#9b6829] font-medium">
                           {days} يوم
                         </span>
                       </div>
-                      <p className="text-[12px] text-[#64748d] mt-0.5">ينتهي {formatDate(l.end_date)}</p>
+                      <p className="text-xs text-[#64748d] mt-0.5">ينتهي {formatDate(l.end_date)}</p>
                     </div>
                   );
                 })}
@@ -249,7 +249,7 @@ export default function LandlordDashboardPage() {
                 <Users className="h-4 w-4 text-violet-600" />
               </div>
               <div>
-                <p className="text-[12px] text-[#64748d]">{tt('tenants.title', 'المستأجرون')}</p>
+                <p className="text-xs text-[#64748d]">{tt('tenants.title', 'المستأجرون')}</p>
                 <p className="text-[18px] font-bold text-[#061b31]">{leases.filter((l) => l.status === 'active').length}</p>
               </div>
             </div>
@@ -262,8 +262,8 @@ export default function LandlordDashboardPage() {
                 <CheckCircle2 className="h-4 w-4 text-emerald-600" />
               </div>
               <div>
-                <p className="text-[12px] text-[#64748d]">محصل هذا العام</p>
-                <p className="text-[14px] font-bold text-[#061b31]">{fmt(collectedThisYear)}</p>
+                <p className="text-xs text-[#64748d]">محصل هذا العام</p>
+                <p className="text-sm font-bold text-[#061b31]">{fmt(collectedThisYear)}</p>
               </div>
             </div>
           </CardContent>
@@ -275,7 +275,7 @@ export default function LandlordDashboardPage() {
                 <Wrench className="h-4 w-4 text-[#9b6829]" />
               </div>
               <div>
-                <p className="text-[12px] text-[#64748d]">صيانة مفتوحة</p>
+                <p className="text-xs text-[#64748d]">صيانة مفتوحة</p>
                 <p className="text-[18px] font-bold text-[#061b31]">{openMaintenance}</p>
               </div>
             </div>
@@ -288,7 +288,7 @@ export default function LandlordDashboardPage() {
                 <TrendingDown className="h-4 w-4 text-rose-600" />
               </div>
               <div>
-                <p className="text-[12px] text-[#64748d]">معدل التحصيل</p>
+                <p className="text-xs text-[#64748d]">معدل التحصيل</p>
                 <p className="text-[18px] font-bold text-[#061b31]">
                   {totalReceivables + collectedThisYear > 0
                     ? Math.round((collectedThisYear / (collectedThisYear + totalReceivables)) * 100)
@@ -305,10 +305,10 @@ export default function LandlordDashboardPage() {
         <CardHeader className="flex flex-row items-center justify-between">
           <div>
             <CardTitle className="text-base font-bold text-[#061b31]">عقاراتي</CardTitle>
-            <CardDescription className="text-[12px]">جميع العقارات في محفظتك</CardDescription>
+            <CardDescription className="text-xs">جميع العقارات في محفظتك</CardDescription>
           </div>
           <Link to="/portal/landlord/performance">
-            <Button variant="ghost" size="sm" className="h-7 text-[12px] text-emerald-600">
+            <Button variant="ghost" size="sm" className="h-7 text-xs text-emerald-600">
               التفاصيل
               <ArrowLeft className="h-3 w-3 mr-1" />
             </Button>
@@ -325,21 +325,21 @@ export default function LandlordDashboardPage() {
                   <div className="flex items-center justify-between mb-2">
                     <h3 className="text-[13px] font-bold text-[#061b31]">{p.property_name}</h3>
                     {propertyId === p.id && (
-                      <span className="text-[12px] px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-700 font-medium">الحالي</span>
+                      <span className="text-xs px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-700 font-medium">الحالي</span>
                     )}
                   </div>
-                  <p className="text-[12px] text-[#64748d] flex items-center gap-1 mb-3">
+                  <p className="text-xs text-[#64748d] flex items-center gap-1 mb-3">
                     <MapPin className="h-3 w-3" />
                     {p.address}
                   </p>
                   <div className="grid grid-cols-2 gap-2">
                     <div>
-                      <p className="text-[12px] text-[#64748d]">{tt('units.title', 'الوحدات')}</p>
-                      <p className="text-[14px] font-bold text-[#061b31]">{propUnits.length}</p>
+                      <p className="text-xs text-[#64748d]">{tt('units.title', 'الوحدات')}</p>
+                      <p className="text-sm font-bold text-[#061b31]">{propUnits.length}</p>
                     </div>
                     <div>
-                      <p className="text-[12px] text-[#64748d]">الإشغال</p>
-                      <p className="text-[14px] font-bold text-emerald-600">{occ}%</p>
+                      <p className="text-xs text-[#64748d]">الإشغال</p>
+                      <p className="text-sm font-bold text-emerald-600">{occ}%</p>
                     </div>
                   </div>
                 </div>

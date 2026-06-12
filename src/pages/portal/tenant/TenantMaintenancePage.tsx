@@ -143,7 +143,7 @@ export default function TenantMaintenancePage() {
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
         <div>
           <h1 className="text-2xl font-bold text-[#061b31]">{tt('maintenance.requests', 'طلبات الصيانة')}</h1>
-          <p className="text-[12px] text-[#64748d] mt-0.5">قدّم وتتبع طلبات الصيانة لوحدتك</p>
+          <p className="text-xs text-[#64748d] mt-0.5">قدّم وتتبع طلبات الصيانة لوحدتك</p>
         </div>
         <Button className="bg-violet-600 hover:bg-violet-700 h-10 text-[13px] font-semibold" onClick={() => setFormOpen(true)}>
           <Plus className="h-4 w-4 ml-1" />
@@ -155,30 +155,30 @@ export default function TenantMaintenancePage() {
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
         <Card className="border-0 shadow-[rgba(50,50,93,0.20)_0px_4px_8px_-2px]">
           <CardContent className="p-4">
-            <p className="text-[12px] text-[#64748d]">إجمالي</p>
-            <p className="text-[20px] font-bold text-[#061b31]">{requests.length}</p>
+            <p className="text-xs text-[#64748d]">إجمالي</p>
+            <p className="text-xl font-bold text-[#061b31]">{requests.length}</p>
           </CardContent>
         </Card>
         <Card className="border-0 shadow-[rgba(50,50,93,0.20)_0px_4px_8px_-2px]">
           <CardContent className="p-4">
-            <p className="text-[12px] text-[#9b6829]">قيد المعالجة</p>
-            <p className="text-[20px] font-bold text-[#9b6829]">
+            <p className="text-xs text-[#9b6829]">قيد المعالجة</p>
+            <p className="text-xl font-bold text-[#9b6829]">
               {requests.filter((r) => ['submitted', 'under_review', 'approved', 'assigned', 'in_progress', 'waiting_parts'].includes(r.status)).length}
             </p>
           </CardContent>
         </Card>
         <Card className="border-0 shadow-[rgba(50,50,93,0.20)_0px_4px_8px_-2px]">
           <CardContent className="p-4">
-            <p className="text-[12px] text-emerald-600">{tt('maintenance.statuses.completed', 'مكتمل')}</p>
-            <p className="text-[20px] font-bold text-emerald-600">
+            <p className="text-xs text-emerald-600">{tt('maintenance.statuses.completed', 'مكتمل')}</p>
+            <p className="text-xl font-bold text-emerald-600">
               {requests.filter((r) => ['completed', 'closed', 'tenant_confirmed'].includes(r.status)).length}
             </p>
           </CardContent>
         </Card>
         <Card className="border-0 shadow-[rgba(50,50,93,0.20)_0px_4px_8px_-2px]">
           <CardContent className="p-4">
-            <p className="text-[12px] text-[#ea2261]">ملغى</p>
-            <p className="text-[20px] font-bold text-[#ea2261]">
+            <p className="text-xs text-[#ea2261]">ملغى</p>
+            <p className="text-xl font-bold text-[#ea2261]">
               {requests.filter((r) => r.status === 'cancelled').length}
             </p>
           </CardContent>
@@ -190,8 +190,8 @@ export default function TenantMaintenancePage() {
         <Card className="border-0 shadow-[rgba(50,50,93,0.20)_0px_4px_8px_-2px]">
           <CardContent className="py-12 text-center">
             <Wrench className="h-12 w-12 mx-auto text-gray-300 mb-3" />
-            <p className="text-[#64748d] text-[14px]">لا توجد طلبات صيانة</p>
-            <p className="text-[#64748d] text-[12px] mt-1">ابدأ بتقديم طلب صيانة جديد</p>
+            <p className="text-[#64748d] text-sm">لا توجد طلبات صيانة</p>
+            <p className="text-[#64748d] text-xs mt-1">ابدأ بتقديم طلب صيانة جديد</p>
           </CardContent>
         </Card>
       ) : (
@@ -207,19 +207,19 @@ export default function TenantMaintenancePage() {
                       </div>
                       <div>
                         <p className="text-[13px] font-bold text-[#061b31]">{req.request_number}</p>
-                        <p className="text-[12px] text-[#64748d]">
+                        <p className="text-xs text-[#64748d]">
                           {CATEGORIES.find((c) => c.value === req.category)?.icon} {CATEGORIES.find((c) => c.value === req.category)?.label}
                         </p>
                       </div>
                       <StatusBadge status={req.status} />
                       {req.priority === 'emergency' && (
-                        <span className="text-[12px] px-2 py-0.5 rounded-full bg-red-50 text-[#ea2261] font-medium flex items-center gap-1">
+                        <span className="text-xs px-2 py-0.5 rounded-full bg-red-50 text-[#ea2261] font-medium flex items-center gap-1">
                           <AlertTriangle className="h-3 w-3" /> طارئ
                         </span>
                       )}
                     </div>
-                    <p className="text-[12px] text-gray-700 mb-2 leading-relaxed">{req.description}</p>
-                    <div className="flex items-center gap-3 text-[12px] text-[#64748d] flex-wrap">
+                    <p className="text-xs text-gray-700 mb-2 leading-relaxed">{req.description}</p>
+                    <div className="flex items-center gap-3 text-xs text-[#64748d] flex-wrap">
                       <span className="flex items-center gap-1">
                         <Clock className="h-3 w-3" />
                         الوقت المفضل: {req.preferred_visit_time}
@@ -227,12 +227,12 @@ export default function TenantMaintenancePage() {
                     </div>
                   </div>
                   <div className="flex gap-2">
-                    <Button variant="outline" size="sm" className="h-8 text-[12px]" onClick={() => setViewRequest(req)}>
+                    <Button variant="outline" size="sm" className="h-8 text-xs" onClick={() => setViewRequest(req)}>
                       <Eye className="h-3 w-3 ml-1" />
                       التفاصيل
                     </Button>
                     {!['completed', 'closed', 'cancelled', 'tenant_confirmed'].includes(req.status) && (
-                      <Button variant="ghost" size="sm" className="h-8 text-[12px] text-[#ea2261] hover:bg-red-50" onClick={() => handleCancelRequest(req.id)}>
+                      <Button variant="ghost" size="sm" className="h-8 text-xs text-[#ea2261] hover:bg-red-50" onClick={() => handleCancelRequest(req.id)}>
                         <XCircle className="h-3 w-3 ml-1" />
                         إلغاء
                       </Button>
@@ -250,14 +250,14 @@ export default function TenantMaintenancePage() {
         <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle className="text-lg font-bold">طلب صيانة جديد</DialogTitle>
-            <DialogDescription className="text-[12px]">
+            <DialogDescription className="text-xs">
               املأ التفاصيل التالية وسيتم التواصل معك في أقرب وقت
             </DialogDescription>
           </DialogHeader>
 
           <div className="space-y-4">
             <div>
-              <Label className="text-[12px] mb-2 block">نوع المشكلة</Label>
+              <Label className="text-xs mb-2 block">نوع المشكلة</Label>
               <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
                 {CATEGORIES.map((c) => (
                   <button
@@ -270,20 +270,20 @@ export default function TenantMaintenancePage() {
                     }`}
                   >
                     <div className="text-xl mb-1">{c.icon}</div>
-                    <p className="text-[12px] text-gray-700">{c.label}</p>
+                    <p className="text-xs text-gray-700">{c.label}</p>
                   </button>
                 ))}
               </div>
             </div>
 
             <div>
-              <Label className="text-[12px]">{tt('maintenance.priority', 'الأولوية')}</Label>
+              <Label className="text-xs">{tt('maintenance.priority', 'الأولوية')}</Label>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mt-1">
                 {PRIORITIES.map((p) => (
                   <button
                     key={p.value}
                     onClick={() => setForm({ ...form, priority: p.value })}
-                    className={`p-2 rounded-lg border-2 text-center text-[12px] font-medium transition-all ${
+                    className={`p-2 rounded-lg border-2 text-center text-xs font-medium transition-all ${
                       form.priority === p.value
                         ? `border-${p.color}-500 bg-${p.color}-50 text-${p.color}-700`
                         : 'border-[#e5edf5] text-[#64748d] hover:border-[#e5edf5]'
@@ -296,7 +296,7 @@ export default function TenantMaintenancePage() {
             </div>
 
             <div>
-              <Label className="text-[12px]">وصف المشكلة</Label>
+              <Label className="text-xs">وصف المشكلة</Label>
               <Textarea
                 placeholder="اشرح المشكلة بالتفصيل..."
                 value={form.description}
@@ -306,7 +306,7 @@ export default function TenantMaintenancePage() {
             </div>
 
             <div>
-              <Label className="text-[12px]">الوقت المفضل للزيارة</Label>
+              <Label className="text-xs">الوقت المفضل للزيارة</Label>
               <Input
                 value={form.preferred_visit_time}
                 onChange={(e) => setForm({ ...form, preferred_visit_time: e.target.value })}
@@ -316,7 +316,7 @@ export default function TenantMaintenancePage() {
             </div>
 
             <div>
-              <Label className="text-[12px] mb-2 block">صور المشكلة (اختياري)</Label>
+              <Label className="text-xs mb-2 block">صور المشكلة (اختياري)</Label>
               <div className="grid grid-cols-4 gap-2">
                 {form.photos.map((p, i) => (
                   <div key={i} className="relative aspect-square rounded-lg overflow-hidden border border-[#e5edf5]">
@@ -335,7 +335,7 @@ export default function TenantMaintenancePage() {
                     className="aspect-square rounded-lg border-2 border-dashed border-[#e5edf5] hover:border-violet-400 flex flex-col items-center justify-center text-[#64748d] hover:text-violet-600"
                   >
                     <Camera className="h-5 w-5 mb-1" />
-                    <span className="text-[12px]">إضافة صورة</span>
+                    <span className="text-xs">إضافة صورة</span>
                   </button>
                 )}
               </div>
@@ -363,23 +363,23 @@ export default function TenantMaintenancePage() {
           {viewRequest && (
             <div className="space-y-3">
               <div className="flex items-center justify-between">
-                <p className="text-[14px] font-bold text-[#061b31]">{viewRequest.request_number}</p>
+                <p className="text-sm font-bold text-[#061b31]">{viewRequest.request_number}</p>
                 <StatusBadge status={viewRequest.status} />
               </div>
               <div className="p-3 bg-[#f6f9fc] rounded-lg">
-                <p className="text-[12px] text-[#64748d] mb-1">{tt('maintenance.description', 'الوصف')}</p>
-                <p className="text-[12px] text-gray-700 whitespace-pre-line">{viewRequest.description}</p>
+                <p className="text-xs text-[#64748d] mb-1">{tt('maintenance.description', 'الوصف')}</p>
+                <p className="text-xs text-gray-700 whitespace-pre-line">{viewRequest.description}</p>
               </div>
               <div className="grid grid-cols-2 gap-2">
                 <div className="p-3 bg-[#f6f9fc] rounded-lg">
-                  <p className="text-[12px] text-[#64748d]">{tt('inventory.category', 'الفئة')}</p>
-                  <p className="text-[12px] font-semibold">
+                  <p className="text-xs text-[#64748d]">{tt('inventory.category', 'الفئة')}</p>
+                  <p className="text-xs font-semibold">
                     {CATEGORIES.find((c) => c.value === viewRequest.category)?.label}
                   </p>
                 </div>
                 <div className="p-3 bg-[#f6f9fc] rounded-lg">
-                  <p className="text-[12px] text-[#64748d]">{tt('maintenance.priority', 'الأولوية')}</p>
-                  <p className="text-[12px] font-semibold">
+                  <p className="text-xs text-[#64748d]">{tt('maintenance.priority', 'الأولوية')}</p>
+                  <p className="text-xs font-semibold">
                     {PRIORITIES.find((p) => p.value === viewRequest.priority)?.label}
                   </p>
                 </div>

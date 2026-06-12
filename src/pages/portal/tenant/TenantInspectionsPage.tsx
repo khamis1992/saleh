@@ -142,14 +142,14 @@ export default function TenantInspectionsPage() {
       {/* Header */}
       <div>
         <h1 className="text-2xl font-bold text-[#061b31]">فحوصات الوحدة</h1>
-        <p className="text-[12px] text-[#64748d] mt-0.5">فحوصات الدخول والخروج والتوقيع عليها</p>
+        <p className="text-xs text-[#64748d] mt-0.5">فحوصات الدخول والخروج والتوقيع عليها</p>
       </div>
 
       {inspections.length === 0 ? (
         <Card className="border-0 shadow-[rgba(50,50,93,0.20)_0px_4px_8px_-2px]">
           <CardContent className="py-12 text-center">
             <ClipboardList className="h-12 w-12 mx-auto text-gray-300 mb-3" />
-            <p className="text-[#64748d] text-[14px]">لا توجد فحوصات حالياً</p>
+            <p className="text-[#64748d] text-sm">لا توجد فحوصات حالياً</p>
           </CardContent>
         </Card>
       ) : (
@@ -169,8 +169,8 @@ export default function TenantInspectionsPage() {
                       </div>
                       <div>
                         <div className="flex items-center gap-2 mb-1 flex-wrap">
-                          <p className="text-[14px] font-bold text-[#061b31]">{insp.inspection_number}</p>
-                          <span className={`text-[12px] px-2 py-0.5 rounded-full font-medium ${
+                          <p className="text-sm font-bold text-[#061b31]">{insp.inspection_number}</p>
+                          <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${
                             isCompleted ? 'bg-emerald-50 text-emerald-700' :
                             insp.status === 'in_progress' ? 'bg-amber-50 text-[#9b6829]' :
                             insp.status === 'cancelled' ? 'bg-gray-100 text-gray-700' :
@@ -180,7 +180,7 @@ export default function TenantInspectionsPage() {
                           </span>
                           {isCompleted && <CheckCircle2 className="h-4 w-4 text-emerald-600" />}
                         </div>
-                        <p className="text-[12px] text-[#64748d] flex items-center gap-2 flex-wrap">
+                        <p className="text-xs text-[#64748d] flex items-center gap-2 flex-wrap">
                           <span className="flex items-center gap-1">
                             <Calendar className="h-3 w-3" />
                             {formatDateLong(insp.inspection_date)}
@@ -193,7 +193,7 @@ export default function TenantInspectionsPage() {
                           )}
                         </p>
                         {insp.findings && (
-                          <p className="text-[12px] text-[#64748d] mt-1 line-clamp-2">{insp.findings}</p>
+                          <p className="text-xs text-[#64748d] mt-1 line-clamp-2">{insp.findings}</p>
                         )}
                       </div>
                     </div>
@@ -201,7 +201,7 @@ export default function TenantInspectionsPage() {
                       {!isCompleted && !isSynthesized ? (
                         <Button
                           size="sm"
-                          className="h-9 text-[12px] bg-[#533afd] hover:bg-blue-700"
+                          className="h-9 text-xs bg-[#533afd] hover:bg-blue-700"
                           onClick={() => setSigningInspection(insp)}
                         >
                           <FileSignature className="h-4 w-4 ml-1" />
@@ -210,14 +210,14 @@ export default function TenantInspectionsPage() {
                       ) : isSynthesized ? (
                         <Button
                           size="sm"
-                          className="h-9 text-[12px] bg-[#533afd] hover:bg-blue-700"
+                          className="h-9 text-xs bg-[#533afd] hover:bg-blue-700"
                           onClick={() => setSigningInspection(insp)}
                         >
                           <FileSignature className="h-4 w-4 ml-1" />
                           توقيع فحص الدخول
                         </Button>
                       ) : (
-                        <Button variant="outline" size="sm" className="h-9 text-[12px]" onClick={() => setSigningInspection(insp)}>
+                        <Button variant="outline" size="sm" className="h-9 text-xs" onClick={() => setSigningInspection(insp)}>
                           <FileText className="h-4 w-4 ml-1" />
                           عرض التفاصيل
                         </Button>
@@ -238,7 +238,7 @@ export default function TenantInspectionsPage() {
             <DialogTitle>
               {signingInspection?.status === 'completed' ? 'تفاصيل الفحص' : 'مراجعة وتوقيع الفحص'}
             </DialogTitle>
-            <DialogDescription className="text-[12px]">
+            <DialogDescription className="text-xs">
               {signingInspection?.status === 'completed'
                 ? 'تم توقيع هذا الفحص مسبقاً'
                 : 'راجع القائمة أدناه ووقّع لتأكيد الفحص'}
@@ -248,12 +248,12 @@ export default function TenantInspectionsPage() {
           {signingInspection && (
             <div className="space-y-4">
               <div className="p-3 bg-[#f6f9fc] rounded-lg">
-                <p className="text-[12px] text-[#64748d] mb-1">الملاحظات المسجلة</p>
-                <p className="text-[12px] text-gray-700 whitespace-pre-line">{signingInspection.findings}</p>
+                <p className="text-xs text-[#64748d] mb-1">الملاحظات المسجلة</p>
+                <p className="text-xs text-gray-700 whitespace-pre-line">{signingInspection.findings}</p>
               </div>
 
               <div className="space-y-2">
-                <p className="text-[12px] font-semibold text-[#061b31]">قائمة الفحص</p>
+                <p className="text-xs font-semibold text-[#061b31]">قائمة الفحص</p>
                 {DEFAULT_CHECKLIST.map((item) => {
                   const isChecked = signingInspection.status === 'completed' ? true : checked.has(item.id);
                   return (
@@ -268,7 +268,7 @@ export default function TenantInspectionsPage() {
                       ) : (
                         <Square className="h-5 w-5 text-gray-300 flex-shrink-0" />
                       )}
-                      <span className="text-[12px] text-gray-700">{item.label}</span>
+                      <span className="text-xs text-gray-700">{item.label}</span>
                     </button>
                   );
                 })}
@@ -277,7 +277,7 @@ export default function TenantInspectionsPage() {
               {signingInspection.status !== 'completed' && (
                 <>
                   <div>
-                    <Label className="text-[12px]">ملاحظات إضافية (اختياري)</Label>
+                    <Label className="text-xs">ملاحظات إضافية (اختياري)</Label>
                     <Textarea
                       value={notes}
                       onChange={(e) => setNotes(e.target.value)}
@@ -287,14 +287,14 @@ export default function TenantInspectionsPage() {
                   </div>
 
                   <div>
-                    <Label className="text-[12px] mb-2 block">التوقيع</Label>
+                    <Label className="text-xs mb-2 block">التوقيع</Label>
                     <SignaturePad
                       onSave={(sig) => setSignature(sig)}
                       width={460}
                       height={160}
                     />
                     {signature && (
-                      <p className="text-[12px] text-emerald-600 mt-1">✓ تم اعتماد التوقيع</p>
+                      <p className="text-xs text-emerald-600 mt-1">✓ تم اعتماد التوقيع</p>
                     )}
                   </div>
                 </>

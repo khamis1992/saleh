@@ -108,7 +108,7 @@ export default function TenantPayRentPage() {
       {/* Header */}
       <div>
         <h1 className="text-2xl font-bold text-[#061b31]">دفع الإيجار</h1>
-        <p className="text-[12px] text-[#64748d] mt-0.5">ادفع فاتورتك بأمان عبر بوابات الدفع المعتمدة</p>
+        <p className="text-xs text-[#64748d] mt-0.5">ادفع فاتورتك بأمان عبر بوابات الدفع المعتمدة</p>
       </div>
 
       {/* Step indicator */}
@@ -129,12 +129,12 @@ export default function TenantPayRentPage() {
               return (
                 <div key={s.key} className="flex items-center flex-1">
                   <div className="flex flex-col items-center">
-                    <div className={`h-8 w-8 rounded-full flex items-center justify-center text-[12px] font-bold transition-colors ${
+                    <div className={`h-8 w-8 rounded-full flex items-center justify-center text-xs font-bold transition-colors ${
                       isDone ? 'bg-emerald-500 text-white' : isActive ? 'bg-[#533afd] text-white' : 'bg-gray-200 text-[#64748d]'
                     }`}>
                       {isDone ? <CheckCircle2 className="h-4 w-4" /> : i + 1}
                     </div>
-                    <p className="text-[12px] text-[#64748d] mt-1 whitespace-nowrap">{s.label}</p>
+                    <p className="text-xs text-[#64748d] mt-1 whitespace-nowrap">{s.label}</p>
                   </div>
                   {i < arr.length - 1 && (
                     <div className={`h-0.5 flex-1 mx-1 transition-colors ${
@@ -155,8 +155,8 @@ export default function TenantPayRentPage() {
             <Card className="border-0 shadow-[rgba(50,50,93,0.20)_0px_4px_8px_-2px]">
               <CardContent className="py-12 text-center">
                 <CheckCircle2 className="h-12 w-12 mx-auto text-emerald-500 mb-3" />
-                <p className="text-gray-700 text-[14px] font-semibold">لا توجد فواتير مستحقة</p>
-                <p className="text-[#64748d] text-[12px] mt-1">جميع فواتيرك مدفوعة</p>
+                <p className="text-gray-700 text-sm font-semibold">لا توجد فواتير مستحقة</p>
+                <p className="text-[#64748d] text-xs mt-1">جميع فواتيرك مدفوعة</p>
               </CardContent>
             </Card>
           ) : (
@@ -169,12 +169,12 @@ export default function TenantPayRentPage() {
                         <Receipt className="h-5 w-5 text-[#ea2261]" />
                       </div>
                       <div>
-                        <p className="text-[14px] font-bold text-[#061b31]">{inv.invoice_number}</p>
-                        <p className="text-[12px] text-[#64748d] mt-0.5">استحقاق {new Date(inv.due_date).toLocaleDateString('en-GB')}</p>
+                        <p className="text-sm font-bold text-[#061b31]">{inv.invoice_number}</p>
+                        <p className="text-xs text-[#64748d] mt-0.5">استحقاق {new Date(inv.due_date).toLocaleDateString('en-GB')}</p>
                       </div>
                     </div>
                     <div className="text-left">
-                      <p className="text-[12px] text-[#64748d]">المستحق</p>
+                      <p className="text-xs text-[#64748d]">المستحق</p>
                       <p className="text-[18px] font-bold text-[#ea2261]">{fmt(inv.balance)}</p>
                     </div>
                     <ArrowRight className="h-5 w-5 text-[#64748d]" />
@@ -192,12 +192,12 @@ export default function TenantPayRentPage() {
           <Card className="border-0 shadow-[rgba(50,50,93,0.20)_0px_4px_8px_-2px] bg-[rgba(83,58,253,0.06)]/50">
             <CardContent className="p-4 flex items-center justify-between">
               <div>
-                <p className="text-[12px] text-[#64748d]">الفاتورة المختارة</p>
+                <p className="text-xs text-[#64748d]">الفاتورة المختارة</p>
                 <p className="text-[13px] font-bold text-[#061b31]">{selectedInvoice.invoice_number}</p>
               </div>
               <div className="text-left">
-                <p className="text-[12px] text-[#64748d]">المستحق</p>
-                <p className="text-[16px] font-bold text-[#533afd]">{fmt(selectedInvoice.balance)}</p>
+                <p className="text-xs text-[#64748d]">المستحق</p>
+                <p className="text-base font-bold text-[#533afd]">{fmt(selectedInvoice.balance)}</p>
               </div>
             </CardContent>
           </Card>
@@ -219,7 +219,7 @@ export default function TenantPayRentPage() {
                       </div>
                       <div className="flex-1">
                         <p className="text-[13px] font-semibold text-[#061b31]">{m.label}</p>
-                        <p className="text-[12px] text-[#64748d]">عبر {m.gateway}</p>
+                        <p className="text-xs text-[#64748d]">عبر {m.gateway}</p>
                       </div>
                     </div>
                   </button>
@@ -228,7 +228,7 @@ export default function TenantPayRentPage() {
             </div>
           </div>
 
-          <Button variant="ghost" size="sm" onClick={() => setStep('select-invoice')} className="text-[12px]">
+          <Button variant="ghost" size="sm" onClick={() => setStep('select-invoice')} className="text-xs">
             <ArrowRight className="h-3.5 w-3.5 ml-1 rotate-180" />
             تغيير الفاتورة
           </Button>
@@ -244,37 +244,37 @@ export default function TenantPayRentPage() {
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-1.5">
-                <Label className="text-[12px]">المبلغ (ر.ق)</Label>
+                <Label className="text-xs">المبلغ (ر.ق)</Label>
                 <Input
                   type="number"
                   value={customAmount || selectedInvoice.balance}
                   onChange={(e) => setCustomAmount(e.target.value)}
-                  className="h-11 text-[15px] font-bold"
+                  className="h-11 text-sm font-bold"
                   dir="ltr"
                 />
-                <p className="text-[12px] text-[#64748d]">اتركه كما هو لدفع كامل المبلغ</p>
+                <p className="text-xs text-[#64748d]">اتركه كما هو لدفع كامل المبلغ</p>
               </div>
 
               <div className="p-4 bg-[#f6f9fc] rounded-xl space-y-2">
-                <div className="flex justify-between text-[12px]">
+                <div className="flex justify-between text-xs">
                   <span className="text-[#64748d]">وسيلة الدفع</span>
                   <span className="font-semibold text-[#061b31]">
                     {PAYMENT_METHODS.find((m) => m.value === selectedMethod)?.label}
                   </span>
                 </div>
-                <div className="flex justify-between text-[12px]">
+                <div className="flex justify-between text-xs">
                   <span className="text-[#64748d]">الفاتورة</span>
                   <span className="font-semibold text-[#061b31]">{selectedInvoice.invoice_number}</span>
                 </div>
                 <div className="border-t border-[#e5edf5] pt-2 flex justify-between">
                   <span className="text-[13px] font-semibold text-[#061b31]">المبلغ الإجمالي</span>
-                  <span className="text-[16px] font-bold text-[#533afd]">{fmt(payAmount)}</span>
+                  <span className="text-base font-bold text-[#533afd]">{fmt(payAmount)}</span>
                 </div>
               </div>
 
               <div className="flex items-start gap-2 p-3 bg-emerald-50 border border-emerald-200 rounded-lg">
                 <ShieldCheck className="h-4 w-4 text-emerald-600 flex-shrink-0 mt-0.5" />
-                <p className="text-[12px] text-emerald-700">
+                <p className="text-xs text-emerald-700">
                   الدفع آمن ومشفر عبر بوابة {PAYMENT_METHODS.find((m) => m.value === selectedMethod)?.gateway}. لن يتم تخزين بيانات بطاقتك.
                 </p>
               </div>
@@ -299,8 +299,8 @@ export default function TenantPayRentPage() {
         <Card className="border-0 shadow-[rgba(50,50,93,0.20)_0px_4px_8px_-2px]">
           <CardContent className="py-16 text-center">
             <Loader2 className="h-12 w-12 mx-auto text-[#533afd] animate-spin mb-4" />
-            <p className="text-[14px] font-semibold text-[#061b31]">جاري معالجة الدفع...</p>
-            <p className="text-[12px] text-[#64748d] mt-1">يرجى عدم إغلاق هذه النافذة</p>
+            <p className="text-sm font-semibold text-[#061b31]">جاري معالجة الدفع...</p>
+            <p className="text-xs text-[#64748d] mt-1">يرجى عدم إغلاق هذه النافذة</p>
           </CardContent>
         </Card>
       )}
@@ -313,29 +313,29 @@ export default function TenantPayRentPage() {
               <CheckCircle2 className="h-10 w-10 text-emerald-600" />
             </div>
             <h2 className="text-xl font-bold text-[#061b31] mb-1">تم الدفع بنجاح!</h2>
-            <p className="text-[12px] text-[#64748d] mb-6">شكراً لك. تم تسجيل الدفع وتحديث الفاتورة</p>
+            <p className="text-xs text-[#64748d] mb-6">شكراً لك. تم تسجيل الدفع وتحديث الفاتورة</p>
 
             <div className="max-w-sm mx-auto p-4 bg-emerald-50/50 border border-emerald-200 rounded-xl space-y-2 text-right">
-              <div className="flex justify-between text-[12px]">
+              <div className="flex justify-between text-xs">
                 <span className="text-[#64748d]">{tt('rentCollection.invoiceNumber', 'رقم الفاتورة')}</span>
                 <span className="font-semibold text-[#061b31]">{selectedInvoice.invoice_number}</span>
               </div>
-              <div className="flex justify-between text-[12px]">
+              <div className="flex justify-between text-xs">
                 <span className="text-[#64748d]">{tt('rentCollection.paidAmount', 'المبلغ المدفوع')}</span>
                 <span className="font-bold text-emerald-600">{fmt(payAmount)}</span>
               </div>
-              <div className="flex justify-between text-[12px]">
+              <div className="flex justify-between text-xs">
                 <span className="text-[#64748d]">رقم المعاملة</span>
                 <span className="font-semibold text-[#061b31]" dir="ltr">TXN-{Date.now().toString(36).toUpperCase().slice(0, 8)}</span>
               </div>
             </div>
 
             <div className="flex gap-2 justify-center mt-6">
-              <Button variant="outline" className="h-10 text-[12px]" onClick={handleStartOver}>
+              <Button variant="outline" className="h-10 text-xs" onClick={handleStartOver}>
                 <Receipt className="h-4 w-4 ml-1" />
                 فاتورة أخرى
               </Button>
-              <Button className="h-10 text-[12px] bg-[#533afd] hover:bg-blue-700" onClick={() => (window.location.href = '/portal/tenant/payments')}>
+              <Button className="h-10 text-xs bg-[#533afd] hover:bg-blue-700" onClick={() => (window.location.href = '/portal/tenant/payments')}>
                 <FileText className="h-4 w-4 ml-1" />
                 سجل المدفوعات
               </Button>

@@ -57,13 +57,13 @@ export default function TenantPaymentsPage() {
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
         <div>
           <h1 className="text-2xl font-bold text-[#061b31]">سجل المدفوعات</h1>
-          <p className="text-[12px] text-[#64748d] mt-0.5">جميع الإيصالات والمدفوعات السابقة</p>
+          <p className="text-xs text-[#64748d] mt-0.5">جميع الإيصالات والمدفوعات السابقة</p>
         </div>
         <div className="bg-emerald-50 border border-emerald-200 rounded-xl px-4 py-2 flex items-center gap-2">
           <TrendingUp className="h-4 w-4 text-emerald-600" />
           <div>
-            <p className="text-[12px] text-emerald-600">إجمالي المدفوع</p>
-            <p className="text-[15px] font-bold text-emerald-700">{fmt(totalPaid)}</p>
+            <p className="text-xs text-emerald-600">إجمالي المدفوع</p>
+            <p className="text-sm font-bold text-emerald-700">{fmt(totalPaid)}</p>
           </div>
         </div>
       </div>
@@ -84,7 +84,7 @@ export default function TenantPaymentsPage() {
         <Card className="border-0 shadow-[rgba(50,50,93,0.20)_0px_4px_8px_-2px]">
           <CardContent className="py-12 text-center">
             <Receipt className="h-12 w-12 mx-auto text-gray-300 mb-3" />
-            <p className="text-[#64748d] text-[14px]">لا توجد مدفوعات</p>
+            <p className="text-[#64748d] text-sm">لا توجد مدفوعات</p>
           </CardContent>
         </Card>
       ) : (
@@ -103,12 +103,12 @@ export default function TenantPaymentsPage() {
                       </div>
                       <div className="flex-1">
                         <div className="flex items-center gap-2 flex-wrap mb-1">
-                          <p className="text-[14px] font-bold text-[#061b31]">{r.receipt_number}</p>
-                          <span className={`text-[12px] px-2 py-0.5 rounded-full bg-${methodInfo.color}-50 text-${methodInfo.color}-700 font-medium`}>
+                          <p className="text-sm font-bold text-[#061b31]">{r.receipt_number}</p>
+                          <span className={`text-xs px-2 py-0.5 rounded-full bg-${methodInfo.color}-50 text-${methodInfo.color}-700 font-medium`}>
                             {methodInfo.label}
                           </span>
                         </div>
-                        <p className="text-[12px] text-[#64748d] flex items-center gap-3 flex-wrap">
+                        <p className="text-xs text-[#64748d] flex items-center gap-3 flex-wrap">
                           <span className="flex items-center gap-1">
                             <Calendar className="h-3 w-3" />
                             {formatDate(r.payment_date)}
@@ -133,20 +133,20 @@ export default function TenantPaymentsPage() {
                           )}
                         </p>
                         {r.notes && (
-                          <p className="text-[12px] text-[#64748d] mt-1 italic">{r.notes}</p>
+                          <p className="text-xs text-[#64748d] mt-1 italic">{r.notes}</p>
                         )}
                       </div>
                     </div>
                     <div className="flex items-center gap-3 lg:flex-col lg:items-end">
                       <div className="text-left">
-                        <p className="text-[12px] text-[#64748d]">{tt('common.amount', 'المبلغ')}</p>
+                        <p className="text-xs text-[#64748d]">{tt('common.amount', 'المبلغ')}</p>
                         <p className="text-[18px] font-bold text-emerald-600">{fmt(r.amount)}</p>
                       </div>
                       <Button
                         variant="outline"
                         size="sm"
                         onClick={() => handleDownload(r.receipt_number)}
-                        className="h-8 text-[12px]"
+                        className="h-8 text-xs"
                       >
                         <Download className="h-3 w-3 ml-1" />
                         إيصال

@@ -123,9 +123,9 @@ export default function TenantDocumentsPage() {
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
         <div>
           <h1 className="text-2xl font-bold text-[#061b31]">{tt('documents.title', 'المستندات')}</h1>
-          <p className="text-[12px] text-[#64748d] mt-0.5">جميع مستندات عقدك وسجلات الدفع</p>
+          <p className="text-xs text-[#64748d] mt-0.5">جميع مستندات عقدك وسجلات الدفع</p>
         </div>
-        <Button variant="outline" onClick={handleDownloadAll} className="h-10 text-[12px]">
+        <Button variant="outline" onClick={handleDownloadAll} className="h-10 text-xs">
           <Archive className="h-4 w-4 ml-1" />
           تحميل الكل (ZIP)
         </Button>
@@ -145,7 +145,7 @@ export default function TenantDocumentsPage() {
         <div className="flex gap-1 overflow-x-auto">
           <button
             onClick={() => setTypeFilter('all')}
-            className={`px-3 h-10 rounded-lg text-[12px] font-medium whitespace-nowrap ${
+            className={`px-3 h-10 rounded-lg text-xs font-medium whitespace-nowrap ${
               typeFilter === 'all' ? 'bg-gray-900 text-white' : 'bg-white text-gray-700 border border-[#e5edf5]'
             }`}
           >
@@ -157,7 +157,7 @@ export default function TenantDocumentsPage() {
               <button
                 key={t.value}
                 onClick={() => setTypeFilter(t.value)}
-                className={`px-3 h-10 rounded-lg text-[12px] font-medium whitespace-nowrap flex items-center gap-1.5 ${
+                className={`px-3 h-10 rounded-lg text-xs font-medium whitespace-nowrap flex items-center gap-1.5 ${
                   typeFilter === t.value ? `bg-${t.color}-600 text-white` : 'bg-white text-gray-700 border border-[#e5edf5]'
                 }`}
               >
@@ -174,7 +174,7 @@ export default function TenantDocumentsPage() {
         <Card className="border-0 shadow-[rgba(50,50,93,0.20)_0px_4px_8px_-2px]">
           <CardContent className="py-12 text-center">
             <FolderOpen className="h-12 w-12 mx-auto text-gray-300 mb-3" />
-            <p className="text-[#64748d] text-[14px]">لا توجد مستندات</p>
+            <p className="text-[#64748d] text-sm">لا توجد مستندات</p>
           </CardContent>
         </Card>
       ) : (
@@ -191,13 +191,13 @@ export default function TenantDocumentsPage() {
                     </div>
                     <div className="flex-1 min-w-0">
                       <p className="text-[13px] font-semibold text-[#061b31] line-clamp-2 leading-tight">{doc.name}</p>
-                      <p className="text-[12px] text-[#64748d] mt-0.5">{typeInfo.label}</p>
+                      <p className="text-xs text-[#64748d] mt-0.5">{typeInfo.label}</p>
                     </div>
                   </div>
                   {doc.notes && (
-                    <p className="text-[12px] text-[#64748d] mb-3 line-clamp-2">{doc.notes}</p>
+                    <p className="text-xs text-[#64748d] mb-3 line-clamp-2">{doc.notes}</p>
                   )}
-                  <div className="flex items-center justify-between text-[12px] text-[#64748d] mb-3">
+                  <div className="flex items-center justify-between text-xs text-[#64748d] mb-3">
                     <span className="flex items-center gap-1">
                       <Calendar className="h-3 w-3" />
                       {formatDate(doc.created_at)}
@@ -213,7 +213,7 @@ export default function TenantDocumentsPage() {
                   <Button
                     variant="outline"
                     size="sm"
-                    className="w-full h-8 text-[12px]"
+                    className="w-full h-8 text-xs"
                     onClick={() => handleDownload(doc)}
                   >
                     <Download className="h-3 w-3 ml-1" />

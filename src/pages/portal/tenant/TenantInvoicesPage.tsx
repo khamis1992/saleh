@@ -63,7 +63,7 @@ export default function TenantInvoicesPage() {
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
         <div>
           <h1 className="text-2xl font-bold text-[#061b31]">فواتيري</h1>
-          <p className="text-[12px] text-[#64748d] mt-0.5">جميع الفواتير الصادرة باسمك</p>
+          <p className="text-xs text-[#64748d] mt-0.5">جميع الفواتير الصادرة باسمك</p>
         </div>
         {totalUnpaid > 0 && (
           <Link to="/portal/tenant/pay">
@@ -79,7 +79,7 @@ export default function TenantInvoicesPage() {
       <div className="flex flex-wrap gap-2">
         <button
           onClick={() => setStatusFilter('all')}
-          className={`px-4 h-9 rounded-full text-[12px] font-medium transition-colors ${
+          className={`px-4 h-9 rounded-full text-xs font-medium transition-colors ${
             statusFilter === 'all' ? 'bg-gray-900 text-white' : 'bg-white text-gray-700 border border-[#e5edf5] hover:bg-[#f6f9fc]'
           }`}
         >
@@ -87,7 +87,7 @@ export default function TenantInvoicesPage() {
         </button>
         <button
           onClick={() => setStatusFilter('paid')}
-          className={`px-4 h-9 rounded-full text-[12px] font-medium transition-colors flex items-center gap-1 ${
+          className={`px-4 h-9 rounded-full text-xs font-medium transition-colors flex items-center gap-1 ${
             statusFilter === 'paid' ? 'bg-emerald-600 text-white' : 'bg-white text-gray-700 border border-[#e5edf5] hover:bg-[#f6f9fc]'
           }`}
         >
@@ -96,7 +96,7 @@ export default function TenantInvoicesPage() {
         </button>
         <button
           onClick={() => setStatusFilter('overdue')}
-          className={`px-4 h-9 rounded-full text-[12px] font-medium transition-colors flex items-center gap-1 ${
+          className={`px-4 h-9 rounded-full text-xs font-medium transition-colors flex items-center gap-1 ${
             statusFilter === 'overdue' ? 'bg-red-600 text-white' : 'bg-white text-gray-700 border border-[#e5edf5] hover:bg-[#f6f9fc]'
           }`}
         >
@@ -105,7 +105,7 @@ export default function TenantInvoicesPage() {
         </button>
         <button
           onClick={() => setStatusFilter('issued')}
-          className={`px-4 h-9 rounded-full text-[12px] font-medium transition-colors flex items-center gap-1 ${
+          className={`px-4 h-9 rounded-full text-xs font-medium transition-colors flex items-center gap-1 ${
             statusFilter === 'issued' ? 'bg-amber-600 text-white' : 'bg-white text-gray-700 border border-[#e5edf5] hover:bg-[#f6f9fc]'
           }`}
         >
@@ -130,7 +130,7 @@ export default function TenantInvoicesPage() {
         <Card className="border-0 shadow-[rgba(50,50,93,0.20)_0px_4px_8px_-2px]">
           <CardContent className="py-12 text-center">
             <Receipt className="h-12 w-12 mx-auto text-gray-300 mb-3" />
-            <p className="text-[#64748d] text-[14px]">لا توجد فواتير تطابق البحث</p>
+            <p className="text-[#64748d] text-sm">لا توجد فواتير تطابق البحث</p>
           </CardContent>
         </Card>
       ) : (
@@ -150,8 +150,8 @@ export default function TenantInvoicesPage() {
                           <FileText className="h-4 w-4 text-[#533afd]" />
                         </div>
                         <div>
-                          <p className="text-[14px] font-bold text-[#061b31]">{inv.invoice_number}</p>
-                          <p className="text-[12px] text-[#64748d] flex items-center gap-1">
+                          <p className="text-sm font-bold text-[#061b31]">{inv.invoice_number}</p>
+                          <p className="text-xs text-[#64748d] flex items-center gap-1">
                             <Calendar className="h-3 w-3" />
                             {formatDate(inv.invoice_date)}
                             <span>·</span>
@@ -162,42 +162,42 @@ export default function TenantInvoicesPage() {
                       </div>
                       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mt-3">
                         <div>
-                          <p className="text-[12px] text-[#64748d]">العقار</p>
-                          <p className="text-[12px] font-semibold text-[#061b31]">{property?.property_name || '—'}</p>
+                          <p className="text-xs text-[#64748d]">العقار</p>
+                          <p className="text-xs font-semibold text-[#061b31]">{property?.property_name || '—'}</p>
                         </div>
                         <div>
-                          <p className="text-[12px] text-[#64748d]">{tt('system.module', 'الوحدة')}</p>
-                          <p className="text-[12px] font-semibold text-[#061b31]">{unit?.unit_number || '—'}</p>
+                          <p className="text-xs text-[#64748d]">{tt('system.module', 'الوحدة')}</p>
+                          <p className="text-xs font-semibold text-[#061b31]">{unit?.unit_number || '—'}</p>
                         </div>
                         <div>
-                          <p className="text-[12px] text-[#64748d]">إيجار</p>
-                          <p className="text-[12px] font-semibold text-[#061b31]">{fmt(inv.rent_amount)}</p>
+                          <p className="text-xs text-[#64748d]">إيجار</p>
+                          <p className="text-xs font-semibold text-[#061b31]">{fmt(inv.rent_amount)}</p>
                         </div>
                         <div>
-                          <p className="text-[12px] text-[#64748d]">{tt('common.total', 'الإجمالي')}</p>
-                          <p className="text-[12px] font-bold text-[#061b31]">{fmt(inv.total)}</p>
+                          <p className="text-xs text-[#64748d]">{tt('common.total', 'الإجمالي')}</p>
+                          <p className="text-xs font-bold text-[#061b31]">{fmt(inv.total)}</p>
                         </div>
                       </div>
                     </div>
                     <div className="flex flex-col items-end gap-2 lg:min-w-[160px]">
                       {inv.balance > 0 ? (
                         <div className="text-left">
-                          <p className="text-[12px] text-[#64748d]">المستحق</p>
-                          <p className={`text-[16px] font-bold ${isOverdue ? 'text-[#ea2261]' : 'text-[#9b6829]'}`}>
+                          <p className="text-xs text-[#64748d]">المستحق</p>
+                          <p className={`text-base font-bold ${isOverdue ? 'text-[#ea2261]' : 'text-[#9b6829]'}`}>
                             {fmt(inv.balance)}
                           </p>
                         </div>
                       ) : (
                         <div className="text-left">
-                          <p className="text-[12px] text-emerald-600">مدفوع بالكامل</p>
-                          <p className="text-[16px] font-bold text-emerald-600">{fmt(inv.paid_amount)}</p>
+                          <p className="text-xs text-emerald-600">مدفوع بالكامل</p>
+                          <p className="text-base font-bold text-emerald-600">{fmt(inv.paid_amount)}</p>
                         </div>
                       )}
                       <div className="flex gap-2 w-full">
                         <Button
                           variant="outline"
                           size="sm"
-                          className="h-8 text-[12px] flex-1"
+                          className="h-8 text-xs flex-1"
                           onClick={() => handleDownloadPDF(inv.invoice_number)}
                         >
                           <Download className="h-3 w-3 ml-1" />
@@ -205,7 +205,7 @@ export default function TenantInvoicesPage() {
                         </Button>
                         {inv.balance > 0 && (
                           <Link to="/portal/tenant/pay" className="flex-1">
-                            <Button size="sm" className="h-8 text-[12px] w-full bg-[#533afd] hover:bg-blue-700">
+                            <Button size="sm" className="h-8 text-xs w-full bg-[#533afd] hover:bg-blue-700">
                               ادفع
                             </Button>
                           </Link>

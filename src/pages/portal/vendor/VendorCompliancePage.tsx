@@ -123,9 +123,9 @@ export default function VendorCompliancePage() {
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
         <div>
           <h1 className="text-2xl font-bold text-[#061b31]">الوثائق النظامية</h1>
-          <p className="text-[12px] text-[#64748d] mt-0.5">إدارة شهادات السجل التجاري والضرائب والتأمين</p>
+          <p className="text-xs text-[#64748d] mt-0.5">إدارة شهادات السجل التجاري والضرائب والتأمين</p>
         </div>
-        <Button onClick={() => setShowUpload(true)} className="bg-amber-600 hover:bg-amber-700 h-10 text-[12px]">
+        <Button onClick={() => setShowUpload(true)} className="bg-amber-600 hover:bg-amber-700 h-10 text-xs">
           <Upload className="h-4 w-4 ml-1" />
           رفع مستند
         </Button>
@@ -136,7 +136,7 @@ export default function VendorCompliancePage() {
         <CardContent className="p-5">
           <div className="flex items-center gap-2 mb-3">
             <Shield className="h-4 w-4 text-[#9b6829]" />
-            <h2 className="text-[14px] font-bold text-[#061b31]">المستندات الأساسية</h2>
+            <h2 className="text-sm font-bold text-[#061b31]">المستندات الأساسية</h2>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {requiredDocs.map((d, i) => {
@@ -148,8 +148,8 @@ export default function VendorCompliancePage() {
                     <Icon className={`h-4 w-4 text-${typeInfo.color}-600`} />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-[12px] font-semibold text-[#061b31]">{d.name}</p>
-                    <p className="text-[12px] text-[#64748d]" dir="ltr">{d.value || 'غير مرفوع'}</p>
+                    <p className="text-xs font-semibold text-[#061b31]">{d.name}</p>
+                    <p className="text-xs text-[#64748d]" dir="ltr">{d.value || 'غير مرفوع'}</p>
                   </div>
                   {d.status === 'verified' ? (
                     <CheckCircle2 className="h-5 w-5 text-emerald-500 flex-shrink-0" />
@@ -167,14 +167,14 @@ export default function VendorCompliancePage() {
       <Card className="border-0 shadow-[rgba(50,50,93,0.20)_0px_4px_8px_-2px]">
         <CardContent className="p-0">
           <div className="p-4 border-b border-[#e5edf5]">
-            <h2 className="text-[14px] font-bold text-[#061b31]">المستندات المرفوعة</h2>
-            <p className="text-[12px] text-[#64748d]">{docs.length} مستند</p>
+            <h2 className="text-sm font-bold text-[#061b31]">المستندات المرفوعة</h2>
+            <p className="text-xs text-[#64748d]">{docs.length} مستند</p>
           </div>
           {docs.length === 0 ? (
             <div className="py-12 text-center text-[#64748d]">
               <FileText className="h-12 w-12 mx-auto text-gray-300 mb-3" />
-              <p className="text-[14px]">لا توجد مستندات مرفوعة</p>
-              <p className="text-[12px] mt-1">ارفع شهاداتك النظامية لضمان استمرارية العمل</p>
+              <p className="text-sm">لا توجد مستندات مرفوعة</p>
+              <p className="text-xs mt-1">ارفع شهاداتك النظامية لضمان استمرارية العمل</p>
             </div>
           ) : (
             <div className="divide-y divide-gray-100">
@@ -191,7 +191,7 @@ export default function VendorCompliancePage() {
                       </div>
                       <div className="flex-1 min-w-0">
                         <p className="text-[13px] font-semibold text-[#061b31]">{d.name}</p>
-                        <p className="text-[12px] text-[#64748d] flex items-center gap-2 flex-wrap">
+                        <p className="text-xs text-[#64748d] flex items-center gap-2 flex-wrap">
                           <span>{typeInfo.label}</span>
                           <span>·</span>
                           <span>رفع: {formatDate(d.uploaded_at)}</span>
@@ -204,13 +204,13 @@ export default function VendorCompliancePage() {
                         </p>
                       </div>
                       {expired && (
-                        <span className="text-[12px] px-2 py-0.5 rounded-full bg-red-50 text-[#ea2261] font-medium">⚠ منتهي</span>
+                        <span className="text-xs px-2 py-0.5 rounded-full bg-red-50 text-[#ea2261] font-medium">⚠ منتهي</span>
                       )}
                       {expiring && !expired && (
-                        <span className="text-[12px] px-2 py-0.5 rounded-full bg-amber-50 text-[#9b6829] font-medium">قارب الانتهاء</span>
+                        <span className="text-xs px-2 py-0.5 rounded-full bg-amber-50 text-[#9b6829] font-medium">قارب الانتهاء</span>
                       )}
                       {!expired && !expiring && d.expiry_date && (
-                        <span className="text-[12px] px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 font-medium">✓ ساري</span>
+                        <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 font-medium">✓ ساري</span>
                       )}
                       <Button size="sm" variant="ghost" onClick={() => { removeDoc(d.id); setRefresh((r) => r + 1); toast.success('تم الحذف'); }} className="h-7 w-7 p-0 text-[#ea2261]">
                         <Trash2 className="h-3.5 w-3.5" />
@@ -231,23 +231,23 @@ export default function VendorCompliancePage() {
             <h2 className="text-lg font-bold text-[#061b31] mb-4">رفع مستند جديد</h2>
             <div className="space-y-3">
               <div>
-                <Label className="text-[12px]">{tt('documents.documentType', 'نوع المستند')}</Label>
+                <Label className="text-xs">{tt('documents.documentType', 'نوع المستند')}</Label>
                 <select value={type} onChange={(e) => setType(e.target.value)} className="mt-1 w-full h-10 text-[13px] bg-white border border-[#e5edf5] rounded-lg px-3">
                   {DOC_TYPES.map((t) => <option key={t.value} value={t.value}>{t.label}</option>)}
                 </select>
               </div>
               <div>
-                <Label className="text-[12px]">اسم المستند</Label>
+                <Label className="text-xs">اسم المستند</Label>
                 <Input value={name} onChange={(e) => setName(e.target.value)} placeholder="مثال: السجل التجاري 2026" className="mt-1 h-10 text-[13px]" />
               </div>
               <div>
-                <Label className="text-[12px]">تاريخ الانتهاء (اختياري)</Label>
+                <Label className="text-xs">تاريخ الانتهاء (اختياري)</Label>
                 <Input type="date" value={expiry} onChange={(e) => setExpiry(e.target.value)} className="mt-1 h-10 text-[13px]" />
               </div>
               <div className="border-2 border-dashed border-[#e5edf5] rounded-lg p-4 text-center">
                 <Camera className="h-6 w-6 mx-auto text-[#64748d] mb-1" />
-                <p className="text-[12px] text-[#64748d]">اضغط لرفع أو اسحب الملف</p>
-                <p className="text-[12px] text-[#64748d] mt-1">PDF، JPG، PNG حتى 5MB</p>
+                <p className="text-xs text-[#64748d]">اضغط لرفع أو اسحب الملف</p>
+                <p className="text-xs text-[#64748d] mt-1">PDF، JPG، PNG حتى 5MB</p>
               </div>
             </div>
             <div className="flex gap-2 mt-4">

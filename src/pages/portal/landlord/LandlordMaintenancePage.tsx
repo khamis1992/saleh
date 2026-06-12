@@ -70,33 +70,33 @@ export default function LandlordMaintenancePage() {
     <div className="space-y-6">
       <div>
         <h1 className="text-2xl font-bold text-[#061b31]">تكلفة الصيانة</h1>
-        <p className="text-[12px] text-[#64748d] mt-0.5">تحليل تكاليف الصيانة عبر العقارات والفئات</p>
+        <p className="text-xs text-[#64748d] mt-0.5">تحليل تكاليف الصيانة عبر العقارات والفئات</p>
       </div>
 
       {/* KPIs */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <Card className="border-0 shadow-[rgba(50,50,93,0.20)_0px_4px_8px_-2px]">
           <CardContent className="p-5">
-            <p className="text-[12px] text-[#64748d]">إجمالي التكلفة (تقديري)</p>
+            <p className="text-xs text-[#64748d]">إجمالي التكلفة (تقديري)</p>
             <p className="text-xl font-bold text-[#061b31]">{fmtInt(totalCost)}</p>
-            <p className="text-[12px] text-[#64748d] mt-1">{maint.length} طلب · ~{fmt(ESTIMATED_COST_PER_REQUEST)} للطلب</p>
+            <p className="text-xs text-[#64748d] mt-1">{maint.length} طلب · ~{fmt(ESTIMATED_COST_PER_REQUEST)} للطلب</p>
           </CardContent>
         </Card>
         <Card className="border-0 shadow-[rgba(50,50,93,0.20)_0px_4px_8px_-2px]">
           <CardContent className="p-5">
-            <p className="text-[12px] text-[#64748d]">طلبات مفتوحة</p>
+            <p className="text-xs text-[#64748d]">طلبات مفتوحة</p>
             <p className="text-2xl font-bold text-[#9b6829]">{openCount}</p>
           </CardContent>
         </Card>
         <Card className="border-0 shadow-[rgba(50,50,93,0.20)_0px_4px_8px_-2px]">
           <CardContent className="p-5">
-            <p className="text-[12px] text-[#ea2261]">طلبات طارئة</p>
+            <p className="text-xs text-[#ea2261]">طلبات طارئة</p>
             <p className="text-2xl font-bold text-[#ea2261]">{emergencyCount}</p>
           </CardContent>
         </Card>
         <Card className="border-0 shadow-[rgba(50,50,93,0.20)_0px_4px_8px_-2px]">
           <CardContent className="p-5">
-            <p className="text-[12px] text-[#64748d]">معدل الإكمال</p>
+            <p className="text-xs text-[#64748d]">معدل الإكمال</p>
             <p className="text-2xl font-bold text-emerald-600">
               {maint.length > 0
                 ? Math.round((maint.filter((m) => ['closed', 'completed', 'tenant_confirmed'].includes(m.status)).length / maint.length) * 100)

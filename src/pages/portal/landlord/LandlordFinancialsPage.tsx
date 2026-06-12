@@ -78,33 +78,33 @@ export default function LandlordFinancialsPage() {
     <div className="space-y-6">
       <div>
         <h1 className="text-2xl font-bold text-[#061b31]">التقارير المالية</h1>
-        <p className="text-[12px] text-[#64748d] mt-0.5">إيرادات العقارات، التحصيل، والمستحقات</p>
+        <p className="text-xs text-[#64748d] mt-0.5">إيرادات العقارات، التحصيل، والمستحقات</p>
       </div>
 
       {/* KPIs */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <Card className="border-0 shadow-[rgba(50,50,93,0.20)_0px_4px_8px_-2px]">
           <CardContent className="p-5">
-            <p className="text-[12px] text-[#64748d]">إجمالي المفوتر</p>
+            <p className="text-xs text-[#64748d]">إجمالي المفوتر</p>
             <p className="text-xl font-bold text-[#061b31]">{fmtInt(totalInvoiced)}</p>
           </CardContent>
         </Card>
         <Card className="border-0 shadow-[rgba(50,50,93,0.20)_0px_4px_8px_-2px]">
           <CardContent className="p-5">
-            <p className="text-[12px] text-emerald-600">إجمالي المحصل</p>
+            <p className="text-xs text-emerald-600">إجمالي المحصل</p>
             <p className="text-xl font-bold text-emerald-600">{fmtInt(totalCollected)}</p>
-            <p className="text-[12px] text-emerald-600 mt-0.5">{collectionRate.toFixed(1)}% معدل تحصيل</p>
+            <p className="text-xs text-emerald-600 mt-0.5">{collectionRate.toFixed(1)}% معدل تحصيل</p>
           </CardContent>
         </Card>
         <Card className="border-0 shadow-[rgba(50,50,93,0.20)_0px_4px_8px_-2px]">
           <CardContent className="p-5">
-            <p className="text-[12px] text-[#ea2261]">المستحقات المتبقية</p>
+            <p className="text-xs text-[#ea2261]">المستحقات المتبقية</p>
             <p className="text-xl font-bold text-[#ea2261]">{fmtInt(totalReceivables)}</p>
           </CardContent>
         </Card>
         <Card className="border-0 shadow-[rgba(50,50,93,0.20)_0px_4px_8px_-2px]">
           <CardContent className="p-5">
-            <p className="text-[12px] text-[#64748d]">الدخل السنوي المتوقع</p>
+            <p className="text-xs text-[#64748d]">الدخل السنوي المتوقع</p>
             <p className="text-xl font-bold text-[#533afd]">{fmtInt(annualIncome)}</p>
           </CardContent>
         </Card>
@@ -137,7 +137,7 @@ export default function LandlordFinancialsPage() {
             <AlertCircle className="h-4 w-4 text-[#ea2261]" />
             فواتير متأخرة
           </CardTitle>
-          <CardDescription className="text-[12px]">{overdueInvoices.length} فاتورة · {fmtInt(overdueAmount)} إجمالي</CardDescription>
+          <CardDescription className="text-xs">{overdueInvoices.length} فاتورة · {fmtInt(overdueAmount)} إجمالي</CardDescription>
         </CardHeader>
         <CardContent>
           {overdueInvoices.length === 0 ? (
@@ -150,10 +150,10 @@ export default function LandlordFinancialsPage() {
               {overdueInvoices.slice(0, 6).map((inv) => (
                 <div key={inv.id} className="p-3 bg-red-50/50 border border-red-100 rounded-lg flex items-center justify-between">
                   <div>
-                    <p className="text-[12px] font-semibold text-[#061b31]">{inv.invoice_number}</p>
-                    <p className="text-[12px] text-[#64748d]">استحقاق {formatDate(inv.due_date)}</p>
+                    <p className="text-xs font-semibold text-[#061b31]">{inv.invoice_number}</p>
+                    <p className="text-xs text-[#64748d]">استحقاق {formatDate(inv.due_date)}</p>
                   </div>
-                  <p className="text-[14px] font-bold text-[#ea2261]">{fmt(inv.balance)}</p>
+                  <p className="text-sm font-bold text-[#ea2261]">{fmt(inv.balance)}</p>
                 </div>
               ))}
             </div>
