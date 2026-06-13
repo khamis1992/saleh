@@ -79,6 +79,7 @@ export function SimpleSidebar() {
 
   // ── Full navigation tree (from translations) ──
   const FULL_NAV_GROUPS: NavGroup[] = useMemo(() => [
+    // 1. عام — Dashboard, My Tasks
     {
       key: 'main',
       title: t.nav.dashboard,
@@ -88,16 +89,7 @@ export function SimpleSidebar() {
         { title: tt('nav.myWork', 'My Tasks'), href: '/my-work', icon: ClipboardList },
       ],
     },
-    {
-      key: 'properties',
-      title: t.nav.properties,
-      gateTitles: [t.nav.properties, t.nav.properties],
-      items: [
-        { title: tt('nav.propertiesUnits', 'Properties & Units'), href: '/properties-units', icon: Building2 },
-        { title: t.nav.tenants, href: '/tenants', icon: Users },
-        { title: tt('nav.contracts', t.nav.leasingContracts), href: '/leases', icon: FileText },
-      ],
-    },
+    // 2. المشاريع والإنشاء — Land → Develop → Procure → Stock
     {
       key: 'construction',
       title: tt('nav.constructionAndProjects', 'Projects & Construction'),
@@ -110,6 +102,29 @@ export function SimpleSidebar() {
         { title: t.nav.inventory, href: '/inventory', icon: Package },
       ],
     },
+    // 3. العقارات والتأجير — Properties → Tenants → Contracts
+    {
+      key: 'properties',
+      title: t.nav.properties,
+      gateTitles: [t.nav.properties, t.nav.properties],
+      items: [
+        { title: tt('nav.propertiesUnits', 'Properties & Units'), href: '/properties-units', icon: Building2 },
+        { title: t.nav.tenants, href: '/tenants', icon: Users },
+        { title: tt('nav.contracts', t.nav.leasingContracts), href: '/leases', icon: FileText },
+      ],
+    },
+    // 4. تحصيل الإيجارات — Collections → Invoices → Receipts
+    {
+      key: 'rentCollection',
+      title: t.rentCollection,
+      gateTitles: [t.rentCollection],
+      items: [
+        { title: tt('nav.collections', 'Collections'), href: '/collections', icon: DollarSign },
+        { title: t.rentCollection.invoices, href: '/rent-collection/invoices', icon: Receipt },
+        { title: t.rentCollection.receipts, href: '/rent-collection/receipts', icon: Receipt },
+      ],
+    },
+    // 5. الصيانة — Requests → Work Orders → Preventive → Inspections → Assets
     {
       key: 'maintenance',
       title: t.nav.maintenance,
@@ -122,20 +137,19 @@ export function SimpleSidebar() {
         { title: tt('nav.assets', 'Assets'), href: '/maintenance/assets', icon: Monitor },
       ],
     },
+    // 6. المالية والمحاسبة — Accounts → JEs → Cost Centers → Bank Accounts
     {
       key: 'finance',
       title: t.nav.finance,
       gateTitles: [t.nav.finance],
       items: [
-        { title: tt('nav.collections', 'Collections'), href: '/collections', icon: DollarSign },
-        { title: t.rentCollection.invoices, href: '/rent-collection/invoices', icon: Receipt },
-        { title: t.rentCollection.receipts, href: '/rent-collection/receipts', icon: Receipt },
         { title: t.finance.accounts, href: '/finance/accounts', icon: Landmark },
         { title: t.finance.journalEntries, href: '/finance/journal-entries', icon: BookOpen },
         { title: tt('nav.costCenters', 'Cost Centers'), href: '/finance/cost-centers', icon: BarChart3 },
         { title: tt('nav.bankAccounts', 'Bank Accounts'), href: '/finance/bank-accounts', icon: Building2 },
       ],
     },
+    // 7. التقارير
     {
       key: 'reports',
       title: t.nav.reports,
@@ -144,6 +158,7 @@ export function SimpleSidebar() {
         { title: t.nav.reports, href: '/reports', icon: BarChart3 },
       ],
     },
+    // 8. الإدارة — Employees → Settings → Numbering → Audit → Roles
     {
       key: 'admin',
       title: tt('nav.administration', 'Admin'),
