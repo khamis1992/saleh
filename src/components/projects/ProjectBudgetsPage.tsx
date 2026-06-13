@@ -1,5 +1,6 @@
 import { formatQAR } from '@/lib/format';
 import { useState, useMemo } from 'react';
+import { useLocale } from '@/providers/LocaleContext';
 import { toast } from 'sonner';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { Input } from '@/components/ui/input';
