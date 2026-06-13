@@ -1,0 +1,277 @@
+- generic:
+  - generic:
+    - region "Notifications alt+T"
+    - generic:
+      - button:
+        - img
+      - complementary:
+        - generic:
+          - generic:
+            - img
+          - generic:
+            - generic: شركة التطوير العقاري
+            - generic: ERP العقاري
+        - generic:
+          - generic:
+            - button:
+              - generic: دا
+              - generic:
+                - generic: د. محمد العتيبي
+                - generic: مدير النظام
+          - generic:
+            - link:
+              - /url: /dashboard
+              - img
+              - generic: الرئيسية
+          - generic:
+            - link:
+              - /url: /lands
+              - img
+              - generic: الأراضي
+            - link:
+              - /url: /construction-all
+              - img
+              - generic: المشاريع والإنشاءات
+            - link:
+              - /url: /budgets
+              - img
+              - generic: ميزانيات المشاريع
+          - generic:
+            - link:
+              - /url: /procurement
+              - img
+              - generic: المشتريات
+            - link:
+              - /url: /inventory/items
+              - img
+              - generic: المخزون
+            - link:
+              - /url: /equipment
+              - img
+              - generic: المعدات
+          - generic:
+            - button:
+              - generic: العقارات والتأجير
+              - img
+          - generic:
+            - link:
+              - /url: /maintenance
+              - img
+              - generic: الصيانة
+            - link:
+              - /url: /finance
+              - img
+              - generic: المالية
+            - link:
+              - /url: /hr/employees
+              - img
+              - generic: الموارد البشرية
+            - link:
+              - /url: /legal/notices
+              - img
+              - generic: الشؤون القانونية
+          - generic:
+            - link:
+              - /url: /reports
+              - img
+              - generic: التقارير والقوائم
+            - link:
+              - /url: /queues
+              - img
+              - generic: قوائم الانتظار
+            - link:
+              - /url: /documents
+              - img
+              - generic: المستندات
+            - link:
+              - /url: /calendar
+              - img
+              - generic: جدول المواعيد
+            - link:
+              - /url: /settings
+              - img
+              - generic: الإدارة
+        - generic:
+          - button:
+            - generic: طي القائمة
+            - img
+      - generic:
+        - banner:
+          - generic:
+            - generic:
+              - generic:
+                - navigation:
+                  - link:
+                    - /url: /dashboard
+                    - img
+                    - generic: الرئيسية
+                  - generic:
+                    - img
+                    - generic: التقويم
+              - button:
+                - img
+                - generic: مدير النظام
+                - img
+            - generic:
+              - button:
+                - img
+                - generic: بحث...
+                - generic: Ctrl+K
+              - button:
+                - img
+                - generic: 99+
+              - button:
+                - img
+              - button:
+                - img
+              - button:
+                - generic:
+                  - generic: د
+        - main:
+          - generic:
+            - generic:
+              - generic:
+                - generic:
+                  - generic:
+                    - img
+                  - generic:
+                    - generic: جدول المواعيد
+                    - generic: 37 مهمة
+            - generic:
+              - generic:
+                - generic:
+                  - generic: "8"
+                  - generic: مهام المشاريع
+                - generic:
+                  - generic: "6"
+                  - generic: المعاينات
+                - generic:
+                  - generic: "6"
+                  - generic: عقود الإيجار
+                - generic:
+                  - generic: "5"
+                  - generic: أوامر العمل
+                - generic:
+                  - generic: "4"
+                  - generic: طلبات الصيانة
+                - generic:
+                  - generic: "4"
+                  - generic: إجازات الموظفين
+                - generic:
+                  - generic: "4"
+                  - generic: استحقاقات الإيجار
+              - generic:
+                - generic:
+                  - img
+                  - textbox:
+                    - /placeholder: بحث...
+                - combobox [expanded]:
+                  - img
+                  - generic: جميع الفئات
+                  - img
+              - generic:
+                - generic:
+                  - button:
+                    - img
+                  - heading [level=2]: يونيو ٢٠٢٦
+                  - button:
+                    - img
+                - generic:
+                  - generic: الأحد
+                  - generic: الإثنين
+                  - generic: الثلاثاء
+                  - generic: الأربعاء
+                  - generic: الخميس
+                  - generic: الجمعة
+                  - generic: السبت
+                - generic:
+                  - generic:
+                    - generic: "1"
+                    - generic:
+                      - button: تسرب مياه من الحمام الرئيسي
+                      - button: المكيف لا يبرد بشكل كاف
+                      - button: انقطاع الكهرباء عن المكتب الرئيسي
+                      - generic: +5 أخرى
+                  - generic:
+                    - generic: "2"
+                  - generic:
+                    - generic: "3"
+                  - generic:
+                    - generic: "4"
+                  - generic:
+                    - generic: "5"
+                  - generic:
+                    - generic: "6"
+                  - generic:
+                    - generic: "7"
+                  - generic:
+                    - generic: "8"
+                  - generic:
+                    - generic: "9"
+                  - generic:
+                    - generic: "10"
+                  - generic:
+                    - generic: "11"
+                  - generic:
+                    - generic: "12"
+                  - generic:
+                    - generic: "13"
+                  - generic:
+                    - generic: "14"
+                  - generic:
+                    - generic: "15"
+                  - generic:
+                    - generic: "16"
+                  - generic:
+                    - generic: "17"
+                  - generic:
+                    - generic: "18"
+                  - generic:
+                    - generic: "19"
+                  - generic:
+                    - generic: "20"
+                    - generic:
+                      - button: "معاينة: أحمد الشمري"
+                  - generic:
+                    - generic: "21"
+                  - generic:
+                    - generic: "22"
+                  - generic:
+                    - generic: "23"
+                  - generic:
+                    - generic: "24"
+                  - generic:
+                    - generic: "25"
+                  - generic:
+                    - generic: "26"
+                  - generic:
+                    - generic: "27"
+                  - generic:
+                    - generic: "28"
+                  - generic:
+                    - generic: "29"
+                  - generic:
+                    - generic: "30"
+              - generic:
+                - generic: 37 مهمة
+                - generic: محدث في الوقت الفعلي
+  - listbox [ref=e289]:
+    - option "جميع الفئات" [active] [selected] [ref=e290]:
+      - img [ref=e293]
+      - generic [ref=e295]: جميع الفئات
+    - option "طلبات الصيانة" [ref=e296]:
+      - generic [ref=e298]: طلبات الصيانة
+    - option "أوامر العمل" [ref=e299]:
+      - generic [ref=e301]: أوامر العمل
+    - option "الصيانة الوقائية" [ref=e302]:
+      - generic [ref=e304]: الصيانة الوقائية
+    - option "مهام المشاريع" [ref=e305]:
+      - generic [ref=e307]: مهام المشاريع
+    - option "المعاينات" [ref=e308]:
+      - generic [ref=e310]: المعاينات
+    - option "عقود الإيجار" [ref=e311]:
+      - generic [ref=e313]: عقود الإيجار
+    - option "إجازات الموظفين" [ref=e314]:
+      - generic [ref=e316]: إجازات الموظفين
+    - option "استحقاقات الإيجار" [ref=e317]:
+      - generic [ref=e319]: استحقاقات الإيجار

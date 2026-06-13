@@ -1,0 +1,25 @@
+- generic [ref=e2]:
+  - region "Notifications alt+T"
+  - generic [ref=e4]:
+    - generic [ref=e5]:
+      - img [ref=e7]
+      - generic [ref=e11]: نظام إدارة العقارات
+      - generic [ref=e12]: مرحباً بك في نظام إدارة العقارات
+    - generic [ref=e14]:
+      - generic [ref=e34]: الرجاء إدخال البريد الإلكتروني وكلمة المرور
+      - generic [ref=e15]:
+        - text: البريد الإلكتروني
+        - generic [ref=e16]:
+          - img [ref=e17]
+          - textbox "email@company.com" [ref=e20]
+      - generic [ref=e21]:
+        - text: كلمة المرور
+        - generic [ref=e22]:
+          - img [ref=e23]
+          - textbox [ref=e26]
+          - button [ref=e27]:
+            - img [ref=e28]
+      - button "دخول" [ref=e31]
+      - paragraph [ref=e32]:
+        - link "نسيت كلمة المرور؟" [ref=e33] [cursor=pointer]:
+          - /url: "#"
