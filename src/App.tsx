@@ -161,7 +161,7 @@ import GoodsReceiptsPage from '@/pages/procurement/GoodsReceiptsPage';
 import ProcurementReceiptsPage from '@/components/projects/ProcurementReceiptsPage';
 import RentSchedulesPage from '@/pages/rent-collection/RentSchedulesPage';
 import ChequesPage from '@/components/projects/ChequesPage';
-import FinanceDashboardPage from '@/pages/finance/FinanceDashboardPage';
+import FinanceDashboardPage from '@/components/projects/FinanceDashboardPage';
 import PropertyValuationPage from '@/pages/finance/PropertyValuationPage';
 import CalendarPageOld from '@/pages/calendar/CalendarPage';
 import CalendarPage from '@/components/projects/CalendarPage';
