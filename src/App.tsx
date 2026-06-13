@@ -145,7 +145,7 @@ import InspectionsPage from '@/components/projects/InspectionsPage';
 import AssetRegistryPageOld from '@/pages/maintenance/AssetRegistryPage';
 import AssetRegistryPage from '@/components/projects/AssetRegistryPage';
 import ChangeOrdersPage from '@/pages/construction/ChangeOrdersPage';
-import RiskRegisterPage from '@/pages/construction/RiskRegisterPage';
+import RiskRegisterPage from '@/components/projects/RiskRegisterPage';
 import MaintenanceDashboardPage from '@/pages/maintenance/MaintenanceDashboardPage';
 import InspectionBuilderPage from '@/pages/maintenance/InspectionBuilderPage';
 import NumberingSettingsPage from '@/pages/settings/NumberingSettingsPage';
