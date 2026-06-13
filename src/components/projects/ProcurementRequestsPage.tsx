@@ -327,7 +327,7 @@ export default function ProcurementRequestsPage() {
     const count = allPRs.length;
     setForm({
       pr_number: `PR-${new Date().getFullYear()}-${String(count + 1).padStart(3, '0')}`,
-      project: '', department: '', required_date: '',
+      project: projectId || '', department: '', required_date: '',
       priority: 'medium', justification: '', estimated_total: 0, items: [],
     });
     setBudgetWarning(null);

@@ -387,7 +387,7 @@ export default function ContractorClaimsPage() {
 
   function handleCreate() {
     setEditingId(null);
-    setForm(emptyClaimForm);
+    setForm({ ...emptyClaimForm, project_id: projectId || '' });
     setBudgetWarning(null);
     setDialogOpen(true);
   }
