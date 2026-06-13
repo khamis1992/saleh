@@ -40,7 +40,8 @@ export default function ProjectDetailPage() {
   const { t } = useLocale();
   const navigate = useNavigate();
   const { id } = useParams();
-  const project = useMemo(() => projectStore.getById(id || ''), [id]);
+  const [refresh, setRefresh] = useState(0);
+  const project = useMemo(() => projectStore.getById(id || ''), [id, refresh]);
   const fmt = (v: number) => formatQAR(v);
 
   // ── Phases state from store ──
