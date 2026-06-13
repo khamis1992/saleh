@@ -1,0 +1,213 @@
+- generic [ref=e2]:
+  - region "Notifications alt+T"
+  - generic [ref=e3]:
+    - button "فتح القائمة" [ref=e4]:
+      - img [ref=e5]
+    - complementary [ref=e6]:
+      - generic [ref=e7]:
+        - img [ref=e9]
+        - generic [ref=e11]:
+          - generic [ref=e12]: شركة التطوير العقاري
+          - generic [ref=e13]: ERP العقاري
+      - generic [ref=e14]:
+        - button "دا د. محمد العتيبي مدير النظام" [ref=e16]:
+          - generic [ref=e17]: دا
+          - generic [ref=e18]:
+            - generic [ref=e19]: د. محمد العتيبي
+            - generic [ref=e20]: مدير النظام
+        - link "الرئيسية" [ref=e22] [cursor=pointer]:
+          - /url: /dashboard
+          - img [ref=e23]
+          - generic [ref=e26]: الرئيسية
+        - generic [ref=e27]:
+          - link "الأراضي" [ref=e28] [cursor=pointer]:
+            - /url: /lands
+            - img [ref=e29]
+            - generic [ref=e32]: الأراضي
+          - link "المشاريع والإنشاءات" [ref=e33] [cursor=pointer]:
+            - /url: /construction-all
+            - img [ref=e34]
+            - generic [ref=e39]: المشاريع والإنشاءات
+          - link "ميزانيات المشاريع" [ref=e40] [cursor=pointer]:
+            - /url: /budgets
+            - img [ref=e41]
+            - generic [ref=e44]: ميزانيات المشاريع
+        - generic [ref=e45]:
+          - link "المشتريات" [ref=e46] [cursor=pointer]:
+            - /url: /procurement
+            - img [ref=e47]
+            - generic [ref=e51]: المشتريات
+          - link "المخزون" [ref=e52] [cursor=pointer]:
+            - /url: /inventory/items
+            - img [ref=e53]
+            - generic [ref=e57]: المخزون
+          - link "المعدات" [ref=e58] [cursor=pointer]:
+            - /url: /equipment
+            - img [ref=e59]
+            - generic [ref=e62]: المعدات
+        - button "العقارات والتأجير" [ref=e64]:
+          - generic [ref=e65]: العقارات والتأجير
+          - img [ref=e66]
+        - generic [ref=e68]:
+          - link "الصيانة" [ref=e69] [cursor=pointer]:
+            - /url: /maintenance
+            - img [ref=e70]
+            - generic [ref=e72]: الصيانة
+          - link "المالية" [ref=e73] [cursor=pointer]:
+            - /url: /finance
+            - img [ref=e74]
+            - generic [ref=e76]: المالية
+          - link "الموارد البشرية" [ref=e77] [cursor=pointer]:
+            - /url: /hr/employees
+            - img [ref=e78]
+            - generic [ref=e83]: الموارد البشرية
+          - link "الشؤون القانونية" [ref=e84] [cursor=pointer]:
+            - /url: /legal/notices
+            - img [ref=e85]
+            - generic [ref=e91]: الشؤون القانونية
+        - generic [ref=e92]:
+          - link "التقارير والقوائم" [ref=e93] [cursor=pointer]:
+            - /url: /reports
+            - img [ref=e94]
+            - generic [ref=e96]: التقارير والقوائم
+          - link "قوائم الانتظار" [ref=e97] [cursor=pointer]:
+            - /url: /queues
+            - img [ref=e98]
+            - generic [ref=e100]: قوائم الانتظار
+          - link "المستندات" [ref=e101] [cursor=pointer]:
+            - /url: /documents
+            - img [ref=e102]
+            - generic [ref=e105]: المستندات
+          - link "جدول المواعيد" [ref=e106] [cursor=pointer]:
+            - /url: /calendar
+            - img [ref=e107]
+            - generic [ref=e109]: جدول المواعيد
+          - link "الإدارة" [ref=e110] [cursor=pointer]:
+            - /url: /settings
+            - img [ref=e111]
+            - generic [ref=e114]: الإدارة
+      - button "طي القائمة" [ref=e116]:
+        - generic [ref=e117]: طي القائمة
+        - img [ref=e118]
+    - generic [ref=e120]:
+      - banner [ref=e122]:
+        - generic [ref=e123]:
+          - generic [ref=e124]:
+            - navigation "مسار التنقل" [ref=e126]:
+              - link "الرئيسية" [ref=e127] [cursor=pointer]:
+                - /url: /dashboard
+                - img [ref=e128]
+                - generic [ref=e131]: الرئيسية
+              - generic [ref=e132]:
+                - img [ref=e133]
+                - generic [ref=e135]: التقويم
+            - button "مدير النظام" [ref=e136]:
+              - img
+              - generic [ref=e137]: مدير النظام
+              - img
+          - generic [ref=e138]:
+            - button "بحث... Ctrl+K" [ref=e139]:
+              - img [ref=e140]
+              - generic [ref=e143]: بحث...
+              - generic [ref=e144]: Ctrl+K
+            - button "99+" [ref=e145]:
+              - img
+              - generic [ref=e146]: 99+
+            - button [ref=e147]:
+              - img
+            - button [ref=e148]:
+              - img
+            - button "د" [ref=e149]:
+              - generic [ref=e151]: د
+      - main [ref=e152]:
+        - generic [ref=e153]:
+          - generic [ref=e156]:
+            - img [ref=e158]
+            - generic [ref=e161]:
+              - generic [ref=e162]: جدول المواعيد
+              - generic [ref=e163]: 47 مهمة
+          - generic [ref=e165]:
+            - generic [ref=e166]:
+              - generic [ref=e167]:
+                - img [ref=e169]
+                - generic [ref=e172]: "16"
+                - generic [ref=e173]: مهام المشاريع
+              - generic [ref=e174]:
+                - img [ref=e176]
+                - generic [ref=e179]: "6"
+                - generic [ref=e180]: الصيانة الوقائية
+              - generic [ref=e181]:
+                - img [ref=e183]
+                - generic [ref=e186]: "6"
+                - generic [ref=e187]: المعاينات
+              - generic [ref=e188]:
+                - img [ref=e190]
+                - generic [ref=e193]: "6"
+                - generic [ref=e194]: عقود الإيجار
+              - generic [ref=e195]:
+                - img [ref=e197]
+                - generic [ref=e200]: "4"
+                - generic [ref=e201]: طلبات الصيانة
+              - generic [ref=e202]:
+                - img [ref=e204]
+                - generic [ref=e207]: "4"
+                - generic [ref=e208]: إجازات الموظفين
+              - generic [ref=e209]:
+                - img [ref=e211]
+                - generic [ref=e214]: "4"
+                - generic [ref=e215]: استحقاقات الإيجار
+              - generic [ref=e216]:
+                - img [ref=e218]
+                - generic [ref=e221]: "1"
+                - generic [ref=e222]: أوامر العمل
+            - generic [ref=e223]:
+              - generic [ref=e224]:
+                - heading "الجدول الزمني" [level=2] [ref=e225]
+                - paragraph [ref=e226]: يونيو ٢٠٢٦
+              - region "scheduler" [ref=e227]:
+                - region "scheduler rows" [ref=e232]:
+                  - generic [ref=e233]:
+                    - generic [ref=e240]: طلبات الصيانة
+                    - generic [ref=e246]: أوامر العمل
+                    - generic [ref=e252]: الصيانة الوقائية
+                    - generic [ref=e258]: مهام المشاريع
+                    - generic [ref=e264]: المعاينات
+                    - generic [ref=e270]: عقود الإيجار
+                    - generic [ref=e276]: إجازات الموظفين
+                    - generic [ref=e282]: استحقاقات الإيجار
+                - generic [ref=e286]:
+                  - generic:
+                    - generic [ref=e290]: June 2026
+                    - generic [ref=e292]: "1"
+                    - generic [ref=e294]: "2"
+                    - generic [ref=e296]: "3"
+                    - generic [ref=e298]: "4"
+                    - generic [ref=e300]: "5"
+                    - generic [ref=e302]: "6"
+                    - generic [ref=e304]: "7"
+                    - generic [ref=e306]: "8"
+                    - generic [ref=e308]: "9"
+                    - generic [ref=e310]: "10"
+                    - generic [ref=e312]: "11"
+                    - generic [ref=e316]: "12"
+                    - generic [ref=e318]: "13"
+                    - generic [ref=e320]: "14"
+                    - generic [ref=e322]: "15"
+                    - generic [ref=e324]: "16"
+                    - generic [ref=e326]: "17"
+                    - generic [ref=e328]: "18"
+                    - generic [ref=e330]: "19"
+                    - generic [ref=e332]: "20"
+                    - generic [ref=e334]: "21"
+                    - generic [ref=e336]: "22"
+                    - generic [ref=e338]: "23"
+                    - generic [ref=e340]: "24"
+                    - generic [ref=e342]: "25"
+                    - generic [ref=e344]: "26"
+                    - generic [ref=e346]: "27"
+                    - generic [ref=e348]: "28"
+                    - generic [ref=e350]: "29"
+                    - generic [ref=e352]: "30"
+            - generic [ref=e499]:
+              - generic [ref=e500]: 47 مهمة مجدولة
+              - generic [ref=e501]: محدث في الوقت الفعلي

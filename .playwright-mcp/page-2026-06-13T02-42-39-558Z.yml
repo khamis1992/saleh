@@ -1,0 +1,577 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - region "Notifications alt+T"
+    - generic [ref=e3]:
+      - button "فتح القائمة" [ref=e4]:
+        - img [ref=e5]
+      - complementary [ref=e6]:
+        - generic [ref=e7]:
+          - img [ref=e9]
+          - generic [ref=e11]:
+            - generic [ref=e12]: شركة التطوير العقاري
+            - generic [ref=e13]: ERP العقاري
+        - generic [ref=e14]:
+          - button "دا د. محمد العتيبي مدير النظام" [ref=e16]:
+            - generic [ref=e17]: دا
+            - generic [ref=e18]:
+              - generic [ref=e19]: د. محمد العتيبي
+              - generic [ref=e20]: مدير النظام
+          - link "الرئيسية" [ref=e22] [cursor=pointer]:
+            - /url: /dashboard
+            - img [ref=e23]
+            - generic [ref=e26]: الرئيسية
+          - generic [ref=e27]:
+            - link "الأراضي" [ref=e28] [cursor=pointer]:
+              - /url: /lands
+              - img [ref=e29]
+              - generic [ref=e32]: الأراضي
+            - link "المشاريع والإنشاءات" [ref=e33] [cursor=pointer]:
+              - /url: /construction-all
+              - img [ref=e34]
+              - generic [ref=e39]: المشاريع والإنشاءات
+            - link "ميزانيات المشاريع" [ref=e40] [cursor=pointer]:
+              - /url: /budgets
+              - img [ref=e41]
+              - generic [ref=e44]: ميزانيات المشاريع
+          - generic [ref=e45]:
+            - link "المشتريات" [ref=e46] [cursor=pointer]:
+              - /url: /procurement
+              - img [ref=e47]
+              - generic [ref=e51]: المشتريات
+            - link "المخزون" [ref=e52] [cursor=pointer]:
+              - /url: /inventory/items
+              - img [ref=e53]
+              - generic [ref=e57]: المخزون
+            - link "المعدات" [ref=e58] [cursor=pointer]:
+              - /url: /equipment
+              - img [ref=e59]
+              - generic [ref=e62]: المعدات
+          - button "العقارات والتأجير" [ref=e64]:
+            - generic [ref=e65]: العقارات والتأجير
+            - img [ref=e66]
+          - generic [ref=e68]:
+            - link "الصيانة" [ref=e69] [cursor=pointer]:
+              - /url: /maintenance
+              - img [ref=e70]
+              - generic [ref=e72]: الصيانة
+            - link "المالية" [ref=e73] [cursor=pointer]:
+              - /url: /finance
+              - img [ref=e74]
+              - generic [ref=e76]: المالية
+            - link "الموارد البشرية" [ref=e77] [cursor=pointer]:
+              - /url: /hr/employees
+              - img [ref=e78]
+              - generic [ref=e83]: الموارد البشرية
+            - link "الشؤون القانونية" [ref=e84] [cursor=pointer]:
+              - /url: /legal/notices
+              - img [ref=e85]
+              - generic [ref=e91]: الشؤون القانونية
+          - generic [ref=e92]:
+            - link "التقارير والقوائم" [ref=e93] [cursor=pointer]:
+              - /url: /reports
+              - img [ref=e94]
+              - generic [ref=e96]: التقارير والقوائم
+            - link "قوائم الانتظار" [ref=e97] [cursor=pointer]:
+              - /url: /queues
+              - img [ref=e98]
+              - generic [ref=e100]: قوائم الانتظار
+            - link "المستندات" [ref=e101] [cursor=pointer]:
+              - /url: /documents
+              - img [ref=e102]
+              - generic [ref=e105]: المستندات
+            - link "جدول المواعيد" [ref=e106] [cursor=pointer]:
+              - /url: /calendar
+              - img [ref=e107]
+              - generic [ref=e109]: جدول المواعيد
+            - link "الإدارة" [ref=e110] [cursor=pointer]:
+              - /url: /settings
+              - img [ref=e111]
+              - generic [ref=e114]: الإدارة
+        - button "طي القائمة" [ref=e116]:
+          - generic [ref=e117]: طي القائمة
+          - img [ref=e118]
+      - generic [ref=e120]:
+        - banner [ref=e122]:
+          - generic [ref=e123]:
+            - generic [ref=e124]:
+              - navigation "مسار التنقل" [ref=e126]:
+                - link "الرئيسية" [ref=e127] [cursor=pointer]:
+                  - /url: /dashboard
+                  - img [ref=e128]
+                  - generic [ref=e131]: الرئيسية
+                - generic [ref=e132]:
+                  - img [ref=e133]
+                  - generic [ref=e135]: لوحة المعلومات
+              - button "مدير النظام" [ref=e136]:
+                - img
+                - generic [ref=e137]: مدير النظام
+                - img
+            - generic [ref=e138]:
+              - button "بحث... Ctrl+K" [ref=e139]:
+                - img [ref=e140]
+                - generic [ref=e143]: بحث...
+                - generic [ref=e144]: Ctrl+K
+              - button "99+" [ref=e145]:
+                - img
+                - generic [ref=e146]: 99+
+              - button [ref=e147]:
+                - img
+              - button [ref=e148]:
+                - img
+              - button "د" [ref=e149]:
+                - generic [ref=e151]: د
+        - main [ref=e152]:
+          - generic [ref=e153]:
+            - generic [ref=e154]:
+              - generic [ref=e155] [cursor=pointer]:
+                - generic [ref=e156]:
+                  - img [ref=e158]
+                  - generic [ref=e163]:
+                    - img [ref=e164]
+                    - text: 2%
+                - generic [ref=e166]: "4"
+                - generic [ref=e167]: المشاريع قيد الإنشاء
+                - generic [ref=e168]: 0 متأخرة
+              - generic [ref=e169] [cursor=pointer]:
+                - generic [ref=e170]:
+                  - img [ref=e172]
+                  - generic [ref=e176]:
+                    - img [ref=e177]
+                    - text: 8%
+                - generic [ref=e179]: "4"
+                - generic [ref=e180]: إجمالي العقارات
+                - generic [ref=e181]: عقار مكتمل
+              - generic [ref=e182] [cursor=pointer]:
+                - generic [ref=e183]:
+                  - img [ref=e185]
+                  - generic [ref=e188]:
+                    - img [ref=e189]
+                    - text: 3%
+                - generic [ref=e191]: "7"
+                - generic [ref=e192]: إجمالي الوحدات
+                - generic [ref=e193]: 4 مؤجرة
+              - generic [ref=e194] [cursor=pointer]:
+                - generic [ref=e195]:
+                  - img [ref=e197]
+                  - generic [ref=e200]:
+                    - img [ref=e201]
+                    - text: 8%
+                - generic [ref=e203]: 57%
+                - generic [ref=e204]: نسبة الإشغال
+                - generic [ref=e205]: من العام السابق
+              - generic [ref=e206] [cursor=pointer]:
+                - generic [ref=e207]:
+                  - img [ref=e209]
+                  - generic [ref=e211]:
+                    - img [ref=e212]
+                    - text: 12%
+                - generic [ref=e214]: 148ك
+                - generic [ref=e215]: دخل الإيجار
+                - generic [ref=e216]: من العام السابق
+              - generic [ref=e217] [cursor=pointer]:
+                - generic [ref=e218]:
+                  - img [ref=e220]
+                  - generic [ref=e222]:
+                    - img [ref=e223]
+                    - text: 5%
+                - generic [ref=e225]: 133ك
+                - generic [ref=e226]: الإيرادات المتوقعة
+                - generic [ref=e227]: 2 مصادر متأخرة
+              - generic [ref=e228] [cursor=pointer]:
+                - generic [ref=e229]:
+                  - img [ref=e231]
+                  - generic [ref=e233]:
+                    - img [ref=e234]
+                    - text: 7%
+                - generic [ref=e236]: "3"
+                - generic [ref=e237]: طلبات الصيانة
+                - generic [ref=e238]: 2 طارئة
+            - generic [ref=e239]:
+              - generic [ref=e240] [cursor=pointer]:
+                - img [ref=e242]
+                - generic [ref=e245]:
+                  - generic [ref=e246]: "2"
+                  - generic [ref=e247]: الوحدات المتاحة
+              - generic [ref=e248] [cursor=pointer]:
+                - img [ref=e250]
+                - generic [ref=e253]:
+                  - generic [ref=e254]: "4"
+                  - generic [ref=e255]: الوحدات المؤجرة
+              - generic [ref=e256] [cursor=pointer]:
+                - img [ref=e258]
+                - generic [ref=e261]:
+                  - generic [ref=e262]: 193ك
+                  - generic [ref=e263]: الرصيد النقدي
+              - generic [ref=e264] [cursor=pointer]:
+                - img [ref=e266]
+                - generic [ref=e269]:
+                  - generic [ref=e270]: 133ك
+                  - generic [ref=e271]: إجمالي الذمم
+              - generic [ref=e272] [cursor=pointer]:
+                - img [ref=e274]
+                - generic [ref=e276]:
+                  - generic [ref=e277]: 70%
+                  - generic [ref=e278]: متوسط الإنجاز
+              - generic [ref=e279] [cursor=pointer]:
+                - img [ref=e281]
+                - generic [ref=e285]:
+                  - generic [ref=e286]: 60.5م
+                  - generic [ref=e287]: قيمة الإنشاءات
+              - generic [ref=e288] [cursor=pointer]:
+                - img [ref=e290]
+                - generic [ref=e293]:
+                  - generic [ref=e294]: 3.5م
+                  - generic [ref=e295]: إجمالي المطلوبات
+              - generic [ref=e296] [cursor=pointer]:
+                - img [ref=e298]
+                - generic [ref=e301]:
+                  - generic [ref=e302]: "1"
+                  - generic [ref=e303]: فواتير معلقة
+            - generic [ref=e304]:
+              - generic [ref=e305]:
+                - heading "حالة الوحدات العقارية" [level=3] [ref=e306]
+                - generic [ref=e307]:
+                  - generic [ref=e309]:
+                    - generic [ref=e310]: مؤجرة
+                    - generic [ref=e311]: 57%
+                  - generic [ref=e315]:
+                    - generic [ref=e316]: متاحة
+                    - generic [ref=e317]: 29%
+                  - generic [ref=e321]:
+                    - generic [ref=e322]: صيانة
+                    - generic [ref=e323]: 14%
+              - generic [ref=e326]:
+                - heading "أداء المشاريع" [level=3] [ref=e327]
+                - generic [ref=e328]:
+                  - generic [ref=e330]:
+                    - generic [ref=e331]: مجمع النخيل ال
+                    - generic [ref=e332]: 85%
+                  - generic [ref=e336]:
+                    - generic [ref=e337]: أبراج السلام
+                    - generic [ref=e338]: 60%
+                  - generic [ref=e342]:
+                    - generic [ref=e343]: فلل الياسمين
+                    - generic [ref=e344]: 40%
+              - generic [ref=e347]:
+                - heading "نسبة الإشغال حسب العقار" [level=3] [ref=e348]
+                - generic [ref=e349]:
+                  - generic [ref=e351]:
+                    - generic [ref=e352]: عمارة النخيل
+                    - generic [ref=e353]: 60%
+                  - generic [ref=e357]:
+                    - generic [ref=e358]: أبراج السلام ا
+                    - generic [ref=e359]: 50%
+                  - generic [ref=e363]:
+                    - generic [ref=e364]: فلل الياسمين
+                    - generic [ref=e365]: 0%
+              - generic [ref=e367]:
+                - heading "التحصيل المالي" [level=3] [ref=e368]
+                - generic [ref=e369]:
+                  - generic [ref=e371]:
+                    - generic [ref=e372]: الإيرادات
+                    - generic [ref=e373]: 148ك
+                  - generic [ref=e377]:
+                    - generic [ref=e378]: المصروفات
+                    - generic [ref=e379]: 63ك
+                  - generic [ref=e383]:
+                    - generic [ref=e384]: صافي الدخل
+                    - generic [ref=e385]: 85ك
+            - generic [ref=e388]:
+              - generic [ref=e389]:
+                - generic [ref=e391]:
+                  - heading "حالة الوحدات" [level=3] [ref=e392]
+                  - paragraph [ref=e393]: 7 وحدة
+                - generic [ref=e394]:
+                  - application [ref=e397]
+                  - generic:
+                    - generic:
+                      - generic: 57%
+                      - generic: إشغال
+                  - generic [ref=e398]:
+                    - generic [ref=e401]: مؤجرة (4)
+                    - generic [ref=e404]: متاحة (2)
+                    - generic [ref=e407]: صيانة (1)
+                    - generic [ref=e410]: محجوزة (0)
+              - generic [ref=e411]:
+                - generic [ref=e413]:
+                  - heading "الدخل الشهري" [level=3] [ref=e414]
+                  - paragraph [ref=e415]: آخر 6 أشهر
+                - application [ref=e418]:
+                  - generic [ref=e422]:
+                    - generic [ref=e423]:
+                      - generic [ref=e425]: يناير
+                      - generic [ref=e427]: فبراير
+                      - generic [ref=e429]: مارس
+                      - generic [ref=e431]: إبريل
+                      - generic [ref=e433]: مايو
+                      - generic [ref=e435]: يونيو
+                    - generic [ref=e436]:
+                      - generic [ref=e438]: "0"
+                      - generic [ref=e440]: 4ك
+                      - generic [ref=e442]: 7ك
+                      - generic [ref=e444]: 11ك
+                      - generic [ref=e446]: 14ك
+              - generic [ref=e447]:
+                - generic [ref=e449]:
+                  - heading "التحصيلات" [level=3] [ref=e450]
+                  - paragraph [ref=e451]: مُحصّل / مستحق
+                - generic [ref=e452]:
+                  - application [ref=e455]
+                  - generic:
+                    - generic:
+                      - generic: 59%
+                      - generic: نسبة
+                  - generic [ref=e456]:
+                    - generic [ref=e459]: "مُحصّل: 193ك"
+                    - generic [ref=e462]: "مستحق: 133ك"
+              - generic [ref=e463]:
+                - generic [ref=e465]:
+                  - heading "تقادم الذمم" [level=3] [ref=e466]
+                  - paragraph [ref=e467]: توزيع المستحقات
+                - application [ref=e470]:
+                  - generic [ref=e474]:
+                    - generic [ref=e475]:
+                      - generic [ref=e477]: 30 يوم
+                      - generic [ref=e479]: 60 يوم
+                      - generic [ref=e481]: 90 يوم
+                      - generic [ref=e483]: 90+ يوم
+                    - generic [ref=e484]:
+                      - generic [ref=e486]: "0"
+                      - generic [ref=e488]: 15ك
+                      - generic [ref=e490]: 30ك
+                      - generic [ref=e492]: 45ك
+                      - generic [ref=e494]: 60ك
+              - generic [ref=e495]:
+                - generic [ref=e497]:
+                  - heading "الإشغال حسب العقار" [level=3] [ref=e498]
+                  - paragraph [ref=e499]: نسبة مئوية
+                - application [ref=e502]:
+                  - generic [ref=e506]:
+                    - generic [ref=e507]:
+                      - generic [ref=e509]: عمارة النخ
+                      - generic [ref=e511]: أبراج السل
+                      - generic [ref=e513]: فلل الياسم
+                      - generic [ref=e515]: المركز الت
+                    - generic [ref=e516]:
+                      - generic [ref=e518]: 0%
+                      - generic [ref=e520]: 25%
+                      - generic [ref=e522]: 50%
+                      - generic [ref=e524]: 75%
+                      - generic [ref=e526]: 100%
+            - generic [ref=e527]:
+              - generic [ref=e528]:
+                - generic [ref=e529]:
+                  - heading "المشاريع الإنشائية" [level=3] [ref=e530]
+                  - button "عرض الكل" [ref=e531]:
+                    - text: عرض الكل
+                    - img [ref=e532]
+                - table [ref=e535]:
+                  - rowgroup [ref=e536]:
+                    - row "المشروع الإنجاز الحالة" [ref=e537]:
+                      - columnheader "المشروع" [ref=e538]
+                      - columnheader "الإنجاز" [ref=e539]
+                      - columnheader "الحالة" [ref=e540]
+                  - rowgroup [ref=e541]:
+                    - row "مجمع النخيل السكني 85% في المسار" [ref=e542] [cursor=pointer]:
+                      - cell "مجمع النخيل السكني" [ref=e543]:
+                        - generic [ref=e546]: مجمع النخيل السكني
+                      - cell "85%" [ref=e547]:
+                        - generic [ref=e551]: 85%
+                      - cell "في المسار" [ref=e552]:
+                        - generic [ref=e553]: في المسار
+                    - row "أبراج السلام 60% في المسار" [ref=e554] [cursor=pointer]:
+                      - cell "أبراج السلام" [ref=e555]:
+                        - generic [ref=e558]: أبراج السلام
+                      - cell "60%" [ref=e559]:
+                        - generic [ref=e563]: 60%
+                      - cell "في المسار" [ref=e564]:
+                        - generic [ref=e565]: في المسار
+                    - row "فلل الياسمين 40% في المسار" [ref=e566] [cursor=pointer]:
+                      - cell "فلل الياسمين" [ref=e567]:
+                        - generic [ref=e570]: فلل الياسمين
+                      - cell "40%" [ref=e571]:
+                        - generic [ref=e575]: 40%
+                      - cell "في المسار" [ref=e576]:
+                        - generic [ref=e577]: في المسار
+                    - row "المركز التجاري 95% تجاوز" [ref=e578] [cursor=pointer]:
+                      - cell "المركز التجاري" [ref=e579]:
+                        - generic [ref=e582]: المركز التجاري
+                      - cell "95%" [ref=e583]:
+                        - generic [ref=e587]: 95%
+                      - cell "تجاوز" [ref=e588]:
+                        - generic [ref=e589]: تجاوز
+              - generic [ref=e590]:
+                - generic [ref=e591]:
+                  - heading "آخر الفواتير" [level=3] [ref=e592]
+                  - button "عرض الكل" [ref=e593]:
+                    - text: عرض الكل
+                    - img [ref=e594]
+                - table [ref=e597]:
+                  - rowgroup [ref=e598]:
+                    - row "الفاتورة المبلغ الحالة" [ref=e599]:
+                      - columnheader "الفاتورة" [ref=e600]
+                      - columnheader "المبلغ" [ref=e601]
+                      - columnheader "الحالة" [ref=e602]
+                  - rowgroup [ref=e603]:
+                    - row "INV-2025-001 60ك مدفوع" [ref=e604] [cursor=pointer]:
+                      - cell "INV-2025-001" [ref=e605]:
+                        - generic [ref=e608]: INV-2025-001
+                      - cell "60ك" [ref=e609]
+                      - cell "مدفوع" [ref=e610]:
+                        - generic [ref=e611]: مدفوع
+                    - row "INV-2025-002 58ك مدفوع" [ref=e612] [cursor=pointer]:
+                      - cell "INV-2025-002" [ref=e613]:
+                        - generic [ref=e616]: INV-2025-002
+                      - cell "58ك" [ref=e617]
+                      - cell "مدفوع" [ref=e618]:
+                        - generic [ref=e619]: مدفوع
+                    - row "INV-2025-003 30ك مدفوع" [ref=e620] [cursor=pointer]:
+                      - cell "INV-2025-003" [ref=e621]:
+                        - generic [ref=e624]: INV-2025-003
+                      - cell "30ك" [ref=e625]
+                      - cell "مدفوع" [ref=e626]:
+                        - generic [ref=e627]: مدفوع
+                    - row "INV-2026-001 60ك متأخر" [ref=e628] [cursor=pointer]:
+                      - cell "INV-2026-001" [ref=e629]:
+                        - generic [ref=e632]: INV-2026-001
+                      - cell "60ك" [ref=e633]
+                      - cell "متأخر" [ref=e634]:
+                        - generic [ref=e635]: متأخر
+                    - row "INV-2026-002 58ك معلق" [ref=e636] [cursor=pointer]:
+                      - cell "INV-2026-002" [ref=e637]:
+                        - generic [ref=e640]: INV-2026-002
+                      - cell "58ك" [ref=e641]
+                      - cell "معلق" [ref=e642]:
+                        - generic [ref=e643]: معلق
+              - generic [ref=e644]:
+                - generic [ref=e645]:
+                  - heading "طلبات الصيانة" [level=3] [ref=e646]
+                  - button "عرض الكل" [ref=e647]:
+                    - text: عرض الكل
+                    - img [ref=e648]
+                - table [ref=e651]:
+                  - rowgroup [ref=e652]:
+                    - row "الطلب الأولوية الحالة" [ref=e653]:
+                      - columnheader "الطلب" [ref=e654]
+                      - columnheader "الأولوية" [ref=e655]
+                      - columnheader "الحالة" [ref=e656]
+                  - rowgroup [ref=e657]:
+                    - row "plumbing عالي جاري" [ref=e658] [cursor=pointer]:
+                      - cell "plumbing" [ref=e659]:
+                        - generic [ref=e662]: plumbing
+                      - cell "عالي" [ref=e663]
+                      - cell "جاري" [ref=e664]:
+                        - generic [ref=e665]: جاري
+                    - row "ac متوسط معلق" [ref=e666] [cursor=pointer]:
+                      - cell "ac" [ref=e667]:
+                        - generic [ref=e670]: ac
+                      - cell "متوسط" [ref=e671]
+                      - cell "معلق" [ref=e672]:
+                        - generic [ref=e673]: معلق
+                    - row "electrical طارئ معلق" [ref=e674] [cursor=pointer]:
+                      - cell "electrical" [ref=e675]:
+                        - generic [ref=e678]: electrical
+                      - cell "طارئ" [ref=e679]
+                      - cell "معلق" [ref=e680]:
+                        - generic [ref=e681]: معلق
+                    - row "general منخفض مكتمل" [ref=e682] [cursor=pointer]:
+                      - cell "general" [ref=e683]:
+                        - generic [ref=e686]: general
+                      - cell "منخفض" [ref=e687]
+                      - cell "مكتمل" [ref=e688]:
+                        - generic [ref=e689]: مكتمل
+              - generic [ref=e690]:
+                - generic [ref=e691]:
+                  - heading "ربحية العقارات" [level=3] [ref=e692]
+                  - button "التقارير" [ref=e693]:
+                    - text: التقارير
+                    - img [ref=e694]
+                - table [ref=e697]:
+                  - rowgroup [ref=e698]:
+                    - row "العقار الإشغال العائد" [ref=e699]:
+                      - columnheader "العقار" [ref=e700]
+                      - columnheader "الإشغال" [ref=e701]
+                      - columnheader "العائد" [ref=e702]
+                  - rowgroup [ref=e703]:
+                    - row "عمارة النخيل 60% 0.8%" [ref=e704] [cursor=pointer]:
+                      - cell "عمارة النخيل" [ref=e705]:
+                        - generic [ref=e708]: عمارة النخيل
+                      - cell "60%" [ref=e709]:
+                        - generic [ref=e713]: 60%
+                      - cell "0.8%" [ref=e714]:
+                        - generic [ref=e715]: 0.8%
+                    - row "أبراج السلام التجارية 50% 0.1%" [ref=e716] [cursor=pointer]:
+                      - cell "أبراج السلام التجارية" [ref=e717]:
+                        - generic [ref=e720]: أبراج السلام التجارية
+                      - cell "50%" [ref=e721]:
+                        - generic [ref=e725]: 50%
+                      - cell "0.1%" [ref=e726]:
+                        - generic [ref=e727]: 0.1%
+                    - row "فلل الياسمين 0% 0%" [ref=e728] [cursor=pointer]:
+                      - cell "فلل الياسمين" [ref=e729]:
+                        - generic [ref=e732]: فلل الياسمين
+                      - cell "0%" [ref=e733]:
+                        - generic [ref=e736]: 0%
+                      - cell "0%" [ref=e737]:
+                        - generic [ref=e738]: 0%
+                    - row "المركز التجاري 0% 0%" [ref=e739] [cursor=pointer]:
+                      - cell "المركز التجاري" [ref=e740]:
+                        - generic [ref=e743]: المركز التجاري
+                      - cell "0%" [ref=e744]:
+                        - generic [ref=e747]: 0%
+                      - cell "0%" [ref=e748]:
+                        - generic [ref=e749]: 0%
+            - generic [ref=e750]:
+              - generic [ref=e751]:
+                - img [ref=e752]
+                - heading "التنبيهات والتحذيرات" [level=3] [ref=e757]
+                - generic [ref=e758]: "8"
+              - generic [ref=e759]:
+                - generic [ref=e760] [cursor=pointer]:
+                  - generic [ref=e761]:
+                    - img [ref=e762]
+                    - generic [ref=e764]: فواتير متأخرة
+                  - generic [ref=e765]: "2"
+                - generic [ref=e766] [cursor=pointer]:
+                  - generic [ref=e767]:
+                    - img [ref=e768]
+                    - generic [ref=e771]: تجاوز ميزانية
+                  - generic [ref=e772]: "1"
+                - generic [ref=e773] [cursor=pointer]:
+                  - generic [ref=e774]:
+                    - img [ref=e775]
+                    - generic [ref=e778]: مطالبات معلقة
+                  - generic [ref=e779]: "1"
+                - generic [ref=e780] [cursor=pointer]:
+                  - generic [ref=e781]:
+                    - img [ref=e782]
+                    - generic [ref=e784]: صيانة طارئة
+                  - generic [ref=e785]: "2"
+            - generic [ref=e786]:
+              - heading "إجراءات سريعة" [level=3] [ref=e787]
+              - generic [ref=e788]:
+                - button "الأراضي" [ref=e789]:
+                  - img [ref=e791]
+                  - generic [ref=e794]: الأراضي
+                - button "المشاريع" [ref=e795]:
+                  - img [ref=e797]
+                  - generic [ref=e802]: المشاريع
+                - button "العقارات" [ref=e803]:
+                  - img [ref=e805]
+                  - generic [ref=e809]: العقارات
+                - button "الوحدات" [ref=e810]:
+                  - img [ref=e812]
+                  - generic [ref=e815]: الوحدات
+                - button "المستأجرون" [ref=e816]:
+                  - img [ref=e818]
+                  - generic [ref=e823]: المستأجرون
+                - button "الفواتير" [ref=e824]:
+                  - img [ref=e826]
+                  - generic [ref=e829]: الفواتير
+                - button "التقارير" [ref=e830]:
+                  - img [ref=e832]
+                  - generic [ref=e834]: التقارير
+                - button "الإعدادات" [ref=e835]:
+                  - img [ref=e837]
+                  - generic [ref=e840]: الإعدادات
+  - generic [ref=e841]: 0%
