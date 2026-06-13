@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<title>الأراضي — Calm Table variant</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  body { font-family: 'Inter', system-ui, sans-serif; -webkit-font-smoothing: antialiased; color: #242424; background: #ffffff; }
+  .shadow-card { box-shadow: rgba(19,19,22,0.04) 0px 1px 5px -4px, rgba(34,42,53,0.06) 0px 0px 0px 1px, rgba(34,42,53,0.04) 0px 4px 8px; }
+  .shadow-card-hover { box-shadow: rgba(19,19,22,0.07) 0px 1px 5px -4px, rgba(34,42,53,0.10) 0px 0px 0px 1px, rgba(34,42,53,0.06) 0px 8px 16px; }
+  .ring-focus:focus-within { box-shadow: 0 0 0 3px rgba(83, 58, 253, 0.15); }
+  .scroll-hidden::-webkit-scrollbar { display: none; }
+</style>
+</head>
+<body class="min-h-screen">
+
+  <!-- TOP NAV (slim) -->
+  <header class="border-b border-gray-100 bg-white">
+    <div class="max-w-[1400px] mx-auto px-6 h-14 flex items-center justify-between">
+      <div class="flex items-center gap-2 text-sm text-gray-500">
+        <span>الرئيسية</span>
+        <span class="text-gray-300">/</span>
+        <span class="text-gray-900 font-semibold">الأراضي</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <button class="text-xs px-3 h-8 rounded-md border border-gray-200 text-gray-700 hover:bg-gray-50">تصدير</button>
+        <button class="text-xs px-3 h-8 rounded-md bg-[#533afd] text-white hover:bg-[#4434d4]">+ إضافة أرض</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- PAGE HEADLINE (calm, centered-ish) -->
+  <section class="border-b border-gray-100 bg-white">
+    <div class="max-w-[1400px] mx-auto px-6 py-10">
+      <div class="flex items-end justify-between flex-wrap gap-6">
+        <div>
+          <h1 class="text-3xl font-semibold text-gray-900 tracking-tight">الأراضي</h1>
+          <p class="text-sm text-gray-500 mt-1.5">بنك أراضي الشركة — 4 قطعة مسجلة، 22,700 م²، قيمة تقديرية QAR 12,500,000.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KPI STRIP (minimal, borderless) -->
+  <section class="border-b border-gray-100 bg-white">
+    <div class="max-w-[1400px] mx-auto px-6 py-6 grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-3">
+      <div>
+        <div class="text-xs text-gray-500">إجمالي</div>
+        <div class="text-2xl font-semibold text-gray-900 mt-0.5">4 <span class="text-sm font-normal text-gray-500">قطعة</span></div>
+      </div>
+      <div>
+        <div class="text-xs text-gray-500">المساحة</div>
+        <div class="text-2xl font-semibold text-gray-900 mt-0.5" dir="ltr">22,700 <span class="text-sm font-normal text-gray-500">م²</span></div>
+      </div>
+      <div>
+        <div class="text-xs text-gray-500">متاحة</div>
+        <div class="text-2xl font-semibold text-emerald-600 mt-0.5">2</div>
+      </div>
+      <div>
+        <div class="text-xs text-gray-500">القيمة</div>
+        <div class="text-2xl font-semibold text-gray-900 mt-0.5" dir="ltr">QAR 12.5M</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN: 280px sidebar + table -->
+  <div class="max-w-[1400px] mx-auto px-6 py-6 grid grid-cols-1 lg:grid-cols-[280px,1fr] gap-6">
+
+    <!-- SIDEBAR (Cal.com style — sectioned white cards) -->
+    <aside class="space-y-4">
+      <!-- Search -->
+      <div class="bg-white shadow-card rounded-xl p-3">
+        <div class="relative ring-focus rounded-md">
+          <input class="w-full h-9 ps-9 pe-3 text-sm rounded-md border border-gray-200 focus:border-[#533afd] focus:outline-none" placeholder="بحث..." />
+          <svg class="absolute start-2.5 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M11 19a8 8 0 110-16 8 8 0 010 16z"/></svg>
+        </div>
+      </div>
+
+      <!-- Status -->
+      <div class="bg-white shadow-card rounded-xl p-3">
+        <div class="text-[11px] uppercase tracking-wider font-semibold text-gray-500 mb-2 px-1.5">الحالة</div>
+        <div class="space-y-0.5">
+          <button class="w-full flex items-center justify-between px-2 py-1.5 rounded-md text-sm bg-[#533afd]/10 text-[#533afd] font-medium">
+            <span class="flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-[#533afd]"></span>الكل</span>
+            <span class="text-xs opacity-70">4</span>
+          </button>
+          <button class="w-full flex items-center justify-between px-2 py-1.5 rounded-md text-sm text-gray-700 hover:bg-gray-50">
+            <span class="flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>متاحة</span>
+            <span class="text-xs text-gray-400">2</span>
+          </button>
+          <button class="w-full flex items-center justify-between px-2 py-1.5 rounded-md text-sm text-gray-700 hover:bg-gray-50">
+            <span class="flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-cyan-500"></span>تحت التصميم</span>
+            <span class="text-xs text-gray-400">1</span>
+          </button>
+          <button class="w-full flex items-center justify-between px-2 py-1.5 rounded-md text-sm text-gray-700 hover:bg-gray-50">
+            <span class="flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-orange-500"></span>قيد التطوير</span>
+            <span class="text-xs text-gray-400">1</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Usage -->
+      <div class="bg-white shadow-card rounded-xl p-3">
+        <div class="text-[11px] uppercase tracking-wider font-semibold text-gray-500 mb-2 px-1.5">الاستخدام</div>
+        <div class="space-y-0.5">
+          <button class="w-full flex items-center justify-between px-2 py-1.5 rounded-md text-sm text-gray-700 hover:bg-gray-50">
+            <span>الكل</span><span class="text-xs text-gray-400">4</span>
+          </button>
+          <button class="w-full flex items-center justify-between px-2 py-1.5 rounded-md text-sm text-gray-700 hover:bg-gray-50">
+            <span>سكني</span><span class="text-xs text-gray-400">3</span>
+          </button>
+          <button class="w-full flex items-center justify-between px-2 py-1.5 rounded-md text-sm text-gray-700 hover:bg-gray-50">
+            <span>تجاري</span><span class="text-xs text-gray-400">1</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Location -->
+      <div class="bg-white shadow-card rounded-xl p-3">
+        <div class="text-[11px] uppercase tracking-wider font-semibold text-gray-500 mb-2 px-1.5">الموقع</div>
+        <div class="space-y-0.5">
+          <button class="w-full flex items-center justify-between px-2 py-1.5 rounded-md text-sm text-gray-700 hover:bg-gray-50">
+            <span>الرياض</span><span class="text-xs text-gray-400">2</span>
+          </button>
+          <button class="w-full flex items-center justify-between px-2 py-1.5 rounded-md text-sm text-gray-700 hover:bg-gray-50">
+            <span>جدة</span><span class="text-xs text-gray-400">1</span>
+          </button>
+          <button class="w-full flex items-center justify-between px-2 py-1.5 rounded-md text-sm text-gray-700 hover:bg-gray-50">
+            <span>الدمام</span><span class="text-xs text-gray-400">1</span>
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- CONTENT -->
+    <main class="min-w-0 space-y-3">
+      <!-- Toolbar -->
+      <div class="flex items-center gap-2 flex-wrap">
+        <div class="inline-flex bg-gray-100 rounded-md p-0.5 me-auto">
+          <button class="px-2.5 py-1 text-xs font-semibold rounded bg-white shadow-sm text-gray-900">جدول</button>
+          <button class="px-2.5 py-1 text-xs font-semibold rounded text-gray-500 hover:text-gray-900">بطاقات</button>
+          <button class="px-2.5 py-1 text-xs font-semibold rounded text-gray-500 hover:text-gray-900">خريطة</button>
+        </div>
+        <span class="text-xs text-gray-500">ترتيب:</span>
+        <button class="h-8 px-3 text-xs border border-gray-200 rounded-md bg-white text-gray-700 hover:bg-gray-50">رقم الأرض</button>
+      </div>
+
+      <!-- TABLE (Cal.com: minimal, rows-only) -->
+      <div class="bg-white shadow-card rounded-xl overflow-hidden">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-gray-100">
+              <th class="px-4 py-3 text-start text-[11px] font-semibold text-gray-500 uppercase tracking-wider">رقم الأرض</th>
+              <th class="px-4 py-3 text-start text-[11px] font-semibold text-gray-500 uppercase tracking-wider">الموقع</th>
+              <th class="px-4 py-3 text-start text-[11px] font-semibold text-gray-500 uppercase tracking-wider">المساحة</th>
+              <th class="px-4 py-3 text-start text-[11px] font-semibold text-gray-500 uppercase tracking-wider">الحالة</th>
+              <th class="px-4 py-3 text-start text-[11px] font-semibold text-gray-500 uppercase tracking-wider">القيمة</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-b border-gray-50 hover:bg-gray-50/60 cursor-pointer">
+              <td class="px-4 py-3.5 font-mono text-xs text-[#533afd]">LAND-2024-001</td>
+              <td class="px-4 py-3.5 font-semibold text-gray-900">أرض الخالدية</td>
+              <td class="px-4 py-3.5 text-gray-700" dir="ltr">5,000 م²</td>
+              <td class="px-4 py-3.5"><span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[11px] font-medium bg-orange-50 text-orange-700"><span class="h-1.5 w-1.5 rounded-full bg-orange-500"></span>قيد التطوير</span></td>
+              <td class="px-4 py-3.5 text-gray-900 font-semibold" dir="ltr">QAR 3,200,000</td>
+            </tr>
+            <tr class="border-b border-gray-50 hover:bg-gray-50/60 cursor-pointer">
+              <td class="px-4 py-3.5 font-mono text-xs text-[#533afd]">LAND-2024-002</td>
+              <td class="px-4 py-3.5 font-semibold text-gray-900">أرض الملقا</td>
+              <td class="px-4 py-3.5 text-gray-700" dir="ltr">8,000 م²</td>
+              <td class="px-4 py-3.5"><span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[11px] font-medium bg-cyan-50 text-cyan-700"><span class="h-1.5 w-1.5 rounded-full bg-cyan-500"></span>تحت التصميم</span></td>
+              <td class="px-4 py-3.5 text-gray-900 font-semibold" dir="ltr">QAR 5,500,000</td>
+            </tr>
+            <tr class="border-b border-gray-50 hover:bg-gray-50/60 cursor-pointer">
+              <td class="px-4 py-3.5 font-mono text-xs text-[#533afd]">LAND-2025-001</td>
+              <td class="px-4 py-3.5 font-semibold text-gray-900">أرض الياسمين</td>
+              <td class="px-4 py-3.5 text-gray-700" dir="ltr">3,500 م²</td>
+              <td class="px-4 py-3.5"><span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[11px] font-medium bg-emerald-50 text-emerald-700"><span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>متاحة</span></td>
+              <td class="px-4 py-3.5 text-gray-900 font-semibold" dir="ltr">QAR 2,100,000</td>
+            </tr>
+            <tr class="hover:bg-gray-50/60 cursor-pointer">
+              <td class="px-4 py-3.5 font-mono text-xs text-[#533afd]">LAND-2025-002</td>
+              <td class="px-4 py-3.5 font-semibold text-gray-900">أرض النرجس</td>
+              <td class="px-4 py-3.5 text-gray-700" dir="ltr">6,200 م²</td>
+              <td class="px-4 py-3.5"><span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[11px] font-medium bg-emerald-50 text-emerald-700"><span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>متاحة</span></td>
+              <td class="px-4 py-3.5 text-gray-900 font-semibold" dir="ltr">QAR 1,700,000</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="px-4 py-3 border-t border-gray-100 flex items-center justify-between text-xs text-gray-500">
+          <span>عرض <b class="text-gray-900">1</b>–<b class="text-gray-900">4</b> من <b class="text-gray-900">4</b></span>
+          <div class="flex items-center gap-1">
+            <button class="h-7 px-2 rounded text-gray-400">السابق</button>
+            <button class="h-7 min-w-[28px] px-2 rounded bg-[#533afd] text-white font-semibold">1</button>
+            <button class="h-7 px-2 rounded text-gray-400">التالي</button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div class="text-center text-xs text-gray-400 py-6">Variant 1 · Calm Table · Cal.com inspired</div>
+</body>
+</html>

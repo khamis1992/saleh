@@ -1,0 +1,264 @@
+- generic [ref=e2]:
+  - region "Notifications alt+T"
+  - generic [ref=e3]:
+    - button "فتح القائمة" [ref=e4]:
+      - img [ref=e5]
+    - complementary [ref=e6]:
+      - generic [ref=e7]:
+        - img [ref=e9]
+        - generic [ref=e11]:
+          - generic [ref=e12]: شركة التطوير العقاري
+          - generic [ref=e13]: ERP العقاري
+      - generic [ref=e14]:
+        - button "دا د. محمد العتيبي مدير النظام" [ref=e16]:
+          - generic [ref=e17]: دا
+          - generic [ref=e18]:
+            - generic [ref=e19]: د. محمد العتيبي
+            - generic [ref=e20]: مدير النظام
+        - link "الرئيسية" [ref=e22] [cursor=pointer]:
+          - /url: /dashboard
+          - img [ref=e23]
+          - generic [ref=e26]: الرئيسية
+        - generic [ref=e27]:
+          - link "الأراضي" [ref=e28] [cursor=pointer]:
+            - /url: /lands
+            - img [ref=e29]
+            - generic [ref=e32]: الأراضي
+          - link "المشاريع والإنشاءات" [ref=e33] [cursor=pointer]:
+            - /url: /construction-all
+            - img [ref=e34]
+            - generic [ref=e39]: المشاريع والإنشاءات
+          - link "ميزانيات المشاريع" [ref=e40] [cursor=pointer]:
+            - /url: /budgets
+            - img [ref=e41]
+            - generic [ref=e44]: ميزانيات المشاريع
+        - generic [ref=e45]:
+          - link "المشتريات" [ref=e46] [cursor=pointer]:
+            - /url: /procurement
+            - img [ref=e47]
+            - generic [ref=e51]: المشتريات
+          - link "المخزون" [ref=e52] [cursor=pointer]:
+            - /url: /inventory/items
+            - img [ref=e53]
+            - generic [ref=e57]: المخزون
+          - link "المعدات" [ref=e58] [cursor=pointer]:
+            - /url: /equipment
+            - img [ref=e59]
+            - generic [ref=e62]: المعدات
+        - button "العقارات والتأجير" [ref=e64]:
+          - generic [ref=e65]: العقارات والتأجير
+          - img [ref=e66]
+        - generic [ref=e68]:
+          - link "الصيانة" [ref=e69] [cursor=pointer]:
+            - /url: /maintenance
+            - img [ref=e70]
+            - generic [ref=e72]: الصيانة
+          - link "المالية" [ref=e73] [cursor=pointer]:
+            - /url: /finance
+            - img [ref=e74]
+            - generic [ref=e76]: المالية
+          - link "الموارد البشرية" [ref=e77] [cursor=pointer]:
+            - /url: /hr/employees
+            - img [ref=e78]
+            - generic [ref=e83]: الموارد البشرية
+          - link "الشؤون القانونية" [ref=e84] [cursor=pointer]:
+            - /url: /legal/notices
+            - img [ref=e85]
+            - generic [ref=e91]: الشؤون القانونية
+        - generic [ref=e92]:
+          - link "التقارير والقوائم" [ref=e93] [cursor=pointer]:
+            - /url: /reports
+            - img [ref=e94]
+            - generic [ref=e96]: التقارير والقوائم
+          - link "قوائم الانتظار" [ref=e97] [cursor=pointer]:
+            - /url: /queues
+            - img [ref=e98]
+            - generic [ref=e100]: قوائم الانتظار
+          - link "المستندات" [ref=e101] [cursor=pointer]:
+            - /url: /documents
+            - img [ref=e102]
+            - generic [ref=e105]: المستندات
+          - link "جدول المواعيد" [ref=e106] [cursor=pointer]:
+            - /url: /calendar
+            - img [ref=e107]
+            - generic [ref=e109]: جدول المواعيد
+          - link "الإدارة" [ref=e110] [cursor=pointer]:
+            - /url: /settings
+            - img [ref=e111]
+            - generic [ref=e114]: الإدارة
+      - button "طي القائمة" [ref=e116]:
+        - generic [ref=e117]: طي القائمة
+        - img [ref=e118]
+    - generic [ref=e120]:
+      - banner [ref=e122]:
+        - generic [ref=e123]:
+          - generic [ref=e124]:
+            - navigation "مسار التنقل" [ref=e126]:
+              - link "الرئيسية" [ref=e127] [cursor=pointer]:
+                - /url: /dashboard
+                - img [ref=e128]
+                - generic [ref=e131]: الرئيسية
+              - generic [ref=e132]:
+                - img [ref=e133]
+                - link "الصيانة" [ref=e135] [cursor=pointer]:
+                  - /url: /maintenance
+              - generic [ref=e136]:
+                - img [ref=e137]
+                - generic [ref=e139]: الصيانة الوقائية
+            - button "مدير النظام" [ref=e140]:
+              - img
+              - generic [ref=e141]: مدير النظام
+              - img
+          - generic [ref=e142]:
+            - button "بحث... Ctrl+K" [ref=e143]:
+              - img [ref=e144]
+              - generic [ref=e147]: بحث...
+              - generic [ref=e148]: Ctrl+K
+            - button "99+" [ref=e149]:
+              - img
+              - generic [ref=e150]: 99+
+            - button [ref=e151]:
+              - img
+            - button [ref=e152]:
+              - img
+            - button "د" [ref=e153]:
+              - generic [ref=e155]: د
+      - main [ref=e156]:
+        - generic [ref=e157]:
+          - navigation "Sub-navigation" [ref=e160]:
+            - link "طلبات الصيانة" [ref=e161] [cursor=pointer]:
+              - /url: /maintenance/requests
+            - link "أوامر العمل" [ref=e162] [cursor=pointer]:
+              - /url: /maintenance/work-orders
+            - link "الصيانة الوقائية" [ref=e163] [cursor=pointer]:
+              - /url: /maintenance/preventive
+            - link "المعاينات" [ref=e164] [cursor=pointer]:
+              - /url: /maintenance/inspections
+            - link "الأصول" [ref=e165] [cursor=pointer]:
+              - /url: /maintenance/assets
+          - generic [ref=e167]:
+            - generic [ref=e168]:
+              - generic [ref=e169]:
+                - heading "الصيانة الوقائية" [level=1] [ref=e170]
+                - paragraph [ref=e171]: جدولة ومتابعة الصيانة الوقائية للأصول والمعدات
+              - button "جدول جديد" [ref=e173]:
+                - img
+                - text: جدول جديد
+            - button "إنشاء أوامر عمل من الجداول المستحقة" [ref=e175]:
+              - img
+              - text: إنشاء أوامر عمل من الجداول المستحقة
+            - generic [ref=e177]:
+              - generic [ref=e178]:
+                - generic [ref=e179]:
+                  - img [ref=e180]
+                  - textbox "بحث..." [ref=e183]
+                - combobox [ref=e184]:
+                  - img [ref=e185]
+                  - generic: جميع الفئات
+                  - img [ref=e187]
+                - combobox [ref=e189]:
+                  - img [ref=e190]
+                  - generic: جميع الحالات
+                  - img [ref=e192]
+              - table [ref=e196]:
+                - rowgroup [ref=e197]:
+                  - row "الأصل / المعدة العقار الفئة التكرار التاريخ القادم المسؤول الحالة" [ref=e198]:
+                    - columnheader "الأصل / المعدة" [ref=e199]
+                    - columnheader "العقار" [ref=e200]
+                    - columnheader "الفئة" [ref=e201]
+                    - columnheader "التكرار" [ref=e202]
+                    - columnheader "التاريخ القادم" [ref=e203]
+                    - columnheader "المسؤول" [ref=e204]
+                    - columnheader "الحالة" [ref=e205]
+                    - columnheader [ref=e206]
+                - rowgroup [ref=e207]:
+                  - row "مكيفات عمارة النخيل عمارة النخيل تكييف شهري 2026-06-15 فني خالد مجدولة ✎ ✕" [ref=e208]:
+                    - cell "مكيفات عمارة النخيل" [ref=e209]
+                    - cell "عمارة النخيل" [ref=e210]
+                    - cell "تكييف" [ref=e211]
+                    - cell "شهري" [ref=e212]
+                    - cell "2026-06-15" [ref=e213]
+                    - cell "فني خالد" [ref=e214]
+                    - cell "مجدولة" [ref=e215]:
+                      - generic [ref=e216]: مجدولة
+                    - cell "✎ ✕" [ref=e217]:
+                      - generic [ref=e218]:
+                        - button "✎" [ref=e219]:
+                          - generic [ref=e220]: ✎
+                        - button "✕" [ref=e221]:
+                          - generic [ref=e222]: ✕
+                  - row "مصاعد أبراج السلام أبراج السلام التجارية مصاعد شهري 2026-06-01 شركة المصاعد المتحدة قيد التنفيذ ✎ ✕" [ref=e223]:
+                    - cell "مصاعد أبراج السلام" [ref=e224]
+                    - cell "أبراج السلام التجارية" [ref=e225]
+                    - cell "مصاعد" [ref=e226]
+                    - cell "شهري" [ref=e227]
+                    - cell "2026-06-01" [ref=e228]
+                    - cell "شركة المصاعد المتحدة" [ref=e229]
+                    - cell "قيد التنفيذ" [ref=e230]:
+                      - generic [ref=e231]: قيد التنفيذ
+                    - cell "✎ ✕" [ref=e232]:
+                      - generic [ref=e233]:
+                        - button "✎" [ref=e234]:
+                          - generic [ref=e235]: ✎
+                        - button "✕" [ref=e236]:
+                          - generic [ref=e237]: ✕
+                  - row "نظام إنذار الحريق عمارة النخيل إنذار حريق ربع سنوي 2026-08-30 شركة الأمان للسلامة مجدولة ✎ ✕" [ref=e238]:
+                    - cell "نظام إنذار الحريق" [ref=e239]
+                    - cell "عمارة النخيل" [ref=e240]
+                    - cell "إنذار حريق" [ref=e241]
+                    - cell "ربع سنوي" [ref=e242]
+                    - cell "2026-08-30" [ref=e243]
+                    - cell "شركة الأمان للسلامة" [ref=e244]
+                    - cell "مجدولة" [ref=e245]:
+                      - generic [ref=e246]: مجدولة
+                    - cell "✎ ✕" [ref=e247]:
+                      - generic [ref=e248]:
+                        - button "✎" [ref=e249]:
+                          - generic [ref=e250]: ✎
+                        - button "✕" [ref=e251]:
+                          - generic [ref=e252]: ✕
+                  - row "مضخات المياه فلل الياسمين مضخات مياه شهري 2026-06-10 فني أحمد مجدولة ✎ ✕" [ref=e253]:
+                    - cell "مضخات المياه" [ref=e254]
+                    - cell "فلل الياسمين" [ref=e255]
+                    - cell "مضخات مياه" [ref=e256]
+                    - cell "شهري" [ref=e257]
+                    - cell "2026-06-10" [ref=e258]
+                    - cell "فني أحمد" [ref=e259]
+                    - cell "مجدولة" [ref=e260]:
+                      - generic [ref=e261]: مجدولة
+                    - cell "✎ ✕" [ref=e262]:
+                      - generic [ref=e263]:
+                        - button "✎" [ref=e264]:
+                          - generic [ref=e265]: ✎
+                        - button "✕" [ref=e266]:
+                          - generic [ref=e267]: ✕
+                  - row "لوحات الكهرباء الرئيسية عمارة النخيل لوحات كهرباء ربع سنوي 2026-07-20 فني سعيد مجدولة ✎ ✕" [ref=e268]:
+                    - cell "لوحات الكهرباء الرئيسية" [ref=e269]
+                    - cell "عمارة النخيل" [ref=e270]
+                    - cell "لوحات كهرباء" [ref=e271]
+                    - cell "ربع سنوي" [ref=e272]
+                    - cell "2026-07-20" [ref=e273]
+                    - cell "فني سعيد" [ref=e274]
+                    - cell "مجدولة" [ref=e275]:
+                      - generic [ref=e276]: مجدولة
+                    - cell "✎ ✕" [ref=e277]:
+                      - generic [ref=e278]:
+                        - button "✎" [ref=e279]:
+                          - generic [ref=e280]: ✎
+                        - button "✕" [ref=e281]:
+                          - generic [ref=e282]: ✕
+                  - row "كاميرات المراقبة أبراج السلام التجارية كاميرات مراقبة شهري 2026-06-05 فني محمد متأخرة ✎ ✕" [ref=e283]:
+                    - cell "كاميرات المراقبة" [ref=e284]
+                    - cell "أبراج السلام التجارية" [ref=e285]
+                    - cell "كاميرات مراقبة" [ref=e286]
+                    - cell "شهري" [ref=e287]
+                    - cell "2026-06-05" [ref=e288]
+                    - cell "فني محمد" [ref=e289]
+                    - cell "متأخرة" [ref=e290]:
+                      - generic [ref=e291]: متأخرة
+                    - cell "✎ ✕" [ref=e292]:
+                      - generic [ref=e293]:
+                        - button "✎" [ref=e294]:
+                          - generic [ref=e295]: ✎
+                        - button "✕" [ref=e296]:
+                          - generic [ref=e297]: ✕

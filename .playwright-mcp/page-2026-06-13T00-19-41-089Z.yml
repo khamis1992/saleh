@@ -1,0 +1,5 @@
+- generic [ref=e223]:
+  - generic [ref=e225]: ⚠️
+  - heading "حدث خطأ غير متوقع" [level=1] [ref=e226]
+  - paragraph [ref=e227]: "Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: undefined. You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports. Check the render method of `SettingsPage`."
+  - button "تحديث الصفحة" [ref=e228]

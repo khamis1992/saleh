@@ -1,0 +1,329 @@
+- generic:
+  - generic:
+    - region "Notifications alt+T"
+    - generic:
+      - button:
+        - img
+      - complementary:
+        - generic:
+          - generic:
+            - img
+          - generic:
+            - generic: شركة التطوير العقاري
+            - generic: ERP العقاري
+        - generic:
+          - generic:
+            - button:
+              - generic: دا
+              - generic:
+                - generic: د. محمد العتيبي
+                - generic: مدير النظام
+          - generic:
+            - link:
+              - /url: /dashboard
+              - img
+              - generic: الرئيسية
+          - generic:
+            - link:
+              - /url: /lands
+              - img
+              - generic: الأراضي
+            - link:
+              - /url: /construction-all
+              - img
+              - generic: المشاريع والإنشاءات
+            - link:
+              - /url: /budgets
+              - img
+              - generic: ميزانيات المشاريع
+          - generic:
+            - link:
+              - /url: /procurement
+              - img
+              - generic: المشتريات
+            - link:
+              - /url: /inventory/items
+              - img
+              - generic: المخزون
+            - link:
+              - /url: /equipment
+              - img
+              - generic: المعدات
+          - generic:
+            - button:
+              - generic: العقارات والتأجير
+              - img
+          - generic:
+            - link:
+              - /url: /maintenance
+              - img
+              - generic: الصيانة
+            - link:
+              - /url: /finance
+              - img
+              - generic: المالية
+            - link:
+              - /url: /hr/employees
+              - img
+              - generic: الموارد البشرية
+            - link:
+              - /url: /legal/notices
+              - img
+              - generic: الشؤون القانونية
+          - generic:
+            - link:
+              - /url: /reports
+              - img
+              - generic: التقارير والقوائم
+            - link:
+              - /url: /queues
+              - img
+              - generic: قوائم الانتظار
+            - link:
+              - /url: /documents
+              - img
+              - generic: المستندات
+            - link:
+              - /url: /calendar
+              - img
+              - generic: جدول المواعيد
+            - link:
+              - /url: /settings
+              - img
+              - generic: الإدارة
+        - generic:
+          - button:
+            - generic: طي القائمة
+            - img
+      - generic:
+        - banner:
+          - generic:
+            - generic:
+              - generic:
+                - navigation:
+                  - link:
+                    - /url: /dashboard
+                    - img
+                    - generic: الرئيسية
+                  - generic:
+                    - img
+                    - link:
+                      - /url: /maintenance
+                      - text: الصيانة
+                  - generic:
+                    - img
+                    - generic: الصيانة الوقائية
+              - button:
+                - img
+                - generic: مدير النظام
+                - img
+            - generic:
+              - button:
+                - img
+                - generic: بحث...
+                - generic: Ctrl+K
+              - button:
+                - img
+                - generic: 99+
+              - button:
+                - img
+              - button:
+                - img
+              - button:
+                - generic:
+                  - generic: د
+        - main:
+          - generic:
+            - generic:
+              - generic:
+                - navigation:
+                  - link:
+                    - /url: /maintenance/requests
+                    - text: طلبات الصيانة
+                  - link:
+                    - /url: /maintenance/work-orders
+                    - text: أوامر العمل
+                  - link:
+                    - /url: /maintenance/preventive
+                    - text: الصيانة الوقائية
+                  - link:
+                    - /url: /maintenance/inspections
+                    - text: المعاينات
+                  - link:
+                    - /url: /maintenance/assets
+                    - text: الأصول
+            - generic:
+              - generic:
+                - generic:
+                  - generic:
+                    - heading [level=1]: الصيانة الوقائية
+                    - paragraph: جدولة ومتابعة الصيانة الوقائية للأصول والمعدات
+                  - generic:
+                    - button:
+                      - img
+                      - text: جدول جديد
+                - generic:
+                  - button:
+                    - img
+                    - text: إنشاء أوامر عمل من الجداول المستحقة
+                - generic:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - img
+                        - textbox:
+                          - /placeholder: بحث...
+                      - combobox:
+                        - img
+                        - generic: جميع الفئات
+                        - img
+                      - combobox:
+                        - img
+                        - generic: جميع الحالات
+                        - img
+                    - generic:
+                      - generic:
+                        - table:
+                          - rowgroup:
+                            - row:
+                              - columnheader: الأصل / المعدة
+                              - columnheader: العقار
+                              - columnheader: الفئة
+                              - columnheader: التكرار
+                              - columnheader: التاريخ القادم
+                              - columnheader: المسؤول
+                              - columnheader: الحالة
+                              - columnheader
+                          - rowgroup:
+                            - row:
+                              - cell: مكيفات عمارة النخيل
+                              - cell: عمارة النخيل
+                              - cell: تكييف
+                              - cell: شهري
+                              - cell: 2026-06-15
+                              - cell: فني خالد
+                              - cell:
+                                - generic: مجدولة
+                              - cell:
+                                - generic:
+                                  - button:
+                                    - generic: ✎
+                                  - button:
+                                    - generic: ✕
+                            - row:
+                              - cell: مصاعد أبراج السلام
+                              - cell: أبراج السلام التجارية
+                              - cell: مصاعد
+                              - cell: شهري
+                              - cell: 2026-06-01
+                              - cell: شركة المصاعد المتحدة
+                              - cell:
+                                - generic: قيد التنفيذ
+                              - cell:
+                                - generic:
+                                  - button:
+                                    - generic: ✎
+                                  - button:
+                                    - generic: ✕
+                            - row:
+                              - cell: نظام إنذار الحريق
+                              - cell: عمارة النخيل
+                              - cell: إنذار حريق
+                              - cell: ربع سنوي
+                              - cell: 2026-08-30
+                              - cell: شركة الأمان للسلامة
+                              - cell:
+                                - generic: مجدولة
+                              - cell:
+                                - generic:
+                                  - button:
+                                    - generic: ✎
+                                  - button:
+                                    - generic: ✕
+                            - row:
+                              - cell: مضخات المياه
+                              - cell: فلل الياسمين
+                              - cell: مضخات مياه
+                              - cell: شهري
+                              - cell: 2026-06-10
+                              - cell: فني أحمد
+                              - cell:
+                                - generic: مجدولة
+                              - cell:
+                                - generic:
+                                  - button:
+                                    - generic: ✎
+                                  - button:
+                                    - generic: ✕
+                            - row:
+                              - cell: لوحات الكهرباء الرئيسية
+                              - cell: عمارة النخيل
+                              - cell: لوحات كهرباء
+                              - cell: ربع سنوي
+                              - cell: 2026-07-20
+                              - cell: فني سعيد
+                              - cell:
+                                - generic: مجدولة
+                              - cell:
+                                - generic:
+                                  - button:
+                                    - generic: ✎
+                                  - button:
+                                    - generic: ✕
+                            - row:
+                              - cell: كاميرات المراقبة
+                              - cell: أبراج السلام التجارية
+                              - cell: كاميرات مراقبة
+                              - cell: شهري
+                              - cell: 2026-06-05
+                              - cell: فني محمد
+                              - cell:
+                                - generic: متأخرة
+                              - cell:
+                                - generic:
+                                  - button:
+                                    - generic: ✎
+                                  - button:
+                                    - generic: ✕
+  - dialog "جدول صيانة وقائية جديد" [ref=e299]:
+    - heading "جدول صيانة وقائية جديد" [level=2] [ref=e301]
+    - generic [ref=e302]:
+      - generic [ref=e303]:
+        - text: العقار *
+        - textbox "prop-..." [active] [ref=e304]
+      - generic [ref=e305]:
+        - text: الوحدة
+        - textbox "unit-..." [ref=e306]
+      - generic [ref=e307]:
+        - text: الأصل / المعدة *
+        - textbox [ref=e308]
+      - generic [ref=e309]:
+        - text: الفئة
+        - combobox [ref=e310]:
+          - generic: تكييف
+          - img [ref=e311]
+      - generic [ref=e313]:
+        - text: التكرار
+        - combobox [ref=e314]:
+          - generic: شهري
+          - img [ref=e315]
+      - generic [ref=e317]:
+        - text: التاريخ القادم
+        - textbox [ref=e318]
+      - generic [ref=e319]:
+        - text: المسؤول
+        - textbox [ref=e320]
+      - generic [ref=e321]:
+        - text: الحالة
+        - combobox [ref=e322]:
+          - generic: مجدولة
+          - img [ref=e323]
+      - generic [ref=e325]:
+        - text: ملاحظات
+        - textbox [ref=e326]
+    - generic [ref=e327]:
+      - button "إلغاء" [ref=e328]
+      - button "حفظ" [ref=e329]
+    - button "Close" [ref=e330]:
+      - img [ref=e331]
+      - generic [ref=e334]: Close

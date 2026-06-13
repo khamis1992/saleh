@@ -24,6 +24,49 @@ interface ApprovalFlow {
   managers: string[];
 }
 
+const LS_APPROVAL_FLOWS = 'erp_approval_flows';
+const LS_NUMBERING_FORMATS = 'erp_numbering_formats';
+
+function safeGet<T>(key: string, fallback: T): T {
+  try {
+    const raw = localStorage.getItem(key);
+    return raw ? (JSON.parse(raw) as T) : fallback;
+  } catch {
+    return fallback;
+  }
+}
+
+// ── Default data (used on first load) ──
+const FLOW_ICON_MAP: Record<string, React.ElementType> = {
+  pr: ShoppingCart, po: FileText, claims: FileSignature, payments: Banknote,
+  leases: FileSignature, discounts: Receipt, maintenance: Wrench, journal: Calculator, legal: Scale,
+};
+
+const DEFAULT_NUMBERING_FORMATS: Record<string, string> = {
+  projects: 'PRJ-{year}-{counter}',
+  lands: 'LND-{year}-{counter}',
+  properties: 'PRP-{year}-{counter}',
+  units: 'UNT-{year}-{counter}',
+  contractors: 'CON-{year}-{counter}',
+  leases: 'LSE-{year}-{counter}',
+  invoices: 'INV-{year}-{counter}',
+  receipts: 'RCT-{year}-{counter}',
+  purchaseOrders: 'PO-{year}-{counter}',
+  maintenance: 'MNT-{year}-{counter}',
+};
+
+const DEFAULT_APPROVAL_FLOWS: ApprovalFlow[] = [
+  { id: 'pr', module: 'purchase_requests', label: 'طلبات الشراء', icon: ShoppingCart, levels: 2, autoApprove: false, notifyOnSubmit: true, managers: ['مدير المشتريات', 'المدير المالي'] },
+  { id: 'po', module: 'purchase_orders', label: 'أوامر الشراء', icon: FileText, levels: 3, autoApprove: false, notifyOnSubmit: true, managers: ['مدير المشتريات', 'المدير المالي', 'المدير العام'] },
+  { id: 'claims', module: 'contractor_claims', label: 'مطالبات المقاولين', icon: FileSignature, levels: 3, autoApprove: false, notifyOnSubmit: true, managers: ['مهندس الموقع', 'مدير المشروع', 'المدير المالي'] },
+  { id: 'payments', module: 'contractor_payments', label: 'مدفوعات المقاولين', icon: Banknote, levels: 2, autoApprove: false, notifyOnSubmit: false, managers: ['المدير المالي', 'المدير العام'] },
+  { id: 'leases', module: 'lease_contracts', label: 'عقود الإيجار', icon: FileSignature, levels: 2, autoApprove: false, notifyOnSubmit: true, managers: ['مدير التأجير', 'المدير العام'] },
+  { id: 'discounts', module: 'discounts', label: 'الخصومات', icon: Receipt, levels: 2, autoApprove: true, notifyOnSubmit: false, managers: ['مدير التأجير'] },
+  { id: 'maintenance', module: 'maintenance_expenses', label: 'مصروفات الصيانة', icon: Wrench, levels: 2, autoApprove: false, notifyOnSubmit: true, managers: ['مدير الصيانة', 'المدير المالي'] },
+  { id: 'journal', module: 'journal_entries', label: 'القيود المحاسبية', icon: Calculator, levels: 2, autoApprove: false, notifyOnSubmit: false, managers: ['المدير المالي', 'المدقق الداخلي'] },
+  { id: 'legal', module: 'legal_notices', label: 'الإشعارات القانونية', icon: Scale, levels: 2, autoApprove: false, notifyOnSubmit: true, managers: ['المستشار القانوني', 'المدير العام'] },
+];
+
 // ── Main Component ──
 export default function SettingsPage() {
   const { t } = useLocale();
@@ -41,7 +84,12 @@ export default function SettingsPage() {
   const [currency, setCurrency] = useState('QAR');
   const [fiscalMonth, setFiscalMonth] = useState('1');
 
-  // Load company data from store on mount
+  // Numbering state (initialised fresh, overwritten from localStorage on mount)
+  const [numberingFormats, setNumberingFormats] = useState<Record<string, string>>(DEFAULT_NUMBERING_FORMATS);
+
+  // Approval flows state
+  const [approvalFlows, setApprovalFlows] = useState<ApprovalFlow[]>(DEFAULT_APPROVAL_FLOWS);
+
   useEffect(() => {
     const company = companyStore.getAll()[0];
     if (company) {
@@ -55,34 +103,15 @@ export default function SettingsPage() {
       setCurrency(company.currency);
       setFiscalMonth(String(company.fiscal_year_start_month));
     }
+
+    const savedNumbering = safeGet<Record<string, string>>(LS_NUMBERING_FORMATS, DEFAULT_NUMBERING_FORMATS);
+    setNumberingFormats(prev => ({ ...prev, ...savedNumbering }));
+
+    const savedFlows = safeGet<Omit<ApprovalFlow, 'icon'>[]>(LS_APPROVAL_FLOWS, []);
+    if (savedFlows.length > 0) {
+      setApprovalFlows(savedFlows.map(f => ({ ...f, icon: FLOW_ICON_MAP[f.id] || Settings })));
+    }
   }, []);
-
-  // Numbering state
-  const [numberingFormats, setNumberingFormats] = useState<Record<string, string>>({
-    projects: 'PRJ-{year}-{counter}',
-    lands: 'LND-{year}-{counter}',
-    properties: 'PRP-{year}-{counter}',
-    units: 'UNT-{year}-{counter}',
-    contractors: 'CON-{year}-{counter}',
-    leases: 'LSE-{year}-{counter}',
-    invoices: 'INV-{year}-{counter}',
-    receipts: 'RCT-{year}-{counter}',
-    purchaseOrders: 'PO-{year}-{counter}',
-    maintenance: 'MNT-{year}-{counter}',
-  });
-
-  // Approval flows state
-  const [approvalFlows, setApprovalFlows] = useState<ApprovalFlow[]>([
-    { id: 'pr', module: 'purchase_requests', label: 'طلبات الشراء', icon: ShoppingCart, levels: 2, autoApprove: false, notifyOnSubmit: true, managers: ['مدير المشتريات', 'المدير المالي'] },
-    { id: 'po', module: 'purchase_orders', label: 'أوامر الشراء', icon: FileText, levels: 3, autoApprove: false, notifyOnSubmit: true, managers: ['مدير المشتريات', 'المدير المالي', 'المدير العام'] },
-    { id: 'claims', module: 'contractor_claims', label: 'مطالبات المقاولين', icon: FileSignature, levels: 3, autoApprove: false, notifyOnSubmit: true, managers: ['مهندس الموقع', 'مدير المشروع', 'المدير المالي'] },
-    { id: 'payments', module: 'contractor_payments', label: 'مدفوعات المقاولين', icon: Banknote, levels: 2, autoApprove: false, notifyOnSubmit: false, managers: ['المدير المالي', 'المدير العام'] },
-    { id: 'leases', module: 'lease_contracts', label: 'عقود الإيجار', icon: FileSignature, levels: 2, autoApprove: false, notifyOnSubmit: true, managers: ['مدير التأجير', 'المدير العام'] },
-    { id: 'discounts', module: 'discounts', label: 'الخصومات', icon: Receipt, levels: 2, autoApprove: true, notifyOnSubmit: false, managers: ['مدير التأجير'] },
-    { id: 'maintenance', module: 'maintenance_expenses', label: 'مصروفات الصيانة', icon: Wrench, levels: 2, autoApprove: false, notifyOnSubmit: true, managers: ['مدير الصيانة', 'المدير المالي'] },
-    { id: 'journal', module: 'journal_entries', label: 'القيود المحاسبية', icon: Calculator, levels: 2, autoApprove: false, notifyOnSubmit: false, managers: ['المدير المالي', 'المدقق الداخلي'] },
-    { id: 'legal', module: 'legal_notices', label: 'الإشعارات القانونية', icon: Scale, levels: 2, autoApprove: false, notifyOnSubmit: true, managers: ['المستشار القانوني', 'المدير العام'] },
-  ]);
 
   const handleSave = () => {
     // Save company data to store
@@ -98,6 +127,12 @@ export default function SettingsPage() {
       fiscal_year_start_month: parseInt(fiscalMonth) || 1,
       updated_at: new Date().toISOString().split('T')[0],
     });
+
+    localStorage.setItem(LS_NUMBERING_FORMATS, JSON.stringify(numberingFormats));
+
+    const serialisableFlows = approvalFlows.map(({ icon: _icon, ...rest }) => rest);
+    localStorage.setItem(LS_APPROVAL_FLOWS, JSON.stringify(serialisableFlows));
+
     setSaved(true);
     setTimeout(() => setSaved(false), 2000);
   };

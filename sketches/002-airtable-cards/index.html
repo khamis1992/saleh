@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Variant 2 — Airtable Cards (Light, Colorful Records)</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'IBM Plex Sans Arabic', 'DM Sans', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    color: #1d1d1f;
+    background: #f6f5f1;
+    line-height: 1.5;
+    padding: 32px;
+  }
+  .container { max-width: 1200px; margin: 0 auto; }
+  .header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 20px; }
+  .header h1 { font-size: 32px; font-weight: 700; color: #1d1d1f; }
+  .header .sub { color: #6b6b6b; font-size: 14px; margin-top: 4px; }
+  .btn {
+    padding: 8px 14px; border-radius: 4px; font-size: 14px; font-weight: 600;
+    border: none; cursor: pointer; font-family: inherit; display: inline-flex; align-items: center; gap: 6px;
+  }
+  .btn-dark { background: #1d1d1f; color: #ffffff; }
+  .btn-ghost { background: #ffffff; color: #1d1d1f; border: 1px solid #d8d6cd; }
+  .btn-ghost:hover { background: #fafaf6; }
+
+  /* View bar (Airtable-style view tabs) */
+  .views {
+    display: flex; gap: 2px; padding: 0 0 12px 0; border-bottom: 1px solid #e5e3da;
+    margin-bottom: 16px;
+  }
+  .view {
+    padding: 6px 12px; font-size: 13px; font-weight: 500; color: #6b6b6b;
+    border-radius: 4px 4px 0 0; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;
+  }
+  .view.active { background: #ffffff; color: #1d1d1f; border: 1px solid #e5e3da; border-bottom-color: #ffffff; margin-bottom: -1px; }
+  .view-icon { width: 14px; height: 14px; }
+
+  /* Toolbar */
+  .toolbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+  .toolbar-left { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  .search { position: relative; }
+  .search input {
+    padding: 6px 10px 6px 30px; border-radius: 4px; border: 1px solid #d8d6cd;
+    background: #ffffff; font-size: 13px; font-family: inherit; width: 220px; color: #1d1d1f;
+  }
+  .search-icon { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); color: #6b6b6b; font-size: 12px; }
+  .filter-btn {
+    padding: 6px 10px; border-radius: 4px; background: #ffffff; border: 1px solid #d8d6cd;
+    font-size: 13px; color: #1d1d1f; cursor: pointer; display: inline-flex; align-items: center; gap: 4px;
+    font-family: inherit; font-weight: 500;
+  }
+  .filter-btn .count { background: #fcb400; color: #1d1d1f; padding: 0 6px; border-radius: 10px; font-size: 11px; font-weight: 700; }
+  .result-count { font-size: 13px; color: #6b6b6b; }
+
+  /* Card grid (Airtable record cards) */
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .card {
+    background: #ffffff; border-radius: 6px; padding: 14px;
+    box-shadow: 0 1px 2px rgba(15,23,42,.04), 0 0 0 1px rgba(15,23,42,.06);
+    cursor: pointer; transition: box-shadow 0.15s, transform 0.15s;
+    position: relative;
+  }
+  .card:hover {
+    box-shadow: 0 4px 12px rgba(15,23,42,.08), 0 0 0 1px rgba(15,23,42,.06);
+    transform: translateY(-1px);
+  }
+  .card-color { height: 4px; border-radius: 6px 6px 0 0; margin: -14px -14px 12px -14px; border-radius: 6px 6px 0 0; }
+  .card-row { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
+  .card-title { font-size: 15px; font-weight: 600; color: #1d1d1f; }
+  .card-code { font-size: 11px; color: #6b6b6b; font-family: 'Geist Mono', monospace; margin-top: 2px; }
+  .status-tag {
+    display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 11px; font-weight: 600;
+  }
+  .tag-emerald { background: #d1f4d8; color: #0d6e3d; }
+  .tag-blue { background: #d4e4fd; color: #1a4480; }
+  .tag-amber { background: #ffe4a3; color: #8b5a00; }
+  .tag-gray { background: #e8e6dd; color: #525252; }
+
+  .field { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid #f3f1ea; font-size: 12px; }
+  .field:last-child { border-bottom: none; }
+  .field-label { color: #6b6b6b; font-weight: 500; }
+  .field-value { color: #1d1d1f; font-weight: 500; }
+  .ltr-num { direction: ltr; display: inline-block; unicode-bidi: isolate; font-variant-numeric: tabular-nums; }
+
+  .card-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; padding-top: 8px; border-top: 1px solid #f3f1ea; }
+  .project-badge { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; color: #1a4480; background: #d4e4fd; padding: 2px 8px; border-radius: 10px; font-weight: 600; }
+  .card-actions { display: flex; gap: 4px; opacity: 0; transition: opacity 0.15s; }
+  .card:hover .card-actions { opacity: 1; }
+  .icon-btn { width: 24px; height: 24px; border-radius: 4px; border: none; background: transparent; cursor: pointer; color: #6b6b6b; }
+  .icon-btn:hover { background: #f3f1ea; color: #1d1d1f; }
+
+  /* Floating "Add record" tile */
+  .add-card {
+    background: transparent; border: 2px dashed #d8d6cd; border-radius: 6px; padding: 14px;
+    display: flex; align-items: center; justify-content: center; min-height: 180px;
+    cursor: pointer; color: #6b6b6b; font-size: 14px; font-weight: 500;
+  }
+  .add-card:hover { background: #fafaf6; border-color: #1d1d1f; color: #1d1d1f; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Header -->
+  <div class="header">
+    <div>
+      <h1>🏞️ بنك الأراضي</h1>
+      <div class="sub">4 سجلات · 22,700 م² · QAR 12.5M قيمة إجمالية</div>
+    </div>
+    <div style="display:flex; gap:8px;">
+      <button class="btn btn-ghost">⚡ أتمتة</button>
+      <button class="btn btn-dark">+ تسجيل جديد</button>
+    </div>
+  </div>
+
+  <!-- View tabs (Airtable-style) -->
+  <div class="views">
+    <div class="view active">▦ كل السجلات</div>
+    <div class="view">✓ المتاحة</div>
+    <div class="view">⚒ قيد التطوير</div>
+    <div class="view">★ عالية القيمة</div>
+    <div class="view">🕐 المضافة حديثاً</div>
+    <div class="view">+ عرض جديد</div>
+  </div>
+
+  <!-- Toolbar -->
+  <div class="toolbar">
+    <div class="toolbar-left">
+      <div class="search">
+        <span class="search-icon">🔍</span>
+        <input placeholder="بحث في الأراضي...">
+      </div>
+      <button class="filter-btn">▤ الحالة <span class="count">1</span></button>
+      <button class="filter-btn">⊞ الاستخدام <span class="count">2</span></button>
+      <button class="filter-btn">⊙ الموقع</button>
+      <button class="filter-btn">⊕ فلتر</button>
+    </div>
+    <div class="result-count"><span class="ltr-num">4 من 4</span></div>
+  </div>
+
+  <!-- Card grid -->
+  <div class="grid">
+
+    <div class="card">
+      <div class="card-color" style="background: linear-gradient(90deg, #10b981, #34d399);"></div>
+      <div class="card-row">
+        <div>
+          <div class="card-title">أرض اللؤلؤة السكنية</div>
+          <div class="card-code">LND-001</div>
+        </div>
+        <span class="status-tag tag-emerald">متاحة</span>
+      </div>
+      <div class="field"><span class="field-label">الموقع</span><span class="field-value">الدوحة</span></div>
+      <div class="field"><span class="field-label">الاستخدام</span><span class="field-value">سكني</span></div>
+      <div class="field"><span class="field-label">المساحة</span><span class="field-value ltr-num">5,000 م²</span></div>
+      <div class="field"><span class="field-label">القيمة</span><span class="field-value ltr-num">3,200,000</span></div>
+      <div class="card-footer">
+        <span class="project-badge">🏗 2 مشاريع</span>
+        <div class="card-actions">
+          <button class="icon-btn">✦</button>
+          <button class="icon-btn">✎</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-color" style="background: linear-gradient(90deg, #0a72ef, #38bdf8);"></div>
+      <div class="card-row">
+        <div>
+          <div class="card-title">مجمع الواحة التجاري</div>
+          <div class="card-code">LND-002</div>
+        </div>
+        <span class="status-tag tag-blue">قيد التطوير</span>
+      </div>
+      <div class="field"><span class="field-label">الموقع</span><span class="field-value">الدوحة</span></div>
+      <div class="field"><span class="field-label">الاستخدام</span><span class="field-value">تجاري</span></div>
+      <div class="field"><span class="field-label">المساحة</span><span class="field-value ltr-num">8,000 م²</span></div>
+      <div class="field"><span class="field-label">القيمة</span><span class="field-value ltr-num">5,800,000</span></div>
+      <div class="card-footer">
+        <span class="project-badge">🏗 1 مشروع</span>
+        <div class="card-actions">
+          <button class="icon-btn">✦</button>
+          <button class="icon-btn">✎</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-color" style="background: linear-gradient(90deg, #10b981, #34d399);"></div>
+      <div class="card-row">
+        <div>
+          <div class="card-title">أرض الكورنيش</div>
+          <div class="card-code">LND-003</div>
+        </div>
+        <span class="status-tag tag-emerald">متاحة</span>
+      </div>
+      <div class="field"><span class="field-label">الموقع</span><span class="field-value">الوكرة</span></div>
+      <div class="field"><span class="field-label">الاستخدام</span><span class="field-value">سكني</span></div>
+      <div class="field"><span class="field-label">المساحة</span><span class="field-value ltr-num">6,200 م²</span></div>
+      <div class="field"><span class="field-label">القيمة</span><span class="field-value ltr-num">2,400,000</span></div>
+      <div class="card-footer">
+        <span class="project-badge">🏗 3 مشاريع</span>
+        <div class="card-actions">
+          <button class="icon-btn">✦</button>
+          <button class="icon-btn">✎</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-color" style="background: linear-gradient(90deg, #f59e0b, #fbbf24);"></div>
+      <div class="card-row">
+        <div>
+          <div class="card-title">أرض المرقاب</div>
+          <div class="card-code">LND-004</div>
+        </div>
+        <span class="status-tag tag-amber">محجوزة</span>
+      </div>
+      <div class="field"><span class="field-label">الموقع</span><span class="field-value">الدوحة</span></div>
+      <div class="field"><span class="field-label">الاستخدام</span><span class="field-value">مختلط</span></div>
+      <div class="field"><span class="field-label">المساحة</span><span class="field-value ltr-num">3,500 م²</span></div>
+      <div class="field"><span class="field-label">القيمة</span><span class="field-value ltr-num">1,100,000</span></div>
+      <div class="card-footer">
+        <span class="project-badge" style="background:#e8e6dd; color:#525252;">🏗 0 مشاريع</span>
+        <div class="card-actions">
+          <button class="icon-btn">✦</button>
+          <button class="icon-btn">✎</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="add-card">+ إضافة سجل جديد</div>
+    <div class="add-card" style="opacity:.5; cursor:default;">+ قالب سكني</div>
+  </div>
+
+  <p style="margin-top:32px; font-size:13px; color:#6b6b6b; text-align:center;">
+    <strong>Variant 2: Airtable-Records</strong> · Light, friendly, view-tabs, color-coded cards, per-record field list.
+  </p>
+</div>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<title>الأراضي — Document Editor variant</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  body { font-family: 'Inter', system-ui, sans-serif; -webkit-font-smoothing: antialiased; color: #1f2937; background: #fafaf7; }
+  .doc-card { background: #ffffff; border: 1px solid #f0eeea; }
+  .pill { background: #f4f1ec; color: #57534e; }
+</style>
+</head>
+<body class="min-h-screen">
+
+  <!-- Floating top action bar (Notion-style) -->
+  <header class="sticky top-0 z-10 bg-[#fafaf7]/80 backdrop-blur border-b border-[#ebe7df]">
+    <div class="max-w-[1200px] mx-auto px-8 h-12 flex items-center gap-3">
+      <span class="text-xs text-gray-500">بنك الأراضي</span>
+      <span class="text-gray-300">/</span>
+      <span class="text-sm font-semibold text-gray-900">الأراضي</span>
+      <div class="ms-auto flex items-center gap-2">
+        <span class="text-xs text-gray-500">مشاركة</span>
+        <button class="text-xs h-7 px-2.5 rounded-md border border-[#ebe7df] bg-white hover:bg-[#f7f5f0]">تصدير</button>
+        <button class="text-xs h-7 px-2.5 rounded-md bg-gray-900 text-white hover:bg-gray-800">+ أرض جديدة</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- DOCUMENT -->
+  <main class="max-w-[1200px] mx-auto px-8 py-10">
+
+    <!-- Cover (subtle, no dark) -->
+    <div class="flex items-start gap-4 mb-8">
+      <div class="h-16 w-16 rounded-2xl bg-gradient-to-br from-amber-100 to-rose-100 ring-1 ring-amber-200/40 flex items-center justify-center shrink-0 text-2xl">🗺️</div>
+      <div class="flex-1 min-w-0">
+        <div class="text-xs text-gray-500 mb-1">قاعدة بيانات · 4 عناصر</div>
+        <h1 class="text-4xl font-bold text-gray-900 tracking-tight">الأراضي</h1>
+        <p class="text-sm text-gray-500 mt-2 max-w-2xl">بنك أراضي الشركة. استخدم الفلاتر على اليمين لتضييق نطاق العرض، أو افتح بطاقة أي أرض لاستعراض تفاصيلها ومشاريعها المرتبطة.</p>
+      </div>
+    </div>
+
+    <!-- KPI as inline metadata (not tiles) -->
+    <div class="flex flex-wrap gap-x-8 gap-y-2 text-sm border-y border-[#ebe7df] py-4 mb-6">
+      <div><span class="text-gray-500">المساحة الإجمالية</span> <span class="font-bold text-gray-900 ms-1" dir="ltr">22,700 م²</span></div>
+      <div><span class="text-gray-500">متاحة</span> <span class="font-bold text-emerald-600 ms-1">2</span></div>
+      <div><span class="text-gray-500">قيد التطوير</span> <span class="font-bold text-orange-600 ms-1">1</span></div>
+      <div><span class="text-gray-500">القيمة التقديرية</span> <span class="font-bold text-gray-900 ms-1" dir="ltr">QAR 12.5M</span></div>
+    </div>
+
+    <!-- TOOLBAR (inline) -->
+    <div class="flex items-center gap-2 mb-4 flex-wrap">
+      <div class="relative">
+        <input class="h-9 w-72 ps-9 pe-3 text-sm rounded-md border border-[#ebe7df] bg-white focus:outline-none focus:ring-2 focus:ring-gray-200" placeholder="ابحث في الأراضي..." />
+        <svg class="absolute start-2.5 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M11 19a8 8 0 110-16 8 8 0 010 16z"/></svg>
+      </div>
+      <button class="h-9 px-3 text-sm rounded-md border border-[#ebe7df] bg-white hover:bg-[#f7f5f0] text-gray-700 flex items-center gap-1.5">الحالة: الكل <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></button>
+      <button class="h-9 px-3 text-sm rounded-md border border-[#ebe7df] bg-white hover:bg-[#f7f5f0] text-gray-700 flex items-center gap-1.5">الاستخدام: الكل</button>
+      <button class="h-9 px-3 text-sm rounded-md border border-[#ebe7df] bg-white hover:bg-[#f7f5f0] text-gray-700 flex items-center gap-1.5">الموقع: الكل</button>
+      <div class="ms-auto inline-flex bg-white border border-[#ebe7df] rounded-md p-0.5">
+        <button class="px-3 py-1 text-xs font-semibold rounded text-gray-900 bg-[#f4f1ec]">قائمة</button>
+        <button class="px-3 py-1 text-xs font-semibold rounded text-gray-500 hover:text-gray-900">شبكة</button>
+        <button class="px-3 py-1 text-xs font-semibold rounded text-gray-500 hover:text-gray-900">خريطة</button>
+      </div>
+    </div>
+
+    <!-- TABLE (very light, minimal borders) -->
+    <div class="doc-card rounded-xl overflow-hidden">
+      <div class="grid grid-cols-[1fr,1fr,120px,140px,140px,80px] text-xs font-semibold text-gray-500 uppercase tracking-wider px-5 py-3 border-b border-[#ebe7df] bg-[#fafaf7]">
+        <div>الاسم</div><div>الموقع</div><div>المساحة</div><div>الحالة</div><div>القيمة</div><div class="text-end">⋯</div>
+      </div>
+
+      <!-- Rows -->
+      <a class="grid grid-cols-[1fr,1fr,120px,140px,140px,80px] items-center px-5 py-3.5 border-b border-[#f0eeea] hover:bg-[#fafaf7] cursor-pointer">
+        <div class="font-semibold text-gray-900">أرض الخالدية <span class="font-mono text-[11px] text-gray-400 ms-2">LAND-2024-001</span></div>
+        <div class="text-sm text-gray-600">الرياض · قطعة P-1245</div>
+        <div class="text-sm text-gray-700 font-mono" dir="ltr">5,000 م²</div>
+        <div><span class="pill inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-[11px] font-medium"><span class="h-1.5 w-1.5 rounded-full bg-orange-500"></span>قيد التطوير</span></div>
+        <div class="text-sm font-bold text-gray-900" dir="ltr">QAR 3.2M</div>
+        <div class="text-end text-gray-300">⋯</div>
+      </a>
+
+      <a class="grid grid-cols-[1fr,1fr,120px,140px,140px,80px] items-center px-5 py-3.5 border-b border-[#f0eeea] hover:bg-[#fafaf7] cursor-pointer">
+        <div class="font-semibold text-gray-900">أرض الملقا <span class="font-mono text-[11px] text-gray-400 ms-2">LAND-2024-002</span></div>
+        <div class="text-sm text-gray-600">الرياض · قطعة P-2301</div>
+        <div class="text-sm text-gray-700 font-mono" dir="ltr">8,000 م²</div>
+        <div><span class="pill inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-[11px] font-medium"><span class="h-1.5 w-1.5 rounded-full bg-cyan-500"></span>تحت التصميم</span></div>
+        <div class="text-sm font-bold text-gray-900" dir="ltr">QAR 5.5M</div>
+        <div class="text-end text-gray-300">⋯</div>
+      </a>
+
+      <a class="grid grid-cols-[1fr,1fr,120px,140px,140px,80px] items-center px-5 py-3.5 border-b border-[#f0eeea] hover:bg-[#fafaf7] cursor-pointer">
+        <div class="font-semibold text-gray-900">أرض الياسمين <span class="font-mono text-[11px] text-gray-400 ms-2">LAND-2025-001</span></div>
+        <div class="text-sm text-gray-600">جدة · قطعة P-3400</div>
+        <div class="text-sm text-gray-700 font-mono" dir="ltr">3,500 م²</div>
+        <div><span class="pill inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-[11px] font-medium"><span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>متاحة</span></div>
+        <div class="text-sm font-bold text-gray-900" dir="ltr">QAR 2.1M</div>
+        <div class="text-end text-gray-300">⋯</div>
+      </a>
+
+      <a class="grid grid-cols-[1fr,1fr,120px,140px,140px,80px] items-center px-5 py-3.5 hover:bg-[#fafaf7] cursor-pointer">
+        <div class="font-semibold text-gray-900">أرض النرجس <span class="font-mono text-[11px] text-gray-400 ms-2">LAND-2025-002</span></div>
+        <div class="text-sm text-gray-600">الدمام · قطعة P-4500</div>
+        <div class="text-sm text-gray-700 font-mono" dir="ltr">6,200 م²</div>
+        <div><span class="pill inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-[11px] font-medium"><span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>متاحة</span></div>
+        <div class="text-sm font-bold text-gray-900" dir="ltr">QAR 1.7M</div>
+        <div class="text-end text-gray-300">⋯</div>
+      </a>
+    </div>
+
+    <!-- Footer -->
+    <div class="mt-3 text-xs text-gray-500 flex items-center justify-between">
+      <span>4 عناصر</span>
+      <span>مرتبة حسب رقم الأرض</span>
+    </div>
+  </main>
+
+  <div class="text-center text-xs text-gray-400 py-6">Variant 2 · Document Editor · Notion / Linear light inspired</div>
+</body>
+</html>

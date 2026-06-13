@@ -1,0 +1,146 @@
+- generic [ref=e2]:
+  - region "Notifications alt+T"
+  - generic [ref=e3]:
+    - complementary [ref=e4]:
+      - generic [ref=e5]:
+        - img [ref=e7]
+        - generic [ref=e9]:
+          - generic [ref=e10]: شركة التطوير العقاري
+          - generic [ref=e11]: ERP العقاري
+      - generic [ref=e12]:
+        - button "دا د. محمد العتيبي مدير النظام" [ref=e14]:
+          - generic [ref=e15]: دا
+          - generic [ref=e16]:
+            - generic [ref=e17]: د. محمد العتيبي
+            - generic [ref=e18]: مدير النظام
+        - link "الرئيسية" [ref=e20] [cursor=pointer]:
+          - /url: /dashboard
+          - img [ref=e21]
+          - generic [ref=e24]: الرئيسية
+        - generic [ref=e25]:
+          - link "الأراضي" [ref=e26] [cursor=pointer]:
+            - /url: /lands
+            - img [ref=e27]
+            - generic [ref=e30]: الأراضي
+          - link "المشاريع والإنشاءات" [ref=e31] [cursor=pointer]:
+            - /url: /construction-all
+            - img [ref=e32]
+            - generic [ref=e37]: المشاريع والإنشاءات
+          - link "ميزانيات المشاريع" [ref=e38] [cursor=pointer]:
+            - /url: /budgets
+            - img [ref=e39]
+            - generic [ref=e42]: ميزانيات المشاريع
+        - generic [ref=e43]:
+          - link "المشتريات" [ref=e44] [cursor=pointer]:
+            - /url: /procurement
+            - img [ref=e45]
+            - generic [ref=e49]: المشتريات
+          - link "المخزون" [ref=e50] [cursor=pointer]:
+            - /url: /inventory/items
+            - img [ref=e51]
+            - generic [ref=e55]: المخزون
+          - link "المعدات" [ref=e56] [cursor=pointer]:
+            - /url: /equipment
+            - img [ref=e57]
+            - generic [ref=e60]: المعدات
+        - button "العقارات والتأجير" [ref=e62]:
+          - generic [ref=e63]: العقارات والتأجير
+          - img [ref=e64]
+        - generic [ref=e66]:
+          - link "الصيانة" [ref=e67] [cursor=pointer]:
+            - /url: /maintenance
+            - img [ref=e68]
+            - generic [ref=e70]: الصيانة
+          - link "المالية" [ref=e71] [cursor=pointer]:
+            - /url: /finance
+            - img [ref=e72]
+            - generic [ref=e74]: المالية
+          - link "الموارد البشرية" [ref=e75] [cursor=pointer]:
+            - /url: /hr/employees
+            - img [ref=e76]
+            - generic [ref=e81]: الموارد البشرية
+          - link "الشؤون القانونية" [ref=e82] [cursor=pointer]:
+            - /url: /legal/notices
+            - img [ref=e83]
+            - generic [ref=e89]: الشؤون القانونية
+        - generic [ref=e90]:
+          - link "التقارير والقوائم" [ref=e91] [cursor=pointer]:
+            - /url: /reports
+            - img [ref=e92]
+            - generic [ref=e94]: التقارير والقوائم
+          - link "قوائم الانتظار" [ref=e95] [cursor=pointer]:
+            - /url: /queues
+            - img [ref=e96]
+            - generic [ref=e98]: قوائم الانتظار
+          - link "المستندات" [ref=e99] [cursor=pointer]:
+            - /url: /documents
+            - img [ref=e100]
+            - generic [ref=e103]: المستندات
+          - link "جدول المواعيد" [ref=e104] [cursor=pointer]:
+            - /url: /calendar
+            - img [ref=e105]
+            - generic [ref=e107]: جدول المواعيد
+          - link "الإدارة" [ref=e108] [cursor=pointer]:
+            - /url: /settings
+            - img [ref=e109]
+            - generic [ref=e112]: الإدارة
+      - button "طي القائمة" [ref=e114]:
+        - generic [ref=e115]: طي القائمة
+        - img [ref=e116]
+    - generic [ref=e118]:
+      - banner [ref=e120]:
+        - generic [ref=e121]:
+          - generic [ref=e122]:
+            - navigation "مسار التنقل" [ref=e124]:
+              - link "الرئيسية" [ref=e125] [cursor=pointer]:
+                - /url: /dashboard
+                - img [ref=e126]
+                - generic [ref=e129]: الرئيسية
+              - generic [ref=e130]:
+                - img [ref=e131]
+                - link "تحصيل الإيجار" [ref=e133] [cursor=pointer]:
+                  - /url: /rent-collection
+              - generic [ref=e134]:
+                - img [ref=e135]
+                - generic [ref=e137]: الفواتير
+            - button "مدير النظام" [ref=e138]:
+              - img
+              - generic [ref=e139]: مدير النظام
+              - img
+          - generic [ref=e140]:
+            - button "بحث... Ctrl+K" [ref=e141]:
+              - img [ref=e142]
+              - generic [ref=e145]: بحث...
+              - generic [ref=e146]: Ctrl+K
+            - button "الصفحة الرئيسية" [ref=e147]
+            - button "99+" [ref=e148]:
+              - img
+              - generic [ref=e149]: 99+
+            - button [ref=e150]:
+              - img
+            - button [ref=e151]:
+              - img
+            - button "د د. محمد العتيبي" [ref=e152]:
+              - generic [ref=e154]: د
+              - generic [ref=e155]: د. محمد العتيبي
+      - main [ref=e156]:
+        - generic [ref=e157]:
+          - generic [ref=e158]:
+            - generic [ref=e159]:
+              - heading "تحصيل الإيجارات" [level=1] [ref=e160]
+              - paragraph [ref=e161]: 6 فاتورة — الفواتير
+            - generic [ref=e162]:
+              - button "إنشاء فواتير" [ref=e163]:
+                - img
+                - text: إنشاء فواتير
+              - button "فاتورة جديدة" [ref=e164]:
+                - img
+                - text: فاتورة جديدة
+          - generic [ref=e166]:
+            - generic [ref=e167]:
+              - img [ref=e168]
+              - textbox "بحث..." [ref=e171]
+            - combobox [ref=e172]:
+              - img [ref=e173]
+              - generic: جميع الحالات
+              - img [ref=e175]

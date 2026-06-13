@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<title>الأراضي — Action Hub variant</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  body { font-family: 'Inter', system-ui, sans-serif; -webkit-font-smoothing: antialiased; color: #111827; background: #f9fafb; }
+  .ring-soft { box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 0 0 1px rgba(0,0,0,0.04); }
+  .ring-soft:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.06), 0 0 0 1px rgba(0,0,0,0.06); }
+</style>
+</head>
+<body class="min-h-screen">
+
+  <!-- Tinted top band (light) -->
+  <div class="bg-gradient-to-b from-blue-50/60 to-white border-b border-gray-200/60">
+    <div class="max-w-[1400px] mx-auto px-6 py-5 flex items-center justify-between flex-wrap gap-4">
+      <div class="flex items-center gap-3">
+        <div class="h-10 w-10 rounded-lg bg-white ring-1 ring-gray-200 flex items-center justify-center">🗺️</div>
+        <div>
+          <h1 class="text-xl font-bold text-gray-900">الأراضي</h1>
+          <p class="text-xs text-gray-500">بنك الأراضي · 4 قطعة</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-2">
+        <button class="h-9 px-3 text-sm rounded-md border border-gray-200 bg-white hover:bg-gray-50">⚙️ تخصيص</button>
+        <button class="h-9 px-3 text-sm rounded-md border border-gray-200 bg-white hover:bg-gray-50">⬇️ تصدير</button>
+        <button class="h-9 px-4 text-sm rounded-md bg-blue-600 text-white hover:bg-blue-700 font-semibold shadow-sm">+ أرض جديدة</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- KPI grid (clickable, with sparkline feel) -->
+  <div class="max-w-[1400px] mx-auto px-6 mt-5 grid grid-cols-2 md:grid-cols-4 gap-3">
+    <button class="text-start bg-white rounded-xl ring-soft p-4 hover:shadow-md transition-all">
+      <div class="text-xs text-gray-500">إجمالي</div>
+      <div class="text-2xl font-bold text-gray-900 mt-0.5">4</div>
+      <div class="text-[10px] text-gray-400 mt-1">قطعة</div>
+    </button>
+    <button class="text-start bg-white rounded-xl ring-soft p-4 hover:shadow-md transition-all ring-2 ring-emerald-200">
+      <div class="text-xs text-emerald-700 font-semibold">✓ متاحة</div>
+      <div class="text-2xl font-bold text-emerald-600 mt-0.5">2</div>
+      <div class="text-[10px] text-gray-400 mt-1">جاهزة للبدء</div>
+    </button>
+    <button class="text-start bg-white rounded-xl ring-soft p-4 hover:shadow-md transition-all">
+      <div class="text-xs text-gray-500">قيد التطوير</div>
+      <div class="text-2xl font-bold text-orange-600 mt-0.5">1</div>
+      <div class="text-[10px] text-gray-400 mt-1">+ 2 تحت الإجراء</div>
+    </button>
+    <button class="text-start bg-white rounded-xl ring-soft p-4 hover:shadow-md transition-all">
+      <div class="text-xs text-gray-500">القيمة</div>
+      <div class="text-2xl font-bold text-gray-900 mt-0.5" dir="ltr">QAR 12.5M</div>
+      <div class="text-[10px] text-emerald-600 mt-1">↑ +14% vs cost</div>
+    </button>
+  </div>
+
+  <!-- TOOLBAR with prominent filter chips -->
+  <div class="max-w-[1400px] mx-auto px-6 mt-5">
+    <div class="bg-white rounded-xl ring-soft p-2.5 flex items-center gap-2 flex-wrap">
+      <div class="relative flex-1 min-w-[200px]">
+        <input class="w-full h-9 ps-9 pe-3 text-sm rounded-md border border-gray-200 bg-gray-50 focus:bg-white focus:outline-none" placeholder="ابحث في 4 قطعة..." />
+        <svg class="absolute start-2.5 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M11 19a8 8 0 110-16 8 8 0 010 16z"/></svg>
+      </div>
+      <div class="flex items-center gap-2 flex-wrap">
+        <span class="text-xs text-gray-500">الحالة:</span>
+        <button class="h-8 px-3 text-xs rounded-full bg-emerald-100 text-emerald-700 font-semibold ring-1 ring-emerald-200 flex items-center gap-1.5">متاحة ×</button>
+        <button class="h-8 px-3 text-xs rounded-full bg-white border border-gray-200 text-gray-700 hover:bg-gray-50">تحت التصميم</button>
+        <button class="h-8 px-3 text-xs rounded-full bg-white border border-gray-200 text-gray-700 hover:bg-gray-50">قيد التطوير</button>
+        <span class="text-gray-300">·</span>
+        <span class="text-xs text-gray-500">الاستخدام:</span>
+        <button class="h-8 px-3 text-xs rounded-full bg-white border border-gray-200 text-gray-700 hover:bg-gray-50">سكني</button>
+        <button class="h-8 px-3 text-xs rounded-full bg-white border border-gray-200 text-gray-700 hover:bg-gray-50">تجاري</button>
+      </div>
+      <div class="ms-auto inline-flex bg-gray-100 rounded-md p-0.5">
+        <button class="px-2.5 py-1 text-xs font-semibold rounded text-gray-500 hover:text-gray-900">جدول</button>
+        <button class="px-2.5 py-1 text-xs font-semibold rounded bg-white shadow-sm text-gray-900">بطاقات</button>
+        <button class="px-2.5 py-1 text-xs font-semibold rounded text-gray-500 hover:text-gray-900">خريطة</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARDS GRID (default view) -->
+  <div class="max-w-[1400px] mx-auto px-6 mt-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
+      <!-- Card 1 -->
+      <div class="bg-white rounded-xl ring-soft overflow-hidden cursor-pointer hover:-translate-y-0.5 transition-all">
+        <div class="h-1 bg-gradient-to-r from-orange-400 to-rose-400"></div>
+        <div class="p-4">
+          <div class="flex items-start justify-between mb-2">
+            <div class="h-9 w-9 rounded-md bg-orange-50 ring-1 ring-orange-100 flex items-center justify-center text-orange-600">🏠</div>
+            <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-orange-50 text-orange-700 ring-1 ring-orange-100">قيد التطوير</span>
+          </div>
+          <div class="font-semibold text-gray-900">أرض الخالدية</div>
+          <div class="font-mono text-[10px] text-gray-400 mt-0.5" dir="ltr">LAND-2024-001</div>
+          <div class="mt-3 text-xs text-gray-600">📍 الرياض · قطعة P-1245</div>
+          <div class="mt-2 text-xs text-gray-600">📐 <span class="font-mono font-semibold" dir="ltr">5,000 م²</span></div>
+          <div class="mt-3 pt-3 border-t border-gray-100 flex items-end justify-between">
+            <div>
+              <div class="text-[10px] text-gray-400">القيمة</div>
+              <div class="text-sm font-bold text-gray-900" dir="ltr">QAR 3.2M</div>
+            </div>
+            <button class="text-[10px] text-blue-700 font-semibold bg-blue-50 px-2 py-0.5 rounded">1 مشروع</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="bg-white rounded-xl ring-soft overflow-hidden cursor-pointer hover:-translate-y-0.5 transition-all">
+        <div class="h-1 bg-gradient-to-r from-cyan-400 to-blue-400"></div>
+        <div class="p-4">
+          <div class="flex items-start justify-between mb-2">
+            <div class="h-9 w-9 rounded-md bg-cyan-50 ring-1 ring-cyan-100 flex items-center justify-center text-cyan-600">🏢</div>
+            <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-cyan-50 text-cyan-700 ring-1 ring-cyan-100">تحت التصميم</span>
+          </div>
+          <div class="font-semibold text-gray-900">أرض الملقا</div>
+          <div class="font-mono text-[10px] text-gray-400 mt-0.5" dir="ltr">LAND-2024-002</div>
+          <div class="mt-3 text-xs text-gray-600">📍 الرياض · قطعة P-2301</div>
+          <div class="mt-2 text-xs text-gray-600">📐 <span class="font-mono font-semibold" dir="ltr">8,000 م²</span></div>
+          <div class="mt-3 pt-3 border-t border-gray-100 flex items-end justify-between">
+            <div>
+              <div class="text-[10px] text-gray-400">القيمة</div>
+              <div class="text-sm font-bold text-gray-900" dir="ltr">QAR 5.5M</div>
+            </div>
+            <button class="text-[10px] text-blue-700 font-semibold bg-blue-50 px-2 py-0.5 rounded">2 مشروع</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="bg-white rounded-xl ring-soft overflow-hidden cursor-pointer hover:-translate-y-0.5 transition-all">
+        <div class="h-1 bg-gradient-to-r from-emerald-400 to-teal-400"></div>
+        <div class="p-4">
+          <div class="flex items-start justify-between mb-2">
+            <div class="h-9 w-9 rounded-md bg-emerald-50 ring-1 ring-emerald-100 flex items-center justify-center text-emerald-600">🏠</div>
+            <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-50 text-emerald-700 ring-1 ring-emerald-100">متاحة</span>
+          </div>
+          <div class="font-semibold text-gray-900">أرض الياسمين</div>
+          <div class="font-mono text-[10px] text-gray-400 mt-0.5" dir="ltr">LAND-2025-001</div>
+          <div class="mt-3 text-xs text-gray-600">📍 جدة · قطعة P-3400</div>
+          <div class="mt-2 text-xs text-gray-600">📐 <span class="font-mono font-semibold" dir="ltr">3,500 م²</span></div>
+          <div class="mt-3 pt-3 border-t border-gray-100 flex items-end justify-between">
+            <div>
+              <div class="text-[10px] text-gray-400">القيمة</div>
+              <div class="text-sm font-bold text-gray-900" dir="ltr">QAR 2.1M</div>
+            </div>
+            <button class="text-[10px] text-blue-700 font-semibold bg-blue-50 px-2 py-0.5 rounded">1 مشروع</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="bg-white rounded-xl ring-soft overflow-hidden cursor-pointer hover:-translate-y-0.5 transition-all">
+        <div class="h-1 bg-gradient-to-r from-emerald-400 to-teal-400"></div>
+        <div class="p-4">
+          <div class="flex items-start justify-between mb-2">
+            <div class="h-9 w-9 rounded-md bg-emerald-50 ring-1 ring-emerald-100 flex items-center justify-center text-emerald-600">🏠</div>
+            <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-50 text-emerald-700 ring-1 ring-emerald-100">متاحة</span>
+          </div>
+          <div class="font-semibold text-gray-900">أرض النرجس</div>
+          <div class="font-mono text-[10px] text-gray-400 mt-0.5" dir="ltr">LAND-2025-002</div>
+          <div class="mt-3 text-xs text-gray-600">📍 الدمام · قطعة P-4500</div>
+          <div class="mt-2 text-xs text-gray-600">📐 <span class="font-mono font-semibold" dir="ltr">6,200 م²</span></div>
+          <div class="mt-3 pt-3 border-t border-gray-100 flex items-end justify-between">
+            <div>
+              <div class="text-[10px] text-gray-400">القيمة</div>
+              <div class="text-sm font-bold text-gray-900" dir="ltr">QAR 1.7M</div>
+            </div>
+            <span class="text-[10px] text-gray-400">لا مشاريع</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="text-center text-xs text-gray-400 py-6">Variant 3 · Action Hub · Airtable / Notion card-first</div>
+</body>
+</html>

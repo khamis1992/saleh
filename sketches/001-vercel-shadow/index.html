@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Variant 1 — Vercel Shadow (Light, Data-Dense)</title>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'IBM Plex Sans Arabic', 'Geist', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    color: #171717;
+    background: #ffffff;
+    line-height: 1.5;
+    padding: 32px;
+    font-feature-settings: "liga" 1, "kern" 1;
+  }
+  /* Shadow-as-border utility */
+  .ring { box-shadow: rgba(0,0,0,0.08) 0px 0px 0px 1px; }
+  .ring-soft { box-shadow: rgba(0,0,0,0.04) 0px 2px 2px, rgba(0,0,0,0.08) 0px 0px 0px 1px; }
+  .ring-full {
+    box-shadow:
+      rgba(0,0,0,0.08) 0px 0px 0px 1px,
+      rgba(0,0,0,0.04) 0px 2px 2px,
+      rgba(0,0,0,0.04) 0px 8px 8px -8px,
+      #fafafa 0px 0px 0px 1px;
+  }
+  .container { max-width: 1200px; margin: 0 auto; }
+  .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+  .header h1 { font-size: 32px; font-weight: 600; letter-spacing: -1.28px; }
+  .header .sub { color: #4d4d4d; font-size: 14px; margin-top: 4px; }
+  .btn {
+    padding: 8px 16px; border-radius: 6px; font-size: 14px; font-weight: 500;
+    border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;
+    font-family: inherit;
+  }
+  .btn-dark { background: #171717; color: #ffffff; }
+  .btn-ghost { background: #ffffff; color: #171717; }
+  .btn-ghost.ring:hover { background: #fafafa; }
+
+  /* KPI strip */
+  .kpis { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 24px; }
+  .kpi { background: #ffffff; border-radius: 8px; padding: 16px; }
+  .kpi-label { font-size: 12px; color: #666; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+  .kpi-value { font-size: 24px; font-weight: 600; letter-spacing: -0.96px; margin-bottom: 4px; }
+  .kpi-delta { font-size: 12px; color: #00875a; font-weight: 500; }
+  .kpi-delta.neg { color: #b91c1c; }
+  .kpi-icon { width: 28px; height: 28px; border-radius: 6px; background: #fafafa; display: flex; align-items: center; justify-content: center; margin-bottom: 12px; font-size: 14px; }
+
+  /* Toolbar */
+  .toolbar { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; border-radius: 8px; margin-bottom: 0; }
+  .tabs { display: inline-flex; background: #fafafa; border-radius: 6px; padding: 3px; }
+  .tab { padding: 6px 12px; font-size: 13px; font-weight: 500; border-radius: 4px; cursor: pointer; color: #4d4d4d; }
+  .tab.active { background: #ffffff; color: #171717; box-shadow: rgba(0,0,0,0.04) 0px 1px 2px, rgba(0,0,0,0.06) 0px 0px 0px 1px; }
+  .sort { font-size: 13px; color: #4d4d4d; display: flex; align-items: center; gap: 8px; }
+  .sort select { background: transparent; border: none; font-family: inherit; font-size: 13px; color: #171717; font-weight: 500; cursor: pointer; }
+
+  /* Table */
+  .table-wrap { border-radius: 8px; overflow: hidden; }
+  table { width: 100%; border-collapse: collapse; }
+  thead th {
+    text-align: right; padding: 10px 16px; font-size: 12px; font-weight: 500;
+    color: #666; background: #fafafa; border-bottom: 1px solid #ebebeb;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  tbody td { padding: 14px 16px; font-size: 14px; border-bottom: 1px solid #f4f4f4; }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: #fafafa; }
+  .name-cell { display: flex; align-items: center; gap: 10px; }
+  .avatar { width: 32px; height: 32px; border-radius: 6px; background: linear-gradient(135deg, #dbeafe, #e0e7ff); display: flex; align-items: center; justify-content: center; font-size: 14px; }
+  .name-cell .title { font-weight: 500; color: #171717; }
+  .name-cell .sub { font-size: 12px; color: #666; }
+
+  .pill { display: inline-flex; align-items: center; gap: 4px; padding: 2px 10px; border-radius: 9999px; font-size: 12px; font-weight: 500; }
+  .pill-emerald { background: #ecfdf5; color: #0068d6; }
+  .pill-blue { background: #ebf5ff; color: #0068d6; }
+  .pill-amber { background: #fffbeb; color: #b45309; }
+  .pill-gray { background: #f5f5f5; color: #525252; }
+  .dot { width: 6px; height: 6px; border-radius: 50%; }
+  .dot-emerald { background: #10b981; } .dot-blue { background: #0a72ef; } .dot-amber { background: #f59e0b; } .dot-gray { background: #a3a3a3; }
+
+  .ltr-num { direction: ltr; display: inline-block; unicode-bidi: isolate; }
+  .code { font-family: 'Geist Mono', monospace; font-size: 12px; color: #525252; }
+
+  .row-actions { display: flex; gap: 4px; opacity: 0; transition: opacity 0.15s; }
+  tbody tr:hover .row-actions { opacity: 1; }
+  .icon-btn { width: 28px; height: 28px; border-radius: 6px; border: none; background: transparent; cursor: pointer; color: #666; display: flex; align-items: center; justify-content: center; }
+  .icon-btn:hover { background: #f5f5f5; color: #171717; }
+
+  .project-chip { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; background: #ebf5ff; color: #0068d6; border-radius: 9999px; font-size: 12px; font-weight: 500; font-family: 'Geist Mono', monospace; }
+
+  /* Pagination */
+  .pagination { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; border-top: 1px solid #ebebeb; }
+  .page-info { font-size: 13px; color: #666; }
+  .page-btns { display: flex; gap: 4px; }
+  .page-btn { min-width: 32px; height: 32px; padding: 0 8px; border-radius: 6px; border: none; background: transparent; font-size: 13px; cursor: pointer; color: #525252; font-family: inherit; }
+  .page-btn:hover { background: #f5f5f5; }
+  .page-btn.active { background: #171717; color: #ffffff; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Header -->
+  <div class="header">
+    <div>
+      <h1>الأراضي</h1>
+      <div class="sub">بنك الأراضي وإدارة الممتلكات العقارية</div>
+    </div>
+    <div style="display:flex; gap:8px;">
+      <button class="btn btn-ghost ring">↓ تصدير</button>
+      <button class="btn btn-dark">+ إضافة أرض</button>
+    </div>
+  </div>
+
+  <!-- KPI strip -->
+  <div class="kpis">
+    <div class="kpi ring-soft">
+      <div class="kpi-icon">▤</div>
+      <div class="kpi-label">إجمالي الأراضي</div>
+      <div class="kpi-value">4</div>
+      <div class="kpi-delta">+12% هذا الشهر</div>
+    </div>
+    <div class="kpi ring-soft">
+      <div class="kpi-icon">✓</div>
+      <div class="kpi-label">متاحة للتطوير</div>
+      <div class="kpi-value">2</div>
+      <div class="kpi-delta">جاهزة للبناء</div>
+    </div>
+    <div class="kpi ring-soft">
+      <div class="kpi-icon">⚒</div>
+      <div class="kpi-label">قيد التطوير</div>
+      <div class="kpi-value">1</div>
+      <div class="kpi-delta">نشطة حالياً</div>
+    </div>
+    <div class="kpi ring-soft">
+      <div class="kpi-icon">◇</div>
+      <div class="kpi-label">إجمالي المساحة</div>
+      <div class="kpi-value ltr-num">22,700 <span style="font-size:14px; color:#666;">م²</span></div>
+      <div class="kpi-delta">+3,200 م²</div>
+    </div>
+    <div class="kpi ring-soft">
+      <div class="kpi-icon">◈</div>
+      <div class="kpi-label">القيمة السوقية</div>
+      <div class="kpi-value ltr-num">12.5M</div>
+      <div class="kpi-delta neg">-2.1%</div>
+    </div>
+  </div>
+
+  <!-- Toolbar -->
+  <div class="toolbar ring-soft" style="border-radius: 8px 8px 0 0; border-bottom: 1px solid #ebebeb;">
+    <div style="display:flex; gap:16px; align-items:center;">
+      <div class="tabs">
+        <div class="tab active">جدول</div>
+        <div class="tab">بطاقات</div>
+        <div class="tab">خريطة</div>
+      </div>
+      <div class="sort">
+        <span>مرتبة حسب:</span>
+        <select><option>المساحة</option><option>التاريخ</option><option>القيمة</option></select>
+      </div>
+    </div>
+    <div style="font-size:13px; color:#666;"><span class="ltr-num">4 من 4</span> نتيجة</div>
+  </div>
+
+  <!-- Table -->
+  <div class="table-wrap ring-soft" style="border-radius: 0 0 8px 8px;">
+    <table>
+      <thead>
+        <tr>
+          <th>الأرض</th>
+          <th>الحالة</th>
+          <th>الاستخدام</th>
+          <th>المساحة</th>
+          <th>القيمة</th>
+          <th>المشاريع</th>
+          <th style="width:40px;"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <div class="name-cell">
+              <div class="avatar">◆</div>
+              <div>
+                <div class="title">أرض اللؤلؤة السكنية</div>
+                <div class="sub"><span class="code">LND-001</span> · الدوحة · قطعة 24</div>
+              </div>
+            </div>
+          </td>
+          <td><span class="pill pill-emerald"><span class="dot dot-emerald"></span>متاحة</span></td>
+          <td>سكني</td>
+          <td><span class="ltr-num">5,000 م²</span></td>
+          <td><span class="ltr-num">3,200,000</span></td>
+          <td><span class="project-chip">2 مشاريع</span></td>
+          <td>
+            <div class="row-actions">
+              <button class="icon-btn">✦</button>
+              <button class="icon-btn">✎</button>
+              <button class="icon-btn">✕</button>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="name-cell">
+              <div class="avatar">▲</div>
+              <div>
+                <div class="title">مجمع الواحة التجاري</div>
+                <div class="sub"><span class="code">LND-002</span> · الدوحة · قطعة 12</div>
+              </div>
+            </div>
+          </td>
+          <td><span class="pill pill-blue"><span class="dot dot-blue"></span>قيد التطوير</span></td>
+          <td>تجاري</td>
+          <td><span class="ltr-num">8,000 م²</span></td>
+          <td><span class="ltr-num">5,800,000</span></td>
+          <td><span class="project-chip">1 مشروع</span></td>
+          <td>
+            <div class="row-actions">
+              <button class="icon-btn">✦</button>
+              <button class="icon-btn">✎</button>
+              <button class="icon-btn">✕</button>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="name-cell">
+              <div class="avatar">●</div>
+              <div>
+                <div class="title">أرض الكورنيش</div>
+                <div class="sub"><span class="code">LND-003</span> · الوكرة · قطعة 8</div>
+              </div>
+            </div>
+          </td>
+          <td><span class="pill pill-emerald"><span class="dot dot-emerald"></span>متاحة</span></td>
+          <td>سكني</td>
+          <td><span class="ltr-num">6,200 م²</span></td>
+          <td><span class="ltr-num">2,400,000</span></td>
+          <td><span class="project-chip">3 مشاريع</span></td>
+          <td>
+            <div class="row-actions">
+              <button class="icon-btn">✦</button>
+              <button class="icon-btn">✎</button>
+              <button class="icon-btn">✕</button>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="name-cell">
+              <div class="avatar">■</div>
+              <div>
+                <div class="title">أرض المرقاب</div>
+                <div class="sub"><span class="code">LND-004</span> · الدوحة · قطعة 5</div>
+              </div>
+            </div>
+          </td>
+          <td><span class="pill pill-amber"><span class="dot dot-amber"></span>محجوزة</span></td>
+          <td>مختلط</td>
+          <td><span class="ltr-num">3,500 م²</span></td>
+          <td><span class="ltr-num">1,100,000</span></td>
+          <td><span class="project-chip">0 مشاريع</span></td>
+          <td>
+            <div class="row-actions">
+              <button class="icon-btn">✦</button>
+              <button class="icon-btn">✎</button>
+              <button class="icon-btn">✕</button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Pagination -->
+    <div class="pagination">
+      <div class="page-info"><span class="ltr-num">1–4 من 4</span></div>
+      <div class="page-btns">
+        <button class="page-btn">‹</button>
+        <button class="page-btn active">1</button>
+        <button class="page-btn">›</button>
+      </div>
+    </div>
+  </div>
+
+  <p style="margin-top:32px; font-size:13px; color:#666; text-align:center;">
+    <strong>Variant 1: Vercel-Shadow</strong> · Light, data-dense, shadow-as-border, single-table-first.
+  </p>
+</div>
+</body>
+</html>

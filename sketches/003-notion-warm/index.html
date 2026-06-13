@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Variant 3 — Notion Warm (Light, Sidebar + Main)</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600&family=Lora:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'IBM Plex Sans Arabic', 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    color: #37352f;
+    background: #fbfbfa;
+    line-height: 1.5;
+  }
+  .layout { display: grid; grid-template-columns: 260px 1fr; min-height: 100vh; }
+  .container { max-width: 920px; margin: 0 auto; padding: 60px 60px 100px; }
+
+  /* Sidebar */
+  .sidebar {
+    background: #f7f6f3; border-left: 1px solid #ebebea; padding: 20px 14px;
+    overflow-y: auto;
+  }
+  .ws { display: flex; align-items: center; gap: 8px; padding: 6px 8px; font-size: 14px; font-weight: 600; margin-bottom: 16px; }
+  .ws-avatar { width: 22px; height: 22px; border-radius: 4px; background: #f7c34a; display: flex; align-items: center; justify-content: center; font-size: 13px; }
+  .nav-section { font-size: 11px; color: #9b9a97; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; padding: 12px 8px 4px; }
+  .nav-item {
+    display: flex; align-items: center; gap: 8px; padding: 5px 8px; border-radius: 4px;
+    font-size: 14px; color: #4a4a47; cursor: pointer;
+  }
+  .nav-item:hover { background: #ebebea; }
+  .nav-item.active { background: #ebebea; color: #37352f; font-weight: 500; }
+  .nav-item .count { margin-right: auto; font-size: 11px; color: #9b9a97; }
+  .nav-icon { width: 16px; color: #9b9a97; font-size: 14px; }
+
+  /* Main */
+  .main { background: #ffffff; }
+  .cover {
+    height: 120px; background: linear-gradient(135deg, #f7e5d0 0%, #f7c34a 50%, #f7d599 100%);
+    position: relative;
+  }
+  .cover-icon {
+    position: absolute; bottom: -28px; right: 60px; width: 56px; height: 56px;
+    background: #ffffff; border-radius: 8px; display: flex; align-items: center; justify-content: center;
+    font-size: 28px; box-shadow: 0 1px 3px rgba(15,23,42,.08);
+  }
+  .header-row { display: flex; justify-content: space-between; align-items: flex-end; padding: 50px 60px 16px; }
+  .header-row h1 { font-family: 'Lora', 'IBM Plex Sans Arabic', serif; font-size: 40px; font-weight: 700; letter-spacing: -0.5px; color: #37352f; }
+  .header-row .sub { color: #787774; font-size: 14px; margin-top: 4px; }
+  .actions { display: flex; gap: 6px; }
+  .btn {
+    padding: 6px 12px; border-radius: 4px; font-size: 13px; font-weight: 500;
+    border: none; cursor: pointer; font-family: inherit;
+    display: inline-flex; align-items: center; gap: 4px;
+  }
+  .btn-soft { background: rgba(55, 53, 47, 0.08); color: #37352f; }
+  .btn-soft:hover { background: rgba(55, 53, 47, 0.12); }
+  .btn-primary { background: #f7c34a; color: #37352f; font-weight: 600; }
+  .btn-primary:hover { background: #f5b938; }
+
+  /* Quick stats inline */
+  .quick-stats { display: flex; gap: 24px; padding: 8px 60px 20px; font-size: 13px; color: #787774; }
+  .quick-stat strong { color: #37352f; font-weight: 600; }
+  .ltr-num { direction: ltr; display: inline-block; unicode-bidi: isolate; }
+
+  /* Property callout */
+  .callout {
+    display: flex; gap: 12px; padding: 12px 16px; background: #f7f6f3;
+    border-radius: 4px; margin-bottom: 24px; font-size: 14px; color: #4a4a47;
+  }
+  .callout-icon { font-size: 20px; }
+
+  /* Section heading */
+  .h2 { font-size: 22px; font-weight: 600; color: #37352f; margin: 24px 0 8px; display: flex; align-items: center; gap: 6px; }
+  .h2-toggle { color: #9b9a97; font-size: 14px; }
+
+  /* Property table (Notion-style) */
+  .ntable { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .ntable tr { border-bottom: 1px solid #ebebea; }
+  .ntable td { padding: 8px 12px; vertical-align: middle; }
+  .ntable tr:hover { background: #fbfbfa; }
+  .ntable .col-icon { width: 32px; text-align: center; color: #9b9a97; }
+  .ntable .col-name { font-weight: 500; color: #37352f; }
+  .ntable .col-meta { color: #787774; font-size: 13px; }
+
+  .pill { display: inline-flex; align-items: center; gap: 4px; padding: 1px 8px; border-radius: 3px; font-size: 12px; font-weight: 500; }
+  .pill-emerald { background: #ddebe1; color: #0d6e3d; }
+  .pill-blue { background: #d3e5ef; color: #1a4480; }
+  .pill-amber { background: #faecc8; color: #8b5a00; }
+  .pill-gray { background: #ebebea; color: #525252; }
+  .pill-default { background: #ebebea; color: #525252; }
+
+  /* KPI cards (Notion-style simple) */
+  .kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin: 16px 0 32px; }
+  .kpi { background: #f7f6f3; border-radius: 6px; padding: 14px; }
+  .kpi-label { font-size: 12px; color: #9b9a97; font-weight: 500; margin-bottom: 4px; }
+  .kpi-value { font-size: 22px; font-weight: 600; color: #37352f; font-family: 'Lora', serif; }
+  .kpi-delta { font-size: 12px; color: #787774; margin-top: 2px; }
+
+  /* View segmented */
+  .view-seg { display: inline-flex; background: #f7f6f3; border-radius: 4px; padding: 2px; margin-bottom: 12px; }
+  .view-seg button { padding: 4px 10px; font-size: 13px; background: transparent; border: none; border-radius: 3px; cursor: pointer; color: #787774; font-family: inherit; font-weight: 500; }
+  .view-seg button.active { background: #ffffff; color: #37352f; box-shadow: 0 1px 2px rgba(15,23,42,.06); }
+
+  /* Add new row */
+  .add-row { color: #9b9a97; font-size: 13px; padding: 8px 12px; cursor: pointer; }
+  .add-row:hover { color: #37352f; }
+</style>
+</head>
+<body>
+<div class="layout">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="ws">
+      <div class="ws-avatar">L</div>
+      <span>Land2 ERP</span>
+    </div>
+    <div class="nav-section">المفضلة</div>
+    <div class="nav-item"><span class="nav-icon">🏠</span> الرئيسية</div>
+    <div class="nav-item active"><span class="nav-icon">🏞️</span> الأراضي <span class="count">4</span></div>
+    <div class="nav-item"><span class="nav-icon">🏗</span> المشاريع <span class="count">6</span></div>
+    <div class="nav-item"><span class="nav-icon">👥</span> المستأجرين</div>
+    <div class="nav-item"><span class="nav-icon">💰</span> المالية</div>
+
+    <div class="nav-section">العروض</div>
+    <div class="nav-item"><span class="nav-icon">✓</span> المتاحة <span class="count">2</span></div>
+    <div class="nav-item"><span class="nav-icon">⚒</span> قيد التطوير <span class="count">1</span></div>
+    <div class="nav-item"><span class="nav-icon">☆</span> محجوزة <span class="count">1</span></div>
+    <div class="nav-item"><span class="nav-icon">+</span> عرض جديد</div>
+
+    <div class="nav-section">الإعدادات</div>
+    <div class="nav-item"><span class="nav-icon">⚙</span> إعداداتي</div>
+  </aside>
+
+  <!-- Main -->
+  <main class="main">
+    <div class="cover">
+      <div class="cover-icon">🏞️</div>
+    </div>
+
+    <div class="header-row">
+      <div>
+        <h1>بنك الأراضي</h1>
+        <div class="sub">إدارة شاملة لمحفظة الأراضي العقارية</div>
+      </div>
+      <div class="actions">
+        <button class="btn btn-soft">+ إضافة</button>
+        <button class="btn btn-soft">↑</button>
+        <button class="btn btn-soft">⋯</button>
+      </div>
+    </div>
+
+    <div class="quick-stats">
+      <div class="quick-stat"><strong>4</strong> سجلات</div>
+      <div class="quick-stat"><strong class="ltr-num">22,700</strong> م²</div>
+      <div class="quick-stat"><strong class="ltr-num">12.5M</strong> QAR قيمة</div>
+      <div class="quick-stat">آخر تحديث: اليوم</div>
+    </div>
+
+    <div class="container" style="padding-top:0;">
+
+      <div class="callout">
+        <div class="callout-icon">💡</div>
+        <div>يمكنك إنشاء عروض مخصصة، إضافة فلاتر متقدمة، وأتمتة سير العمل من شريط الأدوات أعلاه.</div>
+      </div>
+
+      <div class="h2">نظرة عامة <span class="h2-toggle">⌄</span></div>
+      <div class="kpis">
+        <div class="kpi"><div class="kpi-label">إجمالي الأراضي</div><div class="kpi-value">4</div><div class="kpi-delta">+12% هذا الشهر</div></div>
+        <div class="kpi"><div class="kpi-label">متاحة</div><div class="kpi-value">2</div><div class="kpi-delta">جاهزة للتطوير</div></div>
+        <div class="kpi"><div class="kpi-label">المساحة</div><div class="kpi-value ltr-num">22.7k م²</div><div class="kpi-delta">+3,200 م²</div></div>
+        <div class="kpi"><div class="kpi-label">القيمة</div><div class="kpi-value ltr-num">12.5M</div><div class="kpi-delta">QAR</div></div>
+      </div>
+
+      <div style="display:flex; justify-content:space-between; align-items:center; margin: 24px 0 8px;">
+        <div class="h2" style="margin:0;">جميع الأراضي <span class="h2-toggle">⌄</span></div>
+        <div class="view-seg">
+          <button class="active">≡ قائمة</button>
+          <button>▦ بطاقات</button>
+          <button>🗺 خريطة</button>
+        </div>
+      </div>
+
+      <table class="ntable">
+        <tr>
+          <td class="col-icon">🏞️</td>
+          <td>
+            <div class="col-name">أرض اللؤلؤة السكنية</div>
+            <div class="col-meta"><span style="font-family: monospace; font-size: 12px;">LND-001</span> · الدوحة · قطعة 24</div>
+          </td>
+          <td><span class="pill pill-emerald">متاحة</span></td>
+          <td class="col-meta">سكني</td>
+          <td class="col-meta ltr-num">5,000 م²</td>
+          <td class="col-meta ltr-num">3.2M</td>
+          <td class="col-meta">🏗 2</td>
+        </tr>
+        <tr>
+          <td class="col-icon">🏢</td>
+          <td>
+            <div class="col-name">مجمع الواحة التجاري</div>
+            <div class="col-meta"><span style="font-family: monospace; font-size: 12px;">LND-002</span> · الدوحة · قطعة 12</div>
+          </td>
+          <td><span class="pill pill-blue">قيد التطوير</span></td>
+          <td class="col-meta">تجاري</td>
+          <td class="col-meta ltr-num">8,000 م²</td>
+          <td class="col-meta ltr-num">5.8M</td>
+          <td class="col-meta">🏗 1</td>
+        </tr>
+        <tr>
+          <td class="col-icon">🏞️</td>
+          <td>
+            <div class="col-name">أرض الكورنيش</div>
+            <div class="col-meta"><span style="font-family: monospace; font-size: 12px;">LND-003</span> · الوكرة · قطعة 8</div>
+          </td>
+          <td><span class="pill pill-emerald">متاحة</span></td>
+          <td class="col-meta">سكني</td>
+          <td class="col-meta ltr-num">6,200 م²</td>
+          <td class="col-meta ltr-num">2.4M</td>
+          <td class="col-meta">🏗 3</td>
+        </tr>
+        <tr>
+          <td class="col-icon">🏗</td>
+          <td>
+            <div class="col-name">أرض المرقاب</div>
+            <div class="col-meta"><span style="font-family: monospace; font-size: 12px;">LND-004</span> · الدوحة · قطعة 5</div>
+          </td>
+          <td><span class="pill pill-amber">محجوزة</span></td>
+          <td class="col-meta">مختلط</td>
+          <td class="col-meta ltr-num">3,500 م²</td>
+          <td class="col-meta ltr-num">1.1M</td>
+          <td class="col-meta">🏗 0</td>
+        </tr>
+        <tr><td colspan="7" class="add-row">+ إضافة سجل جديد</td></tr>
+      </table>
+
+    </div>
+  </main>
+
+</div>
+</body>
+</html>
