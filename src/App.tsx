@@ -54,7 +54,8 @@ import MaintenanceRequestDetailPage from '@/pages/maintenance/MaintenanceRequest
 
 import FinanceAccountsPageOld from '@/pages/finance/FinanceAccountsPage';
 import FinanceAccountsPage from '@/components/projects/FinanceAccountsPage';
-import FinanceJournalEntriesPage from '@/pages/finance/FinanceJournalEntriesPage';
+import FinanceJournalEntriesPageOld from '@/pages/finance/FinanceJournalEntriesPage';
+import FinanceJournalEntriesPage from '@/components/projects/FinanceJournalEntriesPage';
 import PeriodClosingPage from '@/pages/finance/PeriodClosingPage';
 import ThreeWayMatchPage from '@/pages/finance/ThreeWayMatchPage';
 
