@@ -303,12 +303,12 @@ export default function App() {
 
         {/* Finance — sub-navigation */}
         <Route path="finance" element={<ModuleLayout subNav={[
+          { title: 'لوحة مالية', href: '/finance/dashboard' },
           { title: 'الحسابات', href: '/finance/accounts' },
           { title: 'قيود اليومية', href: '/finance/journal-entries' },
           { title: 'مراكز التكلفة', href: '/finance/cost-centers' },
           { title: 'حسابات بنكية', href: '/finance/bank-accounts' },
           { title: 'شيكات', href: '/finance/cheques' },
-          { title: 'لوحة مالية', href: '/finance/dashboard' },
         ]} />}>
           <Route index element={<Navigate to="/finance/accounts" replace />} />
           <Route path="accounts" element={<FinanceAccountsPage />} />
