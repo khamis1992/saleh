@@ -136,7 +136,7 @@ import PayrollPage from '@/components/projects/PayrollPage';
 import LeaveManagementPageOld from '@/pages/hr/LeaveManagementPage';
 import LeaveManagementPage from '@/components/projects/LeaveManagementPage';
 import CostCentersPage from '@/components/projects/CostCentersPage';
-import BankAccountsPage from '@/pages/finance/BankAccountsPage';
+import BankAccountsPage from '@/components/projects/BankAccountsPage';
 
 // Phase 4 pages
 import ProjectTasksPage from '@/pages/projects/ProjectTasksPage';
