@@ -139,7 +139,8 @@ import BankAccountsPage from '@/pages/finance/BankAccountsPage';
 
 // Phase 4 pages
 import ProjectTasksPage from '@/pages/projects/ProjectTasksPage';
-import InspectionsPage from '@/pages/maintenance/InspectionsPage';
+import InspectionsPageOld from '@/pages/maintenance/InspectionsPage';
+import InspectionsPage from '@/components/projects/InspectionsPage';
 import AssetRegistryPage from '@/pages/maintenance/AssetRegistryPage';
 import ChangeOrdersPage from '@/pages/construction/ChangeOrdersPage';
 import RiskRegisterPage from '@/pages/construction/RiskRegisterPage';
