@@ -104,7 +104,8 @@ import MaintenanceWizardPage from '@/pages/wizards/MaintenanceWizardPage';
 import PurchaseRequestWizardPage from '@/pages/wizards/PurchaseRequestWizardPage';
 import ContractorContractsPage from '@/pages/construction/ContractorContractsPage';
 import ContractorClaimsPage from '@/pages/construction/ContractorClaimsPage';
-import DailyReportsPage from '@/pages/construction/DailyReportsPage';
+import DailyReportsPageOld from '@/pages/construction/DailyReportsPage';
+import DailyReportsPage from '@/components/projects/DailyReportsPage';
 import ProgressUpdatesPageOld from '@/pages/construction/ProgressUpdatesPage';
 import ProgressUpdatesPage from '@/components/projects/ProgressUpdatesPage';
 
